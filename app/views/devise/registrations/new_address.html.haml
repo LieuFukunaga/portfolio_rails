@@ -4,11 +4,19 @@
   .field
     = f.label :zipcode, "郵便番号"
     %br
-    = f.text_field :zipcode
+    = f.text_field :zipcode, placeholder: "例：123-4567"
   .field
-    = f.label :address, "住所"
+    = f.label :prefecture, "住所"
     %br
-    = f.text_field :address
+    = f.select :prefecture, Address.prefectures_i18n.invert, {}, {id: 'prefecture_selector'}
+  .field
+    = f.label :city, "市区町村"
+    %br
+    = f.text_field :city, placeholder: "例：渋谷区xx町"
+  .field
+    = f.label :city, "建物名・番地"
+    %br
+    = f.text_field :city, placeholder: "例：xxマンションyyy号室"
   .actions
     = f.submit "登録"
 = render "devise/shared/links"
