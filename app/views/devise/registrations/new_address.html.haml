@@ -1,0 +1,14 @@
+%h2 住所情報登録
+= form_with model:@address, scope: :address, url: addresses_path, id: 'new_user_address',local: true do |f|
+  = render "devise/shared/error_messages", resource: @address
+  .field
+    = f.label :zipcode, "郵便番号"
+    %br
+    = f.text_field :zipcode
+  .field
+    = f.label :address, "住所"
+    %br
+    = f.text_field :address
+  .actions
+    = f.submit "登録"
+= render "devise/shared/links"
