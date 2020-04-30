@@ -1,7 +1,10 @@
 class Address < ApplicationRecord
   belongs_to :user, optional: true
 
-  validates :zipcode, :prefecture, :city ,presence: true
+  validates :postcode, :prefecture, :city ,presence: true
+  validates :postcode, format: {with:/\A\d{3}-\d{4}\z/}
+  validates :city, format: {with: /\A[^\w].+\z/}
+
   enum prefecture: {
     hokkaido:   0,
     aomori:     1,
