@@ -10,6 +10,10 @@
     %br
     = f.email_field :email, autofocus: true, autocomplete: "email"
   .field
+    = f.label :tel_num, "電話番号"
+    %br
+    = f.text_field :tel_num, autofocus: true, placeholder: "ハイフンなし10~11桁"
+  .field
     = f.label :password , "パスワード"
     - if @minimum_password_length
       = "（#{@minimum_password_length}文字以上）"
