@@ -1,0 +1,61 @@
+ja:
+  enums:
+      address:
+        prefecture:
+          hokkaido:  "北海道"
+          aomori:    "青森"
+          iwate:     "岩手"
+          miyagi:    "宮城"
+          akita:     "秋田"
+          nigata:    "新潟"
+          fukushima: "福島"
+          ishikawa:  "石川"
+          fukui:     "福井"
+          ibaraki:   "茨城"
+          tochigi:   "栃木"
+          gunma:     "群馬"
+          saitama:   "埼玉"
+          chiba:     "千葉"
+          tokyo:     "東京"
+          kanagawa:  "神奈川"
+          yamagata:  "山形"
+          toyama:    "富山"
+          yamanashi: "山梨"
+          nagano:    "長野"
+          gifu:      "岐阜"
+          sizuoka:   "静岡"
+          aichi:     "愛知"
+          mie:       "三重"
+          siga:      "滋賀"
+          kyoto:     "京都"
+          ohsaka:    "大阪"
+          hyougo:    "兵庫"
+          nara:      "奈良"
+          wakayama:  "和歌山"
+          tottori:   "鳥取"
+          shimane:   "島根"
+          okayama:   "岡山"
+          hiroshima: "広島"
+          yamaguchi: "山口"
+          tokushima: "徳島"
+          kagawa:    "香川"
+          ehime:     "愛媛"
+          kouchi:    "高知"
+          fukuoka:   "福岡"
+          saga:      "佐賀"
+          nagasaki:  "長崎"
+          kumamoto:  "熊本"
+          ohita:     "大分"
+          miyazaki:  "宮崎"
+          kagoshima: "鹿児島"
+          okinawa:   "沖縄"
+  activerecord:
+    attributes:
+      address:
+        postcode: 郵便番号
+        prefecture: 都道府県
+        city: 市区町村
+        building: 建物名・番地
+        address: 住所
+    models:
+      address: 住所
