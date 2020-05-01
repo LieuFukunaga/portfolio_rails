@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   root to: "lists#index"
 
+  resources :lists
+
   $date = Time.now.to_s
 
 end
