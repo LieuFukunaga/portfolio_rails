@@ -13,3 +13,10 @@
 
 %p
   = $date
+%p.non-modal
+  = button_tag "モーダルとは無関係なボタン", type: "button", id: "out-of-modal"
+
+%p.modal
+  = button_tag "modal", type: "button", id: "modal-btn"
+#modal-box
+  = button_tag "close", tyoe: "button", id: "modal-close-btn"

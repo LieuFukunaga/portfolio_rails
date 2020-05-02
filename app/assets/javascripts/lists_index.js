@@ -1,0 +1,10 @@
+$(function(){
+  $("#modal-btn").click(function(){
+    $("#modal-box").fadeIn();
+    $("p").addClass("negative");
+  });
+  $("#modal-close-btn").click(function(){
+    $("#modal-box").fadeOut();
+    $("p").removeClass("negative");
+  });
+});
