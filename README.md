@@ -25,7 +25,7 @@ Task 1-3-9
 |name    |string |null: false |
 |tel_num |string |null: false |
 
-### Association
+#### Association
 - has_many :lists, dependent: :destroy
 
 
@@ -38,7 +38,7 @@ Task 1-3-9
 |city       |string     |null: false          |
 |building   |string     |
 
-### Association
+#### Association
 - belongs_to :user, optional: true
 
 
@@ -49,7 +49,7 @@ Task 1-3-9
 |user_id |references |foreign_key: true |
 |tag     |
 
-### Association
+#### Association
 - belongs_to :user
 - has_many :goals
 
@@ -61,7 +61,7 @@ Task 1-3-9
 |status  |integer    |limit: 1, default: 0 |
 |list_id |references |foreign_key: true    |
 
-### Association
+#### Association
 - belongs_to :list
 - has_many :steps, dependent: :destroy
 
@@ -73,7 +73,7 @@ Task 1-3-9
 |status  |integer    |limit: 1, default: 0 |
 |goal_id |references |foreign_key: true    |
 
-### Association
+#### Association
 - belongs_to :goal
 - has_many :actions, dependent: :destroy
 
@@ -85,7 +85,7 @@ Task 1-3-9
 |status  |integer    |limit: 1, default: 0 |
 |step_id |references |foreign_key: true    |
 
-### Association
+#### Association
 - belongs_to :step
 
 ### Active_Storage_Attachmentsテーブル
