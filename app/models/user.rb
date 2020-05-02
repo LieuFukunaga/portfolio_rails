@@ -11,5 +11,5 @@ class User < ApplicationRecord
   validates :tel_num, uniqueness: true
   validates :tel_num, numericality: true, format: {with: /0[1-9]\d{8,9}/}
 
-  has_one :address
+  has_one :address, dependent: :destroy
 end
