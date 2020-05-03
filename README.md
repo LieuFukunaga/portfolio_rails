@@ -42,16 +42,39 @@ Task 1-3-9
 - belongs_to :user, optional: true
 
 
+### Categoriesテーブル
+|Column |type   |Options |
+|-------|-------|--------|
+|name   |string |
+
+#### Association
+- has_many :lists_categories
+- has_many :lists, through: :lists_categories
+
+
 ### Listsテーブル
 |Column  |Type       |Options           |
 |--------|-----------|------------------|
 |name    |string     |null: false       |
 |user_id |references |foreign_key: true |
-|tag     |
 
 #### Association
 - belongs_to :user
+- has_many :lists_categories
+- has_many :categories, through: :lists_categories
 - has_many :goals
+
+
+### Lists_Categoriesテーブル
+|Column      |type       |Options           |
+|------------|-----------|------------------|
+|list_id     |references |foreign_key: true |
+|category_id |references |foreign_key: true |
+
+#### Association
+- belongs_to :lists
+- belongs_to :categories
+
 
 
 ### Goalsテーブル
