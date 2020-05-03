@@ -53,10 +53,10 @@ Task 1-3-9
 
 
 ### Listsテーブル
-|Column  |Type       |Options           |
-|--------|-----------|------------------|
-|name    |string     |null: false       |
-|user_id |references |foreign_key: true |
+|Column  |Type       |Options                        |
+|--------|-----------|-------------------------------|
+|name    |string     |null: false, index: true       |
+|user_id |references |foreign_key: true, index: true |
 
 #### Association
 - belongs_to :user
@@ -65,16 +65,15 @@ Task 1-3-9
 - has_many :goals
 
 
-### Lists_Categoriesテーブル
-|Column      |type       |Options           |
-|------------|-----------|------------------|
-|list_id     |references |foreign_key: true |
-|category_id |references |foreign_key: true |
+### List_Categoriesテーブル
+|Column      |type       |Options                        |
+|------------|-----------|-------------------------------|
+|list_id     |references |foreign_key: true, index: true |
+|category_id |references |foreign_key: true, index: true |
 
 #### Association
 - belongs_to :lists
 - belongs_to :categories
-
 
 
 ### Goalsテーブル
