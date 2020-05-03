@@ -1,0 +1,2 @@
+class ListCategory < ApplicationRecord
+end
