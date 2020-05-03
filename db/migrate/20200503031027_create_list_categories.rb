@@ -6,8 +6,5 @@ class CreateListCategories < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :lists_categories, :list_id
-    add_index :lists_categories, :category_id
-    add_index :lists_categories, [:list_id,:category_id],unique: true
   end
 end
