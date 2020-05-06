@@ -1,0 +1,5 @@
+- @lists.each do |list|
+  - list.goals.each do |goal|
+    %p
+      -# = link_to "#{goal.title}", list_goal_path(goal)
+      = goal.title
