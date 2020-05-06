@@ -1,10 +1,15 @@
 %p
   = "リスト「#{@list.list_name}」のタスク一覧"
 %p
-  = link_to 'タスクを追加する', new_list_goal_path(@list)
+  = link_to new_list_goal_path(@list) do
+    %i.fas.fa-plus-circle
+    %span タスクを追加
 - @goals.each do |goal|
   %p
-    = link_to "#{goal.title}", list_goal_path(goal)
-
+    = link_to list_goal_path(goal) do
+      %i.fas.fa-angle-double-right
+      = "#{goal.title}"
 %p
-  = link_to 'リスト一覧へ戻る', lists_path
+  = link_to lists_path, class:"lists-show-icon" do
+    %i.fas.fa-angle-left
+    %span リスト一覧へ戻る

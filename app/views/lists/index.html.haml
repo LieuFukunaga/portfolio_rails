@@ -5,11 +5,15 @@
   = "#{current_user.email}"
   %span
   %br
-  = link_to "ログアウト", destroy_user_session_path, method: :delete
+  = link_to destroy_user_session_path, method: :delete do
+    %i.fas.fa-sign-out-alt
+    %span ログアウト
 - else
   %h2 ログインしていません
   =link_to "新規登録", new_user_registration_path
-  =link_to "ログイン", new_user_session_path
+  =link_to new_user_session_path do
+    %i.fas.fa-sign-in-alt
+    %span ログイン
 
 -# %p
 -#   = $date
@@ -22,15 +26,17 @@
 -#   = button_tag "close", tyoe: "button", id: "modal-close-btn"
 
 %p
-  = link_to "リスト作成", new_list_path, class: "new-list-btn"
+  = link_to new_list_path, class: "new-list-btn" do
+    %i.fas.fa-plus-circle
+    %span リストを追加
 
 .lists
   = "#{current_user.name}さんのリスト一覧"
   - if current_user.lists.length != 0
     - current_user.lists.each do |list|
-      %p.user-list
-        = link_to "#{list.list_name}", list_path(list)
-        %span 作成日時：
-        = list.created_at
+      %p.list
+        = link_to list_path(list) do
+          %i.fas.fa-angle-double-right
+          = "#{list.list_name}"
   - else
     %p -- NO LIST --
