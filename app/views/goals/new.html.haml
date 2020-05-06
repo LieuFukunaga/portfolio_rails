@@ -4,10 +4,7 @@
     = f.label :title, "ゴールを設定して下さい"
     %br
     = f.text_field :title
-
-  -# .categorize-field
-  -#   = f.label "カテゴリー"
-  -#   %ul#list_categories
+    = f.hidden_field :list_id, value: @list_id
 
   .categorize-field
     = f.label "カテゴリー"

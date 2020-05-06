@@ -4,11 +4,15 @@
   = link_to new_list_goal_path(@list) do
     %i.fas.fa-plus-circle
     %span タスクを追加
-- @goals.each do |goal|
-  %p
-    = link_to list_goal_path(goal) do
-      %i.fas.fa-angle-double-right
-      = "#{goal.title}"
+- if @goals.length != 0
+  - @goals.each do |goal|
+    %p
+      = link_to list_goal_path(goal) do
+        %i.fas.fa-angle-double-right
+        = "#{goal.title}"
+- else
+  %p -- NO TASK --
+
 %p
   = link_to lists_path, class:"lists-show-icon" do
     %i.fas.fa-angle-left

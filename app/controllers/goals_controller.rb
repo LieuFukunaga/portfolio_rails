@@ -6,16 +6,15 @@ class GoalsController < ApplicationController
   def new
     @goal = Goal.new
     @goal.categories.new
-    @list = @goal.list
+    @list_id = List.find(params[:list_id]).id
   end
 
   def create
-    # binding.pry
     @goal = Goal.new(goal_params)
+    binding.pry
     # 作成されたリストに紐付けられたカテゴリをカンマで分割、配列にして変数に代入
     inputs = params[:goal][:categories_attributes][:"0"][:"category_name"].split(",")
     # respond_to do |format|
-    # binding.pry
       if @goal.save!
         @goal.categorize(inputs)
         # format.html { redirect_to @goal, notice: 'リストを作成しました' } # showアクションにリダイレクト
