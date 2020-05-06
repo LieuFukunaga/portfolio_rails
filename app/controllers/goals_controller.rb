@@ -32,6 +32,6 @@ class GoalsController < ApplicationController
 
   private
   def goal_params
-    params.require(:goal).permit(:title, :list_id, categories_attributes: [:category_name, :id, :_destroy])
+    params.require(:goal).permit(:title, :list_id, :date, categories_attributes: [:category_name, :id, :_destroy])
   end
 end
