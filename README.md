@@ -29,6 +29,7 @@ Task 1-3-9
 
 #### Association
 - has_many :lists, dependent: :destroy
+- has_many :addresses, dependent: :destroy
 
 
 ### Addressesテーブル
@@ -85,6 +86,8 @@ Task 1-3-9
 
 #### Association
 - belongs_to :list
+- has_many :categories, through: :goal_categories
+- has_many :goal_categories, dependent: :destroy
 - has_many :steps, dependent: :destroy
 
 
