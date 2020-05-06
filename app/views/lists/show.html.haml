@@ -10,6 +10,9 @@
       = link_to list_goal_path(goal) do
         %i.fas.fa-angle-double-right
         = "#{goal.title}"
+      - if goal.date != nil
+        %h6
+          = "#{goal.date.strftime("%Y年%m月%d日 %H時%M分")}"
 - else
   %p -- NO TASK --
 

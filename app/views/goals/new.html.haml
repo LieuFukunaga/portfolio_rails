@@ -4,6 +4,10 @@
     = f.label :title, "ゴールを設定して下さい"
     %br
     = f.text_field :title
+    %br
+    = f.label :date, "予定日"
+    %br
+    = f.datetime_select :title, {use_month_numbers: true, start_year: Date.today.year, datetime_separator: '<h4 class="task-time">予定時刻</h4>'}
     = f.hidden_field :list_id, value: @list_id
 
   .categorize-field
@@ -14,3 +18,4 @@
 
   .actions
     = f.submit "登録"
+
