@@ -6,7 +6,7 @@ class Goal < ApplicationRecord
   accepts_nested_attributes_for :categories, allow_destroy: true
 
   # 以下、カテゴリ機能のため
-  def categorize(inputs)
+  def save_category(inputs)
     # すでにリストに紐付いているカテゴリの名称をすべて取得
     current_categories = self.categories.pluck(:category_name) unless self.categories.nil?
     old_category = current_categories - inputs #入力されたカテゴリ以外の既存のカテゴリ
