@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_04_123125) do
+ActiveRecord::Schema.define(version: 2020_05_06_010512) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -51,14 +51,22 @@ ActiveRecord::Schema.define(version: 2020_05_04_123125) do
     t.index ["category_name"], name: "index_categories_on_category_name", unique: true
   end
 
-  create_table "list_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "list_id", null: false
+  create_table "goal_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_list_categories_on_category_id"
-    t.index ["list_id", "category_id"], name: "index_list_categories_on_list_id_and_category_id", unique: true
-    t.index ["list_id"], name: "index_list_categories_on_list_id"
+    t.bigint "goal_id"
+    t.index ["category_id"], name: "index_goal_categories_on_category_id"
+    t.index ["goal_id"], name: "index_goal_categories_on_goal_id"
+  end
+
+  create_table "goals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title", null: false
+    t.integer "status", limit: 1, default: 0
+    t.bigint "list_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["list_id"], name: "index_goals_on_list_id"
   end
 
   create_table "lists", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -86,7 +94,8 @@ ActiveRecord::Schema.define(version: 2020_05_04_123125) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "users"
-  add_foreign_key "list_categories", "categories"
-  add_foreign_key "list_categories", "lists"
+  add_foreign_key "goal_categories", "categories"
+  add_foreign_key "goal_categories", "goals"
+  add_foreign_key "goals", "lists"
   add_foreign_key "lists", "users"
 end
