@@ -83,6 +83,7 @@ Task 1-3-9
 |title   |string     |null: false          |
 |status  |integer    |limit: 1, default: 0 |
 |list_id |references |foreign_key: true    |
+|date    |datetime   |
 
 #### Association
 - belongs_to :list
