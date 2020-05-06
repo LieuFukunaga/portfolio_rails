@@ -19,3 +19,7 @@
   .actions
     = f.submit "登録"
 
+%p
+  = link_to list_path(id: @list_id), class:"back-btn" do
+    %i.fas.fa-angle-left
+    %span タスク一覧へ戻る
