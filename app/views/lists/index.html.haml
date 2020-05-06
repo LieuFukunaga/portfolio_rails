@@ -11,12 +11,26 @@
   =link_to "新規登録", new_user_registration_path
   =link_to "ログイン", new_user_session_path
 
-%p
-  = $date
-%p.non-modal
-  = button_tag "モーダルとは無関係なボタン", type: "button", id: "out-of-modal"
+-# %p
+-#   = $date
+-# %p.non-modal
+-#   = button_tag "モーダルとは無関係なボタン", type: "button", id: "out-of-modal"
 
-%p.modal
-  = button_tag "modal", type: "button", id: "modal-btn"
-#modal-box
-  = button_tag "close", tyoe: "button", id: "modal-close-btn"
+-# %p.modal
+-#   = button_tag "modal", type: "button", id: "modal-btn"
+-# #modal-box
+-#   = button_tag "close", tyoe: "button", id: "modal-close-btn"
+
+%p
+  = link_to "リスト作成", new_list_path, class: "new-list-btn"
+
+.lists
+  = "#{current_user.name}さんのリスト一覧"
+  - if current_user.lists.length != 0
+    - current_user.lists.each do |list|
+      %p.user-list
+        = link_to "#{list.list_name}", list_path(list)
+        %span 作成日時：
+        = list.created_at
+  - else
+    %p -- NO LIST --

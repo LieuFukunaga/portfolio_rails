@@ -1,4 +1,19 @@
--# S3への画像アップロードテストに使用
-= form_with model: @list, local: true  do |f|
-  = f.file_field :image
-  = f.submit
+%h2 リスト作成画面
+= form_with model:@list, url: lists_path, local: true do |f|
+  .field
+    = f.label :list_name, "リスト名"
+    %br
+    = f.text_field :list_name
+
+  -# .list_categories-field
+  -#   = f.label "カテゴリー"
+  -#   %ul#list_categories
+
+  -# .fields-for
+  -#   = f.label "カテゴリー"
+  -#   %br
+  -#   = f.fields_for :categories do |c|
+  -#     = c.text_field :category_name
+
+  .actions
+    = f.submit "登録"

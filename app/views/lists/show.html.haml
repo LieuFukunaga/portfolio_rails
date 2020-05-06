@@ -1,0 +1,10 @@
+%p
+  = "リスト「#{@list.list_name}」のタスク一覧"
+%p
+  = link_to 'タスクを追加する', new_list_goal_path(@list)
+- @goals.each do |goal|
+  %p
+    = link_to "#{goal.title}", list_goal_path(goal)
+
+%p
+  = link_to 'リスト一覧へ戻る', lists_path
