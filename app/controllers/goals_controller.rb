@@ -11,9 +11,9 @@ class GoalsController < ApplicationController
 
   def create
     @goal = Goal.new(goal_params)
-    # binding.pry
+    binding.pry
     # 作成されたリストに紐付けられたカテゴリをカンマで分割、配列にして変数に代入
-    inputs = params[:goal][:categories_attributes][:"0"][:"category_name"].split
+    inputs = params[:goal][:categories_attributes][:"0"][:"category_name"].split(/[ 　,、]/)
     # respond_to do |format|
       if @goal.save!
         @goal.save_category(inputs)

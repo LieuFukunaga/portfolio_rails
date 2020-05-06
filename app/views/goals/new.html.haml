@@ -14,7 +14,7 @@
     = f.label "カテゴリー"
     %br
     = f.fields_for :categories do |c|
-      = c.text_field :category_name
+      = c.text_field :category_name, placeholder: "カテゴリを複数設定する場合はスペースまたはカンマで区切って下さい", size: "60px"
 
   .actions
     = f.submit "登録"
