@@ -11,8 +11,11 @@ Rails.application.routes.draw do
 
   root to: "lists#index"
 
-  resources :lists, only: [:new, :create]
-  resources :category
+  resources :categories
+  resources :lists do
+    resources :goals
+  end
+
 
   $date = Time.now.to_s
 
