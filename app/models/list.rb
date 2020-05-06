@@ -1,11 +1,11 @@
 class List < ApplicationRecord
   belongs_to :user
+  has_many :goals, dependent: :destroy
+
   validates :user_id, null: false
+  validates :list_name, null: false, uniqueness: true
 
-  has_many :list_categories, dependent: :destroy
-  has_many :categories, through: :list_categories
 
-  has_one_attached :image
-
+  # has_one_attached :image
 
 end

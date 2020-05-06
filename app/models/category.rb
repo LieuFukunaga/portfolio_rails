@@ -1,7 +1,10 @@
 class Category < ApplicationRecord
-  validates :name, presence:true,length:{maximum:20}
-  validates :name, uniquness: true
+  has_many :goal_categories, dependent: :destroy
+  has_many :goals, through: :goal_categories
 
-  has_many :list_categories, dependent: :destroy
-  has_many :list, through: :list_categories
+  validates :category_name, presence:true, length:{maximum:20}
+  validates :category_name
+
+  accepts_nested_attributes_for :goals
+
 end
