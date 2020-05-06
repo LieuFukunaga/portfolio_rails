@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_one :address, dependent: :destroy
+  has_many :lists, dependent: :destroy
+
   validates :name, presence: true
   validates :name, length: { minimum: 1, maximum: 255 }
 
@@ -11,6 +14,4 @@ class User < ApplicationRecord
   validates :tel_num, uniqueness: true
   validates :tel_num, numericality: true, format: {with: /0[1-9]\d{8,9}/}
 
-  has_one :address, dependent: :destroy
-  has_many :lists
 end
