@@ -57,9 +57,9 @@ Task 1-3-9
 
 
 ### Categoriesテーブル
-|Column          |type   |Options                                |
-|----------------|-------|---------------------------------------|
-|category_name   |string |null: false, index: true, unique: true |
+|Column          |type   |Options                  |
+|----------------|-------|-------------------------|
+|category_name   |string |null: false, index: true |
 
 #### Association
 - has_many :goals, through: :goal_categories
@@ -78,11 +78,11 @@ Task 1-3-9
 
 
 ### Goalsテーブル
-|Column  |Type       |Options              |
-|--------|-----------|---------------------|
-|title   |string     |null: false          |
-|status  |integer    |limit: 1, default: 0 |
-|list_id |references |foreign_key: true    |
+|Column  |Type       |Options                 |
+|--------|-----------|------------------------|
+|title   |string     |null: false, index: true|
+|status  |integer    |limit: 1, default: 0    |
+|list_id |references |foreign_key: true       |
 |date    |datetime   |
 
 #### Association

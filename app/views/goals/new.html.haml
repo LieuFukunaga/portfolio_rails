@@ -10,11 +10,16 @@
     = f.datetime_select :date, {use_month_numbers: true, start_year: Date.today.year, datetime_separator: '<h4 class="task-time">予定時刻</h4>'}
     = f.hidden_field :list_id, value: @list_id
 
+  -# %p.categorize-check-btn
+  -#   = check_box_tag :categorize
+  -#     = label_tag :categorize, "カテゴリを設定する"
+
+
   .categorize-field
     = f.label "カテゴリー"
     %br
     = f.fields_for :categories do |c|
-      = c.text_field :category_name, placeholder: "カテゴリを複数設定する場合はスペースまたはカンマで区切って下さい", size: "60px"
+      = c.text_field :category_name, placeholder: "カテゴリを複数設定する場合はスペースまたはカンマで区切って下さい", size: "60px", id:"category-form"
 
   .actions
     = f.submit "登録"

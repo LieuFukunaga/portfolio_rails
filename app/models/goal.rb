@@ -7,11 +7,10 @@ class Goal < ApplicationRecord
 
   # 以下、カテゴリ機能のため
   def save_category(inputs)
-    # すでにリストに紐付いているカテゴリの名称をすべて取得
-    current_categories = self.categories.pluck(:category_name) unless self.categories.nil?
-    old_category = current_categories - inputs #入力されたカテゴリ以外の既存のカテゴリ
-    # binding.pry
-    new_category = inputs - current_categories #新たに登録されるカテゴリ
+    # タスクに紐付いている既存カテゴリの名称をすべて取得
+    all_categories = self.categories.pluck(:category_name) unless self.categories.nil?
+    old_category = all_categories - inputs #入力されたカテゴリ以外の既存カテゴリ
+    new_category = inputs - all_categories #未登録のカテゴリ
 
     # いったん消して、改めて付ける方式
 

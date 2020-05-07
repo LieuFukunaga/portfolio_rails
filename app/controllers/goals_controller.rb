@@ -11,20 +11,28 @@ class GoalsController < ApplicationController
 
   def create
     @goal = Goal.new(goal_params)
-    binding.pry
-    # 作成されたリストに紐付けられたカテゴリをカンマで分割、配列にして変数に代入
-    inputs = params[:goal][:categories_attributes][:"0"][:"category_name"].split(/[ 　,、]/)
-    # respond_to do |format|
-      if @goal.save!
+    @list_id = List.find(params[:goal][:list_id]).id
+    # カテゴリ有
+    if params[:goal][:categories_attributes] != nil
+      inputs = params[:goal][:categories_attributes][:"0"][:"category_name"].split(/[ 　,、]/) # 作成されたリストに紐付けられたカテゴリをカンマで分割、配列にして変数に代入
+      if @goal.save
         @goal.save_category(inputs)
-        # format.html { redirect_to @goal, notice: 'リストを作成しました' } # showアクションにリダイレクト
-        # format.json { render :show, status: :created, location: @goal }
-        redirect_to root_path
+        flash[:success] = "タスクを作成しました"
+        redirect_to list_path(@list_id)
       else
-        format.html { render :new }
-        format.json { render json: @goal.errors, status: :unprocessable_entity } # バリデーションに引っかかって保存できない旨を表示
+        flash.now[:alert] = @goal.errors.full_messages
+        render action: :new
       end
-    # end
+    # カテゴリ無
+    else
+      if @goal.save
+        flash[:success] = "タスクを作成しました"
+        redirect_to list_path(@list_id)
+      else
+        flash.now[:alert] = @goal.errors.full_messages
+        render action: :new
+      end
+    end
   end
 
   def show

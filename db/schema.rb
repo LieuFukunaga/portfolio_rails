@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_06_123750) do
+ActiveRecord::Schema.define(version: 2020_05_07_023107) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 2020_05_06_123750) do
     t.string "category_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category_name"], name: "index_categories_on_category_name", unique: true
+    t.index ["category_name"], name: "index_categories_on_category_name"
   end
 
   create_table "goal_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 2020_05_06_123750) do
     t.datetime "updated_at", null: false
     t.datetime "date"
     t.index ["list_id"], name: "index_goals_on_list_id"
+    t.index ["title"], name: "index_goals_on_title"
   end
 
   create_table "lists", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
