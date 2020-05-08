@@ -12,15 +12,6 @@
       = f.hidden_field :list_id, value: @list_id
 
     .goals-new__main__category
-      -# - if @categories != nil
-      -#   = f.label "カテゴリを選択"
-      -#   %br
-      -#   = f.collection_check_boxes(:category_ids, @categories, :id, :category_name)
-      -#   %br
-      -# = f.label "カテゴリーを作成"
-      -# %br
-      -# = f.fields_for :categories do |c|
-      -#   = c.text_field :category_name, placeholder: "複数設定する場合はスペースまたはカンマで区切って下さい", size: "60px", id:"category-form"
       %p.goals-new__main__category__check-box
         = button_tag "カテゴリを選択", type: "button", class: "modal-fadein-btn"
         .category-box
