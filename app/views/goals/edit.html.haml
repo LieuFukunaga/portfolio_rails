@@ -8,13 +8,15 @@
     = "＜#{@goal.title}＞のカテゴリ一覧"
     - @categories.each do |c|
       %p
-        = link_to "#{c.category_name}", category_path(c.id)
+        = link_to edit_category_path(c.id) do
+          %i.fas.fa-angle-double-right
+          = "#{c.category_name}"
 
   .goal__return-btn
     = link_to list_path(@list.id), class:"goals-show-icon" do
       %i.fas.fa-angle-left
       %span タスク一覧へ戻る
-  .goal__return-btn
-    = link_to root_path, class:"goals-show-icon" do
+  .return-to-roo-btn
+    = link_to root_path do
       %i.fas.fa-angle-left
       %span リスト一覧へ戻る
