@@ -1,0 +1,12 @@
+.category-box {
+  max-height: 500px;
+  max-width: 300px;
+  display: none;
+  border: solid 1px;
+  overflow: scroll;
+  white-space: nowrap;
+}
+
+.unpointable {
+  pointer-events: none;
+}

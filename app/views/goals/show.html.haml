@@ -1,4 +1,16 @@
-%p
-  = link_to list_path, class:"goals-show-icon" do
-    %i.fas.fa-angle-left
-    %span タスク一覧へ戻る
+.goal
+  .goal__title
+    = "#{@goal.title}"
+    = link_to edit_list_goal_path(@list.id, @goal.id) do
+      %i.far.fa-edit
+
+  .goal__categories
+    = "#{@goal.title}のタスク一覧"
+    - @categories.each do |c|
+      %p
+        = c.category_name
+
+  .goal__return-btn
+    = link_to list_path(@list.id), class:"goals-show-icon" do
+      %i.fas.fa-angle-left
+      %span タスク一覧へ戻る

@@ -1,0 +1,20 @@
+.goal
+  .goal__title
+    = "#{@goal.title}"
+    -# = link_to edit_list_goal_path(@list.id, @goal.id) do
+    -#   %i.far.fa-edit
+
+  .goal__categories
+    = "＜#{@goal.title}＞のカテゴリ一覧"
+    - @categories.each do |c|
+      %p
+        = link_to "#{c.category_name}", category_path(c.id)
+
+  .goal__return-btn
+    = link_to list_path(@list.id), class:"goals-show-icon" do
+      %i.fas.fa-angle-left
+      %span タスク一覧へ戻る
+  .goal__return-btn
+    = link_to root_path, class:"goals-show-icon" do
+      %i.fas.fa-angle-left
+      %span リスト一覧へ戻る

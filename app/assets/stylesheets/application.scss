@@ -1,12 +1,12 @@
 @import "reset";
 
 @import "colors";
-@import "modules/tasks";
 
 @import "font-awesome-sprockets";
 @import "font-awesome";
+
 @import "modules/flash";
-@import "modules/list_index";
+@import "modules/goal/new";
 
 * {
   box-sizing: border-box;

@@ -1,0 +1,4 @@
+.category-index
+  - @categories.each do |category|
+    %p
+      = link_to "#{category.category_name}", category_path(category)

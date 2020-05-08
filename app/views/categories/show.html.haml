@@ -1,0 +1,28 @@
+.goals-table
+  - @goals.each do |goal|
+    %table
+      %tbody
+        %tr
+          %th
+            タスク名
+          %th
+            所属リスト
+          %th
+            更新日時
+        %tr
+          %td
+            = link_to "#{goal.title}", edit_list_goal_path(goal.list_id, goal.id)
+          %td
+            = link_to "#{List.find(goal.list_id).list_name}", list_path(goal.list_id)
+          %td
+            = "#{goal.updated_at.strftime("%Y年%m月%d日 %H時%M分")}"
+%br
+.category__index-btn
+  = link_to categories_path, class:"goals-show-icon" do
+    %i.fas.fa-angle-right
+    %span カテゴリ一覧へ
+.category__return-btn
+  = link_to root_path, class:"goals-show-icon" do
+    %i.fas.fa-angle-left
+    %span リスト一覧へ戻る
+

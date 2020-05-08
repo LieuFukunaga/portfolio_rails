@@ -1,0 +1,7 @@
+ja:
+  activerecord:
+    attributes:
+      category:
+        category_name: カテゴリ名
+    models:
+      category: カテゴリ

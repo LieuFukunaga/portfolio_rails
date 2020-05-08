@@ -1,5 +1,5 @@
 %p
-  = "リスト「#{@list.list_name}」のタスク一覧"
+  = "＜#{@list.list_name}＞のタスク一覧"
 %p
   = link_to new_list_goal_path(@list) do
     %i.fas.fa-plus-circle
@@ -7,7 +7,7 @@
 - if @goals.length != 0
   - @goals.each do |goal|
     %p
-      = link_to list_goal_path(goal) do
+      = link_to edit_list_goal_path(@list.id, goal) do
         %i.fas.fa-angle-double-right
         = "#{goal.title}"
       - if goal.date != nil

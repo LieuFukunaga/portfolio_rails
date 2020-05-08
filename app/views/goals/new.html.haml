@@ -1,30 +1,51 @@
 %h2 タスク作成画面
-= form_with model:@goal, url: list_goals_path(:id), local: true do |f|
-  .field
-    = f.label :title, "ゴールを設定して下さい"
-    %br
-    = f.text_field :title
-    %br
-    = f.label :date, "予定日"
-    %br
-    = f.datetime_select :date, {use_month_numbers: true, start_year: Date.today.year, datetime_separator: '<h4 class="task-time">予定時刻</h4>'}
-    = f.hidden_field :list_id, value: @list_id
+.goals-new__main
+  = form_with model:@goal, url: list_goals_path(:id), local: true do |f|
+    .goals-new__main__form
+      = f.label :title, "ゴールを設定して下さい"
+      %br
+      = f.text_field :title
+      %br
+      = f.label :date, "予定日"
+      %br
+      = f.datetime_select :date, {use_month_numbers: true, start_year: Date.today.year, datetime_separator: '<h4 class="task-time">予定時刻</h4>'}
+      = f.hidden_field :list_id, value: @list_id
 
-  -# %p.categorize-check-btn
-  -#   = check_box_tag :categorize
-  -#     = label_tag :categorize, "カテゴリを設定する"
+    .goals-new__main__category
+      -# - if @categories != nil
+      -#   = f.label "カテゴリを選択"
+      -#   %br
+      -#   = f.collection_check_boxes(:category_ids, @categories, :id, :category_name)
+      -#   %br
+      -# = f.label "カテゴリーを作成"
+      -# %br
+      -# = f.fields_for :categories do |c|
+      -#   = c.text_field :category_name, placeholder: "複数設定する場合はスペースまたはカンマで区切って下さい", size: "60px", id:"category-form"
+      %p.goals-new__main__category__check-box
+        = button_tag "カテゴリを選択", type: "button", class: "modal-fadein-btn"
+        .category-box
+          .options
+            = f.collection_check_boxes(:category_ids, @categories, :id, :category_name, include_hidden: false) do |c|
+              %br
+              = c.label {c.check_box}
+              %span
+              = c.label {c.text}
+              %br
+          %br
+          .close-btn
+            = button_tag "閉じる", type: "button", class: "modal-fadeout-btn"
+          %br
+      %p.goals-new__main__category__text-field
+        = f.label "新規カテゴリを作成"
+        %br
+        = f.fields_for :categories do |c|
+          = c.text_field :category_name, placeholder: "複数設定する場合はスペースまたはカンマで区切って下さい", size: "60px", class:"category-form"
 
 
-  .categorize-field
-    = f.label "カテゴリー"
-    %br
-    = f.fields_for :categories do |c|
-      = c.text_field :category_name, placeholder: "カテゴリを複数設定する場合はスペースまたはカンマで区切って下さい", size: "60px", id:"category-form"
-
-  .actions
-    = f.submit "登録"
-
-%p
-  = link_to list_path(id: @list_id), class:"back-btn" do
-    %i.fas.fa-angle-left
-    %span タスク一覧へ戻る
+    .goals-new__main__actions
+      = f.submit "登録"
+.goals-new__footer
+  %p
+    = link_to list_path(id: @list_id), class:"goals-new__return-btn" do
+      %i.fas.fa-angle-left
+      %span タスク一覧へ戻る
