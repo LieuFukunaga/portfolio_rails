@@ -7,16 +7,13 @@
 - if @goals.length != 0
   - @goals.each do |goal|
     %p
-      = link_to edit_list_goal_path(@list.id, goal) do
-        %i.fas.fa-angle-double-right
+      = link_to list_goal_path(@list.id, goal) do
         = "#{goal.title}"
+        %i.fas.fa-angle-double-right
       - if goal.date != nil
         %h6
           = "#{goal.date.strftime("%Y年%m月%d日 %H時%M分")}"
 - else
   %p -- NO TASK --
 
-%p
-  = link_to lists_path, class:"lists-show-icon" do
-    %i.fas.fa-angle-left
-    %span リスト一覧へ戻る
+= render partial: "layouts/return-to-root"

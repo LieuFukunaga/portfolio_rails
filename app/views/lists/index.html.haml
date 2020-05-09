@@ -26,7 +26,7 @@
     - current_user.lists.each do |list|
       %p.list
         = link_to list_path(list) do
-          %i.fas.fa-angle-double-right
           = "#{list.list_name}"
+          %i.fas.fa-angle-double-right
   - else
     %p -- NO LIST --

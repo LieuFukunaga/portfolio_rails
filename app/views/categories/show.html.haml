@@ -11,17 +11,15 @@
       - @goals.each do |goal|
         %tr
           %td
-            = link_to "#{goal.title}", edit_list_goal_path(goal.list_id, goal.id)
+            = link_to "#{goal.title}", list_goal_path(goal.list_id, goal.id)
           %td
             = link_to "#{List.find(goal.list_id).list_name}", list_path(goal.list_id)
           %td
             = "#{goal.updated_at.strftime("%Y年%m月%d日 %H時%M分")}"
-.category__index-btn
-  = link_to categories_path, class:"goals-show-icon" do
-    %i.fas.fa-angle-right
+
+.return-to-category-index
+  = link_to categories_path do
+    %i.fas.fa-angle-double-left
     %span カテゴリ一覧へ
-.category__return-btn
-  = link_to root_path, class:"goals-show-icon" do
-    %i.fas.fa-angle-left
-    %span リスト一覧へ戻る
+= render partial: "layouts/return-to-root"
 

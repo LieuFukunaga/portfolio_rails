@@ -1,16 +1,16 @@
 .goal
   .goal__title
     = "#{@goal.title}"
-    = link_to edit_list_goal_path(@list.id, @goal.id) do
-      %i.far.fa-edit
+    = link_to edit_list_goal_path(@list, @goal) do
+      %i.fas.fa-cog
 
   .goal__categories
-    = "#{@goal.title}のタスク一覧"
-    - @categories.each do |c|
+    = "＜#{@goal.title}＞のカテゴリ一覧"
+    - @goal_categories.each do |c|
       %p
-        = c.category_name
+        = link_to category_path(c) do
+          = "#{c.category_name}"
+          %i.fas.fa-angle-double-right
 
-  .goal__return-btn
-    = link_to list_path(@list.id), class:"goals-show-icon" do
-      %i.fas.fa-angle-left
-      %span タスク一覧へ戻る
+= render partial: "layouts/return-to-list-show"
+= render partial: "layouts/return-to-root"

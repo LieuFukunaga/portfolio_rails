@@ -1,22 +1,71 @@
-.goal
-  .goal__title
-    = "#{@goal.title}"
+%h1 タスク編集画面
+.goals-edit__main
+  = form_with model:@goal, url: list_goal_path(@list, @goal), local: true do |f|
+    .goals-edit__main__form
+      = f.label :title, "ゴールを設定して下さい"
+      %br
+      = f.text_field :title, value: @goal.title
+      %br
+      = f.label :date, "予定日"
+      %br
+      = f.datetime_select :date, {use_month_numbers: true, start_year: Date.today.year, datetime_separator: '<h4 class="task-time">予定時刻</h4>'}
+      = f.hidden_field :list_id, value: @list.id
+
+    .goals-edit__main__category
+      .goals-edit__main__category__check-box
+        = button_tag "カテゴリを選択", type: "button", class: "modal-fadein-btn"
+        .category-box
+          .options
+            = f.collection_check_boxes(:category_ids, Category.all, :id, :category_name, include_hidden: false) do |c|
+              %br
+              = c.label {c.check_box}
+              %span
+              = c.label {c.text}
+              %br
+          %br
+          .close-btn
+            = button_tag "閉じる", type: "button", class: "modal-fadeout-btn"
+          %br
+      -# .goals-edit__main__category__text-field
+      -#   = f.fields_for :categories do |c|
+      -#     %p
+      -#       = c.hidden_field :category_name, placeholder: "複数設定する場合はスペースまたはカンマで区切って下さい", class:"category-form"
+      %ul.goals-edit__main__category__new-category
+        ＜新規カテゴリ＞
+        = button_tag "追加", type: "button", class: "create-new-category-btn"
+        -# = button_tag "削除", type: "button", class: "delete-new-category-btn"
+
+    .goals-edit__main__actions
+      = f.submit "登録"
+
+  = render partial: "layouts/return-to-list-show"
+  = render partial: "layouts/return-to-root"
+
+-# 取れてる
+-# = @list.attributes
+-# = @goal.attributes
+
+
+
+-# .goal
+-#   .goal__title
+-#     = "#{@goal.title}"
     -# = link_to edit_list_goal_path(@list.id, @goal.id) do
     -#   %i.far.fa-edit
 
-  .goal__categories
-    = "＜#{@goal.title}＞のカテゴリ一覧"
-    - @categories.each do |c|
-      %p
-        = link_to edit_category_path(c.id) do
-          %i.fas.fa-angle-double-right
-          = "#{c.category_name}"
+  -# .goal__categories
+  -#   = "＜#{@goal.title}＞のカテゴリ一覧"
+  -#   - @categories.each do |c|
+  -#     %p
+  -#       = link_to edit_category_path(c.id) do
+  -#         %i.fas.fa-angle-double-right
+  -#         = "#{c.category_name}"
 
-  .goal__return-btn
-    = link_to list_path(@list.id), class:"goals-show-icon" do
-      %i.fas.fa-angle-left
-      %span タスク一覧へ戻る
-  .return-to-roo-btn
-    = link_to root_path do
-      %i.fas.fa-angle-left
-      %span リスト一覧へ戻る
+  -# .goal__return-btn
+  -#   = link_to list_path(@list.id), class:"goals-show-icon" do
+  -#     %i.fas.fa-angle-left
+  -#     %span タスク一覧へ戻る
+  -# .return-to-roo-btn
+  -#   = link_to root_path do
+  -#     %i.fas.fa-angle-left
+  -#     %span リスト一覧へ戻る

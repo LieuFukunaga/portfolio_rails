@@ -4,16 +4,5 @@
     = f.label :list_name, "リスト名"
     %br
     = f.text_field :list_name
-
-  -# .list_categories-field
-  -#   = f.label "カテゴリー"
-  -#   %ul#list_categories
-
-  -# .fields-for
-  -#   = f.label "カテゴリー"
-  -#   %br
-  -#   = f.fields_for :categories do |c|
-  -#     = c.text_field :category_name
-
   .actions
     = f.submit "登録"

@@ -1,4 +1,20 @@
 .category-index
-  - @categories.each do |category|
-    %p
-      = link_to "#{category.category_name}", category_path(category)
+  %table
+    %tbody
+      %tr
+        %th
+          カテゴリ名
+        %th
+          タスク数
+        - @categories.each do |category|
+          %tr
+            %td
+              = link_to edit_category_path(category) do
+                = "#{category.category_name}"
+                %i.fas.fa-cog.categories-icon
+            %td
+              = link_to category_path(category) do
+                = "#{category.goals.length}"
+                %i.fas.fa-angle-double-right
+
+= render partial: "layouts/return-to-root"

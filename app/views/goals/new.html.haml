@@ -1,4 +1,4 @@
-%h2 タスク作成画面
+%h1 タスク作成画面
 .goals-new__main
   = form_with model:@goal, url: list_goals_path(:id), local: true do |f|
     .goals-new__main__form
@@ -9,14 +9,14 @@
       = f.label :date, "予定日"
       %br
       = f.datetime_select :date, {use_month_numbers: true, start_year: Date.today.year, datetime_separator: '<h4 class="task-time">予定時刻</h4>'}
-      = f.hidden_field :list_id, value: @list_id
+      = f.hidden_field :list_id, value: @list.id
 
     .goals-new__main__category
       %p.goals-new__main__category__check-box
         = button_tag "カテゴリを選択", type: "button", class: "modal-fadein-btn"
         .category-box
           .options
-            = f.collection_check_boxes(:category_ids, @categories, :id, :category_name, include_hidden: false) do |c|
+            = f.collection_check_boxes(:category_ids, Category.all, :id, :category_name, include_hidden: false) do |c|
               %br
               = c.label {c.check_box}
               %span
@@ -35,8 +35,6 @@
 
     .goals-new__main__actions
       = f.submit "登録"
-.goals-new__footer
-  %p
-    = link_to list_path(id: @list_id), class:"goals-new__return-btn" do
-      %i.fas.fa-angle-left
-      %span タスク一覧へ戻る
+
+= render partial: "layouts/return-to-list-show"
+= render partial: "layouts/return-to-root"

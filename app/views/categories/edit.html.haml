@@ -18,7 +18,4 @@
         %i.fas.fa-angle-double-right
         = "#{goal.title}"
 
-.return-to-roo-btn
-  = link_to root_path do
-    %i.fas.fa-angle-left
-    %span リスト一覧へ戻る
+= render partial: "layouts/return-to-root"
