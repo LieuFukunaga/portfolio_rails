@@ -1,8 +1,5 @@
-th {
-  min-width: 200px;
-  padding: 5px;
-}
+@import "modules/colors";
 
-td {
-  padding: 5px;
+.categories-show__page-title {
+  font-size: 20px;
 }

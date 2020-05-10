@@ -5,10 +5,20 @@
 @import "font-awesome";
 
 @import "modules/colors";
+@import "modules/table-design";
 @import "modules/flash";
+// for List
+@import "modules/list/index";
+@import "modules/list/new";
+@import "modules/list/show";
+// for Goal
 @import "modules/goal/new";
-@import "modules/category/show";
+@import "modules/goal/show";
+@import "modules/goal/edit";
+// for Category
 @import "modules/category/index";
+@import "modules/category/show";
+@import "modules/category/edit";
 
 * {
   box-sizing: border-box;

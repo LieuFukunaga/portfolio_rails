@@ -1,8 +1,13 @@
-%h2 リスト作成画面
-= form_with model:@list, url: lists_path, local: true do |f|
-  .field
-    = f.label :list_name, "リスト名"
-    %br
-    = f.text_field :list_name
-  .actions
-    = f.submit "登録"
+.lists-new
+  %h1.lists-new__page-title リスト作成画面
+  %br
+  .lists-new__form
+    = form_with model:@list, url: lists_path, local: true do |f|
+      .field
+        = f.label :list_name, "リスト名"
+        %br
+        = f.text_field :list_name
+      .actions
+        = f.submit "登録"
+  %br
+  = render partial: "layouts/return-to-root"

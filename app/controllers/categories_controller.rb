@@ -1,12 +1,12 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update]
-  before_action :set_categories, only: [:index]
 
   def index
+    @categories = Category.includes(:goals).order("category_name ASC")
   end
 
   def show
-    @goals = @category.goals
+    @goals = @category.goals.order("date DESC")
   end
 
   def edit
@@ -32,7 +32,4 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
   end
 
-  def set_categories
-    @categories = Category.includes(:goals)
-  end
 end

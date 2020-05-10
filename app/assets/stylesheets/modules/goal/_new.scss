@@ -1,4 +1,10 @@
-.category-box {
+@import "modules/colors";
+
+
+.goals-new__page-title {
+  font-size: 20px;
+}
+.goals-new__form__category__check-boxes__options-box {
   max-height: 500px;
   max-width: 300px;
   display: none;
@@ -7,6 +13,6 @@
   white-space: nowrap;
 }
 
-.unpointable {
-  pointer-events: none;
-}
+// .unpointable {
+//   pointer-events: none;
+// }

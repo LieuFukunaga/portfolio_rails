@@ -1,7 +1,6 @@
 class GoalsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update]
   before_action :set_goal, only: [:show, :edit, :update]
-  before_action :set_goal_categories, only: [:show]
 
   def new
     @goal = Goal.new
@@ -25,7 +24,7 @@ class GoalsController < ApplicationController
         flash.now[:alert] = @goal.errors.full_messages
         render action: :new
       end
-    # 新規カテゴリの入力がない場合
+      # 新規カテゴリの入力がない場合
     else
       if @goal.save
         flash[:success] = "タスクを作成しました"
@@ -39,6 +38,7 @@ class GoalsController < ApplicationController
   end
 
   def show
+    @goal_categories = @goal.categories.order("category_name ASC")
   end
 
   def edit
@@ -47,13 +47,16 @@ class GoalsController < ApplicationController
 
   def update
     # set_goalで更新するレコードの情報を取得
-    checked_ids = params[:goal][:category_ids]
+    update_ids = params[:goal][:category_ids]
+    # binding.pry
     if params[:goal][:categories_attributes] != nil
-      inputs = params[:goal][:categories_attributes][:"0"][:"category_name"].split(/[, 、　]/) # 区切り文字で分割、配列化
-      if @goal.update(goal_params)
-        @goal.save_category(inputs, checked_ids)
+      last_index = params[:goal][:categories_attributes].permit!.to_h.to_a
+      added_categories = last_index.last[1][:category_name].split(/[, 、　]/)
+      # binding.pry
+      if @goal.update!(goal_params)
+        @goal.update_category(added_categories, update_ids)
         flash[:success] = "#{@goal.title}を更新しました"
-        redirect_to @goal
+        redirect_to list_goal_path(@goal.list_id, @goal.id)
       else
         flash.now[:alert] = @goal.errors.full_messages
         render action: :edit
@@ -85,8 +88,4 @@ class GoalsController < ApplicationController
     @goal = Goal.find(params[:id])
   end
 
-  def set_goal_categories
-    @goal = Goal.find(params[:id])
-    @goal_categories = @goal.categories
-  end
 end

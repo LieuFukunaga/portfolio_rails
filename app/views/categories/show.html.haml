@@ -1,25 +1,27 @@
-.goals-table
-  %table
-    %tbody
-      %tr
-        %th
-          タスク名
-        %th
-          所属リスト
-        %th
-          更新日時
-      - @goals.each do |goal|
+.categories-show
+  %h1.categories-show__page-title
+    = "”#{@category.category_name}”のタスク一覧"
+  %br
+  .categories-show__table
+    %table
+      %tbody
         %tr
-          %td
-            = link_to "#{goal.title}", list_goal_path(goal.list_id, goal.id)
-          %td
-            = link_to "#{List.find(goal.list_id).list_name}", list_path(goal.list_id)
-          %td
-            = "#{goal.updated_at.strftime("%Y年%m月%d日 %H時%M分")}"
+          %th
+            タスク名
+          %th
+            所属リスト
+          %th
+            予定日時
+        - @goals.each do |goal|
+          %tr
+            %td
+              = link_to "#{goal.title}", list_goal_path(goal.list_id, goal.id)
+            %td
+              = link_to "#{List.find(goal.list_id).list_name}", list_path(goal.list_id)
+            %td
+              = "#{goal.date.strftime("%Y年%m月%d日 %H時%M分")}"
+  %br
 
-.return-to-category-index
-  = link_to categories_path do
-    %i.fas.fa-angle-double-left
-    %span カテゴリ一覧へ
-= render partial: "layouts/return-to-root"
+  = render partial: "layouts/link-to-category-index"
+  = render partial: "layouts/return-to-root"
 
