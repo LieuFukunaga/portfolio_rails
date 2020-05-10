@@ -63,7 +63,6 @@ class Goal < ApplicationRecord
       new_category = updates - all_categories
     end
 
-    binding.pry
     # 関連データもろともDestroy
     old_category.each do |old_name|
       Category.find_by(category_name: old_name).destroy

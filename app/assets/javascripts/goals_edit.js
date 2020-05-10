@@ -1,9 +1,6 @@
 $(function(){
   let category_index = $(".edit-category__jquery").length
 
-  // let addedCategory = `<li class="added-categories">
-  //                       <input placeholder="複数設定する場合はスペースまたはカンマで区切って下さい" size="60px" class="added-form" type="text" name="no_category" id="goal_categories_attributes_${category_index}_category_name">
-  //                   </li>`
   let addedCategory = `<li class="added-categories">
                           <input placeholder="複数設定する場合はスペースまたはカンマで区切って下さい" size="60px" class="added-form" type="text" name="no_category" id="goal_categories_attributes_0_category_name">
                       </li>`

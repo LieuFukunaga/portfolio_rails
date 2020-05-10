@@ -51,7 +51,6 @@ class GoalsController < ApplicationController
     # 新規カテゴリが追加された場合
     if params[:goal][:categories_attributes] != nil
       added_categories = params[:goal][:categories_attributes][:"0"][:"category_name"].split(/[, 、　]/)
-      binding.pry
       if @goal.update(goal_params)
         @goal.update_category(added_categories, update_ids)
         flash[:success] = "#{@goal.title}を更新しました"
