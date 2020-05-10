@@ -46,14 +46,13 @@ class GoalsController < ApplicationController
   end
 
   def update
-    # set_goalで更新するレコードの情報を取得
     update_ids = params[:goal][:category_ids]
-    # binding.pry
+
+    # 新規カテゴリが追加された場合
     if params[:goal][:categories_attributes] != nil
-      last_index = params[:goal][:categories_attributes].permit!.to_h.to_a
-      added_categories = last_index.last[1][:category_name].split(/[, 、　]/)
-      # binding.pry
-      if @goal.update!(goal_params)
+      added_categories = params[:goal][:categories_attributes][:"0"][:"category_name"].split(/[, 、　]/)
+      binding.pry
+      if @goal.update(goal_params)
         @goal.update_category(added_categories, update_ids)
         flash[:success] = "#{@goal.title}を更新しました"
         redirect_to list_goal_path(@goal.list_id, @goal.id)
@@ -61,7 +60,7 @@ class GoalsController < ApplicationController
         flash.now[:alert] = @goal.errors.full_messages
         render action: :edit
       end
-      # 新規カテゴリの入力がない場合
+    # 新規カテゴリの入力がない場合
     else
       if @goal.update!(goal_params)
         flash[:success] = "#{@goal.title}を更新しました"

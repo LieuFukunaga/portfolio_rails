@@ -22,12 +22,14 @@
   .list-index__users-list
     %table
       %tbody
-        %th
-          = "＜#{current_user.name}さんのリスト一覧＞"
-          %span
-          = link_to new_list_path, class: "new-list-btn" do
-            %i.fas.fa-plus-circle
-            %span リストを追加
+        %tr
+          %th
+            = "＜#{current_user.name}さんのリスト一覧＞"
+        %tr
+          %th
+            = link_to new_list_path, class: "new-list-btn" do
+              %i.fas.fa-plus-circle
+              %span リストを追加
         - if current_user.lists.length != 0
           - current_user.lists.each do |list|
             %tr

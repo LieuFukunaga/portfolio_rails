@@ -45,7 +45,7 @@ class Goal < ApplicationRecord
 
   def update_category(added_categories, update_ids)
     # 更新するレコードに紐づくすべてのカテゴリを取得
-    all_categories = self.categories.select(:category_name).distinct.pluck(:category_name) unless self.categories.nil?
+    all_categories = self.categories.pluck(:category_name) unless self.categories.nil?
     # チェックボックスのカテゴリが選択されている場合
     if update_ids != nil
       # 選択されたカテゴリのidを元にレコードを取得、配列に格納
@@ -53,7 +53,7 @@ class Goal < ApplicationRecord
       update_ids.each do |update_id|
         already_registered << Category.find(update_id)
       end
-      already_registered = already_registered.distinct.pluck(:category_name) unless update_ids.nil?
+      already_registered = already_registered.pluck(:category_name) unless update_ids.nil?
       old_category = all_categories - added_categories - already_registered # 既存・新規カテゴリ以外のカテゴリ
       new_category = added_categories - all_categories #これから紐付けられるカテゴリ
 
@@ -62,6 +62,7 @@ class Goal < ApplicationRecord
       old_category = all_categories - updates
       new_category = updates - all_categories
     end
+
     binding.pry
     # 関連データもろともDestroy
     old_category.each do |old_name|
