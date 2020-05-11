@@ -1,9 +1,36 @@
 @import "reset";
 
-@import "colors";
-@import "modules/tasks";
 
 @import "font-awesome-sprockets";
 @import "font-awesome";
+
+@import "modules/header";
+@import "modules/colors";
+@import "modules/table-design";
 @import "modules/flash";
-@import "modules/list_index";
+// for List
+@import "modules/list/index";
+@import "modules/list/new";
+@import "modules/list/show";
+// for Goal
+@import "modules/goal/new";
+@import "modules/goal/show";
+@import "modules/goal/edit";
+// for Category
+@import "modules/category/index";
+@import "modules/category/show";
+@import "modules/category/edit";
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: underline;
+  background-color: $light-gray;
+}

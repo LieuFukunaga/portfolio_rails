@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_02_093900) do
+ActiveRecord::Schema.define(version: 2020_05_11_111258) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -44,28 +44,44 @@ ActiveRecord::Schema.define(version: 2020_05_02_093900) do
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
+  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "category_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["category_name"], name: "index_categories_on_category_name"
+    t.index ["user_id"], name: "index_categories_on_user_id"
+  end
+
+  create_table "goal_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "goal_id"
+    t.index ["category_id"], name: "index_goal_categories_on_category_id"
+    t.index ["goal_id"], name: "index_goal_categories_on_goal_id"
+  end
+
+  create_table "goals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title", null: false
+    t.integer "status", limit: 1, default: 0
+    t.bigint "list_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "date"
+    t.bigint "user_id"
+    t.index ["list_id"], name: "index_goals_on_list_id"
+    t.index ["title"], name: "index_goals_on_title"
+    t.index ["user_id"], name: "index_goals_on_user_id"
+  end
+
   create_table "lists", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "taggings", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "tag_id"
-    t.string "taggable_type"
-    t.integer "taggable_id"
-    t.string "tagger_type"
-    t.integer "tagger_id"
-    t.string "context", limit: 128
-    t.datetime "created_at"
-    t.index ["tag_id"], name: "index_taggings_on_tag_id"
-    t.index ["taggable_id", "taggable_type", "context"], name: "taggings_taggable_context_idx"
-  end
-
-  create_table "tags", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["name"], name: "index_tags_on_name", unique: true
+    t.string "list_name", null: false
+    t.bigint "user_id"
+    t.index ["list_name"], name: "index_lists_on_list_name"
+    t.index ["user_id"], name: "index_lists_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -84,5 +100,10 @@ ActiveRecord::Schema.define(version: 2020_05_02_093900) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "users"
-  add_foreign_key "taggings", "tags"
+  add_foreign_key "categories", "users"
+  add_foreign_key "goal_categories", "categories"
+  add_foreign_key "goal_categories", "goals"
+  add_foreign_key "goals", "lists"
+  add_foreign_key "goals", "users"
+  add_foreign_key "lists", "users"
 end

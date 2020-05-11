@@ -1,0 +1,14 @@
+= render 'layouts/header'
+%br
+.lists-edit
+  %h1.lists-edit__page-title ＜リスト編集画面＞
+  .lists-edit__form
+    = form_with model:@list, url: list_path(@list), local: true do |f|
+      .field
+        = f.label :list_name, "リスト名"
+        %br
+        = f.text_field :list_name
+      .actions
+        = f.submit "登録"
+  %br
+  = render partial: "layouts/return-to-root"

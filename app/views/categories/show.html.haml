@@ -1,0 +1,30 @@
+= render 'layouts/header'
+
+.categories-show
+  .categories-show__top
+    %span.categories-show__top__page-title
+      = "”#{@category.category_name}”のタスク一覧"
+  %br
+  .categories-show__table
+    %table
+      %tbody
+        %tr
+          %th
+            タスク名
+          %th
+            所属リスト
+          %th
+            予定日時
+        - @category.goals.where(user_id: current_user.id).each do |goal|
+          %tr
+            %td
+              = link_to "#{goal.title}", list_goal_path(goal.list_id, goal.id)
+            %td
+              = link_to "#{List.find(goal.list_id).list_name}", list_path(goal.list_id)
+            %td
+              = "#{goal.date.strftime("%Y年%m月%d日 %H時%M分")}"
+  %br
+
+  = render partial: "layouts/link-to-category-index"
+  = render partial: "layouts/return-to-root"
+

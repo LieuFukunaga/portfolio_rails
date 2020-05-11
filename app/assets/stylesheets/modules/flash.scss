@@ -2,12 +2,15 @@
   .notice {
     background-color: $green;
     color: $white;
-    text-align: center;
   }
 
   .alert {
     background-color: $orange;
     color: $white;
-    text-align: center;
+  }
+
+  .success {
+    background-color: $green;
+    color: $white;
   }
 }

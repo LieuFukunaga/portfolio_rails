@@ -1,4 +1,14 @@
--# S3への画像アップロードテストに使用
-= form_with model: @list, local: true  do |f|
-  = f.file_field :image
-  = f.submit
+= render 'layouts/header'
+%br
+.lists-new
+  %h1.lists-new__page-title ＜リスト作成画面＞
+  .lists-new__form
+    = form_with model:@list, url: lists_path, local: true do |f|
+      .field
+        = f.label :list_name, "リスト名"
+        %br
+        = f.text_field :list_name
+      .actions
+        = f.submit "登録"
+  %br
+  = render partial: "layouts/return-to-root"

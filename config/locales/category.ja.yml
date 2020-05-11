@@ -1,0 +1,14 @@
+ja:
+  activerecord:
+    errors:
+      messages:
+        record_invalid: 'バリデーションに失敗しました: %{errors}'
+        restrict_dependent_destroy:
+          has_one: "%{record}が存在しているので削除できません"
+          has_many: "%{record}が存在しているので削除できません"
+    models:
+      category: カテゴリ
+    attributes:
+      categories:
+        category_name: カテゴリ名
+        user_id: ユーザID

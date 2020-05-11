@@ -1,0 +1,46 @@
+-# = render 'layouts/header'
+-# %br
+.goals-edit
+  %h1.goals-edit__page-title ＜タスク編集画面＞
+  %br
+  .goals-edit__form
+    = form_with model:@goal, url: list_goal_path(@list, @goal), local: true do |f|
+      .goals-edit__form__fields
+        = f.label :title, "ゴールを設定して下さい"
+        %br
+        = f.text_field :title, value: @goal.title
+        %br
+        = f.label :status, "タスクの状態"
+        %br
+        = f.select :status, Goal.statuses_i18n.invert, {}, {id: 'status_selector'}
+        %br
+        = f.label :date, "予定日"
+        %br
+        = f.datetime_select :date, {use_month_numbers: true, start_year: Date.today.year, datetime_separator: '<h4 class="datetime-selector">予定時刻</h4>'}
+        = f.hidden_field :list_id, value: @list.id
+        = f.hidden_field :user_id, value: current_user.id, id:"login-user-id"
+
+      .goals-edit__form__category
+        .goals-edit__form__category__check-boxes
+          = button_tag "カテゴリを選択", type: "button", id: "modal-fadein-btn"
+          .goals-edit__form__category__check-boxes__options-box
+            .options
+              = f.collection_check_boxes(:category_ids, Category.all, :id, :category_name, include_hidden: false) do |c|
+                %br
+                = c.label {c.check_box}
+                %span
+                = c.label {c.text}
+                %br
+            %br
+            .close-btn
+              = button_tag "閉じる", type: "button", id: "modal-fadeout-btn"
+            %br
+        %ul.goals-edit__form__category__create-category-btn
+          ＜新規カテゴリ＞
+          = button_tag "追加", type: "button", id: "create-category-btn"
+
+      .goals-edit__form__submit-btn
+        = f.submit "登録"
+
+    = render partial: "layouts/return-to-list-show"
+    = render partial: "layouts/return-to-root"

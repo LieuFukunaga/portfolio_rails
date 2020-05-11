@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    errors:
+      messages:
+        record_invalid: 'バリデーションに失敗しました: %{errors}'
+        restrict_dependent_destroy:
+          has_one: "%{record}が存在しているので削除できません"
+          has_many: "%{record}が存在しているので削除できません"
+    models:
+      list: リスト
+    attributes:
+      list:
+        list_name:  リスト名
+        user_id:    ユーザID
+        created_at: 作成日時
+        updated_at: 更新日時

@@ -1,0 +1,5 @@
+.return-to-list-show
+  = link_to list_path(@list) do
+    %i.fas.fa-angle-left
+    %span
+      = "”#{@list.list_name}”のタスク一覧へ戻る"

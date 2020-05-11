@@ -1,0 +1,33 @@
+= render 'layouts/header'
+.categories-edit
+  %h1.categories-edit__page-title
+    カテゴリ編集画面
+  %br
+  .categories-edit__form
+    = form_with model: @category, url: category_path(@category), local: true do |f|
+      = f.label :category_name, "カテゴリ名を変更"
+      %br
+      = f.text_field :category_name, value: @category.category_name
+      %br
+      = f.submit "更新する"
+  %br
+  .categories-edit__table
+    %table
+      %tbody
+        %h2.categories-edit__table-title
+          = "”#{@category.category_name}”のタスク一覧"
+        %tr
+          %th
+            タスク名
+          %th
+            予定日時
+        - @category.goals.each do |goal|
+          %tr
+            %td
+              = link_to list_goal_path(goal.list_id, goal.id) do
+                = "#{goal.title}"
+                %i.fas.fa-angle-double-right
+            %td
+              = goal.date.strftime("%Y年%m月%d日 %H時%M分")
+  %br
+  = render partial: "layouts/return-to-root"

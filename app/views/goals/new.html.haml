@@ -1,0 +1,45 @@
+-# = render 'layouts/header'
+-# %br
+.goals-new
+  %h1.goals-new__page-title ＜タスク作成画面＞
+  .goals-new__form
+    = form_with model:@goal, url: list_goals_path(:id), local: true do |f|
+      .goals-new__form__fields
+        = f.label :title, "ゴールを設定して下さい"
+        %br
+        = f.text_field :title
+        %br
+        = f.label :date, "予定日"
+        %br
+        = f.datetime_select :date, {use_month_numbers: true, start_year: Date.today.year, datetime_separator: '<h4 class="datetime-selector">予定時刻</h4>'}
+        = f.hidden_field :list_id, value: @list.id
+        = f.hidden_field :user_id, value: current_user.id
+
+      .goals-new__form__category
+        .goals-new__form__category__check-boxes
+          = button_tag "カテゴリを選択", type: "button", id: "modal-fadein-btn"
+          .goals-new__form__category__check-boxes__options-box
+            .options
+              = f.collection_check_boxes(:category_ids, Category.all, :id, :category_name, include_hidden: false) do |c|
+                %br
+                = c.label {c.check_box}
+                %span
+                = c.label {c.text}
+                %br
+            %br
+            .close-btn
+              = button_tag "閉じる", type: "button", id: "modal-fadeout-btn"
+            %br
+        .goals-new__form__category__create-category-form
+          = f.label "新規カテゴリを作成"
+          %br
+          = f.fields_for :categories do |c|
+            = c.text_field :category_name, placeholder: "複数設定する場合はスペースまたはカンマで区切って下さい", size: "60px", class:"create-category-form"
+            = c.hidden_field :user_id, value: current_user.id, class: "hidden-field__user-id"
+
+
+      .goals-new__form__submit-btn
+        = f.submit "登録"
+
+  = render partial: "layouts/return-to-list-show"
+  = render partial: "layouts/return-to-root"

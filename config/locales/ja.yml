@@ -1,5 +1,10 @@
 ---
 ja:
+  enums:
+      application_record:
+        status:
+          doing:  "未達成"
+          done :  "達成"
   activerecord:
     errors:
       messages:

@@ -12,6 +12,8 @@ Task 1-3-9
 
 - "1-3-9"（=>１つのゴールに３つのステップ、９つのアクション）というレイアウトは変更できません。ステップとアクションの数を制限することで、タスクの取捨選択と課題の切り分けを促します。
 
+- 各タスクはそれぞれ１つの「リスト」に属します。また、リストとは別に複数の「カテゴリ」を設定し、整理することができます。
+
 ## 本番環境
 - GitHub URL: https://github.com/LieuFukunaga/portfolio_rails
 - URL: http://18.181.47.18
@@ -27,6 +29,7 @@ Task 1-3-9
 
 #### Association
 - has_many :lists, dependent: :destroy
+- has_many :addresses, dependent: :destroy
 
 
 ### Addressesテーブル
@@ -42,57 +45,57 @@ Task 1-3-9
 - belongs_to :user, optional: true
 
 
-### Categoriesテーブル
-|Column |type   |Options |
-|-------|-------|--------|
-|name   |string |
-
-#### Association
-- has_many :lists_categories
-- has_many :lists, through: :lists_categories
-
-
 ### Listsテーブル
-|Column  |Type       |Options           |
-|--------|-----------|------------------|
-|name    |string     |null: false       |
-|user_id |references |foreign_key: true |
+|Column       |Type       |Options                                |
+|-------------|-----------|---------------------------------------|
+|list_name    |string     |null: false, index: true, unique: true |
+|user_id      |references |foreign_key: true, index: true         |
 
 #### Association
 - belongs_to :user
-- has_many :lists_categories
-- has_many :categories, through: :lists_categories
-- has_many :goals
+- has_many :goals, dependent: :destroy
 
 
-### Lists_Categoriesテーブル
-|Column      |type       |Options           |
-|------------|-----------|------------------|
-|list_id     |references |foreign_key: true |
-|category_id |references |foreign_key: true |
+### Categoriesテーブル
+|Column          |type   |Options                  |
+|----------------|-------|-------------------------|
+|category_name   |string |null: false, index: true |
 
 #### Association
-- belongs_to :lists
-- belongs_to :categories
+- has_many :goals, through: :goal_categories
+- has_many :goal_categories, dependent: :destroy
 
 
-
-### Goalsテーブル
-|Column  |Type       |Options              |
-|--------|-----------|---------------------|
-|name    |string     |null: false          |
-|status  |integer    |limit: 1, default: 0 |
-|list_id |references |foreign_key: true    |
+### goal_Categoriesテーブル
+|Column      |type       |Options                        |
+|------------|-----------|-------------------------------|
+|list_id     |references |foreign_key: true, index: true |
+|category_id |references |foreign_key: true, index: true |
 
 #### Association
 - belongs_to :list
+- belongs_to :category
+
+
+### Goalsテーブル
+|Column  |Type       |Options                 |
+|--------|-----------|------------------------|
+|title   |string     |null: false, index: true|
+|status  |integer    |limit: 1, default: 0    |
+|list_id |references |foreign_key: true       |
+|date    |datetime   |
+
+#### Association
+- belongs_to :list
+- has_many :categories, through: :goal_categories
+- has_many :goal_categories, dependent: :destroy
 - has_many :steps, dependent: :destroy
 
 
 ### Stepsテーブル
 |Column  |Type       |Options              |
 |--------|-----------|---------------------|
-|name    |string     |null: false          |
+|title   |string     |null: false          |
 |status  |integer    |limit: 1, default: 0 |
 |goal_id |references |foreign_key: true    |
 
@@ -104,7 +107,7 @@ Task 1-3-9
 ### Actionsテーブル
 |Column  |Type       |Options              |
 |--------|-----------|---------------------|
-|name    |string     |null: false          |
+|title   |string     |null: false          |
 |status  |integer    |limit: 1, default: 0 |
 |step_id |references |foreign_key: true    |
 
