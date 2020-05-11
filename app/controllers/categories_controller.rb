@@ -25,7 +25,7 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    if @category.user_id != current_user.id
+    if @category.user_id == current_user.id
       @category.destroy
       redirect_to categories_path, notice: "#{@category.category_name}を削除しました"
     else
