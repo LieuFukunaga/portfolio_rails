@@ -31,8 +31,12 @@ class CategoriesController < ApplicationController
     # else
     #   redirect_to categories_path
     # end
-    @category.destroy
-    redirect_to categories_path, notice: "#{@category.category_name}を削除しました"
+    if @category.destroy!
+      redirect_to categories_path, notice: "#{@category.category_name}を削除しました"
+    else
+      flash.now[:alert] = @category.errors.full_messages
+      render categories_path
+    end
   end
 
   private
