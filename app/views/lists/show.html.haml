@@ -1,6 +1,8 @@
+= render 'layouts/header'
+%br
 .lists-show
   %h1.lists-show__page-title
-    = "”#{@list.list_name}”のタスク一覧"
+    = "＜”#{@list.list_name}”のタスク一覧＞"
   %br
   .list-show__add-task-btn
     = link_to new_list_goal_path(@list) do
@@ -15,14 +17,21 @@
             タスク名
           %th
             予定日時
-        - @goals.each do |goal|
+          %th
+            タスクの状態
+        - @goals.each.with_index(1) do |goal, index|
           %tr
             %td
-              = link_to list_goal_path(@list.id, goal) do
+              = link_to list_goal_path(@list.id, goal), id: "goal-title_#{index}" do
                 = "#{goal.title}"
                 %i.fas.fa-angle-double-right
             %td
               = "#{goal.date.strftime("%Y年%m月%d日 %H時%M分")}"
+            %td
+              = goal.status_i18n
+            %td{data: {index: "#{index}"}}
+              = link_to list_goal_path(goal.list_id, goal.id), method: :delete, class: "lists-show__delete-btn" do
+                削除
   - else
     %p -- NO TASK --
   %br

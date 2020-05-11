@@ -1,25 +1,22 @@
+= render 'layouts/header'
+%br
 .goals-show
   %h1.goals-show__page-title
     = link_to edit_list_goal_path(@list, @goal) do
       %span.goals-show__title
-        = "#{@goal.title}"
-      %i.fas.fa-cog
+        = "”#{@goal.title}”詳細ページ"
+      %i.fas.fa-edit
   %br
   %table
     %tbody
       %th
-        = "”#{@goal.title}”のカテゴリ一覧"
+        = "#{@goal.title}のカテゴリ一覧"
       - @goal_categories.each do |c|
         %tr
           %td
             = link_to category_path(c) do
               = "#{c.category_name}"
               %i.fas.fa-angle-double-right
-  %br
-  .goals-show__add-task
-    = link_to new_list_goal_path(@list, @goal) do
-      = "”#{@list.list_name}”にタスクを追加"
-      %i.fas.fa-plus-circle
 %br
 = render partial: "layouts/return-to-list-show"
 = render partial: "layouts/return-to-root"

@@ -6,9 +6,12 @@ class User < ApplicationRecord
 
   has_one :address, dependent: :destroy
   has_many :lists, dependent: :destroy
+  has_many :goals, dependent: :destroy
 
   validates :name, presence: true
   validates :name, length: { minimum: 1, maximum: 255 }
+
+  validates :email, format: {with: /\A\w+@\w+\.\w+\z/}
 
   validates :tel_num, presence: true
   validates :tel_num, uniqueness: true

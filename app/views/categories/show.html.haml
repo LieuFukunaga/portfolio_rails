@@ -1,6 +1,9 @@
+= render 'layouts/header'
+
 .categories-show
-  %h1.categories-show__page-title
-    = "”#{@category.category_name}”のタスク一覧"
+  .categories-show__top
+    %span.categories-show__top__page-title
+      = "”#{@category.category_name}”のタスク一覧"
   %br
   .categories-show__table
     %table
@@ -12,7 +15,7 @@
             所属リスト
           %th
             予定日時
-        - @goals.each do |goal|
+        - @category.goals.where(user_id: current_user.id).each do |goal|
           %tr
             %td
               = link_to "#{goal.title}", list_goal_path(goal.list_id, goal.id)

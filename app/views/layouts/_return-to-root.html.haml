@@ -1,4 +1,5 @@
 .return-to-root
   = link_to root_path do
     %i.fas.fa-angle-left
-    %span リスト一覧へ戻る
+    %span
+      = "#{current_user.name}さんのリスト一覧へ戻る"

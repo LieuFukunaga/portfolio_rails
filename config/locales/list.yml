@@ -7,7 +7,10 @@ ja:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
     models:
-      category: カテゴリ
+      list: リスト
     attributes:
-      category:
-        category_name: カテゴリ名
+      list:
+        list_name:  リスト名
+        user_id:    ユーザID
+        created_at: 作成日時
+        updated_at: 更新日時

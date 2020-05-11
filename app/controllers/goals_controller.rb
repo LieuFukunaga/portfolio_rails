@@ -1,6 +1,10 @@
 class GoalsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update]
-  before_action :set_goal, only: [:show, :edit, :update]
+  before_action :set_goal, only: [:show, :edit, :update, :destroy]
+
+  def index
+    @goals = Goal.includes([:list, goal_categories: :categories])
+  end
 
   def new
     @goal = Goal.new
@@ -61,7 +65,7 @@ class GoalsController < ApplicationController
       end
     # 新規カテゴリの入力がない場合
     else
-      if @goal.update!(goal_params)
+      if @goal.update(goal_params)
         flash[:success] = "#{@goal.title}を更新しました"
         redirect_to list_path(@list)
       else
@@ -71,9 +75,14 @@ class GoalsController < ApplicationController
     end
   end
 
+  def destroy
+    @goal.destroy
+    redirect_to list_path(@goal.list_id), notice: "#{@goal.title}を削除しました"
+  end
+
   private
   def goal_params
-    params.require(:goal).permit(:title, :list_id, :date, category_ids: [], categories_attributes: [:category_name])
+    params.require(:goal).permit(:title, :status, :list_id, :user_id,:date, category_ids: [], categories_attributes: [:category_name])
   end
 
   def set_list

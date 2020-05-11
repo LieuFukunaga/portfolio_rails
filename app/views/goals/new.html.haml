@@ -1,6 +1,7 @@
+-# = render 'layouts/header'
+-# %br
 .goals-new
-  %h1.goals-new__page-title タスク作成画面
-  %br
+  %h1.goals-new__page-title ＜タスク作成画面＞
   .goals-new__form
     = form_with model:@goal, url: list_goals_path(:id), local: true do |f|
       .goals-new__form__fields
@@ -12,6 +13,7 @@
         %br
         = f.datetime_select :date, {use_month_numbers: true, start_year: Date.today.year, datetime_separator: '<h4 class="datetime-selector">予定時刻</h4>'}
         = f.hidden_field :list_id, value: @list.id
+        = f.hidden_field :user_id, value: current_user.id
 
       .goals-new__form__category
         .goals-new__form__category__check-boxes

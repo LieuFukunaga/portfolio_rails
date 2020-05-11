@@ -1,43 +1,30 @@
+= render 'layouts/header'
 .lists-index
-  %h1.lists-index__application-name Task 1-3-9
-  %header.lists-index__header
-  %br
-    - if user_signed_in?
-      .lists-index__header__user-name
-        = "ようこそ #{current_user.name}さん"
-      .lists-index__header__email
-        = "#{current_user.email}でログインしています"
-      %br
-      .lists-index__header__logout-btn
-        = link_to destroy_user_session_path, method: :delete do
-          %i.fas.fa-sign-out-alt
-          %span ログアウト
-    - else
-      %h2 ログインしていません
-      .lists-index__header__login-btn
-        =link_to "新規登録", new_user_registration_path
-        =link_to new_user_session_path do
-          %i.fas.fa-sign-in-alt
-          %span ログイン
   .list-index__users-list
     %table
       %tbody
         %tr
           %th
             = "＜#{current_user.name}さんのリスト一覧＞"
-        %tr
           %th
             = link_to new_list_path, class: "new-list-btn" do
               %i.fas.fa-plus-circle
               %span リストを追加
         - if current_user.lists.length != 0
-          - current_user.lists.each do |list|
+          - current_user.lists.each.with_index(1) do |list, index|
             %tr
               %td
-                = link_to list_path(list) do
+                = link_to list_path(list), id: "list-name_#{index}" do
                   = "#{list.list_name}"
                   %i.fas.fa-angle-double-right
+              %td
+                = link_to edit_list_path(list.id) do
+                  編集
+              %td{data: {index: "#{index}"}}
+                = link_to list_path(list.id), method: :delete, class: "lists-index__delete-btn" do
+                  削除
         - else
-          %p -- NO LIST --
+          %tr
+            %td -- NO LIST --
   %br
   = render partial: "layouts/link-to-category-index"

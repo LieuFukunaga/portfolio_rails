@@ -4,6 +4,7 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+@import "modules/header";
 @import "modules/colors";
 @import "modules/table-design";
 @import "modules/flash";
@@ -26,4 +27,10 @@
 
 a {
   text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: underline;
+  background-color: $light-gray;
 }

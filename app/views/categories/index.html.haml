@@ -1,3 +1,4 @@
+= render 'layouts/header'
 .category-index
   %h1.category-index__page-title カテゴリ一覧
   %br
@@ -8,15 +9,20 @@
           カテゴリ名
         %th
           タスク数
-        - @categories.each do |category|
+        - @categories.each.with_index(1) do |category, index|
           %tr
             %td
-              = link_to edit_category_path(category) do
+              = link_to category_path(category), id: "category-name_#{index}" do
                 = "#{category.category_name}"
-                %i.fas.fa-cog
-            %td
-              = link_to category_path(category) do
-                = "#{category.goals.length}"
                 %i.fas.fa-angle-double-right
+            %td
+              = category.goals.where(user_id: current_user.id).length
+            %td
+              = link_to edit_category_path(category.id) do
+                編集
+            %td{data: {index: "#{index}"}}
+              = link_to category_path(category.id), method: :delete, class: "categories-index__delete-btn" do
+                削除
 
+%br
 = render partial: "layouts/return-to-root"

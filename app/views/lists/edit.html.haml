@@ -1,9 +1,9 @@
 = render 'layouts/header'
 %br
-.lists-new
-  %h1.lists-new__page-title ＜リスト作成画面＞
-  .lists-new__form
-    = form_with model:@list, url: lists_path, local: true do |f|
+.lists-edit
+  %h1.lists-edit__page-title ＜リスト編集画面＞
+  .lists-edit__form
+    = form_with model:@list, url: list_path(@list), local: true do |f|
       .field
         = f.label :list_name, "リスト名"
         %br

@@ -1,5 +1,14 @@
 @import "modules/colors";
 
-.categories-show__page-title {
-  font-size: 20px;
+.categories-show {
+  margin-top: 10px;
+  &__top {
+    margin-bottom: 10px;
+    &__page-title {
+      font-size: 20px;
+    }
+    &__edit-btn {
+      margin-left: 20px;
+    }
+  }
 }

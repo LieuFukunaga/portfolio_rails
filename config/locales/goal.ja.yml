@@ -1,4 +1,22 @@
 ja:
+  enums:
+    goal:
+      status:
+        doing:  "実行中"
+        done:   "達成！"
   activerecord:
+    errors:
+      messages:
+        record_invalid: 'バリデーションに失敗しました: %{errors}'
+        restrict_dependent_destroy:
+          has_one: "%{record}が存在しているので削除できません"
+          has_many: "%{record}が存在しているので削除できません"
     models:
       goal: ゴール
+    attributes:
+      goal:
+        title:      ゴール
+        status:     ステータス
+        list_id:    リストID
+        created_at: 作成日時
+        updated_at: 更新日時

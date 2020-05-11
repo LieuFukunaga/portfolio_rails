@@ -1,13 +1,20 @@
 class Goal < ApplicationRecord
   belongs_to :list
+  belongs_to :user
 
   has_many :goal_categories, dependent: :destroy
   has_many :categories, through: :goal_categories
 
   validates :title, length: { minimum: 0, maximum: 20 }
+  validates :title, null: false, presence: true
 
   accepts_nested_attributes_for :categories, allow_destroy: true
   accepts_nested_attributes_for :goal_categories, allow_destroy: true
+
+  enum status: {
+    doing: 0,
+    done: 1,
+  }
 
   def save_category(inputs, checked_ids)
 

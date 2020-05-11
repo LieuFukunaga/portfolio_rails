@@ -1,12 +1,11 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :edit, :update]
+  before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   def index
-    @categories = Category.includes(:goals).order("category_name ASC")
+    @categories = Category.includes(:goals)
   end
 
   def show
-    @goals = @category.goals.order("date DESC")
   end
 
   def edit
@@ -20,6 +19,11 @@ class CategoriesController < ApplicationController
       flash.now[:alert] = @category.errors.full_messages
       render action: :edit
     end
+  end
+
+  def destroy
+    @category.destroy
+    redirect_to categories_path, notice: "#{@category.category_name}を削除しました"
   end
 
   private
