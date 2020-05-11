@@ -8,13 +8,16 @@ $(function(){
   });
 
 // 　text_field用
-  $('.create-category-form').attr("name", 'no_category')
+  $(".hidden-field__user-id").attr("name", 'no_user');
+  $('.create-category-form').attr("name", 'no_category');
   $(".create-category-form").on("change", function (){
     let input = $(this).val();
     if (input != "") {
       $(this).attr("name", 'goal[categories_attributes][0][category_name]')
+      $(".hidden-field__user-id").attr("name", 'goal[categories_attributes][0][user_id]')
     } else {
       $(this).attr("name", 'no_category')
+      $(".hidden-field__user-id").attr("name", 'no_user')
     };
   });
 });

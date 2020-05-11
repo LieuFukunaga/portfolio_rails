@@ -35,6 +35,7 @@
           %br
           = f.fields_for :categories do |c|
             = c.text_field :category_name, placeholder: "複数設定する場合はスペースまたはカンマで区切って下さい", size: "60px", class:"create-category-form"
+            = c.hidden_field :user_id, value: current_user.id, class: "hidden-field__user-id"
 
 
       .goals-new__form__submit-btn

@@ -1,4 +1,5 @@
 class GoalsController < ApplicationController
+
   before_action :set_list, only: [:show, :edit, :update]
   before_action :set_goal, only: [:show, :edit, :update, :destroy]
 
@@ -20,7 +21,7 @@ class GoalsController < ApplicationController
     # 新規カテゴリの入力がある場合
     if params[:goal][:categories_attributes] != nil
       inputs = params[:goal][:categories_attributes][:"0"][:"category_name"].split(/[, 、　]/) # 区切り文字で分割、配列化
-      if @goal.save
+      if @goal.save && @goal.valid?
         @goal.save_category(inputs, checked_ids)
         flash[:success] = "タスクを作成しました"
         redirect_to list_path(@list)
@@ -30,7 +31,7 @@ class GoalsController < ApplicationController
       end
       # 新規カテゴリの入力がない場合
     else
-      if @goal.save
+      if @goal.save && @goal.valid?
         flash[:success] = "タスクを作成しました"
         redirect_to list_path(@list)
       else
@@ -46,7 +47,11 @@ class GoalsController < ApplicationController
   end
 
   def edit
-    @categories = Category.includes(:goals) # セレクトボックス用
+    if @goal.user_id == current_user.id
+      @categories = Category.includes(:goals) # セレクトボックス用
+    else
+      redirect_to root_path
+    end
   end
 
   def update
@@ -76,13 +81,17 @@ class GoalsController < ApplicationController
   end
 
   def destroy
-    @goal.destroy
-    redirect_to list_path(@goal.list_id), notice: "#{@goal.title}を削除しました"
+    if @goal.user_id == current_user.id
+      @goal.destroy
+      redirect_to list_path(@goal.list_id), notice: "#{@goal.title}を削除しました"
+    else
+      redirect_to root_path
+    end
   end
 
   private
   def goal_params
-    params.require(:goal).permit(:title, :status, :list_id, :user_id,:date, category_ids: [], categories_attributes: [:category_name])
+    params.require(:goal).permit(:title, :status, :list_id, :user_id, :date, category_ids: [], categories_attributes: [:category_name, :user_id])
   end
 
   def set_list

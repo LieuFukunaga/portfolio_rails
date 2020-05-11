@@ -9,5 +9,6 @@ ja:
     models:
       category: カテゴリ
     attributes:
-      category:
+      categories:
         category_name: カテゴリ名
+        user_id: ユーザID

@@ -26,6 +26,9 @@ class ListsController < ApplicationController
   end
 
   def edit
+    if @list.user_id != current_user.id
+      redirect_to root_path
+    end
   end
 
   def update
@@ -39,8 +42,12 @@ class ListsController < ApplicationController
   end
 
   def destroy
-    @list.destroy
-    redirect_to root_path, notice: "#{@list.list_name}を削除しました"
+    if @list.user_id == current_user.id
+      @list.destroy
+      redirect_to root_path, notice: "#{@list.list_name}を削除しました"
+    else
+      redirect_to root_path
+    end
   end
 
   private

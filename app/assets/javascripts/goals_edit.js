@@ -1,8 +1,8 @@
 $(function(){
-  let category_index = $(".edit-category__jquery").length
-
+  let userId = $("#login-user-id").val();
   let addedCategory = `<li class="added-categories">
                           <input placeholder="複数設定する場合はスペースまたはカンマで区切って下さい" size="60px" class="added-form" type="text" name="no_category" id="goal_categories_attributes_0_category_name">
+                          <input value="${userId}" class="added-form-hidden" type="hidden" name="no_user" id="goal_categories_attributes_0_user_id">
                       </li>`
 
   $("#modal-fadein-btn").click(function(){
@@ -27,7 +27,8 @@ $(function(){
   $(document).on("change", ".added-form", function (){
     let input = $(".added-form").val();
     if (input != "") {
-      $(".added-form").attr("name", `goal[categories_attributes][0][category_name]`)
+      $(".added-form").attr("name", "goal[categories_attributes][0][category_name]");
+      $(".added-form-hidden").attr("name", "goal[categories_attributes][0][user_id]");
     } else {
       $(".added-form").attr("name", 'no_category')
     };

@@ -18,7 +18,7 @@
         %br
         = f.datetime_select :date, {use_month_numbers: true, start_year: Date.today.year, datetime_separator: '<h4 class="datetime-selector">予定時刻</h4>'}
         = f.hidden_field :list_id, value: @list.id
-        = f.hidden_field :user_id, value: current_user.id
+        = f.hidden_field :user_id, value: current_user.id, id:"login-user-id"
 
       .goals-edit__form__category
         .goals-edit__form__category__check-boxes
