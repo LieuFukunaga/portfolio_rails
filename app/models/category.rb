@@ -1,5 +1,5 @@
 class Category < ApplicationRecord
-  belongs_to :user, optional: true
+  belongs_to :user
   has_many :goal_categories, dependent: :destroy
   has_many :goals, through: :goal_categories
 
