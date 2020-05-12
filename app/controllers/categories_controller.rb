@@ -25,18 +25,25 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    if @category.user_id != current_user.id
-      @category.destroy
+    # if @category.user_id == current_user.id
+    #   @category.destroy
+    #   redirect_to categories_path, notice: "#{@category.category_name}を削除しました"
+    # else
+    #   redirect_to categories_path
+    # end
+    # binding.pry
+    if @category.destroy
       redirect_to categories_path, notice: "#{@category.category_name}を削除しました"
     else
-      redirect_to categories_path
+      flash.now[:alert] = @category.errors.full_messages
+      render categories_path
     end
   end
 
   private
 
   def category_params
-    params.require(:category).permit(:category_name)
+    params.require(:category).permit(:category_name, :user_id)
   end
 
   def set_category

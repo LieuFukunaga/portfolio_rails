@@ -21,7 +21,7 @@ class GoalsController < ApplicationController
     # 新規カテゴリの入力がある場合
     if params[:goal][:categories_attributes] != nil
       inputs = params[:goal][:categories_attributes][:"0"][:"category_name"].split(/[, 、　]/) # 区切り文字で分割、配列化
-      if @goal.save && @goal.valid?
+      if @goal.save
         @goal.save_category(inputs, checked_ids)
         flash[:success] = "タスクを作成しました"
         redirect_to list_path(@list)
@@ -31,7 +31,7 @@ class GoalsController < ApplicationController
       end
       # 新規カテゴリの入力がない場合
     else
-      if @goal.save && @goal.valid?
+      if @goal.save
         flash[:success] = "タスクを作成しました"
         redirect_to list_path(@list)
       else
