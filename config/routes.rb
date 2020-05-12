@@ -11,9 +11,9 @@ Rails.application.routes.draw do
 
   root to: "lists#index"
 
-  resources :categories
+  resources :categories, except: :new
   resources :lists do
-    resources :goals
+    resources :goals, except: :index
   end
 
 

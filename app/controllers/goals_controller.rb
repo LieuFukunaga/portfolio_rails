@@ -3,10 +3,6 @@ class GoalsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update]
   before_action :set_goal, only: [:show, :edit, :update, :destroy]
 
-  def index
-    @goals = Goal.includes([:list, goal_categories: :categories])
-  end
-
   def new
     @goal = Goal.new
     @goal.categories.new                 # 新規カテゴリ作成用

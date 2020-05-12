@@ -1,5 +1,8 @@
 = render 'layouts/header'
 %br
+- breadcrumb :goals_show
+= breadcrumbs separator: " &rsaquo; "
+%br
 .goals-show
   %h1.goals-show__page-title
     = link_to edit_list_goal_path(@list, @goal) do

@@ -1,8 +1,11 @@
 = render 'layouts/header'
 %br
+- breadcrumb :lists_show
+= breadcrumbs separator: " &rsaquo; "
+%br
 .lists-show
   %h1.lists-show__page-title
-    = "＜”#{@list.list_name}”のタスク一覧＞"
+    = "＜リスト”#{@list.list_name}”のタスク一覧＞"
   %br
   .list-show__add-task-btn
     = link_to new_list_goal_path(@list) do
@@ -25,8 +28,7 @@
           %tr
             - if goal.image.attached?
               %td
-                = link_to list_goal_path(@list.id, goal), id: "goal-title_#{index}" do
-                  = image_tag goal.image, size: "100x100"
+                = image_tag goal.image, size: "100x100"
             - else
               %td.lists-show__no-image
                 = link_to list_goal_path(@list.id, goal), id: "goal-title_#{index}", class: "lists-show__links"  do

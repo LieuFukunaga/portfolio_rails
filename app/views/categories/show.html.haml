@@ -1,5 +1,8 @@
 = render 'layouts/header'
-
+%br
+- breadcrumb :categories_show
+= breadcrumbs separator: " &rsaquo; "
+%br
 .categories-show
   .categories-show__top
     %span.categories-show__top__page-title
