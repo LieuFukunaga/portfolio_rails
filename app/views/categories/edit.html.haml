@@ -9,6 +9,7 @@
       %br
       = f.text_field :category_name, value: @category.category_name
       %br
+      = f.hidden_field :user_id, value: @category.user_id
       = f.submit "更新する"
   %br
   .categories-edit__table

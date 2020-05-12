@@ -31,7 +31,8 @@ class CategoriesController < ApplicationController
     # else
     #   redirect_to categories_path
     # end
-    if @category.destroy!
+    # binding.pry
+    if @category.destroy
       redirect_to categories_path, notice: "#{@category.category_name}を削除しました"
     else
       flash.now[:alert] = @category.errors.full_messages
@@ -42,7 +43,7 @@ class CategoriesController < ApplicationController
   private
 
   def category_params
-    params.require(:category).permit(:category_name)
+    params.require(:category).permit(:category_name, :user_id)
   end
 
   def set_category
