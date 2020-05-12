@@ -21,16 +21,16 @@
         = f.hidden_field :user_id, value: current_user.id, id:"login-user-id"
 
       .goals-edit__form__category
-        .goals-edit__form__category__check-boxes
-          = button_tag "カテゴリを選択", type: "button", id: "modal-fadein-btn"
-          .goals-edit__form__category__check-boxes__options-box
-            .options
-              = f.collection_check_boxes(:category_ids, Category.all, :id, :category_name, include_hidden: false) do |c|
-                %br
-                = c.label {c.check_box}
-                %span
-                = c.label {c.text}
-                %br
+        - if Category.where(user_id: current_user.id).length != 0
+          .goals-edit__form__category__check-boxes
+            = button_tag "カテゴリを選択", type: "button", id: "modal-fadein-btn"
+            .goals-edit__form__category__check-boxes__options-box
+              .options
+                = f.collection_check_boxes(:category_ids, Category.where(user_id: current_user.id), :id, :category_name, include_hidden: false) do |c|
+                  = c.label {c.check_box}
+                  %span
+                  = c.label {c.text}
+                  %br
             %br
             .close-btn
               = button_tag "閉じる", type: "button", id: "modal-fadeout-btn"
