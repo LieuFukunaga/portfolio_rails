@@ -19,7 +19,10 @@ class Goal < ApplicationRecord
   def save_category(inputs, checked_ids)
 
     # 入力された新規カテゴリのcategory_nameを取得
-    all_categories = self.categories.pluck(:category_name) unless self.categories.nil?
+    all_categories = self.categories unless self.categories.nil?
+    all_categories_name = all_categories.pluck(:category_name)
+    all_categories_id = all_categories.pluck(:user_id)[0]
+
 
     # チェックボックスのカテゴリが選択された場合
     if checked_ids != nil
@@ -28,14 +31,15 @@ class Goal < ApplicationRecord
         checked_category << Category.find(checked_id)
       end
       checked_category = checked_category.pluck(:category_name) unless checked_ids.nil?
-      old_category = all_categories - inputs - checked_category # 既存・新規カテゴリ以外のカテゴリ
-      new_category = inputs - all_categories #これから紐付けられるカテゴリ
+      old_category = all_categories_name - inputs - checked_category # 既存・新規カテゴリ以外のカテゴリ
+      new_category = inputs - all_categories_name #これから紐付けられるカテゴリ
     # チェックボックスのカテゴリが選択されなかった場合
     else
-      old_category = all_categories - inputs
+      old_category = all_categories_name - inputs
       new_category = inputs - all_categories
     end
 
+    binding.pry
     # 関連データもろともDestroy
     old_category.each do |old_name|
       Category.find_by(category_name:old_name).destroy
@@ -43,8 +47,7 @@ class Goal < ApplicationRecord
 
     # Create
     new_category.each do |new_name|
-      new_tag = Category.find_or_create_by(category_name: new_name) # 検索条件を指定、該当レコードが無ければ新規レコードを作成
-      self.categories << new_tag
+      self.categories << Category.find_or_create_by(category_name: new_name, user_id: all_categories_id) # 検索条件を指定、該当レコードが無ければ新規レコードを作成
     end
 
   end
@@ -52,7 +55,9 @@ class Goal < ApplicationRecord
 
   def update_category(added_categories, update_ids)
     # 更新するレコードに紐づくすべてのカテゴリを取得
-    all_categories = self.categories.pluck(:category_name) unless self.categories.nil?
+    all_categories = self.categories unless self.categories.nil?
+    all_categories_name = all_categories.pluck(:category_name)
+    all_categories_id = all_categories.pluck(:user_id)[0]
     # チェックボックスのカテゴリが選択されている場合
     if update_ids != nil
       # 選択されたカテゴリのidを元にレコードを取得、配列に格納
@@ -61,8 +66,8 @@ class Goal < ApplicationRecord
         already_registered << Category.find(update_id)
       end
       already_registered = already_registered.pluck(:category_name) unless update_ids.nil?
-      old_category = all_categories - added_categories - already_registered # 既存・新規カテゴリ以外のカテゴリ
-      new_category = added_categories - all_categories #これから紐付けられるカテゴリ
+      old_category = all_categories_name - added_categories - already_registered # 既存・新規カテゴリ以外のカテゴリ
+      new_category = added_categories - all_categories_name #これから紐付けられるカテゴリ
 
       # チェックボックスのカテゴリが選択されなかった場合
     else
@@ -77,8 +82,7 @@ class Goal < ApplicationRecord
 
     # Create
     new_category.each do |new_name|
-      new_tag = Category.find_or_create_by(category_name: new_name) # 検索条件を指定、該当レコードが無ければ新規レコードを作成
-      self.categories << new_tag
+      self.categories << Category.find_or_create_by(category_name: new_name, user_id: all_categories_id) # 検索条件を指定、該当レコードが無ければ新規レコードを作成
     end
   end
 
