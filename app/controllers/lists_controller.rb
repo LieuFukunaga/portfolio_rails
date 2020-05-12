@@ -50,6 +50,11 @@ class ListsController < ApplicationController
     end
   end
 
+  def search
+    @lists = List.search(params[:keyword])
+    @lists = @lists.where(user_id: current_user.id)
+  end
+
   private
   def list_params
     params.require(:list).permit(:list_name).merge(user_id: current_user.id)

@@ -1,7 +1,12 @@
 = render 'layouts/header'
 %br
 .lists-index
-  .list-index__users-list
+  .lists-index__users-list
+    .lists-index__users-list__search-form
+      = form_with url: search_lists_path, method: :get, id: "lists-new__search-form" do |f|
+        = f.text_field :keyword, placeholder: "リストを検索する"
+        = f.submit "検索", id:"lists-new__search-btn"
+    %br
     %table
       %tbody
         %tr

@@ -14,6 +14,14 @@ crumb :lists_show do
   link "タスク一覧ページ", list_path(List.find(params[:id]))
 end
 
+crumb :lists_search do
+  link "リスト検索ページ", search_lists_path
+end
+
+crumb :lists_show do
+  link "タスク一覧ページ", list_path(List.find(params[:id]))
+end
+
 crumb :goals_new do
   link "タスク作成ページ", new_list_goal_path(List.find(params[:list_id]))
 end
