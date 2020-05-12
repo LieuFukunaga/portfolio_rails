@@ -27,14 +27,15 @@
             .goals-edit__form__category__check-boxes__options-box
               .options
                 = f.collection_check_boxes(:category_ids, Category.where(user_id: current_user.id), :id, :category_name, include_hidden: false) do |c|
+                  %br
                   = c.label {c.check_box}
                   %span
                   = c.label {c.text}
                   %br
-            %br
-            .close-btn
-              = button_tag "閉じる", type: "button", id: "modal-fadeout-btn"
-            %br
+                %br
+                .close-btn
+                  = button_tag "閉じる", type: "button", id: "modal-fadeout-btn"
+                %br
         %ul.goals-edit__form__category__create-category-btn
           ＜新規カテゴリ＞
           = button_tag "追加", type: "button", id: "create-category-btn"
