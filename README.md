@@ -20,6 +20,9 @@ Task 1-3-9
 
 ## データベース設計
 
+ER図
+
+
 ### Usersテーブル
 ※ gem 'devise'が標準で持っているカラムは除く
 |Column  |Type   |Options     |
@@ -30,6 +33,7 @@ Task 1-3-9
 #### Association
 - has_many :lists, dependent: :destroy
 - has_many :addresses, dependent: :destroy
+- has_namy :categories
 
 
 ### Addressesテーブル
@@ -82,10 +86,12 @@ Task 1-3-9
 |--------|-----------|------------------------|
 |title   |string     |null: false, index: true|
 |status  |integer    |limit: 1, default: 0    |
+|user_id |references |foreign_key: true       |
 |list_id |references |foreign_key: true       |
 |date    |datetime   |
 
 #### Association
+- belongs_to :user
 - belongs_to :list
 - has_many :categories, through: :goal_categories
 - has_many :goal_categories, dependent: :destroy
