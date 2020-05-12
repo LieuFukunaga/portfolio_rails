@@ -14,6 +14,8 @@
       %tbody
         %tr
           %th
+            サムネイル
+          %th
             タスク名
           %th
             予定日時
@@ -21,6 +23,14 @@
             タスクの状態
         - @goals.each.with_index(1) do |goal, index|
           %tr
+            - if goal.image.attached?
+              %td
+                = link_to list_goal_path(@list.id, goal), id: "goal-title_#{index}" do
+                  = image_tag goal.image, size: "100x100"
+            - else
+              %td.lists-show__no-image
+                = link_to list_goal_path(@list.id, goal), id: "goal-title_#{index}", class: "lists-show__links"  do
+                  %i.fas.fa-tasks
             %td
               = link_to list_goal_path(@list.id, goal), id: "goal-title_#{index}" do
                 = "#{goal.title}"

@@ -8,6 +8,21 @@
         %br
         = f.text_field :title, value: @goal.title
         %br
+        - if @goal.image.attached?
+          現在の画像
+          %br
+          = image_tag @goal.image, size: "100x100"
+          %br
+          = f.label :image do
+            画像を変更する
+            %i.fa.fa-camera
+            = f.file_field :image, class: "goals-edit__file-field"
+        - else
+          = f.label :image do
+            画像を追加する
+            %i.fa.fa-camera
+            = f.file_field :image, class: "goals-edit__file-field"
+        %br
         = f.label :status, "タスクの状態"
         %br
         = f.select :status, Goal.statuses_i18n.invert, {}, {id: 'status_selector'}

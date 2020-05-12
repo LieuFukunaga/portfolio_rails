@@ -7,6 +7,11 @@
         %br
         = f.text_field :title
         %br
+        = f.label :image do
+          画像を追加する
+          %i.fa.fa-camera
+          = f.file_field :image, class: "goals-new__file-field"
+        %br
         = f.label :date, "予定日"
         %br
         = f.datetime_select :date, {use_month_numbers: true, start_year: Date.today.year, datetime_separator: '<h4 class="datetime-selector">予定時刻</h4>'}
