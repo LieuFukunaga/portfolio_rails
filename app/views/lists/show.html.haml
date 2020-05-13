@@ -7,10 +7,16 @@
   %h1.lists-show__page-title
     = "＜リスト”#{@list.list_name}”のタスク一覧＞"
   %br
-  .list-show__add-task-btn
-    = link_to new_list_goal_path(@list) do
-      %i.fas.fa-plus-circle
-      %span タスクを追加
+  .lists-show__operator
+    .lists-show__operator__create-task-btn
+      = link_to new_list_goal_path(@list) do
+        %i.fas.fa-plus-circle
+        %span タスクを追加
+    .lists-show__operator__search-form
+      = form_with url: task_search_lists_path, method: :get, id: "lists-show__search-form" do |f|
+        = f.text_field :keyword, placeholder: "タスクを検索する"
+        = button_tag type: "submit", id:"lists-show__search-btn" do
+          %i.fas.fa-search
   %br
   - if @goals.length != 0
     %table
@@ -37,12 +43,15 @@
                 = "#{goal.title}"
                 %i.fas.fa-angle-double-right
             %td
-              = "#{goal.date.strftime("%Y年%m月%d日 %H時%M分")}"
+              = "#{goal.date.strftime("%m月%d日 %H時%M分")}"
             %td
               = goal.status_i18n
+            %td
+              = link_to edit_list_goal_path(goal.list_id, goal.id) do
+                %i.fas.fa-edit
             %td{data: {index: "#{index}"}}
               = link_to list_goal_path(goal.list_id, goal.id), method: :delete, class: "lists-show__delete-btn" do
-                削除
+                %i.fas.fa-trash-alt
   - else
     %p -- NO TASK --
   %br

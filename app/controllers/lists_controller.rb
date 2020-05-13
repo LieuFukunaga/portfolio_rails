@@ -59,6 +59,16 @@ class ListsController < ApplicationController
     end
   end
 
+  def task_search
+    if params[:keyword] != ""
+      goals = Goal.includes([:user, :list])
+      goals = goals.where(user_id: current_user.id)
+      @tasks = List.task_search(goals, params[:keyword])
+    else
+      redirect_to root_path
+    end
+  end
+
   private
   def move_to_index
     redirect_to action: :index unless user_signed_in?

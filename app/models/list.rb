@@ -11,4 +11,10 @@ class List < ApplicationRecord
     end
   end
 
+  def self.task_search(goals, search)
+    if search
+      goals.where("title LIKE(?)", "%#{search}%")
+    end
+  end
+
 end

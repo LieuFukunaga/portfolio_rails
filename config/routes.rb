@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :lists do
     collection do
       get "list_search"
+      get "task_search"
     end
     resources :goals, except: :index
   end

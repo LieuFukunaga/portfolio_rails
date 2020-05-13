@@ -34,6 +34,10 @@ crumb :goals_edit do
   link "タスク編集ページ", edit_list_goal_path(List.find(params[:list_id]), Goal.find(params[:id]))
 end
 
+crumb :tasks_search do
+  link "タスク検索ページ", task_search_lists_path
+end
+
 crumb :categories_index do
   link "カテゴリ一覧ページ", categories_path
 end

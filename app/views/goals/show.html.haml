@@ -1,5 +1,3 @@
-= render 'layouts/header'
-%br
 - breadcrumb :goals_show
 = breadcrumbs separator: " &rsaquo; "
 %br
@@ -12,8 +10,6 @@
         %i.fas.fa-tasks.lists-search__results__icon
     .goals-show__page-title__goal-title
       = "”#{@goal.title}”"
-      = link_to edit_list_goal_path(@list, @goal) do
-        %i.fas.fa-edit
   %br
   %table
     %tbody
