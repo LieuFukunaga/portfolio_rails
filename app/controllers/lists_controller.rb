@@ -50,12 +50,20 @@ class ListsController < ApplicationController
     end
   end
 
-  def search
-    @lists = List.search(params[:keyword])
-    @lists = @lists.where(user_id: current_user.id)
+  def list_search
+    if params[:keyword] != ""
+      @lists = List.list_search(params[:keyword])
+      @lists = @lists.where(user_id: current_user.id)
+    else
+      redirect_to root_path
+    end
   end
 
   private
+  def move_to_index
+    redirect_to action: :index unless user_signed_in?
+  end
+
   def list_params
     params.require(:list).permit(:list_name).merge(user_id: current_user.id)
   end
@@ -63,5 +71,6 @@ class ListsController < ApplicationController
   def set_list
     @list = List.find(params[:id])
   end
+
 
 end

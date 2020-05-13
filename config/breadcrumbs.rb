@@ -15,7 +15,7 @@ crumb :lists_show do
 end
 
 crumb :lists_search do
-  link "リスト検索ページ", search_lists_path
+  link "リスト検索ページ", list_search_lists_path
 end
 
 crumb :lists_show do

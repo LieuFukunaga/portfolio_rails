@@ -6,12 +6,13 @@
 
 @import "modules/header";
 @import "modules/colors";
-@import "modules/table-design";
+@import "modules/mixins";
 @import "modules/flash";
 // for List
 @import "modules/list/index";
 @import "modules/list/new";
 @import "modules/list/show";
+@import "modules/list/search";
 // for Goal
 @import "modules/goal/new";
 @import "modules/goal/show";

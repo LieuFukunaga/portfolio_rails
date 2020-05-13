@@ -4,10 +4,6 @@
   font-size: 20px;
 }
 
-i.fas.fa-tasks {
-  height: 100px;
-  width: 100px;
-  line-height: 100px;
-  text-align: center;
-  font-size: 25px;
+.lists-show__no-image {
+  @include no-image-icons-style;
 }

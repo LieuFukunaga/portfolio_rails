@@ -1,1 +1,8 @@
 @import "modules/colors";
+
+.lists-index__operator {
+  display: flex;
+  &__create-list-btn {
+    margin-right: 30px;
+  }
+}

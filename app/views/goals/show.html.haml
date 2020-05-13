@@ -5,15 +5,20 @@
 %br
 .goals-show
   %h1.goals-show__page-title
-    = link_to edit_list_goal_path(@list, @goal) do
-      %span.goals-show__title
-        = "”#{@goal.title}”詳細ページ"
-      %i.fas.fa-edit
+    .goals-show__page-title__goal-image
+      - if @goal.image.attached?
+        = image_tag @goal.image, size: "200x200"
+      - else
+        %i.fas.fa-tasks.lists-search__results__icon
+    .goals-show__page-title__goal-title
+      = "”#{@goal.title}”"
+      = link_to edit_list_goal_path(@list, @goal) do
+        %i.fas.fa-edit
   %br
   %table
     %tbody
       %th
-        = "#{@goal.title}のカテゴリ一覧"
+        = "”#{@goal.title}”のカテゴリ一覧"
       - @goal_categories.each do |c|
         %tr
           %td

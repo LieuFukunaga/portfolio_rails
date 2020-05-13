@@ -11,7 +11,7 @@ class GoalsController < ApplicationController
 
   def create
     @goal = Goal.new(goal_params)
-    @list = List.find(@goal.list_id) # 画面遷移用
+    @list = List.find(@goal.list_id)           # 画面遷移用
     checked_ids = params[:goal][:category_ids] # チェックボックスのカテゴリのidを取得
 
     # 新規カテゴリの入力がある場合
@@ -51,7 +51,7 @@ class GoalsController < ApplicationController
   end
 
   def update
-    update_ids = params[:goal][:category_ids]
+    update_ids = params[:goal][:category_ids] # チェックボックスで選択されたカテゴリのidを取得
 
     # 新規カテゴリが追加された場合
     if params[:goal][:categories_attributes] != nil

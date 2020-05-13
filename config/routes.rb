@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :categories, except: :new
   resources :lists do
     collection do
-      get "search"
+      get "list_search"
     end
     resources :goals, except: :index
   end

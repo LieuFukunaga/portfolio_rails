@@ -30,9 +30,8 @@
               %td
                 = image_tag goal.image, size: "100x100"
             - else
-              %td.lists-show__no-image
-                = link_to list_goal_path(@list.id, goal), id: "goal-title_#{index}", class: "lists-show__links"  do
-                  %i.fas.fa-tasks
+              %td
+                %i.fas.fa-tasks.lists-show__no-image
             %td
               = link_to list_goal_path(@list.id, goal), id: "goal-title_#{index}" do
                 = "#{goal.title}"

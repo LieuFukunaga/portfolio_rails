@@ -72,10 +72,10 @@ class Goal < ApplicationRecord
 
       # チェックボックスのカテゴリが選択されなかった場合
     else
-      old_category = all_categories - updates
-      new_category = updates - all_categories
+      old_category = all_categories_name - added_categories
+      new_category = added_categories - all_categories_name
     end
-
+    binding.pry
     # 関連データもろともDestroy
     old_category.each do |old_name|
       Category.find_by(category_name: old_name).destroy

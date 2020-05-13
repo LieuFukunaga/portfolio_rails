@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :authenticate_user!
+  before_action :authenticate_user!                                       # ログイン済みのユーザのみにアクセスを許可
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :basic_auth, if: :production?
+  before_action :basic_auth, if: :production?                             # 本番環境のみにBasic認証を設定
 
 
   protected

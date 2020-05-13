@@ -1,0 +1,37 @@
+= render 'layouts/header'
+%br
+- breadcrumb :lists_search
+= breadcrumbs separator: " &rsaquo; "
+%br
+.lists-search
+  .lists-search__search-form
+    = form_with url: list_search_lists_path, method: :get, id: "lists-search__list-searcher" do |f|
+      = f.text_field :keyword, placeholder: "リストを検索"
+      = button_tag type: "submit", id:"lists-new__search-btn" do
+        %i.fas.fa-search
+  .lists-search__results
+    %table
+      %tbody
+        %tr
+          %th
+            リスト名
+          %th
+            主なタスク
+        - @lists.each do |list|
+          %tr
+            %td
+              = link_to list_path(list) do
+                = list.list_name
+                %i.fas.fa-angle-double-right
+            - list.goals.each.with_index(1) do |goal, i|
+              - if i <= 3
+                %td{class: "lists-search__results__image-#{i}"}
+                  - if goal.image.attached?
+                    = image_tag goal.image, size: "100x100"
+                  - else
+                    %i.fas.fa-tasks.lists-search__results__icon
+                %td{class: "lists-search__results__title-#{i}"}
+                  = link_to list_goal_path(goal.list_id, goal.id) do
+                    = goal.title
+                    %i.fas.fa-angle-double-right
+
