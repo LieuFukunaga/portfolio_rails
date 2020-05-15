@@ -11,9 +11,21 @@ class List < ApplicationRecord
   #   end
   # end
 
+  def self.split_keyword(search)
+    split_keyword = search.split(/[[:blank:]]+/)                # 空文字で区切られている複数の検索ワードを分割できている
+    split_first = split_keyword.group_by{|e| e}.select{|key, value| value.size > 1}.map(&:first)
+    duplication_word = split_keyword.delete_if {|word| word != split_first[0]}
+    split_keyword = search.split(/[[:blank:]]+/) - duplication_word + split_first
+    return split_keyword
+  end
+
   def self.list_search(search, user_id)
     if search.present?
       split_keyword = search.split(/[[:blank:]]+/)                # 空文字で区切られている複数の検索ワードを分割できている
+      split_first = split_keyword.group_by{|e| e}.select{|key, value| value.size > 1}.map(&:first)
+      duplication_word = split_keyword.delete_if {|word| word != split_first[0]}
+      split_keyword = search.split(/[[:blank:]]+/) - duplication_word + split_first
+      keyword_amount = split_keyword.length
 
       lists = []
       split_keyword.each do |keyword|
@@ -21,12 +33,13 @@ class List < ApplicationRecord
         lists += List.where('list_name LIKE(?)', "%#{keyword}%")  # この段階では重複が発生している
       end
 
-      first = lists.group_by{ |e| e }.select{ |key, value| value.size > 1 }.map(&:first)
-      duplications = List.where(id: first.pluck(:id))
-      lists = lists - duplications + first
+      # full_matched = lists.group_by{ |e| e }.select{ |key, value| value.size >= keyword_amount }
+      # first = lists.group_by{ |e| e }.select{ |key, value| value.size > 1 }.map(&:first)
+      lists = lists.group_by{ |e| e }.select{ |key, value| value.size >= keyword_amount }.map(&:first)
+      # duplications = List.where(id: first.pluck(:id))
+      # lists = lists - duplications + first
 
       lists.delete_if {|list| list.user_id != user_id}
-      # binding.pry
     end
   end
 

@@ -30,16 +30,17 @@
                   = list.list_name
                   %i.fas.fa-angle-double-right
               - list.goals.each.with_index(1) do |goal, i|
-                - if i <= 3
-                  %td{class: "lists-search__results__image-#{i}"}
-                    - if goal.image.attached?
-                      = image_tag goal.image, size: "100x100"
-                    - else
-                      %i.fas.fa-tasks.lists-search__results__icon
-                  %td{class: "lists-search__results__title-#{i}"}
-                    = link_to list_goal_path(goal.list_id, goal.id) do
-                      = goal.title
-                      %i.fas.fa-angle-double-right
+                - if goal != 0
+                  - if i <= 3
+                    %td{class: "lists-search__results__image-#{i}"}
+                      - if goal.image.attached?
+                        = image_tag goal.image, size: "100x100"
+                      - else
+                        %i.fas.fa-tasks.lists-search__results__icon
+                    %td{class: "lists-search__results__title-#{i}"}
+                      = link_to list_goal_path(goal.list_id, goal.id) do
+                        = goal.title
+                        %i.fas.fa-angle-double-right
       - else
         %br
         該当するリストはありません

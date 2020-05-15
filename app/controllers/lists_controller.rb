@@ -53,8 +53,7 @@ class ListsController < ApplicationController
   def list_search
     user_id = current_user.id
     @lists = List.list_search(params[:keyword], user_id)
-    @keywords = params[:keyword].split(/[[:blank:]]+/)
-    # binding.pry
+    @keywords = List.split_keyword(params[:keyword])
   end
 
   def task_search
