@@ -57,9 +57,6 @@ class ListsController < ApplicationController
   end
 
   def task_search
-    # goals = Goal.includes([:user, :list])
-    # goals = goals.where(user_id: current_user.id)
-    # @tasks = List.task_search(goals, params[:keyword])
     user_id = current_user.id
     @tasks = List.task_search(params[:keyword], user_id)
     respond_to do |format|
