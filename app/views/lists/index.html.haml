@@ -18,6 +18,8 @@
         %tr
           %th
             = "＜リスト一覧＞"
+          %th
+            タスク数
       %tbody
         - if current_user.lists.length != 0
           - current_user.lists.each.with_index(1) do |list, index|
@@ -26,6 +28,8 @@
                 = link_to list_path(list), id: "list_#{index}" do
                   = "#{list.list_name}"
                   %i.fas.fa-angle-double-right
+              %td
+                = "#{list.goals.length}"
               %td
                 = link_to new_list_goal_path(list.id) do
                   %i.fas.fa-plus-circle
@@ -42,7 +46,7 @@
   .lists-index__tasks
     .lists-index__tasks__task-searcher
       = form_with url: task_search_lists_path, method: :get do |f|
-        = f.text_field :keyword, placeholder: "#{current_user.name}さんのタスクを検索", id: "task-search-form", size: "35px"
+        = f.text_field :keyword, placeholder: "タスクを検索", id: "task-search-form"
         = button_tag type: "submit", id:"lists-index__search-btn" do
           %i.fas.fa-search
   .lists-index__task-table
