@@ -12,7 +12,7 @@ $(function() {
                         </tr>
                       </thead>
                       <tbody id="task-table__body"></tbody>`
-    taskTable.append(tableHeader);
+    taskTable.append(tableHeader).hide().fadeIn(100);
   }
 
   function appendNoMatchMessage(message) {
@@ -21,7 +21,7 @@ $(function() {
                               <th>${message}</th>
                             </tr>
                           </thead>`
-    taskTable.append(noMatchMessage);
+    taskTable.append(noMatchMessage).hide().fadeIn(100);
   }
 
   function appendTask(task, index) {
@@ -48,7 +48,7 @@ $(function() {
                     "${task.status}"
                   </td>
                 </tr>`
-      $("#task-table__body").append(html);
+      $("#task-table__body").append(html).hide().fadeIn(100);
     } else {
       let html =`<tr>
                   <td>
@@ -72,11 +72,12 @@ $(function() {
                     "${task.status}"
                   </td>
                 </tr>`
-      $("#task-table__body").append(html);
+      $("#task-table__body").append(html).hide().fadeIn(100);
     };
   }
 
   $("#task-search-form").on("keyup", function() {
+    taskTable.empty();
     let input = $(this).val();
     $.ajax({
       type: 'GET',
