@@ -8,7 +8,7 @@
         %i.fas.fa-plus-circle
     .lists-index__list-operator__search-form
       = form_with url: list_search_lists_path, method: :get, id: "lists-index__search-form" do |f|
-        = f.text_field :keyword, id: "list-searcher", placeholder: "リストを検索", required: true
+        = f.text_field :keyword, id: "list-searcher", placeholder: "検索のヒント：除外したい単語の前にマイナス記号(-)をつけて下さい", required: true, size: "60px"
         = button_tag type: "submit", id:"lists-new__search-btn" do
           %i.fas.fa-search
   %br
