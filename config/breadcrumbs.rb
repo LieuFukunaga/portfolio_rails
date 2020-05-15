@@ -27,7 +27,7 @@ crumb :goals_new do
 end
 
 crumb :goals_show do
-  link "タスク編集ページ", list_goal_path(List.find(params[:list_id]), Goal.find(params[:id]))
+  link "タスク詳細ページ", list_goal_path(List.find(params[:list_id]), Goal.find(params[:id]))
 end
 
 crumb :goals_edit do

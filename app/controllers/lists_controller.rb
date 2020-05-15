@@ -51,21 +51,19 @@ class ListsController < ApplicationController
   end
 
   def list_search
-    if params[:keyword] != ""
-      @lists = List.list_search(params[:keyword])
-      @lists = @lists.where(user_id: current_user.id)
-    else
-      redirect_to root_path
-    end
+    user_id = current_user.id
+    @lists = List.list_search(params[:keyword], user_id)
+    @keywords = params[:keyword].split(/[[:blank:]]+/)
+    # binding.pry
   end
 
   def task_search
-    if params[:keyword] != ""
-      goals = Goal.includes([:user, :list])
-      goals = goals.where(user_id: current_user.id)
-      @tasks = List.task_search(goals, params[:keyword])
-    else
-      redirect_to root_path
+    goals = Goal.includes([:user, :list])
+    goals = goals.where(user_id: current_user.id)
+    @tasks = List.task_search(goals, params[:keyword])
+    respond_to do |format|
+      format.html
+      format.json
     end
   end
 

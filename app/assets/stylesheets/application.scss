@@ -35,3 +35,19 @@ a:hover {
   text-decoration: underline;
   opacity: 0.5;
 }
+
+.fas:not(.fa-tasks) {
+  font-size: 20px;
+}
+
+.fa-edit:hover {
+  transform: scale(1.3, 1.3);
+}
+
+.fa-trash-alt:hover {
+  transform: scale(1.3, 1.3);
+}
+
+.fa-plus-circle:hover {
+  transform: scale(1.3, 1.3);
+}

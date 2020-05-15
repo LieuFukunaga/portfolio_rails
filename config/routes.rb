@@ -15,12 +15,9 @@ Rails.application.routes.draw do
   resources :lists do
     collection do
       get "list_search"
-      get "task_search"
+      get "task_search", defaults: {format: 'json'}
     end
     resources :goals, except: :index
   end
-
-
-  $date = Time.now.to_s
 
 end

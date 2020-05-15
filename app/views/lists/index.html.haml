@@ -1,30 +1,34 @@
 = render 'layouts/header'
 %br
 .lists-index
-  .lists-index__operator
-    .lists-index__operator__create-list-btn
+  .lists-index__list-operator
+    .lists-index__list-operator__create-list-btn
       = link_to new_list_path, class: "new-list-btn" do
-        %i.fas.fa-plus-circle
         リストを追加
-    .lists-index__operator__search-form
-      = form_with url: list_search_lists_path, method: :get, id: "lists-new__search-form" do |f|
-        = f.text_field :keyword, placeholder: "リストを検索する"
+        %i.fas.fa-plus-circle
+    .lists-index__list-operator__search-form
+      = form_with url: list_search_lists_path, method: :get, id: "lists-index__search-form" do |f|
+        = f.text_field :keyword, id: "list-searcher", placeholder: "リストを検索"
         = button_tag type: "submit", id:"lists-new__search-btn" do
           %i.fas.fa-search
   %br
-  .lists-index__table
-    %table
-      %tbody
+  .lists-index__list-table
+    %table.users-list
+      %thead
         %tr
           %th
-            = "＜#{current_user.name}さんのリスト一覧＞"
+            = "＜リスト一覧＞"
+      %tbody
         - if current_user.lists.length != 0
           - current_user.lists.each.with_index(1) do |list, index|
             %tr
               %td
-                = link_to list_path(list), id: "list-name_#{index}" do
+                = link_to list_path(list), id: "list_#{index}" do
                   = "#{list.list_name}"
                   %i.fas.fa-angle-double-right
+              %td
+                = link_to new_list_goal_path(list.id) do
+                  %i.fas.fa-plus-circle
               %td
                 = link_to edit_list_path(list.id) do
                   %i.fas.fa-edit
@@ -35,4 +39,13 @@
           %tr
             %td -- NO LIST --
   %br
-  = render partial: "layouts/link-to-category-index"
+  .lists-index__tasks
+    .lists-index__tasks__task-searcher
+      = form_with url: task_search_lists_path, method: :get do |f|
+        = f.text_field :keyword, placeholder: "#{current_user.name}さんのタスクを検索", id: "task-search-form", size: "35px"
+        = button_tag type: "submit", id:"lists-index__search-btn" do
+          %i.fas.fa-search
+  .lists-index__task-table
+    %table#task-table
+%br
+= render partial: "layouts/link-to-category-index"
