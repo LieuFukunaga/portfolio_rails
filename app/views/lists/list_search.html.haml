@@ -6,7 +6,7 @@
 .lists-search
   .lists-search__search-form
     = form_with url: list_search_lists_path, method: :get, id: "lists-search__list-searcher" do |f|
-      = f.text_field :keyword, placeholder: "リストを検索", required: true
+      = f.text_field :keyword, placeholder: "検索のヒント：除外したい単語の前にマイナス記号(-)をつけて下さい", required: true, size: "60px"
       = button_tag type: "submit", id:"lists-new__search-btn" do
         %i.fas.fa-search
   .lists-search__keywords

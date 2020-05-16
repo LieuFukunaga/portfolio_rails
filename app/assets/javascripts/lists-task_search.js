@@ -12,7 +12,7 @@ $(function() {
                         </tr>
                       </thead>
                       <tbody id="task-table__body"></tbody>`
-    taskTable.append(tableHeader).hide().fadeIn(100);
+    taskTable.append(tableHeader).hide().fadeIn(300);
   }
 
   function appendNoMatchMessage(message) {
@@ -21,7 +21,7 @@ $(function() {
                               <th>${message}</th>
                             </tr>
                           </thead>`
-    taskTable.append(noMatchMessage).hide().fadeIn(100);
+    taskTable.append(noMatchMessage).hide().fadeIn(300);
   }
 
   function appendTask(task, index) {
