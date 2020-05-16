@@ -22,22 +22,30 @@ class List < ApplicationRecord
     if search.present?
       split_keyword = search.split(/[[:blank:]]+/) # 空文字で区切られている複数の検索ワードを分割
 
+      # ひらがなをカタカナに、カタカナをひらがなに変換
+      tr_keyword = split_keyword.map{|word| word.tr('ァ-ンぁ-ん','ぁ-んァ-ン')}
+      # ひらがな・カタカナ、両方で検索
+      split_keyword += tr_keyword
+
+      # 全角を半角に、半角を全角に変換
+      zenkaku = split_keyword.map{|word| word.tr('0-9a-zA-Z', '０-９ａ-ｚＡ-Ｚ')}
+      hankaku = split_keyword.map{|word| word.tr('０-９ａ-ｚＡ-Ｚ','0-9a-zA-Z')}
+      # 全角・半角、両方で検索
+      split_keyword += zenkaku
+      split_keyword += hankaku
+
       # 複数ワードの重複を削除
       unduplicated_first = split_keyword.group_by{ |e| e }.select{ |key, value| value.size > 1 }.map{ |key, value| value.first } # 重複している単語を取得、配列化
       unduplicated_words = split_keyword - unduplicated_first
       split_keyword = unduplicated_words + unduplicated_first
-
-      # カタカナ・ひらがな変換
-      tr_keyword = split_keyword.map {|word| word.tr('ァ-ンぁ-ん','ぁ-んァ-ン')}
-      split_keyword += tr_keyword
-      binding.pry
-
+      # binding.pry
       # マイナス検索用
       minus_keyword = split_keyword.select { |word| word.match(/\A-/) }
       if minus_keyword.length != 0
         split_keyword.reject!{ |word| word.match(/\A-/) }
         minus_keyword.each{ |word| word.slice!(/\A-/) }
       end
+      # binding.pry
 
       lists = []
       split_keyword.each do |keyword|
