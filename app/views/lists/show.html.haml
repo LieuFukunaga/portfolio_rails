@@ -31,7 +31,7 @@
             予定日時
           %th
             タスクの状態
-      %tbody.lists-show__operator__search-results__result-rows
+      %tbody.lists-show__operator__search-results__result-rows.hover-records
         - @goals.each.with_index(1) do |goal, index|
           %tr
             - if goal.image.attached?
@@ -52,6 +52,7 @@
             %td{data: {index: "#{index}"}}
               = link_to list_goal_path(goal.list_id, goal.id), method: :delete, class: "lists-show__delete-btn" do
                 %i.fas.fa-trash-alt
+    = paginate @goals
   - else
     %p -- NO TASK --
   %br

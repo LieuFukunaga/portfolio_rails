@@ -13,6 +13,7 @@
 @import "modules/list/new";
 @import "modules/list/show";
 @import "modules/list/search";
+@import "modules/list/list_search";
 // for Goal
 @import "modules/goal/new";
 @import "modules/goal/show";
@@ -33,6 +34,9 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+tbody.hover-records tr:hover {
   opacity: 0.5;
 }
 

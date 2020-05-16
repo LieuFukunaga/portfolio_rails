@@ -21,7 +21,7 @@
             = "＜リスト一覧＞"
           %th
             タスク数
-      %tbody
+      %tbody.hover-records
         - if current_user.lists.length != 0
           - @lists.where(user_id: current_user).each.with_index(1) do |list, index|
             %tr
@@ -52,5 +52,3 @@
   %br
   .lists-index__task-table
     %table#task-table
-%br
-= render partial: "layouts/link-to-category-index"

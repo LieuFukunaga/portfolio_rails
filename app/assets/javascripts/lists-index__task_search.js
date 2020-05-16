@@ -11,7 +11,7 @@ $(function() {
                           <th>タスクの状態</th>
                         </tr>
                       </thead>
-                      <tbody id="task-table__body"></tbody>`
+                      <tbody id="task-table__body" class="hover-records"></tbody>`
     taskTable.append(tableHeader).hide().fadeIn(300);
   }
 
@@ -28,7 +28,7 @@ $(function() {
     if ( typeof task.image !== "undefined") {
       let html =`<tr>
                   <td>
-                    <img src="${task.image}" width="100" height="100">
+                    <img src="${task.image}" width="50" height="50" class="task-search__images">
                   </td>
                   <td class="lists-task_search__results__task-${index + 1}">
                     <a href="/lists/${task.list_id}/goals/${task.id}">
@@ -47,8 +47,8 @@ $(function() {
       $("#task-table__body").append(html).hide().fadeIn(100);
     } else {
       let html =`<tr>
-                  <td>
-                    <i class="fas fa-tasks lists-show__no-image"></i>
+                  <td class="lists-index__task-search__no-image-icon">
+                    <i class="fas fa-tasks"></i>
                   </td>
                   <td class="lists-task_search__results__task-${index + 1}">
                     <a href="/lists/${task.list_id}/goals/${task.id}">
@@ -99,4 +99,5 @@ $(function() {
       $("#task-table").empty();
     };
   });
+
 });

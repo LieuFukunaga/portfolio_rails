@@ -4,6 +4,7 @@
 = breadcrumbs separator: " &rsaquo; "
 %br
 .lists-search
+  -# 検索フォーム
   .lists-search__search-form
     = form_with url: list_search_lists_path, method: :get, id: "lists-search__list-searcher" do |f|
       = f.text_field :keyword, placeholder: "検索のヒント：除外したい単語の前にマイナス記号(-)をつけて下さい", required: true, size: "60px"
@@ -13,37 +14,55 @@
     検索ワード:
     - @keywords.each do |keyword|
       = "”#{keyword}”"
-  .lists-search__results
-    %table
-      - if @lists.length != 0
+
+  - if @lists.length != 0
+    -# ソートボタン
+    .lists-search__sort
+      .lists-search__sort__select-wrap
+        %select{name: "sort_order", class: 'sort_order'}
+          %option{value: "location.pathname", name: "location.pathname"}
+            並び替え
+          %option{value: "list_name_asc"}
+            リスト名（昇順）
+          %option{value: "list_name_desc"}
+            リスト名（降順）
+          %option{value: "updated_at_asc"}
+            更新日時（昇順）
+          %option{value: "updated_at_desc"}
+            更新日時（降順）
+    -# 検索結果
+    .lists-search__results
+      %table.lists-search__results__table
         %thead
           %tr
             %th
               リスト名
             %th
-              主なタスク
-        %tbody
+              タスク数
+            %th
+              最近のタスク
+        %tbody.lists-search__table-body
           - @lists.each do |list|
             %tr
               %td
                 = link_to list_path(list) do
                   = list.list_name
                   %i.fas.fa-angle-double-right
+              %td
+                = "#{list.goals.length}"
               - list.goals.each.with_index(1) do |goal, i|
                 - if goal != 0
-                  - if i <= 3
+                  - if goal.updated_at >= Time.now - 1.week
                     %td{class: "lists-search__results__image-#{i}"}
                       - if goal.image.attached?
                         = image_tag goal.image, size: "100x100"
                       - else
                         %i.fas.fa-tasks.lists-search__results__icon
                     %td{class: "lists-search__results__title-#{i}"}
-                      = link_to list_goal_path(goal.list_id, goal.id) do
-                        = goal.title
-                        %i.fas.fa-angle-double-right
-      - else
-        %br
-        該当するリストはありません
+                      = link_to "#{goal.title}",list_goal_path(goal.list_id, goal.id)
+  - else
+    %br
+    該当するリストはありません
 %br
 = render partial: "layouts/return-to-root"
 

@@ -109,6 +109,7 @@ class List < ApplicationRecord
 
       tasks = tasks.group_by{ |e| e }.select{ |key, value| value.size >= 1 }.map(&:first)   # キーワードすべてに部分一致している検索結果を配列化
       tasks.delete_if { |task| task.user_id != user_id } # 検索結果から、ログインユーザに紐づくリストを抽出
+      tasks.sort!{|a,b| a.title <=> b.title}
 
       if minus_keyword.length != 0
         minus_tasks = []

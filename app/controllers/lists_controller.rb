@@ -22,7 +22,7 @@ class ListsController < ApplicationController
   end
 
   def show
-    @goals = @list.goals.order("title ASC")
+    @goals = @list.goals.order("title ASC").page(params[:page]).per(6)
   end
 
   def edit
@@ -51,12 +51,18 @@ class ListsController < ApplicationController
   end
 
   def list_search
+    # ソート機能用
+    sort = params[:sort] || "created_at DESC"
+
+    # 検索機能用
     user_id = current_user.id
-    @lists = List.list_search(params[:keyword], user_id)
+    @lists = List.order(sort).list_search(params[:keyword], user_id)
     @keywords = List.split_keyword(params[:keyword])
+
   end
 
   def task_search
+    sort = params[:sort] || "created_at DESC"
     user_id = current_user.id
     @tasks = List.task_search(params[:keyword], user_id)
     respond_to do |format|
