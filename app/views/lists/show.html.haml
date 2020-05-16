@@ -41,9 +41,7 @@
               %td
                 %i.fas.fa-tasks.lists-show__no-image
             %td
-              = link_to list_goal_path(@list.id, goal), id: "goal_#{index}" do
-                = "#{goal.title}"
-                %i.fas.fa-angle-double-right
+              = link_to "#{goal.title}", list_goal_path(@list.id, goal), id: "goal_#{index}"
             %td
               = "#{goal.date.strftime("%m月%d日 %H時%M分")}"
             %td

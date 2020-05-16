@@ -23,12 +23,10 @@
             タスク数
       %tbody
         - if current_user.lists.length != 0
-          - current_user.lists.each.with_index(1) do |list, index|
+          - @lists.where(user_id: current_user).each.with_index(1) do |list, index|
             %tr
               %td
-                = link_to list_path(list), id: "list_#{index}" do
-                  = "#{list.list_name}"
-                  %i.fas.fa-angle-double-right
+                = link_to "#{list.list_name}", list_path(list), id: "list_#{index}"
               %td
                 = "#{list.goals.length}"
               %td
@@ -43,6 +41,7 @@
         - else
           %tr
             %td -- NO LIST --
+    = paginate @lists
   %br
   .lists-index__tasks
     .lists-index__tasks__task-searcher
@@ -50,6 +49,7 @@
         = f.text_field :keyword, placeholder: "タスクを検索", id: "task-search-form"
         = button_tag type: "submit", id:"lists-index__search-btn" do
           %i.fas.fa-search
+  %br
   .lists-index__task-table
     %table#task-table
 %br

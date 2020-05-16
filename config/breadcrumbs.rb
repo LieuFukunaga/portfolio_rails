@@ -43,11 +43,11 @@ crumb :categories_index do
 end
 
 crumb :categories_show do
-  link "カテゴリ一覧ページ", category_path(Category.find(params[:id]))
+  link "カテゴリ詳細ページ", category_path(Category.find(params[:id]))
 end
 
 crumb :categories_edit do
-  link "カテゴリ一覧ページ", edit_category_path(Category.find(params[:id]))
+  link "カテゴリ編集ページ", edit_category_path(Category.find(params[:id]))
 end
 
 # crumb :projects do

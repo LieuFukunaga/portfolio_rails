@@ -33,15 +33,11 @@ $(function() {
                   <td class="lists-task_search__results__task-${index + 1}">
                     <a href="/lists/${task.list_id}/goals/${task.id}">
                       "${task.title}"
-                      <i class="fas fa-angle-double-right">
-                      </i>
                     </a>
                   </td>
                   <td>
                     <a href="/lists/${task.list_id}">
                       "${task.list_name}"
-                      <i class="fas fa-angle-double-right">
-                      </i>
                     </a>
                   </td>
                   <td>
@@ -57,15 +53,11 @@ $(function() {
                   <td class="lists-task_search__results__task-${index + 1}">
                     <a href="/lists/${task.list_id}/goals/${task.id}">
                       "${task.title}"
-                      <i class="fas fa-angle-double-right">
-                      </i>
                     </a>
                   </td>
                   <td>
                     <a href="/lists/${task.list_id}">
                       "${task.list_name}"
-                      <i class="fas fa-angle-double-right">
-                      </i>
                     </a>
                   </td>
                   <td>
@@ -107,5 +99,4 @@ $(function() {
       $("#task-table").empty();
     };
   });
-
 });

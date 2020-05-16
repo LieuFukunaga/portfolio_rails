@@ -2,7 +2,7 @@ class ListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :destroy]
 
   def index
-    @lists = List.all
+    @lists = List.includes(:user).order("list_name ASC").page(params[:page]).per(10)
     @goals = List.includes(:goals)
   end
 
@@ -22,7 +22,7 @@ class ListsController < ApplicationController
   end
 
   def show
-    @goals = @list.goals
+    @goals = @list.goals.order("title ASC")
   end
 
   def edit

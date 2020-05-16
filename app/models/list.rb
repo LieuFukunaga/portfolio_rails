@@ -71,25 +71,6 @@ class List < ApplicationRecord
     end
   end
 
-  # def self.task_search(search, user_id)
-  #   if search.present?                            # 入力欄が空の場合にgoals.allを返させないためのpresent?
-  #     # goals.where("title LIKE(?)", "%#{search}%") # whereが２重で掛けられている状態。user_idがcurrent_userのレコードの中から部分一致検索している
-  #     split_keyword = search.split(/[[:blank:]]+/)
-
-  #     tasks = []
-  #     split_keyword.each do |keyword|
-  #       next if keyword == ""
-  #       tasks += Goal.where('title LIKE(?)', "%#{keyword}%")
-  #     end
-
-  #     first = tasks.group_by{ |e| e }.select{ |key, value| value.size > 1 }.map(&:first)
-  #     duplications = Goal.where(id: first.pluck(:id))
-  #     tasks = tasks - duplications + first
-
-  #     tasks.delete_if {|task| task.user_id != user_id}
-  #   end
-  # end
-
 
   # タスク検索のため
   def self.task_search(search, user_id)

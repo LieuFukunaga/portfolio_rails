@@ -17,9 +17,7 @@
           - @categories.each.with_index(1) do |category, index|
             %tr
               %td
-                = link_to category_path(category), id: "category-name_#{index}" do
-                  = "#{category.category_name}"
-                  %i.fas.fa-angle-double-right
+                = link_to "#{category.category_name}", category_path(category), id: "category-name_#{index}"
               %td
                 = category.goals.where(user_id: current_user.id).length
               - if category.user_id == current_user.id

@@ -12,7 +12,7 @@
       = "”#{@goal.title}”"
   %br
   %table
-    %tbody
+    %thead
       %th
         = "”#{@goal.title}”のカテゴリ一覧"
       - @goal_categories.each do |c|
@@ -20,7 +20,6 @@
           %td
             = link_to category_path(c) do
               = "#{c.category_name}"
-              %i.fas.fa-angle-double-right
 %br
 = render partial: "layouts/return-to-list-show"
 = render partial: "layouts/return-to-root"
