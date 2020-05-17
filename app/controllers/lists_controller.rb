@@ -52,11 +52,15 @@ class ListsController < ApplicationController
 
   def list_search
     # ソート機能用
-    sort = params[:sort] || "created_at DESC"
+    if params[:sort] == "/lists/list_search"
+      list_sort = "created_at DESC"
+    else
+      list_sort = params[:sort]
+    end
 
     # 検索機能用
     user_id = current_user.id
-    @lists = List.order(sort).list_search(params[:keyword], user_id)
+    @lists = List.order(list_sort).list_search(params[:keyword], user_id)
     @keywords = List.split_keyword(params[:keyword])
 
   end

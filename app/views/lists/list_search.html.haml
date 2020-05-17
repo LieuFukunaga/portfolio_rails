@@ -19,6 +19,7 @@
     -# ソートボタン
     .lists-search__sort
       .lists-search__sort__select-wrap
+        -# params[:sort]という名前でoptionのvalue属性をlists#list_searchに送る
         %select{name: "sort_order", class: 'sort_order'}
           %option{value: "location.pathname", name: "location.pathname"}
             並び替え
