@@ -1,4 +1,19 @@
-.lists-search__table-body {
+.lists-list_search__list-operator__form__form-field {
+  position: relative;
+  &__text-field {
+    height: 40px;
+    line-height: 40px;
+    padding: 10px
+  }
+  &__search-btn {
+    position: absolute;
+    border-style: none;
+    left: 600px;
+    top: 10px;
+  }
+}
+
+.lists-list_search__list-operator__results__table {
   text-align: center;
   overflow: scroll;
   white-space: nowrap;
