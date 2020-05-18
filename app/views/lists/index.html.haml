@@ -56,7 +56,5 @@
         ＜タスク検索＞
         = form_with url: task_search_lists_path, method: :get, class: "lists-index__task-operator__search-form__form-field" do |f|
           = f.text_field :keyword, placeholder: "#{current_user.name}さんのすべてのタスクから検索", id: "task-searcher", size: "70px"
-          = button_tag type: "submit", class:"lists-index__task-operator__search-form__form-field__task-search-btn" do
-            %i.fas.fa-search
       .lists-index__task-table
         %table#task-table

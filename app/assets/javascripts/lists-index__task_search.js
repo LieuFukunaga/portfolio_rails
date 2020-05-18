@@ -1,4 +1,8 @@
 $(function() {
+  // インクリメンタルサーチ用フォームのsubmitをキャンセルするため
+  $('.lists-index__task-operator__search-form__form-field').on('submit', function(e){
+    e.preventDefault()
+  });
 
   let taskTable = $("#task-table")
 
