@@ -83,9 +83,6 @@ class ListsController < ApplicationController
   end
 
   private
-  def move_to_index
-    redirect_to action: :index unless user_signed_in?
-  end
 
   def list_params
     params.require(:list).permit(:list_name).merge(user_id: current_user.id)

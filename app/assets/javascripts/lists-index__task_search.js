@@ -22,7 +22,7 @@ $(function() {
   }
 
   // table要素に検索結果を動的に追加するため
-  function appendTask(task, index) {
+  function appendTask(task) {
     // 日付フォーマット用
     var date = new Date(task.date);
     var year = date.getFullYear();
@@ -34,7 +34,7 @@ $(function() {
     if ( typeof task.image !== "undefined") {
       let html =`<tr>
                   <td class="thumbnail">
-                    <img src="${task.image}" max-width="100" max-height="100" class="task-search__images">
+                    <img src="${task.image}" class="lists-index__task_search__images">
                   </td>
                   <td class="lists-task_search__results__task-${task.id}">
                     <a href="/lists/${task.list_id}/goals/${task.id}">
@@ -137,8 +137,8 @@ $(function() {
       taskTable.empty();
       if (results.length !== 0) {
         appendTableHeader()
-        results.forEach(function(task, index){
-          appendTask(task, index)
+        results.forEach(function(task){
+          appendTask(task)
         });
       } else {
         $("#task-table").empty();

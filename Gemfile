@@ -40,7 +40,6 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'rails-i18n'
 gem 'devise'
 gem 'dotenv-rails'
-gem 'gon'
 gem 'haml-rails'
 gem 'erb2haml'
 gem 'pry-rails'
@@ -90,3 +89,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'therubyracer'
 gem 'libv8'
+gem 'gon'
