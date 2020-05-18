@@ -124,6 +124,9 @@ class List < ApplicationRecord
       end
 
       return tasks
+    # else
+    #   tasks = Goal.where(date: Date.today)
+    #   return tasks
     end
   end
 

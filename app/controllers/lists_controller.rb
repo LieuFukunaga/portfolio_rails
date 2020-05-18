@@ -68,7 +68,6 @@ class ListsController < ApplicationController
   def task_search
     user_id = current_user.id
     @tasks = List.task_search(params[:keyword], user_id)
-
     respond_to do |format|
       format.html
       format.json
