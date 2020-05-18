@@ -36,8 +36,8 @@
           - @goals.each.with_index(1) do |goal, index|
             %tr{data: {id:goal.id}}
               - if goal.image.attached?
-                %td
-                  = image_tag goal.image, size: "100x100"
+                %td.thumbnail
+                  = image_tag goal.image.variant(resize: "100x100").processed
               - else
                 %td
                   %i.fas.fa-tasks.no-image

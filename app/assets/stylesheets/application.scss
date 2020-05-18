@@ -12,7 +12,8 @@
 @import "modules/list/index";
 @import "modules/list/new";
 @import "modules/list/show";
-@import "modules/list/search";
+@import "modules/list/list_search_at_root";
+@import "modules/list/task_search_at_root";
 @import "modules/list/list_search";
 // for Goal
 @import "modules/goal/new";
@@ -58,4 +59,15 @@ tbody.hover-records tr:hover {
 
 .no-image {
   @include no-image-icons-style;
+}
+
+.tasks-thumbnail {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+td.thumbnail {
+  width: 100px;
+  height: 100px;
+  text-align: center;
 }

@@ -1,15 +1,16 @@
-- breadcrumb :goals_show
-= breadcrumbs separator: " &rsaquo; "
+%header
+  - breadcrumb :goals_show
+  = breadcrumbs separator: " &rsaquo; "
 %br
-.goals-show
-  %h1.goals-show__page-title
-    .goals-show__page-title__goal-image
+%main.goals-show
+  .goals-show__task-info
+    .goals-show__task-info__image
       - if @goal.image.attached?
-        = image_tag @goal.image, size: "200x200"
+        = image_tag @goal.image.variant(resize: "250x250"), class: "goals-show__task-info__image"
       - else
-        %i.fas.fa-tasks.lists-search__results__icon
-    .goals-show__page-title__goal-title
-      = "”#{@goal.title}”"
+        %i.fas.fa-tasks
+    .goals-show__task-info__title
+      = "ゴール：#{@goal.title}"
   %br
   %table
     %thead
@@ -21,5 +22,6 @@
             = link_to category_path(c) do
               = "#{c.category_name}"
 %br
-= render partial: "layouts/return-to-list-show"
-= render partial: "layouts/return-to-root"
+%footer
+  = render partial: "layouts/return-to-list-show"
+  = render partial: "layouts/return-to-root"

@@ -33,8 +33,8 @@ $(function() {
 
     if ( typeof task.image !== "undefined") {
       let html =`<tr>
-                  <td>
-                    <img src="${task.image}" width="100" height="100" class="task-search__images">
+                  <td class="thumbnail">
+                    <img src="${task.image}" max-width="100" max-height="100" class="task-search__images">
                   </td>
                   <td class="lists-task_search__results__task-${task.id}">
                     <a href="/lists/${task.list_id}/goals/${task.id}">
