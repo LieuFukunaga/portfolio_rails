@@ -1,16 +1,17 @@
-= render 'layouts/header'
-%br
-- breadcrumb :tasks_search
-= breadcrumbs separator: " &rsaquo; "
-%br
-.lists-task_search
-  .lists-task_search__search-form
-    = form_with url: task_search_lists_path, method: :get, id: "lists-task_search__task-searcher" do |f|
+%header
+  = render 'layouts/header'
+  %br
+  - breadcrumb :tasks_search
+  = breadcrumbs separator: " &rsaquo; "
+  %br
+.task_search
+  .task_search__search-form
+    = form_with url: task_search_lists_path, method: :get, id: "task-search-form" do |f|
       = f.text_field :keyword, placeholder: "タスクを検索"
-      = button_tag type: "submit", id:"lists-new__search-btn" do
+      = button_tag type: "submit", id:"task-search-btn" do
         %i.fas.fa-search
-  .lists-task_search__results
-    %table
+  .task_search__results
+    %table.task_search__results__table
       %tbody
         %tr
           %th

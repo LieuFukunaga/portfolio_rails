@@ -1,7 +1,7 @@
 class GoalsController < ApplicationController
 
   before_action :set_list, only: [:show, :edit, :update]
-  before_action :set_goal, only: [:show, :edit, :update, :destroy]
+  before_action :set_goal, only: [:show, :edit, :update, :destroy, :destroy_at_root]
 
   def new
     @goal = Goal.new
@@ -83,6 +83,15 @@ class GoalsController < ApplicationController
     else
       redirect_to root_path
     end
+  end
+
+  def destroy_at_root
+    # if @goal.user_id == current_user.id
+      # @goal.destroy
+      # redirect_to root_path, notice: "#{@goal.title}を削除しました"
+    # else
+      # redirect_to root_path
+    # end
   end
 
   private

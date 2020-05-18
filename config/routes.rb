@@ -17,7 +17,14 @@ Rails.application.routes.draw do
       get "list_search"
       get "task_search", defaults: {format: 'json'}
     end
-    resources :goals, except: :index
+    member do
+      get "change_status", defaults: {format: 'json'}
+    end
+    resources :goals, except: :index do
+      member do
+        delete "destroy_at_root"
+      end
+    end
   end
 
 end

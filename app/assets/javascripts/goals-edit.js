@@ -23,7 +23,7 @@ $(function(){
     };
   });
 
-  // 　text_field用
+  // text_field用
   $(document).on("change", ".added-form", function (){
     let input = $(".added-form").val();
     if (input != "") {

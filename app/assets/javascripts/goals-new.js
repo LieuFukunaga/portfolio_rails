@@ -7,7 +7,7 @@ $(function(){
     $(".goals-new__form__category__check-boxes__options-box").fadeOut(100);
   });
 
-// 　text_field用
+// text_field用
   $(".hidden-field__user-id").attr("name", 'no_user');
   $('.create-category-form').attr("name", 'no_category');
   $(".create-category-form").on("change", function (){

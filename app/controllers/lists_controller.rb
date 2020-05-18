@@ -66,9 +66,17 @@ class ListsController < ApplicationController
   end
 
   def task_search
-    sort = params[:sort] || "created_at DESC"
     user_id = current_user.id
     @tasks = List.task_search(params[:keyword], user_id)
+
+    respond_to do |format|
+      format.html
+      format.json
+    end
+  end
+
+  def change_status
+    @gaols = List.find(params[:id]).goals
     respond_to do |format|
       format.html
       format.json

@@ -1,54 +1,62 @@
-= render 'layouts/header'
+%header
+  = render 'layouts/header'
 %br
-.lists-index
-  .lists-index__list-operator
-    .lists-index__list-operator__search-form
-      = form_with url: list_search_lists_path, method: :get, id: "lists-index__search-form" do |f|
-        = f.text_field :keyword, id: "list-searcher", placeholder: "検索のヒント：除外したい単語の前にマイナス記号(-)をつけて下さい", required: true, size: "60px"
-        = button_tag type: "submit", id:"lists-new__search-btn" do
-          %i.fas.fa-search
+%main.lists-index
+  .left-content
+    .lists-index__list-operator
+      .lists-index__list-operator__search-form
+        ＜リスト検索＞
+        = form_with url: list_search_lists_path, method: :get, class: "lists-index__list-operator__search-form__form-field" do |f|
+          = f.text_field :keyword, class: "lists-index__list-operator__search-form__form-field__text-field", placeholder: "検索のヒント：除外したい単語の前にマイナス記号(-)をつけて下さい", required: true, size: "70px"
+          = button_tag type: "submit", class:"lists-index__list-operator__search-form__form-field__list-search-btn" do
+            %i.fas.fa-search
+      %br
+      .lists-index__list-operator__create-list-btn
+        = link_to new_list_path, class: "new-list-btn" do
+          リストを追加
+          %i.fas.fa-plus-circle
     %br
-    .lists-index__list-operator__create-list-btn
-      = link_to new_list_path, class: "new-list-btn" do
-        リストを追加
-        %i.fas.fa-plus-circle
-  %br
-  .lists-index__list-table
-    %table.users-list
-      %thead
-        %tr
-          %th
-            = "＜リスト一覧＞"
-          %th
-            タスク数
-      %tbody.hover-records
-        - if current_user.lists.length != 0
-          - @lists.where(user_id: current_user).each.with_index(1) do |list, index|
-            %tr
-              %td
-                = link_to "#{list.list_name}", list_path(list), id: "list_#{index}"
-              %td
-                = "#{list.goals.length}"
-              %td
-                = link_to new_list_goal_path(list.id) do
-                  %i.fas.fa-plus-circle
-              %td
-                = link_to edit_list_path(list.id) do
-                  %i.fas.fa-edit
-              %td{data: {index: "#{index}"}}
-                = link_to list_path(list.id), method: :delete, class: "lists-index__delete-btn" do
-                  %i.fas.fa-trash-alt
-        - else
+    .lists-index__list-table
+      %table.users-list
+        %thead
           %tr
-            %td -- NO LIST --
-    = paginate @lists
-  %br
-  .lists-index__tasks
-    .lists-index__tasks__task-searcher
-      = form_with url: task_search_lists_path, method: :get do |f|
-        = f.text_field :keyword, placeholder: "タスクを検索", id: "task-search-form"
-        = button_tag type: "submit", id:"lists-index__search-btn" do
-          %i.fas.fa-search
-  %br
-  .lists-index__task-table
-    %table#task-table
+            %th
+              = "＜リスト一覧＞"
+          %tr
+            %th
+              リスト名
+            %th
+              タスク数
+        %tbody.hover-records
+          - if current_user.lists.length != 0
+            - @lists.where(user_id: current_user).each.with_index(1) do |list, index|
+              %tr
+                %td
+                  = link_to "#{list.list_name}", list_path(list), id: "list_#{index}"
+                %td
+                  = "#{list.goals.length}"
+                %td
+                  = link_to new_list_goal_path(list.id) do
+                    %i.fas.fa-plus-circle
+                %td
+                  = link_to edit_list_path(list.id) do
+                    %i.fas.fa-edit
+                %td{data: {index: "#{index}"}}
+                  = link_to list_path(list.id), method: :delete, class: "lists-index__delete-btn" do
+                    %i.fas.fa-trash-alt
+          - else
+            %tr
+              %td -- NO LIST --
+      = paginate @lists
+    %br
+
+  .right-content
+    .lists-index__task-operator
+      .lists-index__task-operator__search-form
+        ＜タスク検索＞
+        = form_with url: task_search_lists_path, method: :get, class: "lists-index__task-operator__search-form__form-field" do |f|
+          = f.text_field :keyword, placeholder: "#{current_user.name}さんのすべてのタスクから検索", id: "task-searcher", size: "70px"
+          = button_tag type: "submit", class:"lists-index__task-operator__search-form__form-field__task-search-btn" do
+            %i.fas.fa-search
+      .lists-index__task-table
+        %table#task-table
