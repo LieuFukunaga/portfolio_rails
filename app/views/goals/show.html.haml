@@ -6,9 +6,9 @@
   .goals-show__task-info
     .goals-show__task-info__image
       - if @goal.image.attached?
-        = image_tag @goal.image.variant(resize: "250x250"), class: "goals-show__task-info__image"
+        = image_tag @goal.image.variant(resize: "250x250").processed, data: {id: @goal.id}, class: "goals-show__task-info__image__thumbnail"
       - else
-        %i.fas.fa-tasks
+        %i.fas.fa-tasks.goals-show__task-info__image__no-image
     .goals-show__task-info__title
       = "ゴール：#{@goal.title}"
   .goals-show__link-to-edit

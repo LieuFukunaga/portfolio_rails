@@ -1,9 +1,24 @@
 @import "modules/colors";
 
-.goals-show__task-info__title {
-  font-size: 20px;
+.goals-show__task-info {
+  &__title {
+    font-size: 20px;
+  }
+  &__image {
+    width: 252px;
+    height: 252px;
+    display: flex;
+    text-align: center;
+    &__thumbnail {
+      align-items: center;
+    }
+    &__no-image {
+      border: 1px solid;
+      height: 100%;
+      width: 100%;
+      line-height: 100%;
+    }
+  }
 }
 
-.goals-show__task-info {
-}
 

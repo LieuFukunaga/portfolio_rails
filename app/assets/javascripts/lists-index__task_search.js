@@ -28,8 +28,10 @@ $(function() {
     var year = date.getFullYear();
     var month = ("00" + (date.getMonth()+1)).slice(-2);
     var day = ("00" + date.getDate()).slice(-2);
-    var hour = date.getHours();
-    var minute =date.getMinutes();
+    var hour = ("00" + date.getHours()).slice(-2);
+    var minute =("00" + date.getMinutes()).slice(-2);
+    var weekday = date.getDay();
+    var youbi= [ "日", "月", "火", "水", "木", "金", "土" ][weekday];// 曜日(日本語表記)
 
     if ( typeof task.image !== "undefined") {
       let html =`<tr>
@@ -47,7 +49,7 @@ $(function() {
                     </a>
                   </td>
                   <td>
-                    ${year}/${month}/${day} ${hour}:${minute}
+                    ${year}/${month}/${day} ${hour}:${minute} (${youbi})
                   </td>
                   <td>
                     ${task.status_i18n}
@@ -80,7 +82,7 @@ $(function() {
                     </a>
                   </td>
                   <td>
-                  ${year}/${month}/${day} ${hour}:${minute}
+                  ${year}/${month}/${day} ${hour}:${minute} (${youbi})
                   </td>
                   <td>
                     "${task.status}"

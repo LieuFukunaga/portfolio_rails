@@ -9,21 +9,23 @@
   %br
   .goals-new__form
     = form_with model:@goal, url: list_goals_path(:id), local: true do |f|
-      .goals-new__form__fields
-        = f.label :title, "ゴールを設定して下さい"
-        %br
-        = f.text_field :title
-        %br
-        = f.label :image do
-          画像を追加する
-          %i.fa.fa-camera
-          = f.file_field :image, class: "goals-new__file-field"
-        %br
-        = f.label :date, "予定日"
-        %br
-        = f.datetime_select :date, {use_month_numbers: true, start_year: Date.today.year, datetime_separator: '<h4 class="datetime-selector">予定時刻</h4>'}
-        = f.hidden_field :list_id, value: @list.id
-        = f.hidden_field :user_id, value: current_user.id
+      .goals-new__form__image
+        .goals-new__form__image__preview
+      %br
+      .goals-new__form__text-field
+        = f.text_field :title, id: "goals-new__text-field", size: "45px", placeholder: "ゴールを設定して下さい"
+        .goals-new__form__text-field__icons
+          .goals-new__form__text-field__icons__upload
+            = f.label :image, class: "goals-new__form__text-field__icons__upload__label" do
+              %i.fa.fa-camera
+              = f.file_field :image, id: "goals-new__file-field"
+          .goals-new__form__text-field__icons__remove
+            %i.fas.fa-trash#goals-new__remove-review-btn
+      = f.label :date, "予定日"
+      %br
+      = f.datetime_select :date, {use_month_numbers: true, default: Time.now + 1.hour, datetime_separator: '<br><label class="datetime-selector">予定時刻<br></label>', minute_step: 5}
+      = f.hidden_field :list_id, value: @list.id
+      = f.hidden_field :user_id, value: current_user.id
 
       .goals-new__form__category
         - if Category.where(user_id: current_user.id).length != 0
@@ -45,7 +47,7 @@
           = f.label "新規カテゴリを作成"
           %br
           = f.fields_for :categories do |c|
-            = c.text_field :category_name, placeholder: "複数設定する場合はスペースまたはカンマで区切って下さい", size: "60px", class:"create-category-form"
+            = c.text_field :category_name, placeholder: "複数の場合はspaceまたはカンマで区切って下さい", size: "45px", id:"create-category-form"
             = c.hidden_field :user_id, value: current_user.id, class: "hidden-field__user-id"
 
 

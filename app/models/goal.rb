@@ -5,7 +5,8 @@ class Goal < ApplicationRecord
   has_many :goal_categories, dependent: :destroy
   has_many :categories, through: :goal_categories
 
-  validates :title, length: { minimum: 0, maximum: 20 }
+  validates :title, format: {with:/[^\s、,]/}
+  validates :title, length: { minimum: 0, maximum: 45 }
   validates :title, null: false, presence: true
 
   accepts_nested_attributes_for :categories, allow_destroy: true

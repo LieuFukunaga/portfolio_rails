@@ -78,7 +78,7 @@
               %tr
                 -if task.image.attached?
                   %td.thumbnail
-                    = image_tag goal.image.variant(resize: "100x100").processed
+                    = image_tag task.image.variant(resize: "100x100").processed
                 - else
                   %td
                     %i.fas.fa-tasks.no-image

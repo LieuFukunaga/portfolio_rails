@@ -66,6 +66,13 @@ tbody.hover-records tr:hover {
   max-height: 100px;
 }
 
+table {
+  display: block;
+  overflow: scroll;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
 td.thumbnail {
   width: 100px;
   height: 100px;

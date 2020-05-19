@@ -4,7 +4,7 @@ class ListsController < ApplicationController
   def index
     @lists = List.includes(:user).order("list_name ASC").page(params[:page]).per(10)
 
-    tasks = Goal.select{|d| d.date >= Time.now}.select{|d|d.date <= Time.now + 1.week}
+    tasks = Goal.order("date DESC").select{|d| d.date >= Time.now}.select{|d|d.date <= Time.now + 1.week}
     @tasks = tasks.delete_if { |task| task.user_id != current_user.id }
   end
 

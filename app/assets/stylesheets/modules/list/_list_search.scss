@@ -1,9 +1,17 @@
+@mixin form-style {
+  height: 40px;
+  line-height: 40px;
+  padding: 10px;
+  border-radius: 25px;
+}
+
 .lists-list_search__list-operator__form__form-field {
   position: relative;
   &__text-field {
     height: 40px;
     line-height: 40px;
-    padding: 10px
+    padding: 10px;
+    @include form-style;
   }
   &__search-btn {
     position: absolute;
@@ -15,6 +23,16 @@
 
 .lists-list_search__list-operator__results__table {
   text-align: center;
-  overflow: scroll;
-  white-space: nowrap;
 }
+
+// table {
+//   display: block;
+//   overflow-x: scroll;
+//   white-space: nowrap;
+//   -webkit-overflow-scrolling: touch;
+// }
+
+// table tbody {
+//   width: 100%;
+//   display:table;
+// }
