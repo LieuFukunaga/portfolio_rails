@@ -46,7 +46,7 @@
               %td
                 = "#{goal.date.strftime("%Y/%m/%d %H:%M")}"
               %td
-                = render 'change_status'
+                = "#{goal.status_i18n}"
               %td
                 = link_to edit_list_goal_path(goal.list_id, goal.id) do
                   %i.fas.fa-edit

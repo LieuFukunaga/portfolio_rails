@@ -11,11 +11,16 @@
         %i.fas.fa-tasks
     .goals-show__task-info__title
       = "ゴール：#{@goal.title}"
+  .goals-show__link-to-edit
+    = link_to edit_list_goal_path(@goal.list_id, @goal) do
+      %i.fas.fa-edit
   %br
   %table
     %thead
-      %th
-        = "”#{@goal.title}”のカテゴリ一覧"
+      %tr
+        %th
+          = "”#{@goal.title}”のカテゴリ一覧"
+    %tbody
       - @goal_categories.each do |c|
         %tr
           %td

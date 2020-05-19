@@ -57,4 +57,43 @@
         = form_with url: task_search_lists_path, method: :get, class: "lists-index__task-operator__search-form__form-field" do |f|
           = f.text_field :keyword, placeholder: "#{current_user.name}さんのすべてのタスクから検索", id: "task-searcher", size: "70px"
       .lists-index__task-table
+        %table#next-seven-days-tasks
+          %thead
+            %tr
+              %th
+                ＜次の7日間のタスク＞
+            %tr
+              %th
+                サムネイル
+              %th
+                タスク名
+              %th
+                所属リスト
+              %th
+                予定日時
+              %th
+                タスクの状態
+          %tbody
+            - @tasks.each.with_index(1) do |task, index|
+              %tr
+                -if task.image.attached?
+                  %td.thumbnail
+                    = image_tag goal.image.variant(resize: "100x100").processed
+                - else
+                  %td
+                    %i.fas.fa-tasks.no-image
+                %td
+                  = link_to "#{task.title}", list_goal_path(task.list_id, task), id: "goal_#{index}"
+                %td
+                  = "#{List.find(task.list_id).list_name}"
+                %td
+                  = "#{task.date.strftime("%m/%d %H:%M(#{%w(日 月 火 水 木 金 土)[task.date.wday]})")}"
+                %td
+                  = "#{task.status_i18n}"
+                %td
+                  = link_to edit_list_goal_path(task.list_id, task.id) do
+                    %i.fas.fa-edit
+                %td{data: {index: "#{index}"}}
+                  = link_to list_goal_path(task.list_id, task.id), method: :delete, class: "lists-show__delete-btn" do
+                    %i.fas.fa-trash-alt
         %table#task-table

@@ -124,10 +124,6 @@ class List < ApplicationRecord
       end
 
       return tasks
-    # else
-    #   tasks = Goal.select{|d| d.date >= Time.now}.select{|d|d.date <= Time.now + 1.week}
-    #   tasks.delete_if { |task| task.user_id != user_id }
-    #   return tasks
     end
   end
 

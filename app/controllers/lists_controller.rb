@@ -3,7 +3,9 @@ class ListsController < ApplicationController
 
   def index
     @lists = List.includes(:user).order("list_name ASC").page(params[:page]).per(10)
-    @goals = List.includes(:goals)
+
+    tasks = Goal.select{|d| d.date >= Time.now}.select{|d|d.date <= Time.now + 1.week}
+    @tasks = tasks.delete_if { |task| task.user_id != current_user.id }
   end
 
   def new
@@ -74,13 +76,13 @@ class ListsController < ApplicationController
     end
   end
 
-  def change_status
-    @gaols = List.find(params[:id]).goals
-    respond_to do |format|
-      format.html
-      format.json
-    end
-  end
+  # def change_status
+  #   @gaols = List.find(params[:id]).goals
+  #   respond_to do |format|
+  #     format.html
+  #     format.json
+  #   end
+  # end
 
   private
 

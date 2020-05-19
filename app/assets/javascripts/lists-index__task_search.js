@@ -50,7 +50,7 @@ $(function() {
                     ${year}/${month}/${day} ${hour}:${minute}
                   </td>
                   <td>
-                    ${task.status}
+                    ${task.status_i18n}
                   </td>
                   <td>
                     <a href="/lists/${task.list_id}/goals/${task.id}/edit">
@@ -101,14 +101,14 @@ $(function() {
   }
 
   // 検索結果が0件の場合のメッセージ表示のため
-  function appendNoMatchMessage(message) {
-    let noMatchMessage = `<thead class='nothing'>
-                            <tr>
-                              <th>${message}</th>
-                            </tr>
-                          </thead>`
-    taskTable.append(noMatchMessage).hide().fadeIn(300);
-  }
+  // function appendNoMatchMessage(message) {
+  //   let noMatchMessage = `<thead class='nothing'>
+  //                           <tr>
+  //                             <th>${message}</th>
+  //                           </tr>
+  //                         </thead>`
+  //   taskTable.append(noMatchMessage).hide().fadeIn(300);
+  // }
 
   // タスクを削除するかの確認のため
   $("#task-table").on("click", ".lists-index__delete-task-btn", function(){
@@ -136,13 +136,15 @@ $(function() {
     .done(function(results){ // data: リクエストによって返ってきたレスポンス。jbuilderで作成されたJSONデータ
       taskTable.empty();
       if (results.length !== 0) {
+        $("#next-seven-days-tasks").hide().fadeOut(100);
         appendTableHeader()
         results.forEach(function(task){
           appendTask(task)
         });
       } else {
         $("#task-table").empty();
-        appendNoMatchMessage("一致するタスクがありません")
+        $("#next-seven-days-tasks").show().fadeIn(100);
+        // appendNoMatchMessage("一致するタスクがありません")
       }
     })
     .fail(function() {
