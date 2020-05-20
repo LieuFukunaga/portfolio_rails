@@ -21,8 +21,11 @@ Rails.application.routes.draw do
     #   get "change_status", defaults: {format: 'json'}
     # end
     resources :goals, except: :index do
+      # member do
+      #   delete "destroy_at_root"
+      # end
       member do
-        delete "destroy_at_root"
+        delete "image_destroy"
       end
     end
   end

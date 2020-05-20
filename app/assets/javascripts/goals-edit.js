@@ -33,9 +33,9 @@ $(function(){
     $(".goals-edit__form__text-field__icons__upload__label").append(buildFileField);
   })
 
-  $(".goals-edit__form__image__previews__current-image__image-box__delete-btn").click(function(){
-    $(".goals-edit__form__text-field__icons__upload__label__file-field").remove();
-  })
+  // $(".goals-edit__form__image__previews__current-image__image-box__delete-btn").click(function(){
+  //   $(".goals-edit__form__text-field__icons__upload__label__file-field").remove();
+  // })
 
 
 

@@ -1,7 +1,7 @@
 class GoalsController < ApplicationController
 
   before_action :set_list, only: [:show, :edit, :update]
-  before_action :set_goal, only: [:show, :edit, :update, :destroy, :destroy_at_root]
+  before_action :set_goal, only: [:show, :edit, :update, :destroy, :image_destroy]
 
   def new
     @goal = Goal.new
@@ -83,6 +83,19 @@ class GoalsController < ApplicationController
     else
       redirect_to root_path
     end
+  end
+
+  def image_destroy
+    if @goal.user_id == current_user.id && @goal.image.attached?
+      @goal.image.purge
+      redirect_to action: :edit and return
+    else
+      render action: :edit
+    end
+    # respond_to do |format|
+    #   format.html
+    #   format.json
+    # end
   end
 
   def destroy_at_root
