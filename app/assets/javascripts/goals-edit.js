@@ -19,7 +19,7 @@ $(function(){
     return fileField
   }
 
-  $(".goals-edit__form__text-field__icons").on("change", ".goals-edit__form__text-field__icons__upload__label__file-field", function(e){
+  $(".goals-edit__form__text-field__icons__upload").on("change", ".goals-edit__form__text-field__icons__upload__label__file-field", function(e){
     $(".goals-edit__form__image__previews__new-image").empty();
     let file = e.target.files[0];
     let blobUrl = window.URL.createObjectURL(file);
@@ -33,9 +33,12 @@ $(function(){
     $(".goals-edit__form__text-field__icons__upload__label").append(buildFileField);
   })
 
-  // $(".goals-edit__form__image__previews__current-image__image-box__delete-btn").click(function(){
-  //   $(".goals-edit__form__text-field__icons__upload__label__file-field").remove();
-  // })
+  $(".goals-edit__form__image__previews__current-image__image-box__delete-btn").click(function(){
+    if (!confirm("この操作は取り消せません")){
+      return false;
+    };
+    $("#current_image").addClass("grayout");
+  })
 
 
 

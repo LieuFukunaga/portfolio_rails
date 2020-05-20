@@ -6,7 +6,7 @@ $(function(){
   }
 
   function appendFileField () {
-    let fileField = `<input id=".goals-edit__form__text-field__icons__upload__file-field" type="file" name="goal[image]">`
+    let fileField = `<input id="goals-new__file-field" type="file" name="goal[image]">`
     $(".goals-new__form__text-field__icons__upload__label").append(fileField);
   }
 

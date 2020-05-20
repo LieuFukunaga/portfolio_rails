@@ -31,7 +31,6 @@
         &__image-box {
           &__delete-btn {
             display: block;
-            border-radius: 5px;
             margin: 5px 10px;
           }
         }
@@ -76,4 +75,8 @@
 
 .added-form {
   @include task-form-style;
+}
+
+.grayout {
+  opacity: 0.3;
 }

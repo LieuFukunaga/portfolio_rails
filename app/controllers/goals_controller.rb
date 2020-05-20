@@ -87,7 +87,7 @@ class GoalsController < ApplicationController
 
   def image_destroy
     if @goal.user_id == current_user.id && @goal.image.attached?
-      @goal.image.purge_later
+      @goal.image.purge
     else
       render action: :edit
     end
