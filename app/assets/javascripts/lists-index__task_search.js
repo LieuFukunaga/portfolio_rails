@@ -60,7 +60,7 @@ $(function() {
                     </a>
                   </td>
                   <td data-index="${task.id}">
-                    <a class="lists-index__delete-task-btn" rel="nofollow" data-method="delete" href="/lists/${task.list_id}/goals/${task.id}/destroy_at_root">
+                    <a class="lists-index__delete-task-btn" rel="nofollow" data-method="delete" href="/lists/${task.list_id}/goals/${task.id}/root_destroy">
                       <i class="fas fa-trash-alt"></i>
                     </a>
                   </td>
@@ -93,7 +93,7 @@ $(function() {
                   </a>
                   </td>
                   <td data-index="${task.id}">
-                    <a class="lists-index__delete-task-btn" rel="nofollow" data-method="delete" href="/lists/${task.list_id}/goals/${task.id}/destroy_at_root">
+                    <a class="lists-index__delete-task-btn" rel="nofollow" data-method="delete" href="/lists/${task.list_id}/goals/${task.id}/root_destroy">
                       <i class="fas fa-trash-alt"></i>
                     </a>
                   </td>

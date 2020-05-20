@@ -95,7 +95,7 @@
                     = link_to edit_list_goal_path(task.list_id, task.id) do
                       %i.fas.fa-edit
                   %td{data: {index: "#{index}"}}
-                    = link_to list_goal_path(task.list_id, task.id), method: :delete, class: "lists-show__delete-btn" do
+                    = link_to root_destroy_list_goal_path(task.list_id, task.id), method: :delete, class: "lists-index__delete-btn" do
                       %i.fas.fa-trash-alt
         - else
           = "#{@next_seven_days.strftime("%m/%d  (#{%w(日 月 火 水 木 金 土)[@next_seven_days.wday]}）")}までタスクはありません"
