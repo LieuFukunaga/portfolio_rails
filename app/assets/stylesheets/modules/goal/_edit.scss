@@ -24,18 +24,23 @@
 .goals-edit__form {
   &__image {
     &__previews {
-      width: 250px;
-      height: 250px;
       text-align: center;
       display: flex;
       &__current-image {
-        // display: flex;
+        display: flex;
         &__image-box {
+          &__delete-btn {
+            display: block;
+            border-radius: 5px;
+            margin: 5px 10px;
+          }
         }
-        // &__right-angle {
-        // }
+        &__right-angle {
+          margin: 10px;
+          line-height: 250px;
+        }
       }
-      #goals-edit__new-image-preview {
+      .goals-edit__new-image-preview {
         align-items: center;
         max-width: 250px;
         max-height: 250px;
@@ -45,17 +50,21 @@
   &__text-field {
     display: flex;
     position: relative;
-    #goals-edit__text-field {
-      @include task-form-style;
+    &__input {
+      #goals-edit__text-field {
+        @include task-form-style;
+      }
     }
     &__icons {
       display: flex;
       position: absolute;
-      top: 10px;
+      top: 32px;
       left: 350px;
       &__upload {
-        #goals-edit__file-field {
-          display: none;
+        &__label {
+          &__file-field {
+            display: none;
+          }
         }
       }
       &__remove {
@@ -68,19 +77,3 @@
 .added-form {
   @include task-form-style;
 }
-
-
-
-// .goals-edit__form__category__check-boxes__options-box {
-//   max-height: 300px;
-//   max-width: 300px;
-//   display: none;
-//   border: solid 1px;
-//   overflow: scroll;
-//   white-space: nowrap;
-//   -webkit-overflow-scrolling: touch;
-// }
-
-// .goals-edit__file-field {
-//   display: none;
-// }

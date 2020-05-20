@@ -11,7 +11,10 @@
         .goals-new__form__image__preview
       %br
       .goals-new__form__text-field
-        = f.text_field :title, id: "goals-new__text-field", size: "45px", placeholder: "ゴールを設定して下さい"
+        .goals-new__form__text-field__input
+          = f.label :title, "ゴールを設定して下さい"
+          %br
+          = f.text_field :title, id: "goals-new__text-field", size: "45px", placeholder: "スペースや読点を含めないで下さい"
         .goals-new__form__text-field__icons
           .goals-new__form__text-field__icons__upload
             = f.label :image, class: "goals-new__form__text-field__icons__upload__label" do

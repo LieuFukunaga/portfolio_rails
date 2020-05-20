@@ -38,13 +38,15 @@
   &__text-field {
     display: flex;
     position: relative;
-    #goals-new__text-field {
-      @include task-form-style;
+    &__input {
+      #goals-new__text-field {
+        @include task-form-style;
+      }
     }
     &__icons {
       display: flex;
       position: absolute;
-      top: 10px;
+      top: 32px;
       left: 350px;
       &__upload {
         #goals-new__file-field {

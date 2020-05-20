@@ -64,7 +64,7 @@ class GoalsController < ApplicationController
         flash.now[:alert] = @goal.errors.full_messages
         render action: :edit
       end
-    # 新規カテゴリの入力がない場合
+      # 新規カテゴリの入力がない場合
     else
       if @goal.update(goal_params)
         flash[:success] = "#{@goal.title}を更新しました"

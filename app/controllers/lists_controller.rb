@@ -6,6 +6,7 @@ class ListsController < ApplicationController
 
     tasks = Goal.order("date DESC").select{|d| d.date >= Time.now}.select{|d|d.date <= Time.now + 1.week}
     @tasks = tasks.delete_if { |task| task.user_id != current_user.id }
+    @next_seven_days = Date.today + 1.week
   end
 
   def new

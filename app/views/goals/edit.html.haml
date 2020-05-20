@@ -9,20 +9,27 @@
     = form_with model:@goal, url: list_goal_path(@list, @goal), local: true do |f|
       .goals-edit__form__image
         .goals-edit__form__image__previews
-          .goals-edit__form__image__preview__current-image
+          .goals-edit__form__image__previews__current-image
             - if @goal.image.attached?
-              .goals-edit__form__image__preview__current-image__image-box
-                = image_tag @goal.image.variant(resize: "250x250").processed
-              -# .goals-edit__form__image__preview__current-image__right-angle
-              -#   %i.fas.fa-angle-double-right
+              .goals-edit__form__image__previews__current-image__image-box
+                = image_tag @goal.image.variant(resize: "250x250").processed, id: "current_image"
+                = button_tag "元の画像を削除", type: "button", class: "goals-edit__form__image__previews__current-image__image-box__delete-btn"
+              .goals-edit__form__image__previews__current-image__right-angle
+                %i.fas.fa-angle-double-right
           .goals-edit__form__image__previews__new-image
+            -# この下にプレビュー用のimg要素がappendされる
       .goals-edit__form__text-field
-        = f.text_field :title, value: @goal.title, id: "goals-edit__text-field", size: "45px", placeholder: "ゴールを設定して下さい"
+        .goals-edit__form__text-field__input
+          = f.label :title, "ゴールを設定して下さい"
+          %br
+          = f.text_field :title, value: @goal.title, id: "goals-edit__text-field", size: "45px", placeholder: "スペースや読点を含めないで下さい"
+
+        -# プレビュー用イベント発生元
         .goals-edit__form__text-field__icons
           .goals-edit__form__text-field__icons__upload
-            = f.label :image, class: "goals-ediit__form__text-field__icons__upload__label" do
+            = f.label :image, class: "goals-edit__form__text-field__icons__upload__label" do
               %i.fa.fa-camera
-              = f.file_field :image, id: "goals-edit__file-field"
+              = f.file_field :image, class: "goals-edit__form__text-field__icons__upload__label__file-field"
           .goals-edit__form__text-field__icons__remove
             %i.fas.fa-trash#goals-edit__remove-preview-btn
       %br
