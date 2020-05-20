@@ -18,7 +18,7 @@ $(function(){
     $('.goals-new__form__image__preview').append(buildImg(blobUrl));
   })
 
-  $("#goals-new__remove-review-btn").click(function(){
+  $("#goals-new__remove-preview-btn").click(function(){
     $(".goals-new__form__image__preview").empty();
     $("#goals-new__file-field").remove();
     appendFileField();

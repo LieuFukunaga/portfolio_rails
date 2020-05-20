@@ -4,8 +4,6 @@
 .goals-new
   .goals-new__page-info
     %h1.goals-new__page-info__page-title ＜タスク作成画面＞
-    %h2.goals-new__page-info__list-name
-      = "リスト：#{@list.list_name}"
   %br
   .goals-new__form
     = form_with model:@goal, url: list_goals_path(:id), local: true do |f|
@@ -20,7 +18,7 @@
               %i.fa.fa-camera
               = f.file_field :image, id: "goals-new__file-field"
           .goals-new__form__text-field__icons__remove
-            %i.fas.fa-trash#goals-new__remove-review-btn
+            %i.fas.fa-trash#goals-new__remove-preview-btn
       = f.label :date, "予定日"
       %br
       = f.datetime_select :date, {use_month_numbers: true, default: Time.now + 1.hour, datetime_separator: '<br><label class="datetime-selector">予定時刻<br></label>', minute_step: 5}

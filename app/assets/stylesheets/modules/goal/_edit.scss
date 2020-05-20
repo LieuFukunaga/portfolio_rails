@@ -1,18 +1,86 @@
 @import "modules/colors";
 
-.goals-edit__page-title {
+@mixin task-form-style {
+  height: 40px;
+  line-height: 40px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.goals-edit__page-info__page-title {
   font-size: 20px;
 }
 
 .goals-edit__form__category__check-boxes__options-box {
-  max-height: 500px;
+  max-height: 300px;
   max-width: 300px;
   display: none;
   border: solid 1px;
   overflow: scroll;
   white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
 }
 
-.goals-edit__file-field {
-  display: none;
+.goals-edit__form {
+  &__image {
+    &__previews {
+      width: 250px;
+      height: 250px;
+      text-align: center;
+      display: flex;
+      &__current-image {
+        // display: flex;
+        &__image-box {
+        }
+        // &__right-angle {
+        // }
+      }
+      #goals-edit__new-image-preview {
+        align-items: center;
+        max-width: 250px;
+        max-height: 250px;
+      }
+    }
+  }
+  &__text-field {
+    display: flex;
+    position: relative;
+    #goals-edit__text-field {
+      @include task-form-style;
+    }
+    &__icons {
+      display: flex;
+      position: absolute;
+      top: 10px;
+      left: 350px;
+      &__upload {
+        #goals-edit__file-field {
+          display: none;
+        }
+      }
+      &__remove {
+        padding-left: 5px;
+      }
+    }
+  }
 }
+
+.added-form {
+  @include task-form-style;
+}
+
+
+
+// .goals-edit__form__category__check-boxes__options-box {
+//   max-height: 300px;
+//   max-width: 300px;
+//   display: none;
+//   border: solid 1px;
+//   overflow: scroll;
+//   white-space: nowrap;
+//   -webkit-overflow-scrolling: touch;
+// }
+
+// .goals-edit__file-field {
+//   display: none;
+// }
