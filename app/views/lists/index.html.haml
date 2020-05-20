@@ -90,7 +90,7 @@
                   %td
                     = "#{task.date.strftime("%m/%d %H:%M (#{%w(日 月 火 水 木 金 土)[task.date.wday]}）")}"
                   %td
-                    = "#{task.status_i18n}"
+                    = button_tag "#{task.status_i18n}", type: "button", name: "status"
                   %td
                     = link_to edit_list_goal_path(task.list_id, task.id) do
                       %i.fas.fa-edit

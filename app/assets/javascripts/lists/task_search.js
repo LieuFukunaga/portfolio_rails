@@ -52,7 +52,7 @@ $(function() {
                     ${year}/${month}/${day} ${hour}:${minute} (${youbi})
                   </td>
                   <td>
-                    ${task.status_i18n}
+                    <button name="status" type="button">${task.status}</button>
                   </td>
                   <td>
                     <a href="/lists/${task.list_id}/goals/${task.id}/edit">
@@ -85,7 +85,7 @@ $(function() {
                   ${year}/${month}/${day} ${hour}:${minute} (${youbi})
                   </td>
                   <td>
-                    "${task.status}"
+                    <button name="status" type="button">${task.status}</button>
                   </td>
                   <td>
                   <a href="/lists/${task.list_id}/goals/${task.id}/edit">
