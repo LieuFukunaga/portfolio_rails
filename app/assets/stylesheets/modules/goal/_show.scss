@@ -5,18 +5,14 @@
     font-size: 20px;
   }
   &__image {
-    width: 252px;
-    height: 252px;
+    width: 250px;
+    height: 250px;
     display: flex;
     text-align: center;
     &__thumbnail {
       align-items: center;
-    }
-    &__no-image {
-      border: 1px solid;
-      height: 100%;
-      width: 100%;
-      line-height: 100%;
+      max-width: 250px;
+      max-height: 250px;
     }
   }
 }

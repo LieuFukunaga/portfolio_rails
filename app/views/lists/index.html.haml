@@ -81,7 +81,7 @@
                     %td.thumbnail
                       = image_tag task.image.variant(resize: "100x100").processed
                   - else
-                    %td
+                    %td.no-image-icons
                       %i.fas.fa-tasks.no-image
                   %td
                     = link_to "#{task.title}", list_goal_path(task.list_id, task), id: "goal_#{index}"

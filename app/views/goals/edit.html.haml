@@ -1,7 +1,8 @@
-- breadcrumb :goals_edit
-= breadcrumbs separator: " &rsaquo; "
+%header
+  - breadcrumb :goals_edit
+  = breadcrumbs separator: " &rsaquo; "
 %br
-.goals-edit
+%main.goals-edit
   .goals-edit__page-info
     %h1.goals-edit__page-info__page-title ＜タスク編集画面＞
   %br
@@ -14,7 +15,6 @@
             - if @goal.image.attached?
               .goals-edit__form__image__previews__current-image__image-box
                 = image_tag @goal.image.variant(resize: "250x250").processed, id: "current_image"
-                -# ”変更前画像”の削除
                 = link_to "元の画像を削除", image_destroy_list_goal_path(@list, @goal), method: :delete , class: "goals-edit__form__image__previews__current-image__image-box__delete-btn"
               .goals-edit__form__image__previews__current-image__right-angle
                 %i.fas.fa-angle-double-right
@@ -68,6 +68,6 @@
 
       .goals-edit__form__submit-btn
         = f.submit "登録"
-
-    = render partial: "layouts/return-to-list-show"
-    = render partial: "layouts/return-to-root"
+%footer
+  = render partial: "layouts/return-to-list-show"
+  = render partial: "layouts/return-to-root"
