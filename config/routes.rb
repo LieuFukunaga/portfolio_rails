@@ -23,7 +23,10 @@ Rails.application.routes.draw do
         delete "root_destroy"
         delete "image_destroy"
         # 既存リソースの更新なのでpatchを使用
-        patch "change_status"
+        post "change_status"
+      end
+      collection do
+        # post "change_status", defaults: {format: 'json'}
       end
     end
 

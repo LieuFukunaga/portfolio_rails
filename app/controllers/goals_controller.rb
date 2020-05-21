@@ -108,10 +108,12 @@ class GoalsController < ApplicationController
       status = params[:status]
       if status == "実行中"
         @goal.update(status: "done")
-        redirect_to root_path and return
       else
         @goal.update(status: "doing")
-        redirect_to root_path
+      end
+      respond_to do |format|
+        format.html {redirect_to list_path(@goal.list_id)}
+        format.json {render json: @goal}
       end
     end
   end

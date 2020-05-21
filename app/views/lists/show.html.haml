@@ -33,7 +33,7 @@
             %th
               タスクの状態
         %tbody.lists-show__task-table__results__body
-          - @goals.each.with_index(1) do |goal, index|
+          - @goals.each.with_index(1) do |goal|
             %tr{data: {id:goal.id}}
               - if goal.image.attached?
                 %td.thumbnail
@@ -42,15 +42,15 @@
                 %td
                   %i.fas.fa-tasks.no-image
               %td
-                = link_to "#{goal.title}", list_goal_path(@list.id, goal), id: "goal_#{index}"
+                = link_to "#{goal.title}", list_goal_path(@list.id, goal), id: "goal_#{goal.id}"
               %td
                 = "#{goal.date.strftime("%Y/%m/%d %H:%M")}"
-              %td
-                = "#{goal.status_i18n}"
+              %td.js-change-status{data: {id: goal.id}}
+                = button_to "#{goal.status_i18n}", change_status_list_goal_path(goal.list_id, goal), method: :post, name: "status", class: "change-status-btn goal_#{goal.id}", value: goal.status
               %td
                 = link_to edit_list_goal_path(goal.list_id, goal.id) do
                   %i.fas.fa-edit
-              %td{data: {index: "#{index}"}}
+              %td{data: {id: "#{goal.id}"}}
                 = link_to list_goal_path(goal.list_id, goal.id), method: :delete, class: "lists-show__delete-btn" do
                   %i.fas.fa-trash-alt
       = paginate @goals

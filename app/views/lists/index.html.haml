@@ -90,11 +90,7 @@
                   %td
                     = "#{task.date.strftime("%m/%d %H:%M (#{%w(日 月 火 水 木 金 土)[task.date.wday]}）")}"
                   %td
-                    -# = button_tag "#{task.status_i18n}", type: "button", name: "status", value: task.status
-                    = button_to "#{task.status_i18n}", change_status_list_goal_path(task.list_id, task), method: :patch, name: "status", value: task.status
-                    -# = form_with url: change_status_list_goal_path(task.list_id, task), method: :patch, class: "change_status" do |f|
-                    -#   = f.select :status, Goal.statuses_i18n.invert, {}, {id: 'status_selector'}
-                    -# = link_to "#{task.status_i18n}", change_status_list_goal_path(task.list_id, task), method: :post, name: "status", value: task.status
+                    = "#{task.status_i18n}"
                   %td
                     = link_to edit_list_goal_path(task.list_id, task.id) do
                       %i.fas.fa-edit
