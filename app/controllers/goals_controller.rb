@@ -94,6 +94,7 @@ class GoalsController < ApplicationController
     end
   end
 
+  # 画像削除のためのアクション
   def image_destroy
     if @goal.user_id == current_user.id && @goal.image.attached?
       @goal.image.purge
@@ -102,14 +103,7 @@ class GoalsController < ApplicationController
     end
   end
 
-  def destroy_at_root
-    # if @goal.user_id == current_user.id
-      # @goal.destroy
-      # redirect_to root_path, notice: "#{@goal.title}を削除しました"
-    # else
-      # redirect_to root_path
-    # end
-  end
+
 
   private
   def goal_params

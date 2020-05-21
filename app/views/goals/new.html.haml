@@ -1,7 +1,8 @@
-- breadcrumb :goals_new
-= breadcrumbs separator: " &rsaquo; "
+%header
+  - breadcrumb :goals_new
+  = breadcrumbs separator: " &rsaquo; "
 %br
-.goals-new
+%main.goals-new
   .goals-new__page-info
     %h1.goals-new__page-info__page-title ＜タスク作成画面＞
   %br
@@ -55,6 +56,6 @@
 
       .goals-new__form__submit-btn
         = f.submit "登録"
-
+%footer
   = render partial: "layouts/return-to-list-show"
   = render partial: "layouts/return-to-root"

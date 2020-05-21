@@ -1,9 +1,10 @@
-= render 'layouts/header'
+%header
+  = render 'layouts/header'
+  %br
+  - breadcrumb :lists_search
+  = breadcrumbs separator: " &rsaquo; "
 %br
-- breadcrumb :lists_search
-= breadcrumbs separator: " &rsaquo; "
-%br
-.lists-list_search
+%main.lists-list_search
   -# 検索フォーム
   .lists-list_search__list-operator
     .lists-list_search__list-operator__form
@@ -66,5 +67,6 @@
     %br
     該当するリストはありません
 %br
-= render partial: "layouts/return-to-root"
+%footer
+  = render partial: "layouts/return-to-root"
 

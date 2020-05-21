@@ -10,7 +10,6 @@ $(function(){
     $(".goals-new__form__text-field__icons__upload__label").append(fileField);
   }
 
-
   $(".goals-new__form__text-field__icons__upload").on("change", "#goals-new__file-field", function(e){
     $(".goals-new__form__image__preview").empty();
     let file = e.target.files[0];
@@ -23,6 +22,7 @@ $(function(){
     $("#goals-new__file-field").remove();
     appendFileField();
   })
+
 
 
   // collection_check_boxes表示切り替えのため

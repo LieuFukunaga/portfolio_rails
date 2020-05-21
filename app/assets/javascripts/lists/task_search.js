@@ -102,16 +102,6 @@ $(function() {
     };
   }
 
-  // 検索結果が0件の場合のメッセージ表示のため
-  // function appendNoMatchMessage(message) {
-  //   let noMatchMessage = `<thead class='nothing'>
-  //                           <tr>
-  //                             <th>${message}</th>
-  //                           </tr>
-  //                         </thead>`
-  //   taskTable.append(noMatchMessage).hide().fadeIn(300);
-  // }
-
   // タスクを削除するかの確認のため
   $("#task-table").on("click", ".lists-index__delete-task-btn", function(){
     let parent = $(".lists-index__delete-task-btn").parent();
