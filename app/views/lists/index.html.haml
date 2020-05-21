@@ -86,7 +86,7 @@
                   %td
                     = link_to "#{task.title}", list_goal_path(task.list_id, task), id: "goal_#{index}"
                   %td
-                    = "#{List.find(task.list_id).list_name}"
+                    = link_to "#{List.find(task.list_id).list_name}", list_path(task.list_id)
                   %td
                     = "#{task.date.strftime("%m/%d %H:%M (#{%w(日 月 火 水 木 金 土)[task.date.wday]}）")}"
                   %td
