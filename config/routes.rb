@@ -15,7 +15,10 @@ Rails.application.routes.draw do
   resources :lists do
     collection do
       get "list_search"
-      get "task_search", defaults: {format: 'json'}
+      get "task_search"
+    end
+    member do
+      get "search_in_list"
     end
 
     resources :goals, except: :index do
@@ -24,6 +27,7 @@ Rails.application.routes.draw do
         delete "image_destroy"
         # 既存リソースの更新なのでpatchを使用
         post "change_status"
+        post "change_status_at_root", defaults: {format: 'json'}
       end
       collection do
         # post "change_status", defaults: {format: 'json'}

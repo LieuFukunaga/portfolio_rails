@@ -1,0 +1,28 @@
+- @tasks.each do |task|
+  %p
+    = task.title
+
+-# ソート用プルダウンメニュー
+- if @tasks.length != 0
+  .lists-show__operator__sort
+    .lists-show__operator__sort__select-wrap
+      -# params[:sort]という名前でoptionのvalue属性をlists#list_searchに送る
+      %select{name: "task_sort", class: 'task_sort'}
+        %option{value: "location.pathname", name: "location.pathname"}
+          並び替え
+        %option{value: "title_asc"}
+          タスク名（昇順）
+        %option{value: "title_desc"}
+          タスク名（降順）
+        %option{value: "date_asc"}
+          予定日時（昇順）
+        %option{value: "date_desc"}
+          予定日時（降順）
+        %option{value: "status_asc"}
+          「実行中」を前に
+        %option{value: "status_desc"}
+          「達成！」を前に
+        %option{value: "updated_at_asc"}
+          更新日時（昇順）
+        %option{value: "updated_at_desc"}
+          更新日時（降順）

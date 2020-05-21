@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: [:show, :edit, :update, :destroy]
+  before_action :set_list, only: [:show, :edit, :update, :destroy, :search_in_list]
 
   def index
     @lists = List.includes(:user).order("list_name ASC").page(params[:page]).per(10)
@@ -29,7 +29,14 @@ class ListsController < ApplicationController
   end
 
   def show
-    @goals = @list.goals.order("title ASC").page(params[:page]).per(6)
+    # ソート機能用
+    # binding.pry
+    if params[:task_sort] == "/lists/#{@list.id}"
+      task_sort = "title ASC"
+    else
+      task_sort = params[:sort]
+    end
+    @goals = @list.goals.order(task_sort).page(params[:page]).per(6)
   end
 
   def edit
@@ -79,6 +86,26 @@ class ListsController < ApplicationController
       format.html
       format.json
     end
+  end
+
+  def search_in_list
+    user_id = current_user.id
+    list_id = List.find(params[:id]).id
+
+    # binding.pry
+    if params[:task_sort] == "/lists/#{@list.id}"
+      task_sort = "title ASC"
+    else
+      task_sort = params[:sort]
+    end
+    # @goals = @list.goals.order(task_sort).page(params[:page]).per(6)
+
+    @tasks = List.order(task_sort).search_in_list(params[:keyword], user_id, list_id)
+    # binding.pry
+    # respond_to do |format|
+    #   format.html
+    #   format.json
+    # end
   end
 
   private
