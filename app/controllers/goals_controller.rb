@@ -1,7 +1,7 @@
 class GoalsController < ApplicationController
 
   before_action :set_list, only: [:show, :edit, :update]
-  before_action :set_goal, only: [:show, :edit, :update, :destroy, :root_destroy, :image_destroy]
+  before_action :set_goal, only: [:show, :edit, :update, :destroy, :root_destroy, :image_destroy, :change_status]
 
   def new
     @goal = Goal.new
@@ -103,7 +103,18 @@ class GoalsController < ApplicationController
     end
   end
 
-
+  def change_status
+    if @goal.user_id == current_user.id
+      status = params[:status]
+      if status == "実行中"
+        @goal.update(status: "done")
+        redirect_to root_path and return
+      else
+        @goal.update(status: "doing")
+        redirect_to root_path
+      end
+    end
+  end
 
   private
   def goal_params

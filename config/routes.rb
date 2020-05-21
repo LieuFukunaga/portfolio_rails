@@ -17,15 +17,16 @@ Rails.application.routes.draw do
       get "list_search"
       get "task_search", defaults: {format: 'json'}
     end
-    # member do
-    #   get "change_status", defaults: {format: 'json'}
-    # end
+
     resources :goals, except: :index do
       member do
         delete "root_destroy"
         delete "image_destroy"
+        # 既存リソースの更新なのでpatchを使用
+        patch "change_status"
       end
     end
+
   end
 
 end

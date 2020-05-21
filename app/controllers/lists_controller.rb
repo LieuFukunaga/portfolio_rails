@@ -7,6 +7,10 @@ class ListsController < ApplicationController
     tasks = Goal.order("date DESC").select{|d| d.date >= Time.now}.select{|d|d.date <= Time.now + 1.week}
     @tasks = tasks.delete_if { |task| task.user_id != current_user.id }
     @next_seven_days = Date.today + 1.week
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   def new
@@ -77,14 +81,6 @@ class ListsController < ApplicationController
     end
   end
 
-  # def change_status
-  #   @gaols = List.find(params[:id]).goals
-  #   respond_to do |format|
-  #     format.html
-  #     format.json
-  #   end
-  # end
-
   private
 
   def list_params
@@ -94,6 +90,5 @@ class ListsController < ApplicationController
   def set_list
     @list = List.find(params[:id])
   end
-
 
 end
