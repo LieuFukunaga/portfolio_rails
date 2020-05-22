@@ -41,7 +41,7 @@
                 %td
                   = link_to edit_list_path(list.id) do
                     %i.fas.fa-edit
-                %td{data: {index: "#{index}"}}
+                %td{data: {list_index: "#{index}"}}
                   = link_to list_path(list.id), method: :delete, class: "lists-index__delete-btn" do
                     %i.fas.fa-trash-alt
           - else
@@ -74,9 +74,9 @@
                   予定日時
                 %th
                   タスクの状態
-            %tbody
+            %tbody.hover-records
               - @tasks.each.with_index(1) do |task, index|
-                %tr
+                %tr{data: {n7dt_record: "#{index}"}}
                   -if task.image.attached?
                     %td.thumbnail
                       = image_tag task.image.variant(resize: "100x100").processed
@@ -84,7 +84,7 @@
                     %td.no-image-icons
                       %i.fas.fa-tasks.no-image
                   %td
-                    = link_to "#{task.title}", list_goal_path(task.list_id, task), id: "goal_#{index}"
+                    = link_to "#{task.title}", list_goal_path(task.list_id, task), id: "n7dt_title_#{index}"
                   %td
                     = link_to "#{List.find(task.list_id).list_name}", list_path(task.list_id)
                   %td
@@ -94,9 +94,9 @@
                   %td
                     = link_to edit_list_goal_path(task.list_id, task.id) do
                       %i.fas.fa-edit
-                  %td{data: {index: "#{index}"}}
-                    = link_to root_destroy_list_goal_path(task.list_id, task.id), method: :delete, class: "lists-index__delete-btn" do
+                  %td{data: {n7dt_trash: "#{index}"}}
+                    = link_to root_destroy_list_goal_path(task.list_id, task.id), method: :delete, class: "delete-n7dt-btn" do
                       %i.fas.fa-trash-alt
         - else
           = "#{@next_seven_days.strftime("%m/%d  (#{%w(日 月 火 水 木 金 土)[@next_seven_days.wday]}）")}までタスクはありません"
-        %table#task-table
+        %table#searched-task-table

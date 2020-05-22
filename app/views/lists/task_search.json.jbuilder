@@ -2,7 +2,7 @@ json.array! @tasks do |task|
   json.id task.id
   json.list_name task.list.list_name
   json.title task.title
-  json.status task.status_i18n
+  json.status task.status
   json.date task.date
   json.list_id task.list_id
   json.user_id task.user_id

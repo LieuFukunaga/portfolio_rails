@@ -4,7 +4,7 @@ $(function() {
     e.preventDefault()
   });
 
-  let taskTable = $("#task-table")
+  let taskTable = $("#searched-task-table")
 
   // 検索結果が１件以上の場合、テーブルの項目行を追加するため
   function appendTableHeader(){
@@ -18,11 +18,11 @@ $(function() {
                         </tr>
                       </thead>
                       <tbody id="task-table__body" class="hover-records"></tbody>`
-    taskTable.append(tableHeader).hide().fadeIn(300);
+    taskTable.append(tableHeader).fadeIn(200);
   }
 
   // table要素に検索結果を動的に追加するため
-  function appendTask(task) {
+  function appendTask(task, index) {
     // 日付フォーマット用
     var date = new Date(task.date);
     var year = date.getFullYear();
@@ -34,11 +34,11 @@ $(function() {
     var youbi= [ "日", "月", "火", "水", "木", "金", "土" ][weekday];// 曜日(日本語表記)
 
     if ( typeof task.image !== "undefined") {
-      let html =`<tr>
+      let html =`<tr data-search-result-index="${index}">
                   <td class="thumbnail">
                     <img src="${task.image}" class="lists-index__task_search__images">
                   </td>
-                  <td class="lists-task_search__results__task-${task.id}">
+                  <td class="lists-task_search__results__row-${index}">
                     <a href="/lists/${task.list_id}/goals/${task.id}">
                       ${task.title}
                     </a>
@@ -51,27 +51,27 @@ $(function() {
                   <td>
                     ${year}/${month}/${day} ${hour}:${minute} (${youbi})
                   </td>
-                  <td>
-                    ${task.status}
+                  <td class="js-change-status" data-id="${task.id}">
+                    <a class="change-status-link" id="change_status_task_${task.id}" rel="nofollow" data-method="post" href="/lists/${task.list_id}/goals/${task.id}/change_status_at_root?status=${task.status}">${task.status}</a>
                   </td>
                   <td>
                     <a href="/lists/${task.list_id}/goals/${task.id}/edit">
                       <i class="fas fa-edit"></i>
                     </a>
                   </td>
-                  <td data-index="${task.id}">
-                    <a class="lists-index__delete-task-btn" rel="nofollow" data-method="delete" href="/lists/${task.list_id}/goals/${task.id}/root_destroy">
+                  <td data-taskId="${task.id}">
+                    <a class="lists-index__delete-task-btn" rel="nofollow" data-method="delete" data-trash-task-index="${index}" href="/lists/${task.list_id}/goals/${task.id}/root_destroy">
                       <i class="fas fa-trash-alt"></i>
                     </a>
                   </td>
                 </tr>`
-      $("#task-table__body").append(html).hide().fadeIn(100);
+      $("#task-table__body").append(html).fadeIn(200);
     } else {
-      let html =`<tr>
+      let html =`<tr data-search-result-index="${index}">
                   <td class="lists-index__task-search__no-image-icon">
                     <i class="fas fa-tasks no-image"></i>
                   </td>
-                  <td class="lists-task_search__results__task-${task.id}">
+                  <td class="lists-task_search__results__row-${index}">
                     <a href="/lists/${task.list_id}/goals/${task.id}">
                       "${task.title}"
                     </a>
@@ -92,22 +92,20 @@ $(function() {
                     <i class="fas fa-edit"></i>
                   </a>
                   </td>
-                  <td data-index="${task.id}">
-                    <a class="lists-index__delete-task-btn" rel="nofollow" data-method="delete" href="/lists/${task.list_id}/goals/${task.id}/root_destroy">
+                  <td>
+                    <a class="lists-index__delete-task-btn" rel="nofollow" data-method="delete" data-trash-task-index="${index}" href="/lists/${task.list_id}/goals/${task.id}/root_destroy">
                       <i class="fas fa-trash-alt"></i>
                     </a>
                   </td>
                 </tr>`
-      $("#task-table__body").append(html).hide().fadeIn(100);
+      $("#task-table__body").append(html).fadeIn(200);
     };
   }
 
-  // タスクを削除するかの確認のため
-  $("#task-table").on("click", ".lists-index__delete-task-btn", function(){
-    let parent = $(".lists-index__delete-task-btn").parent();
-    console.log(parent);
-    let taskId = parent.data('index');
-    let goalTitle = $(`.lists-task_search__results__task-${taskId}`).text();
+  // 動的に追加されたタスクを削除する際のアラート表示のため
+  $("#searched-task-table").on("click", ".lists-index__delete-task-btn", function(){
+    let taskId = $(this).data("trash-task-index");
+    let goalTitle = $(`.lists-task_search__results__row-${taskId}`).text();
     console.log(`${goalTitle}`);
     if (!confirm(`${goalTitle}を削除してよろしいですか？`)){
       return false;
@@ -130,12 +128,12 @@ $(function() {
       if (results.length !== 0) {
         $("#next-seven-days-tasks").hide().fadeOut(100);
         appendTableHeader()
-        results.forEach(function(task){
-          appendTask(task)
+        results.forEach(function(task, index){
+          appendTask(task, index)
         });
       } else {
         $("#task-table").empty();
-        $("#next-seven-days-tasks").show().fadeIn(100);
+        $("#next-seven-days-tasks").fadeIn(200);
         // appendNoMatchMessage("一致するタスクがありません")
       }
     })
