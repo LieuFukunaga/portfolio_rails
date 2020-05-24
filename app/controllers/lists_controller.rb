@@ -58,9 +58,8 @@ class ListsController < ApplicationController
   def destroy
     if @list.user_id == current_user.id
       @list.destroy
-      redirect_to root_path, notice: "#{@list.list_name}を削除しました"
     else
-      redirect_to root_path
+      render root_path
     end
   end
 

@@ -65,7 +65,7 @@
               タスクの状態
         %tbody.lists-show__task-table__results__body
           - @goals.each.with_index(1) do |goal|
-            %tr{data: {id:goal.id}}
+            %tr{data: {lists_show_task_id:goal.id}}
               - if goal.image.attached?
                 %td.thumbnail
                   = image_tag goal.image.variant(resize: "100x100").processed
@@ -81,8 +81,8 @@
               %td
                 = link_to edit_list_goal_path(goal.list_id, goal.id) do
                   %i.fas.fa-edit
-              %td{data: {id: "#{goal.id}"}}
-                = link_to list_goal_path(goal.list_id, goal.id), method: :delete, class: "lists-show__delete-btn" do
+              %td
+                = link_to list_goal_path(goal.list_id, goal.id), method: :delete, class: "lists-show__delete-task-btn", data: {task_id: "#{goal.id}"} do
                   %i.fas.fa-trash-alt
       = paginate @goals
     - else

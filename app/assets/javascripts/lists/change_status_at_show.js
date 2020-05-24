@@ -20,7 +20,6 @@ $(function(){
     .done(function(task){
       if (task.status == "doing") {
         $(`.goal_${taskId}`).val("実行中");
-        
       } else {
         $(`.goal_${taskId}`).val("達成！");
       };

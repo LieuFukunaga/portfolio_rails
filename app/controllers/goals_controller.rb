@@ -1,7 +1,7 @@
 class GoalsController < ApplicationController
 
   before_action :set_list, only: [:show, :edit, :update]
-  before_action :set_goal, only: [:show, :edit, :update, :destroy, :root_destroy, :image_destroy, :change_status, :change_status_at_root, :change_status_of_task_search]
+  before_action :set_goal, only: [:show, :edit, :update, :destroy, :root_destroy, :image_destroy, :change_status, :change_status_at_root]
 
   def new
     @goal = Goal.new
@@ -79,20 +79,11 @@ class GoalsController < ApplicationController
   def destroy
     if @goal.user_id == current_user.id
       @goal.destroy
-      redirect_to list_path(@goal.list_id), notice: "#{@goal.title}を削除しました"
     else
       redirect_to root_path
     end
   end
 
-  def root_destroy
-    if @goal.user_id == current_user.id
-      @goal.destroy
-      redirect_to root_path, notice: "#{@goal.title}を削除しました"
-    else
-      render root_path
-    end
-  end
 
   # 画像削除のためのアクション
   def image_destroy
@@ -119,7 +110,7 @@ class GoalsController < ApplicationController
     end
   end
 
-  # ＜次の７日間のタスク＞用
+  # トップページのタスク検索機能におけるステータス更新のため
   def change_status_at_root
     if @goal.user_id == current_user.id
       status = params[:status]
@@ -129,7 +120,7 @@ class GoalsController < ApplicationController
         @goal.update(status: "doing")
       end
       respond_to do |format|
-        format.json {render json: @goal}
+        format.json
       end
     end
   end

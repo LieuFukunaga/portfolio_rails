@@ -23,7 +23,6 @@ Rails.application.routes.draw do
 
     resources :goals, except: :index do
       member do
-        delete "root_destroy"
         delete "image_destroy"
         # 既存リソースの更新なのでpatchを使用
         post "change_status"

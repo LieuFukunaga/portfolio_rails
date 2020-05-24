@@ -22,7 +22,7 @@ $(function() {
   }
 
   // table要素に検索結果を動的に追加するため
-  function appendTask(task, index) {
+  function appendTask(task) {
     // 日付フォーマット用
     var date = new Date(task.date);
     var year = date.getFullYear();
@@ -36,12 +36,12 @@ $(function() {
     if ( typeof task.image !== "undefined") {
       if (task.status == "doing"){
         // 画像あり・実行中
-        var html =`<tr data-search-result-index="${index}">
+        var html =`<tr data-search-result-id="${task.id}">
                     <td class="thumbnail">
                       <img src="${task.image}" class="lists-index__task_search__images">
                     </td>
-                    <td class="lists-task_search__results__row-${index}">
-                      <a href="/lists/${task.list_id}/goals/${task.id}">
+                    <td>
+                      <a id="task_search__result-${task.id}" href="/lists/${task.list_id}/goals/${task.id}">
                         ${task.title}
                       </a>
                     </td>
@@ -53,16 +53,16 @@ $(function() {
                     <td>
                       ${year}/${month}/${day} ${hour}:${minute} (${youbi})
                     </td>
-                    <td class="js-change-status">
-                      <a class="change-status-links" id="change_status_task_${task.id}" rel="nofollow" data-method="post" href="javascript:void(0)" data-id="${task.id}" data-status-href="/lists/${task.list_id}/goals/${task.id}/change_status_at_root?status=doing">実行中</a>
+                    <td class="js-change-status" data-id="${task.id}">
+                      ${task.status}
                     </td>
                     <td>
-                      <a href="/lists/${task.list_id}/goals/${task.id}/edit">
-                        <i class="fas fa-edit"></i>
-                      </a>
+                    <a href="/lists/${task.list_id}/goals/${task.id}/edit">
+                      <i class="fas fa-edit"></i>
+                    </a>
                     </td>
-                    <td data-taskId="${task.id}">
-                      <a class="lists-index__delete-task-btn" rel="nofollow" data-method="delete" data-trash-task-index="${index}" href="/lists/${task.list_id}/goals/${task.id}/root_destroy">
+                    <td>
+                      <a class="appended-delete-task-btn" rel="nofollow" data-method="delete" data-trash-task-id="${task.id}" href="/lists/${task.list_id}/goals/${task.id}">
                         <i class="fas fa-trash-alt"></i>
                       </a>
                     </td>
@@ -70,12 +70,12 @@ $(function() {
         $("#task-table__body").append(html).hide().fadeIn(200);
       } else {
         // 画像あり・達成！
-        var html =`<tr data-search-result-index="${index}">
+        var html =`<tr data-search-result-id="${task.id}">
                     <td class="thumbnail">
                       <img src="${task.image}" class="lists-index__task_search__images">
                     </td>
-                    <td class="lists-task_search__results__row-${index}">
-                      <a href="/lists/${task.list_id}/goals/${task.id}">
+                    <td>
+                      <a id="task_search__result-${task.id}" href="/lists/${task.list_id}/goals/${task.id}">
                         ${task.title}
                       </a>
                     </td>
@@ -87,16 +87,16 @@ $(function() {
                     <td>
                       ${year}/${month}/${day} ${hour}:${minute} (${youbi})
                     </td>
-                    <td class="js-change-status">
-                      <a class="change-status-links" id="change_status_task_${task.id}" rel="nofollow" data-method="post" href="javascript:void(0)" data-id="${task.id}" data-status-href="/lists/${task.list_id}/goals/${task.id}/change_status_at_root?status=done">達成！</a>
+                    <td class="js-change-status" data-id="${task.id}">
+                      ${task.status}
                     </td>
                     <td>
-                      <a href="/lists/${task.list_id}/goals/${task.id}/edit">
-                        <i class="fas fa-edit"></i>
-                      </a>
+                    <a href="/lists/${task.list_id}/goals/${task.id}/edit">
+                      <i class="fas fa-edit"></i>
+                    </a>
                     </td>
-                    <td data-taskId="${task.id}">
-                      <a class="lists-index__delete-task-btn" rel="nofollow" data-method="delete" data-trash-task-index="${index}" href="/lists/${task.list_id}/goals/${task.id}/root_destroy">
+                    <td>
+                      <a class="appended-delete-task-btn" rel="nofollow" data-method="delete" data-trash-task-id="${task.id}" href="/lists/${task.list_id}/goals/${task.id}">
                         <i class="fas fa-trash-alt"></i>
                       </a>
                     </td>
@@ -106,25 +106,25 @@ $(function() {
     } else {
       if (task.status == "doing"){
         // 画像なし・実行中
-        var html =`<tr data-search-result-index="${index}">
+        var html =`<tr data-search-result-id="${task.id}">
                     <td class="lists-index__task-search__no-image-icon">
                       <i class="fas fa-tasks no-image"></i>
                     </td>
-                    <td class="lists-task_search__results__row-${index}">
-                      <a href="/lists/${task.list_id}/goals/${task.id}">
-                        "${task.title}"
+                    <td>
+                      <a id="task_search__result-${task.id}" href="/lists/${task.list_id}/goals/${task.id}">
+                        ${task.title}
                       </a>
                     </td>
                     <td>
                       <a href="/lists/${task.list_id}">
-                        "${task.list_name}"
+                        ${task.list_name}
                       </a>
                     </td>
                     <td>
                       ${year}/${month}/${day} ${hour}:${minute} (${youbi})
                     </td>
-                    <td class="js-change-status">
-                      <a class="change-status-links result-index-${index}" id="change_status_task_${task.id}" rel="nofollow" data-method="post" href="javascript:void(0)" data-id="${task.id}" data-status-href="/lists/${task.list_id}/goals/${task.id}/change_status_at_root?status=doing">実行中</a>
+                    <td class="js-change-status" data-id="${task.id}">
+                      ${task.status}
                     </td>
                     <td>
                     <a href="/lists/${task.list_id}/goals/${task.id}/edit">
@@ -132,7 +132,7 @@ $(function() {
                     </a>
                     </td>
                     <td>
-                      <a class="lists-index__delete-task-btn" rel="nofollow" data-method="delete" data-trash-task-index="${index}" href="/lists/${task.list_id}/goals/${task.id}/root_destroy">
+                      <a class="appended-delete-task-btn" rel="nofollow" data-method="delete" data-trash-task-id="${task.id}" href="/lists/${task.list_id}/goals/${task.id}">
                         <i class="fas fa-trash-alt"></i>
                       </a>
                     </td>
@@ -140,25 +140,25 @@ $(function() {
         $("#task-table__body").append(html).hide().fadeIn(200);
       } else {
         // 画像なし・達成
-        var html =`<tr data-search-result-index="${index}">
+        var html =`<tr data-search-result-id="${task.id}">
                     <td class="lists-index__task-search__no-image-icon">
                       <i class="fas fa-tasks no-image"></i>
                     </td>
-                    <td class="lists-task_search__results__row-${index}">
-                      <a href="/lists/${task.list_id}/goals/${task.id}">
-                        "${task.title}"
+                    <td>
+                      <a id="task_search__result-${task.id}" href="/lists/${task.list_id}/goals/${task.id}">
+                        ${task.title}
                       </a>
                     </td>
                     <td>
                       <a href="/lists/${task.list_id}">
-                        "${task.list_name}"
+                        ${task.list_name}
                       </a>
                     </td>
                     <td>
                       ${year}/${month}/${day} ${hour}:${minute} (${youbi})
                     </td>
-                    <td class="js-change-status">
-                      <a class="change-status-links result-index-${index}" id="change_status_task_${task.id}" rel="nofollow" data-method="post" href="javascript:void(0)" data-id="${task.id}" data-status-href="/lists/${task.list_id}/goals/${task.id}/change_status_at_root?status=done">達成！</a>
+                    <td class="js-change-status" data-id="${task.id}">
+                      ${task.status}
                     </td>
                     <td>
                     <a href="/lists/${task.list_id}/goals/${task.id}/edit">
@@ -166,7 +166,7 @@ $(function() {
                     </a>
                     </td>
                     <td>
-                      <a class="lists-index__delete-task-btn" rel="nofollow" data-method="delete" data-trash-task-index="${index}" href="/lists/${task.list_id}/goals/${task.id}/root_destroy">
+                      <a class="appended-delete-task-btn" rel="nofollow" data-method="delete" data-trash-task-id="${task.id}" href="/lists/${task.list_id}/goals/${task.id}">
                         <i class="fas fa-trash-alt"></i>
                       </a>
                     </td>
@@ -178,12 +178,15 @@ $(function() {
   }
 
   // 動的に追加されたタスクを削除する際のアラート表示のため
-  $("#searched-task-table").on("click", ".lists-index__delete-task-btn", function(){
-    let taskId = $(this).data("trash-task-index");
-    let goalTitle = $(`.lists-task_search__results__row-${taskId}`).text();
-    console.log(`${goalTitle}`);
+  $("#searched-task-table").on("click", ".appended-delete-task-btn", function(){
+    let taskId = $(this).data("trash-task-id");
+    let goalTitle = $(`#task_search__result-${taskId}`).text();
+    goalTitle = goalTitle.replace(`\n`, "");
+    // console.log(`${goalTitle}`);
     if (!confirm(`${goalTitle}を削除してよろしいですか？`)){
       return false;
+    } else {
+      $(`tr[data-search-result-id=${taskId}]`).fadeOut(200);
     };
   })
 
@@ -199,16 +202,15 @@ $(function() {
       dataType: 'json'
     })
     .done(function(results){ // data: リクエストによって返ってきたレスポンス。jbuilderで作成されたJSONデータ
-      // console.log(results);
       taskTable.empty();
       if (results.length !== 0) {
         $("#next-seven-days-tasks").hide().fadeOut(100);
         appendTableHeader()
-        results.forEach(function(task, index){
-          appendTask(task, index)
+        results.forEach(function(task){
+          appendTask(task)
         });
       } else {
-        $("#task-table").empty();
+        $("#searched-task-table").empty();
         $("#next-seven-days-tasks").hide().fadeIn(200);
         // appendNoMatchMessage("一致するタスクがありません")
       }
