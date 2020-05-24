@@ -28,6 +28,7 @@
       .lists-show__operator__sort
         .lists-show__operator__sort__select-wrap
           -# params[:sort]という名前でoptionのvalue属性をlists#list_searchに送る
+          = link_to "歩下", list_path(@list, hoge: "hoge")
           %select{name: "sort_order", class: 'sort_order'}
             %option{value: "location.pathname", name: "location.pathname"}
               並び替え
