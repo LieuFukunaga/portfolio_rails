@@ -31,12 +31,12 @@ class ListsController < ApplicationController
   def show
     # ソート機能用
     # binding.pry
-    if params[:task_sort] == "/lists/#{@list.id}"
-      task_sort = "title ASC"
-    else
-      task_sort = params[:sort]
-    end
-    @goals = @list.goals.order(task_sort).page(params[:page]).per(5)
+    # if params[:sort].nil?
+    #   task_sort = "id DESC"
+    # else
+    #   task_sort = params[:sort]
+    # end
+    @goals = @list.goals.order("id DESC").page(params[:page]).per(5)
   end
 
   def edit
@@ -65,7 +65,6 @@ class ListsController < ApplicationController
 
   def list_search
     # ソート機能用
-    # if params[:sort] == "/lists/list_search"
     if params[:sort].nil?       # 不具合などでparams[:sort]がnilになったときはid降順で表示
       list_sort = "id DESC"
     else
@@ -93,19 +92,13 @@ class ListsController < ApplicationController
     list_id = List.find(params[:id]).id
 
     # binding.pry
-    if params[:task_sort] == "/lists/#{@list.id}"
-      task_sort = "title ASC"
+    if params[:sort].nil?
+      task_sort = "id DESC"
     else
       task_sort = params[:sort]
     end
-    # @goals = @list.goals.order(task_sort).page(params[:page]).per(6)
 
     @tasks = List.order(task_sort).search_in_list(params[:keyword], user_id, list_id)
-    # binding.pry
-    # respond_to do |format|
-    #   format.html
-    #   format.json
-    # end
   end
 
   private

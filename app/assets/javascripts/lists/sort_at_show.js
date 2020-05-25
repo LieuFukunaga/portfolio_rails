@@ -1,6 +1,6 @@
 $(function(){
   // プルダウンメニューが変更されたらイベント発火
-  $('select[name="sort_order"]').change(function(){
+  $('select[name=sort]').change(function(){
     let currentOption = $(this).val();
 
     // 選択肢に応じたURLパラメータを変数化
@@ -29,7 +29,7 @@ $(function(){
     // console.log(`${currentHref}`);
 
     // ソート機能の重複防止
-    if(location.href.match(/sort=.+/) != null) {
+    if(location.href.match(/&sort=.+/) != null) {
       var currentHref = currentHref.replace(location.href.match(/&sort=.+/)[0], '') // matchメソッドの返り値は配列。検索にマッチした文字列は添字0に格納されている。
     };
 
@@ -64,8 +64,9 @@ $(function(){
         var sort = 8
       }
 
-      let add_selected = $('select[name=task_sort]').children()[sort]
+      let add_selected = $('select[name=sort]').children()[sort]
       $(add_selected).attr('selected', true)
+      $("option[value=location.pathname]").text(add_selected.text());
     }
   });
 });

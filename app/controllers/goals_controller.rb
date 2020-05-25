@@ -3,6 +3,23 @@ class GoalsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update]
   before_action :set_goal, only: [:show, :edit, :update, :destroy, :root_destroy, :image_destroy, :change_status, :change_status_at_root]
 
+  def index
+    user_id = current_user.id
+    list_id = List.find(params[:list_id]).id
+    binding.pry
+
+    if params[:sort].nil?
+      task_sort = "id DESC"
+    else
+      task_sort = params[:sort]
+    end
+
+    @tasks = Goal.order(task_sort).search_in_list(params[:keyword], user_id, list_id)
+    @keywords = Goal.split_keyword(params[:keyword])
+    @list_id = list_id
+    @list_name = List.find(params[:list_id]).list_name
+  end
+
   def new
     @goal = Goal.new
     @goal.categories.new                 # 新規カテゴリ作成用

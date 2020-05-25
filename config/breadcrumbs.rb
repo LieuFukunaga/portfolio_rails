@@ -22,6 +22,10 @@ crumb :lists_show do
   link "タスク一覧ページ", list_path(List.find(params[:id]))
 end
 
+crumb :goals_index do
+  link "タスク検索", list_goals_path(List.find(params[:list_id]))
+end
+
 crumb :goals_new do
   link "タスク作成ページ", new_list_goal_path(List.find(params[:list_id]))
 end

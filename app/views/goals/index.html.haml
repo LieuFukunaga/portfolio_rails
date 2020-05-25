@@ -1,13 +1,28 @@
-- @tasks.each do |task|
-  %p
-    = task.title
+%header
+  = render 'layouts/header'
+  - breadcrumb :goals_index
+  = breadcrumbs separator: " &rsaquo; "
+%main.goals-index
+  %h1.goals-index__page-title
+    = "{ ”#{@list_name}”内のタスク検索 }"
+  %br
+  .goals-index__operator
+    .goals-index__operator__show-keywords
+      検索ワード:
+      - @keywords.each do |keyword|
+        = "”#{keyword}”"
+  .goals-index__search-results
+    - @tasks.each do |task|
+      %p
+        = task.title
+
 
 -# ソート用プルダウンメニュー
 - if @tasks.length != 0
-  .lists-show__operator__sort
-    .lists-show__operator__sort__select-wrap
+  .search-in-list__sort
+    .search-in-list__sort__select-wrap
       -# params[:sort]という名前でoptionのvalue属性をlists#list_searchに送る
-      %select{name: "task_sort", class: 'task_sort'}
+      %select{name: "sort", id: 'search-in-list__sort'}
         %option{value: "location.pathname", name: "location.pathname"}
           並び替え
         %option{value: "title_asc"}
@@ -26,3 +41,7 @@
           更新日時（昇順）
         %option{value: "updated_at_desc"}
           更新日時（降順）
+%footer
+  = link_to list_path(@list_id) do
+    %i.fas.fa-angle-left
+    = "#{@list_name}のタスク一覧へ戻る"

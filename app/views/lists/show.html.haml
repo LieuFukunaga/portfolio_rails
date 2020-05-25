@@ -16,36 +16,35 @@
 
     -# 検索フォーム
     .lists-show__operator__search-form
-      = form_with url: search_in_list_list_path(@list), method: :get, class: "lists-show__operator__search-form__form-fields" do |f|
+      = form_with url: list_goals_path(@list), method: :get, class: "lists-show__operator__search-form__form-fields" do |f|
         = f.text_field :keyword, placeholder: "#{@list.list_name}のタスクを検索", id: "list-in-search", size: "40px", required: true
         = button_tag type: "submit", id:"lists-show__search-btn" do
           %i.fas.fa-search
 
-    -# ソート用プルダウンメニュー
-    - if @goals.length != 0
-      .lists-show__operator__sort
-        .lists-show__operator__sort__select-wrap
-          -# params[:sort]という名前でoptionのvalue属性をlists#list_searchに送る
-          = link_to "歩下", list_path(@list, hoge: "hoge")
-          %select{name: "sort_order", class: 'sort_order'}
-            %option{value: "location.pathname", name: "location.pathname"}
-              並び替え
-            %option{value: "title_asc"}
-              タスク名（昇順）
-            %option{value: "title_desc"}
-              タスク名（降順）
-            %option{value: "date_asc"}
-              予定日時（昇順）
-            %option{value: "date_desc"}
-              予定日時（降順）
-            %option{value: "status_asc"}
-              「実行中」を前に
-            %option{value: "status_desc"}
-              「達成！」を前に
-            %option{value: "updated_at_asc"}
-              更新日時（昇順）
-            %option{value: "updated_at_desc"}
-              更新日時（降順）
+    -# -# ソート用プルダウンメニュー
+    -# - if @goals.length != 0
+    -#   .lists-show__operator__sort
+    -#     .lists-show__operator__sort__select-wrap
+    -#       -# params[:sort]という名前でoptionのvalue属性をlists#list_searchに送る
+    -#       %select{name: "sort", id: 'lists-show__sort'}
+    -#         %option{value: "location.pathname", name: "location.pathname"}
+    -#           並び替え
+    -#         %option{value: "title_asc"}
+    -#           タスク名（昇順）
+    -#         %option{value: "title_desc"}
+    -#           タスク名（降順）
+    -#         %option{value: "date_asc"}
+    -#           予定日時（昇順）
+    -#         %option{value: "date_desc"}
+    -#           予定日時（降順）
+    -#         %option{value: "status_asc"}
+    -#           「実行中」を前に
+    -#         %option{value: "status_desc"}
+    -#           「達成！」を前に
+    -#         %option{value: "updated_at_asc"}
+    -#           更新日時（昇順）
+    -#         %option{value: "updated_at_desc"}
+    -#           更新日時（降順）
 
   %br
   -# 検索結果

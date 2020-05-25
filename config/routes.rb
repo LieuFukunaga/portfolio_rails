@@ -21,7 +21,7 @@ Rails.application.routes.draw do
       get "search_in_list"
     end
 
-    resources :goals, except: :index do
+    resources :goals do
       member do
         delete "image_destroy"
         # 既存リソースの更新なのでpatchを使用
