@@ -15,6 +15,8 @@ $(function() {
                           <th>所属リスト</th>
                           <th>予定日時</th>
                           <th>タスクの状態</th>
+                          <th></th>
+                          <th></th>
                         </tr>
                       </thead>
                       <tbody id="task-table__body" class="hover-records"></tbody>`
@@ -37,7 +39,7 @@ $(function() {
       if (task.status == "doing"){
         // 画像あり・実行中
         var html =`<tr data-search-result-id="${task.id}">
-                    <td class="thumbnail">
+                    <td class="thumbnail td-image">
                       <img src="${task.image}" class="lists-index__task_search__images">
                     </td>
                     <td>
@@ -71,7 +73,7 @@ $(function() {
       } else {
         // 画像あり・達成！
         var html =`<tr data-search-result-id="${task.id}">
-                    <td class="thumbnail">
+                    <td class="thumbnail td-image">
                       <img src="${task.image}" class="lists-index__task_search__images">
                     </td>
                     <td>
@@ -177,18 +179,24 @@ $(function() {
     };
   }
 
+  function appendNoMatchMessage(message) {
+    var html = `<h3 class='name'>${ message }</h3>`
+    taskTable.append(html);
+  }
+
   // 動的に追加されたタスクを削除する際のアラート表示のため
   $("#searched-task-table").on("click", ".appended-delete-task-btn", function(){
     let taskId = $(this).data("trash-task-id");
     let goalTitle = $(`#task_search__result-${taskId}`).text();
     goalTitle = goalTitle.replace(`\n`, "");
-    // console.log(`${goalTitle}`);
     if (!confirm(`${goalTitle}を削除してよろしいですか？`)){
       return false;
     } else {
       $(`tr[data-search-result-id=${taskId}]`).fadeOut(200);
     };
   })
+
+
 
 
 
@@ -204,15 +212,13 @@ $(function() {
     .done(function(results){ // data: リクエストによって返ってきたレスポンス。jbuilderで作成されたJSONデータ
       taskTable.empty();
       if (results.length !== 0) {
-        $("#next-seven-days-tasks").hide().fadeOut(100);
         appendTableHeader()
         results.forEach(function(task){
           appendTask(task)
         });
       } else {
         $("#searched-task-table").empty();
-        $("#next-seven-days-tasks").hide().fadeIn(200);
-        // appendNoMatchMessage("一致するタスクがありません")
+        appendNoMatchMessage("一致するタスクがありません")
       }
     })
     .fail(function() {

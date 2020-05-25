@@ -1,7 +1,8 @@
-= render 'layouts/header'
-%br
-- breadcrumb :lists_new
-= breadcrumbs separator: " &rsaquo; "
+%header
+  = render 'layouts/header'
+  %br
+  - breadcrumb :lists_new
+  = breadcrumbs separator: " &rsaquo; "
 %br
 .lists-new
   %h1.lists-new__page-title ＜リスト作成＞

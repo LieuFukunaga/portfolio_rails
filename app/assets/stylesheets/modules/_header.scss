@@ -1,4 +1,19 @@
-.application-name {
-  font-weight: bold;
-  font-size: 40px;
+@import "modules/colors";
+
+.common-header {
+  display: flex;
+  justify-content: space-between;
+  &--left {
+    .application-name {
+      font-weight: bold;
+      font-size: 40px;
+    }
+  }
+  &--right {
+    .logout-btn {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+  }
 }

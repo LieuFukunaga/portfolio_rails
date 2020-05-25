@@ -1,7 +1,8 @@
-= render 'layouts/header'
-%br
-- breadcrumb :categories_show
-= breadcrumbs separator: " &rsaquo; "
+%header
+  = render 'layouts/header'
+  %br
+  - breadcrumb :categories_show
+  = breadcrumbs separator: " &rsaquo; "
 %br
 .categories-show
   .categories-show__top

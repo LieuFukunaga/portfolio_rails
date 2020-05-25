@@ -2,7 +2,7 @@ class ListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :destroy, :search_in_list]
 
   def index
-    @lists = List.includes(:user).order("list_name ASC").page(params[:page]).per(10)
+    @lists = List.includes(:user).order("list_name ASC").page(params[:page]).per(7)
 
     tasks = Goal.order("date DESC").select{|d| d.date >= Time.now}.select{|d|d.date <= Time.now + 1.week}
     @tasks = tasks.delete_if { |task| task.user_id != current_user.id }
@@ -36,7 +36,7 @@ class ListsController < ApplicationController
     else
       task_sort = params[:sort]
     end
-    @goals = @list.goals.order(task_sort).page(params[:page]).per(6)
+    @goals = @list.goals.order(task_sort).page(params[:page]).per(5)
   end
 
   def edit
@@ -57,7 +57,7 @@ class ListsController < ApplicationController
 
   def destroy
     if @list.user_id == current_user.id
-      @list.destroy
+      @list.destroy!
     else
       render root_path
     end
@@ -65,10 +65,11 @@ class ListsController < ApplicationController
 
   def list_search
     # ソート機能用
-    if params[:sort] == "/lists/list_search"
-      list_sort = "created_at DESC"
+    # if params[:sort] == "/lists/list_search"
+    if params[:sort].nil?       # 不具合などでparams[:sort]がnilになったときはid降順で表示
+      list_sort = "id DESC"
     else
-      list_sort = params[:sort]
+      list_sort = params[:sort] # params[:sort]が値を持っているときは、その値をorderメソッドに渡す
     end
 
     # 検索機能用

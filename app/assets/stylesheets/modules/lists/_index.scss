@@ -1,0 +1,78 @@
+@import "modules/colors";
+
+
+@mixin form-style {
+  height: 40px;
+  line-height: 40px;
+  padding: 10px;
+  border-radius: 25px;
+}
+
+
+i.fas.fa-walking {
+  font-size: 30px;
+  color: $lightgreen;
+}
+
+
+.lists-index {
+  margin: 15px;
+  display: flex;
+  .left-content {
+    max-height: 50vh;
+    width: 50%;
+    .upper-content {
+      .lists-index__list-operator {
+        &__search-form {
+          &__form-field {
+            position: relative;
+            &__text-field {
+              @include form-style;
+              width: 75%;
+            }
+            &__list-search-btn {
+              position: absolute;
+              top: 10px;
+              right: 28%;
+              border-style: none;
+            }
+          }
+        }
+        &__create-list-btn {
+          margin: 10px 0;
+        }
+      }
+      .lists-index__list-table {
+        margin-top: 30px;
+      }
+    }
+    .lower-content {
+      margin-top: 5vh;
+      #next-seven-days-tasks {
+        max-height: 37vh;
+      }
+    }
+  }
+  .right-content {
+    max-height: 50vh;
+    width: 50%;
+    .lists-index__task-operator {
+      &__search-form {
+        &__form-field {
+          #task-searcher {
+            @include form-style;
+            width: 85%;
+          }
+        }
+      }
+      .lists-index__task-table {
+        margin-top: 30px;
+        #searched-task-table {
+          max-height: 75vh;
+        }
+      }
+    }
+  }
+}
+
+

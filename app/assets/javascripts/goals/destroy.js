@@ -20,4 +20,5 @@ $(function(){
       $(`tr[data-lists-show-task-id=${goalId}]`).fadeOut(200);
     };
   });
+
 });

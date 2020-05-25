@@ -1,9 +1,7 @@
 %header
   = render 'layouts/header'
-  %br
   - breadcrumb :lists_show
   = breadcrumbs separator: " &rsaquo; "
-%br
 %main.lists-show
   %h1.lists-show__page-title
     = "＜リスト”#{@list.list_name}”のタスク一覧＞"
@@ -64,11 +62,13 @@
               予定日時
             %th
               タスクの状態
+            %th
+            %th
         %tbody.lists-show__task-table__results__body
           - @goals.each.with_index(1) do |goal|
             %tr{data: {lists_show_task_id:goal.id}}
               - if goal.image.attached?
-                %td.thumbnail
+                %td.thumbnail.td-image
                   = image_tag goal.image.variant(resize: "100x100").processed
               - else
                 %td

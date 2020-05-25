@@ -1,17 +1,24 @@
-%h2 ログイン
-= form_with model: @user, scope: :user, url: user_session_path, id: 'user_session', class: 'user_session', local: true do |f|
-  .field
-    = f.label :email, "Eメール"
-    %br
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password, "パスワード"
-    %br
-    = f.password_field :password, autocomplete: "current-password"
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me, "パスワードを記憶する"
-  .actions
-    = f.submit "ログイン"
-= render "devise/shared/links"
+.sessions-new
+  %h1.sessions-new__application-name Task 1-3-9
+  %h2 { ログイン画面 }
+  %br
+  .sessions-new__form
+    = form_with model: @user, scope: :user, url: user_session_path, id: 'user_session', class: 'user_session', local: true do |f|
+      .field
+        = f.label :email, "Eメール"
+        %br
+        = f.email_field :email, autofocus: true, autocomplete: "email"
+      %br
+      .field
+        = f.label :password, "パスワード"
+        %br
+        = f.password_field :password, autocomplete: "current-password"
+      %br
+      - if devise_mapping.rememberable?
+        .field
+          = f.check_box :remember_me
+          = f.label :remember_me, "パスワードを記憶する"
+      .actions
+        = f.submit "ログイン"
+  %br
+  = render "devise/shared/links"

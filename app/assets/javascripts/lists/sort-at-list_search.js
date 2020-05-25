@@ -1,16 +1,16 @@
 $(function(){
   // プルダウンメニューが変更されたらイベント発火
-  $('select[name="sort_order"]').change(function(){
-    let currentOption = $(this).val();
+  $('select[name=sort]').change(function(){
+    let currentOptionVal = $(this).val();
 
-    if (currentOption == "list_name_asc") {
-      // 選択肢に応じたURLパラメータを変数化
+    if (currentOptionVal == "list_name_asc") {
+      // 選択肢に応じたURLパラメータを変数htmlに代入
       var html = "&sort=list_name+asc"
-    } else if (currentOption == "list_name_desc") {
+    } else if (currentOptionVal == "list_name_desc") {
       var html = "&sort=list_name+desc"
-    } else if (currentOption == "updated_at_asc") {
+    } else if (currentOptionVal == "updated_at_asc") {
       var html = "&sort=updated_at+asc"
-    } else if (currentOption == "updated_at_desc") {
+    } else if (currentOptionVal == "updated_at_desc") {
       var html = "&sort=updated_at+desc"
     } else {
       var html = ""
@@ -20,7 +20,8 @@ $(function(){
     var currentHref = window.location.href;
 
     // ソート機能の重複防止
-    if(location.href.match(/sort=.+/) != null) {
+    if(location.href.match(/&sort=.+/) != null) {
+      // &sort以降だけを削除
       var currentHref = currentHref.replace(location.href.match(/&sort=.+/)[0], '') // matchメソッドの返り値は配列。検索にマッチした文字列は添字0に格納されている。
     };
 
@@ -47,8 +48,9 @@ $(function(){
         var sort = 4
       }
 
-      let add_selected = $('select[name=sort_order]').children()[sort]
+      let add_selected = $('select[name=sort]').children()[sort]
       $(add_selected).attr('selected', true)
+      $("option[value=location.pathname]").text(add_selected.text());
     }
   });
 });

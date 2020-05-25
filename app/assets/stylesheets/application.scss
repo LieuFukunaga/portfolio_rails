@@ -7,21 +7,25 @@
 @import "modules/header";
 @import "modules/colors";
 @import "modules/flash";
-// for List
-@import "modules/list/index";
-@import "modules/list/new";
-@import "modules/list/show";
-@import "modules/list/list_search_at_root";
-@import "modules/list/task_search_at_root";
-@import "modules/list/list_search";
-// for Goal
-@import "modules/goal/new";
-@import "modules/goal/show";
-@import "modules/goal/edit";
-// for Category
-@import "modules/category/index";
-@import "modules/category/show";
-@import "modules/category/edit";
+// for lists
+@import "modules/lists/index";
+@import "modules/lists/new";
+@import "modules/lists/show";
+@import "modules/lists/list_search_at_root";
+@import "modules/lists/task_search_at_root";
+@import "modules/lists/list_search";
+// for goals
+@import "modules/goals/new";
+@import "modules/goals/show";
+@import "modules/goals/edit";
+// for categories
+@import "modules/categories/index";
+@import "modules/categories/show";
+@import "modules/categories/edit";
+// for users
+@import "modules/users/sessions_new";
+@import "modules/users/registrations_new";
+@import "modules/users/registrations_new_address";
 
 
 
@@ -37,6 +41,22 @@
 
 * {
   box-sizing: border-box;
+  color: $cs-navy;
+}
+
+header {
+  padding: 15px;
+  border-bottom: 1px solid;
+  border-color: $gray;
+}
+
+footer {
+  padding: 15px;
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 a {
@@ -46,10 +66,6 @@ a {
 
 a:hover {
   text-decoration: underline;
-}
-
-tbody.hover-records tr:hover {
-  opacity: 0.5;
 }
 
 .fas:not(.fa-tasks) {
@@ -84,8 +100,26 @@ table {
   -webkit-overflow-scrolling: touch;
 }
 
+tbody.hover-records tr:hover {
+  opacity: 0.5;
+}
+
+th {
+  font-weight: bold;
+  padding: 0 5px;
+  background-color: $lightgray;
+}
+
 td.thumbnail {
   width: 100px;
   height: 100px;
+  text-align: center;
+}
+
+td {
+  padding: 5px 10px;
+}
+
+.td-image {
   text-align: center;
 }

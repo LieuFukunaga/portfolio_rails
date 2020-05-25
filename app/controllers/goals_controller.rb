@@ -78,9 +78,7 @@ class GoalsController < ApplicationController
 
   def destroy
     if @goal.user_id == current_user.id
-      @goal.destroy
-    else
-      redirect_to root_path
+      @goal.destroy!
     end
   end
 

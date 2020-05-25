@@ -1,6 +1,5 @@
 %header
   = render 'layouts/header'
-  %br
   - breadcrumb :lists_search
   = breadcrumbs separator: " &rsaquo; "
 %br
@@ -9,7 +8,7 @@
   .lists-list_search__list-operator
     .lists-list_search__list-operator__form
       = form_with url: list_search_lists_path, method: :get, class: "lists-list_search__list-operator__form__form-field" do |f|
-        = f.text_field :keyword, placeholder: "検索のヒント：除外したい単語の前にマイナス記号(-)をつけて下さい", required: true, size: "70px", class: "lists-list_search__list-operator__form__form-field__text-field"
+        = f.text_field :keyword, placeholder: "検索のヒント：除外したい単語の前にマイナス記号(-)をつけて下さい", required: true, class: "lists-list_search__list-operator__form__form-field__text-field"
         = button_tag type: "submit", class:"lists-list_search__list-operator__form__form-field__search-btn" do
           %i.fas.fa-search
     .lists-list_search__list-operator__show-keywords
@@ -22,7 +21,7 @@
     .lists-list_search__list-operator__sort
       .lists-list_search__list-operator__sort__select-wrap
         -# params[:sort]という名前でoptionのvalue属性をlists#list_searchに送る
-        %select{name: "sort_order", class: 'sort_order'}
+        %select{name: "sort", id: 'list_search__sort'}
           %option{value: "location.pathname", name: "location.pathname"}
             並び替え
           %option{value: "list_name_asc"}
@@ -48,15 +47,13 @@
           - @lists.each do |list|
             %tr.lists-list_search__list-operator__results__table__body__record
               %td
-                = link_to list_path(list) do
-                  = list.list_name
-                  %i.fas.fa-angle-double-right
+                = link_to "#{list.list_name}", list_path(list)
               %td
                 = "#{list.goals.length}"
               - list.goals.each.with_index(1) do |goal, i|
                 - if goal != 0
                   - if goal.updated_at >= Time.now - 1.week
-                    %td{class: "lists-list_search__list-operator__results__table__body__record__image-#{i} thumbnail"}
+                    %td.td-image{class: "lists-list_search__list-operator__results__table__body__record__image-#{i} thumbnail"}
                       - if goal.image.attached?
                         = image_tag goal.image.variant(resize: "100x100").processed
                       - else
