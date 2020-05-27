@@ -1,26 +1,66 @@
-- breadcrumb :goals_show
-= breadcrumbs separator: " &rsaquo; "
-%br
-.goals-show
-  %h1.goals-show__page-title
-    .goals-show__page-title__goal-image
-      - if @goal.image.attached?
-        = image_tag @goal.image, size: "200x200"
-      - else
-        %i.fas.fa-tasks.lists-search__results__icon
-    .goals-show__page-title__goal-title
-      = "”#{@goal.title}”"
-  %br
-  %table
-    %tbody
-      %th
-        = "”#{@goal.title}”のカテゴリ一覧"
-      - @goal_categories.each do |c|
+%header
+  .goals-show__header
+    .goals-show__header__left-content
+      #goals-show__task-title
+        = "#{@goal.title}"
+    .goals-show__header__right-content
+      .goals-show__header__right-content__date-time
+        = "#{@goal.updated_at.strftime("%Y/%m/%d")}"
+
+%main.goals-show
+  .goals-show__goal
+    .goals-show__task-info
+      .goals-show__task-info__image
+        - if @goal.image.attached?
+          = image_tag @goal.image, data: {id: @goal.id}, class: "goals-show__task-info__image__thumbnail thumbnail--large"
+    .goals-show__task-info--middle
+      .goals-show__task-info--middle__change-status{data: {id: @goal.id}}
+        = link_to "#{@goal.status_i18n}", change_status_at_root_list_goal_path(@goal.list_id, @goal, status: @goal.status), method: :post, class: "goals-show__task-info--middle__change-status__link", id: "change_status_task_#{@goal.id}"
+      .goals-show__task-info--middle__link-to-edit
+        = link_to edit_list_goal_path(@goal.list_id, @goal) do
+          %i.fas.fa-edit
+    %br
+    %table
+      %thead
         %tr
-          %td
-            = link_to category_path(c) do
-              = "#{c.category_name}"
-              %i.fas.fa-angle-double-right
-%br
-= render partial: "layouts/return-to-list-show"
-= render partial: "layouts/return-to-root"
+          %th
+            カテゴリー：
+      %tbody
+        - @goal_categories.each do |c|
+          %tr
+            %td
+              = link_to category_path(c) do
+                = "#{c.category_name}"
+    .goals-show__links
+      = render partial: "layouts/return-to-list-show"
+      = render partial: "layouts/return-to-root"
+
+  .goals-show__steps
+    .task__steps__upper
+      step1
+    .task__steps__middle
+      step2
+    .task__steps__lower
+      step3
+
+  .goals-show__actions
+    .task__actions--1
+      action1
+    .task__actions--2
+      action2
+    .task__actions--3
+      action3
+    .task__actions--4
+      action4
+    .task__actions--5
+      action5
+    .task__actions--6
+      action6
+    .task__actions--7
+      action7
+    .task__actions--8
+      action8
+    .task__actions--9
+      action9
+
+

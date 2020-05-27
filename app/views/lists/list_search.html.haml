@@ -1,37 +1,68 @@
-= render 'layouts/header'
-%br
-- breadcrumb :lists_search
-= breadcrumbs separator: " &rsaquo; "
-%br
-.lists-search
-  .lists-search__search-form
-    = form_with url: list_search_lists_path, method: :get, id: "lists-search__list-searcher" do |f|
-      = f.text_field :keyword, placeholder: "リストを検索"
-      = button_tag type: "submit", id:"lists-new__search-btn" do
-        %i.fas.fa-search
-  .lists-search__results
-    %table
-      %tbody
-        %tr
-          %th
-            リスト名
-          %th
-            主なタスク
-        - @lists.each do |list|
+%header
+  = render 'layouts/header'
+  .breadcrumbs-field
+    - breadcrumb :lists_search
+    = breadcrumbs separator: " &rsaquo; "
+
+%main.lists-list_search
+  -# 検索フォーム
+  .lists-list_search__list-operator
+    .lists-list_search__list-operator__form
+      = form_with url: list_search_lists_path, method: :get, class: "lists-list_search__list-operator__form__form-field" do |f|
+        = f.text_field :keyword, placeholder: "Tips：除外したい単語の前にマイナス記号(-)をつけて下さい", required: true, class: "lists-list_search__list-operator__form__form-field__text-field"
+        = button_tag type: "submit", class:"lists-list_search__list-operator__form__form-field__search-btn" do
+          %i.fas.fa-search
+    .lists-list_search__list-operator__show-keywords
+      検索ワード:
+      - @keywords.each do |keyword|
+        = "”#{keyword}”"
+
+  - if @lists.length != 0
+    -# リスト検索画面、ソート機能
+    .lists-list_search__list-operator__sort
+      .lists-list_search__list-operator__sort__select-wrap
+        -# params[:sort]という名前でoptionのvalue属性をlists#list_searchに送る
+        %select{name: :sort, id: 'list_search__sort', action: "list_search", class: "pulldown-menu"}
+          %option{value: "location.pathname", name: "location.pathname"}
+            並び替え
+          %option{value: "list_name_asc"}
+            リスト名（昇順）
+          %option{value: "list_name_desc"}
+            リスト名（降順）
+          %option{value: "updated_at_asc"}
+            更新日時（昇順）
+          %option{value: "updated_at_desc"}
+            更新日時（降順）
+
+    -# 検索結果
+    .lists-list_search__list-operator__results
+      %table.lists-list_search__list-operator__results__table
+        %thead.lists-list_search__list-operator__results__table__head
           %tr
-            %td
-              = link_to list_path(list) do
-                = list.list_name
-                %i.fas.fa-angle-double-right
-            - list.goals.each.with_index(1) do |goal, i|
-              - if i <= 3
-                %td{class: "lists-search__results__image-#{i}"}
-                  - if goal.image.attached?
-                    = image_tag goal.image, size: "100x100"
-                  - else
-                    %i.fas.fa-tasks.lists-search__results__icon
-                %td{class: "lists-search__results__title-#{i}"}
-                  = link_to list_goal_path(goal.list_id, goal.id) do
-                    = goal.title
-                    %i.fas.fa-angle-double-right
+            %th
+              リスト名
+            %th
+              タスク数
+            %th
+              最近更新したタスク
+        %tbody.lists-list_search__list-operator__results__table__body
+          - @lists.each do |list|
+            %tr.lists-list_search__list-operator__results__table__body__record
+              %td
+                = link_to "#{list.list_name}", list_path(list)
+              %td
+                = "#{list.goals.length}"
+              - list.goals.each.with_index(1) do |goal, i|
+                - if goal != 0
+                  - if goal.updated_at >= Time.now - 1.week
+                    %td.td-image{class: "lists-list_search__list-operator__results__table__body__record__image-#{i} thumbnail"}
+                      - if goal.image.attached?
+                        = image_tag goal.image, class: "thumbnail--small"
+                      - else
+                        %i.fas.fa-tasks.lists-search__results__icon
+                    %td{class: "lists-list_search__list-operator__results__table__body__record__title-#{i}"}
+                      = link_to "#{goal.title}",list_goal_path(goal.list_id, goal.id)
+  - else
+    %br
+    該当するリストはありません
 

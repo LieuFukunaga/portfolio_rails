@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
+gem 'mini_magick', '~> 4.8'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -40,7 +40,6 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'rails-i18n'
 gem 'devise'
 gem 'dotenv-rails'
-gem 'gon'
 gem 'haml-rails'
 gem 'erb2haml'
 gem 'pry-rails'
@@ -49,6 +48,7 @@ gem 'enum_help'
 gem 'font-awesome-sass'
 gem 'aws-sdk-s3', require: false
 gem 'font-awesome-sass'
+gem 'kaminari'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -87,3 +87,6 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+gem 'therubyracer'
+gem 'libv8'
+gem 'gon'

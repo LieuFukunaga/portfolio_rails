@@ -1,59 +1,63 @@
-= render 'layouts/header'
-%br
-- breadcrumb :lists_show
-= breadcrumbs separator: " &rsaquo; "
-%br
-.lists-show
-  %h1.lists-show__page-title
-    = "＜リスト”#{@list.list_name}”のタスク一覧＞"
-  %br
+%header
+  = render 'layouts/header'
+  .breadcrumbs-field
+    - breadcrumb :lists_show
+    = breadcrumbs separator: " &rsaquo; "
+
+%main.lists-show
   .lists-show__operator
-    .lists-show__operator__create-task-btn
-      = link_to new_list_goal_path(@list) do
-        %i.fas.fa-plus-circle
-        %span タスクを追加
+    -# 検索フォーム
     .lists-show__operator__search-form
-      = form_with url: task_search_lists_path, method: :get, id: "lists-show__search-form" do |f|
-        = f.text_field :keyword, placeholder: "タスクを検索する"
+      = form_with url: task_search_in_list_list_goals_path(@list), method: :get, class: "lists-show__operator__search-form__form-fields" do |f|
+        = f.text_field :keyword, placeholder: "”#{@list.list_name}” のタスクを検索", id: "list-in-search", required: true
         = button_tag type: "submit", id:"lists-show__search-btn" do
           %i.fas.fa-search
-  %br
-  - if @goals.length != 0
-    %table
-      %tbody
-        %tr
-          %th
-            サムネイル
-          %th
-            タスク名
-          %th
-            予定日時
-          %th
-            タスクの状態
-        - @goals.each.with_index(1) do |goal, index|
+    -# タスク追加ボタン
+    .lists-show__operator__create-task-btn
+      = link_to new_list_goal_path(@list) do
+        タスクを追加
+        %i.fas.fa-plus
+
+  -# リスト内タスク一覧
+  .lists-show__task-table
+    - if @goals.length != 0
+      %table.lists-show__task-table__results
+        %thead.lists-show__task-table__results__header
           %tr
-            - if goal.image.attached?
+            %th
+              サムネイル
+            %th
+              タスク名
+            %th
+              予定日時
+            %th
+              タスクの状態
+            %th
+            %th
+        %tbody.lists-show__task-table__results__body
+          - @goals.each do |goal|
+            %tr{data: {lists_show_task_id: goal.id}}
+              - if goal.image.attached?
+                %td.thumbnail.td-image
+                  = image_tag goal.image.variant(resize: "100x100").processed
+              - else
+                %td
+                  %i.fas.fa-tasks.no-image
               %td
-                = image_tag goal.image, size: "100x100"
-            - else
+                = link_to "#{goal.title}", list_goal_path(@list.id, goal), id: "goal_#{goal.id}"
               %td
-                %i.fas.fa-tasks.lists-show__no-image
-            %td
-              = link_to list_goal_path(@list.id, goal), id: "goal-title_#{index}" do
-                = "#{goal.title}"
-                %i.fas.fa-angle-double-right
-            %td
-              = "#{goal.date.strftime("%m月%d日 %H時%M分")}"
-            %td
-              = goal.status_i18n
-            %td
-              = link_to edit_list_goal_path(goal.list_id, goal.id) do
-                %i.fas.fa-edit
-            %td{data: {index: "#{index}"}}
-              = link_to list_goal_path(goal.list_id, goal.id), method: :delete, class: "lists-show__delete-btn" do
-                %i.fas.fa-trash-alt
-  - else
-    %p -- NO TASK --
-  %br
+                = "#{goal.date.strftime("%Y/%m/%d %H:%M")}"
+              %td.js-change-status{data: {id: goal.id}}
+                = button_to "#{goal.status_i18n}", change_status_list_goal_path(goal.list_id, goal), method: :post, name: "status", class: "change-status-btn goal_#{goal.id}", value: goal.status
+              %td
+                = link_to edit_list_goal_path(goal.list_id, goal.id) do
+                  %i.fas.fa-edit
+              %td
+                = link_to list_goal_path(goal.list_id, goal.id), method: :delete, class: "lists-show__delete-task-btn", data: {task_id: "#{goal.id}"} do
+                  %i.fas.fa-trash
+      = paginate @goals
+    - else
+      %p -- NO TASK --
+
+%footer
   = render partial: "layouts/link-to-category-index"
-  = render partial: "layouts/return-to-root"

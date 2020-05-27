@@ -1,0 +1,31 @@
+.goals-task_search_in_list {
+  &__operator {
+    margin-bottom: 10px;
+    &__form {
+      margin-bottom: 20px;
+      @include form-style;
+      &__form-field {
+        &__text-field {
+          width: 40%;
+        }
+        &__search-btn {
+          @include search-btn;
+        }
+      }
+    }
+    &__show-keywords {
+      margin-bottom: 5px;
+    }
+    &__sort {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__task-table {
+    display: block;
+    overflow: scroll;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    height: 60vh;
+  }
+}

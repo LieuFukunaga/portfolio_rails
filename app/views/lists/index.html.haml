@@ -1,38 +1,106 @@
-= render 'layouts/header'
-%br
-.lists-index
-  .lists-index__operator
-    .lists-index__operator__create-list-btn
-      = link_to new_list_path, class: "new-list-btn" do
-        %i.fas.fa-plus-circle
-        リストを追加
-    .lists-index__operator__search-form
-      = form_with url: list_search_lists_path, method: :get, id: "lists-new__search-form" do |f|
-        = f.text_field :keyword, placeholder: "リストを検索する"
-        = button_tag type: "submit", id:"lists-new__search-btn" do
-          %i.fas.fa-search
-  %br
-  .lists-index__table
-    %table
-      %tbody
-        %tr
-          %th
-            = "＜#{current_user.name}さんのリスト一覧＞"
-        - if current_user.lists.length != 0
-          - current_user.lists.each.with_index(1) do |list, index|
+%header
+  = render 'layouts/header'
+
+%main.lists-index
+  .left-content
+    .upper-content
+      .lists-index__list-operator
+        .lists-index__list-operator__search-form
+          %h2 { リスト検索 }
+          = form_with url: list_search_lists_path, method: :get, class: "lists-index__list-operator__search-form__form-field" do |f|
+            = f.text_field :keyword, class: "lists-index__list-operator__search-form__form-field__text-field", placeholder: "Tips：除外したい単語の前にマイナス記号(-)をつけて下さい", required: true
+            = button_tag type: "submit", class:"lists-index__list-operator__search-form__form-field__list-search-btn" do
+              %i.fas.fa-search
+      .lists-index__list-table
+        %h2 { リスト一覧 }
+        .lists-index__list-operator__create-list-btn
+          = link_to "リストを追加", new_list_path, class: "new-list-btn"
+        %table.users-list
+          %thead
             %tr
-              %td
-                = link_to list_path(list), id: "list-name_#{index}" do
-                  = "#{list.list_name}"
-                  %i.fas.fa-angle-double-right
-              %td
-                = link_to edit_list_path(list.id) do
-                  %i.fas.fa-edit
-              %td{data: {index: "#{index}"}}
-                = link_to list_path(list.id), method: :delete, class: "lists-index__delete-btn" do
-                  %i.fas.fa-trash-alt
+              %th
+                リスト名
+              %th
+                タスク数
+              %th
+              %th
+              %th
+          %tbody.hover-records
+            - if current_user.lists.length != 0
+              - @lists.where(user_id: current_user).each.with_index(1) do |list|
+                %tr{data: {list_id: "#{list.id}"}}
+                  %td
+                    = link_to "#{list.list_name}", list_path(list), id: "list_#{list.id}"
+                  %td
+                    = "#{list.goals.length}"
+                  %td
+                    = link_to new_list_goal_path(list.id) do
+                      %i.fas.fa-plus
+                  %td
+                    = link_to edit_list_path(list.id) do
+                      %i.fas.fa-edit
+                  %td{data: {list_id: "#{list.id}"}}
+                    = link_to list_path(list.id), method: :delete, class: "lists-index__delete-btn", data:{trash_list_id: "#{list.id}"} do
+                      %i.fas.fa-trash
+            - else
+              %tr
+                %td -- NO LIST --
+        = paginate @lists
+
+    .lower-content
+      %h2 { 次の7日間のタスク }
+      %table#next-seven-days-tasks
+        - if @tasks.length != 0
+          %thead
+            %tr
+              %th
+                サムネイル
+              %th
+                タスク名
+              %th
+                所属リスト
+              %th
+                予定日時
+              %th
+                タスクの状態
+              %th
+              %th
+          %tbody.hover-records.n7dt-tbody
+            - @tasks.each do |task|
+              %tr{data: {search_result_id: "#{task.id}"}}
+                -if task.image.attached?
+                  %td.thumbnail.td-image
+                    = image_tag task.image, class: "thumbnail--small"
+                - else
+                  %td.no-image-icons
+                    %i.fas.fa-tasks.no-image
+                %td
+                  = link_to "#{task.title}", list_goal_path(task.list_id, task), id: "n7dt_title_#{task.id}"
+                %td
+                  = link_to "#{List.find(task.list_id).list_name}", list_path(task.list_id)
+                %td
+                  = "#{task.date.strftime("%m/%d %H:%M (#{%w(日 月 火 水 木 金 土)[task.date.wday]}）")}"
+                %td.js-change-status{data: {id: task.id}}
+                  = link_to "#{task.status_i18n}", change_status_at_root_list_goal_path(task.list_id, task, status: task.status), method: :post, class: "change-status-link", id: "change_status_task_#{task.id}"
+                %td
+                  = link_to edit_list_goal_path(task.list_id, task.id) do
+                    %i.fas.fa-edit
+                %td
+                  = link_to list_goal_path(task.list_id, task.id), method: :delete, class: "delete-task-btn", data:{trash_task_id: "#{task.id}"} do
+                    -# = button_tag type: "button", class: "delete-task-btn", data:{trash_task_id: "#{task.id}", href: "/lists/#{task.list_id}/gaols/#{task.id}/root_destroy"} do
+                    %i.fas.fa-trash
         - else
-          %tr
-            %td -- NO LIST --
-  %br
-  = render partial: "layouts/link-to-category-index"
+          %h3
+            = "#{@next_seven_days.strftime("%m/%d  (#{%w(日 月 火 水 木 金 土)[@next_seven_days.wday]}）")}までタスクはありません"
+            %br
+            お疲れさまでした
+            %i.fas.fa-walking
+
+  .right-content
+    .lists-index__task-operator
+      .lists-index__task-operator__search-form
+        %h2 { タスク検索 }
+        = form_with url: task_search_lists_path, method: :get, class: "lists-index__task-operator__search-form__form-field" do |f|
+          = f.text_field :keyword, placeholder: "#{current_user.name}さんのすべてのタスクから検索", id: "task-searcher"
+      .lists-index__task-table
+        %table#searched-task-table

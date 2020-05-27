@@ -1,0 +1,86 @@
+@import "modules/colors";
+
+@mixin task-form-style {
+  height: 40px;
+  line-height: 40px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.goals-edit__page-info__page-title {
+  font-size: 20px;
+}
+
+.goals-edit__form__category__check-boxes__options-box {
+  max-height: 300px;
+  max-width: 300px;
+  display: none;
+  border: solid 1px;
+  overflow: scroll;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.goals-edit__form {
+  &__image {
+    &__previews {
+      height: 350px;
+      text-align: center;
+      display: flex;
+      // 変更前画像がある場合の表示に対するスタイル
+      &__current-image {
+        display: flex;
+        &__image-box {
+          &__delete-btn {
+            display: block;
+            margin: 5px 10px;
+          }
+        }
+        &__right-angle {
+          margin: 10px;
+          line-height: 250px;
+        }
+      }
+      // 変更後画像がある場合の表示に対するスタイル
+      &__new-image {
+        // appendされた変更後画像プレビュー
+        .goals-edit__new-image-preview {
+          align-items: center;
+        }
+      }
+    }
+  }
+  &__text-field {
+    display: flex;
+    position: relative;
+    &__input {
+      #goals-edit__text-field {
+        @include task-form-style;
+      }
+    }
+    &__icons {
+      display: flex;
+      position: absolute;
+      top: 32px;
+      left: 350px;
+      &__upload {
+        &__label {
+          &__file-field {
+            display: none;
+          }
+        }
+      }
+      &__remove {
+        padding-left: 5px;
+      }
+    }
+  }
+}
+
+.added-form {
+  @include task-form-style;
+}
+
+.grayout {
+  opacity: 0.3;
+}

@@ -1,4 +1,23 @@
-.application-name {
-  font-weight: bold;
-  font-size: 40px;
+@import "modules/colors";
+
+.common-header {
+  display: flex;
+  justify-content: space-between;
+  &--left {
+    h1.application-name {
+      font-weight: bold;
+      font-size: 50px;
+    }
+  }
+  &--right {
+    margin-top: 10px;
+    .login-user-name {
+      margin-bottom: 10px;
+    }
+    .logout-btn {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+  }
 }

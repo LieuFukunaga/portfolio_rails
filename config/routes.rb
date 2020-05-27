@@ -17,10 +17,19 @@ Rails.application.routes.draw do
       get "list_search"
       get "task_search"
     end
-    resources :goals, except: :index
+
+    resources :goals do
+      member do
+        delete "image_destroy"
+        # 既存リソースの更新なのでpatchを使用
+        post "change_status"
+        post "change_status_at_root", defaults: {format: 'json'}
+      end
+      collection do
+        get "task_search_in_list"
+      end
+    end
+
   end
-
-
-  $date = Time.now.to_s
 
 end

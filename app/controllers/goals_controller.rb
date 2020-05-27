@@ -1,7 +1,7 @@
 class GoalsController < ApplicationController
 
   before_action :set_list, only: [:show, :edit, :update]
-  before_action :set_goal, only: [:show, :edit, :update, :destroy]
+  before_action :set_goal, only: [:show, :edit, :update, :destroy, :root_destroy, :image_destroy, :change_status, :change_status_at_root]
 
   def new
     @goal = Goal.new
@@ -35,7 +35,6 @@ class GoalsController < ApplicationController
         render action: :new
       end
     end
-
   end
 
   def show
@@ -62,9 +61,9 @@ class GoalsController < ApplicationController
         redirect_to list_goal_path(@goal.list_id, @goal.id)
       else
         flash.now[:alert] = @goal.errors.full_messages
-        render action: :edit
+        render action: :show
       end
-    # 新規カテゴリの入力がない場合
+      # 新規カテゴリの入力がない場合
     else
       if @goal.update(goal_params)
         flash[:success] = "#{@goal.title}を更新しました"
@@ -78,12 +77,72 @@ class GoalsController < ApplicationController
 
   def destroy
     if @goal.user_id == current_user.id
-      @goal.destroy
-      redirect_to list_path(@goal.list_id), notice: "#{@goal.title}を削除しました"
-    else
-      redirect_to root_path
+      @goal.destroy!
     end
   end
+
+
+
+  # 画像削除のためのアクション
+  def image_destroy
+    if @goal.user_id == current_user.id && @goal.image.attached?
+      @goal.image.purge
+    else
+      render action: :edit
+    end
+  end
+
+  # リスト詳細・タスク詳細ページ用
+  def change_status
+    if @goal.user_id == current_user.id
+      status = params[:status]
+      if status == "実行中"
+        @goal.update(status: "done")
+      else
+        @goal.update(status: "doing")
+      end
+      respond_to do |format|
+        format.html {redirect_to list_path(@goal.list_id)}
+        format.json {render json: @goal}
+      end
+    end
+  end
+
+  # トップページのタスク検索機能におけるステータス更新のため
+  def change_status_at_root
+    if @goal.user_id == current_user.id
+      status = params[:status]
+      if status == "doing"
+        @goal.update(status: "done")
+      else
+        @goal.update(status: "doing")
+      end
+      respond_to do |format|
+        format.json
+      end
+    end
+  end
+
+
+  # リスト内タスク検索のため
+  def task_search_in_list
+    if params[:sort].nil?
+      task_sort = "id DESC"
+    else
+      task_sort = params[:sort]
+    end
+
+    user_id = current_user.id
+    list_id = List.find(params[:list_id]).id
+
+    @tasks = Goal.order(task_sort).search_in_list(params[:keyword], user_id, list_id)
+    @keywords = Goal.split_keyword(params[:keyword])
+
+    @list_id = list_id
+    @list_name = List.find(params[:list_id]).list_name
+    @sort = task_sort
+  end
+
 
   private
   def goal_params

@@ -1,0 +1,31 @@
+.lists-list_search {
+  &__list-operator {
+    &__form {
+      margin-bottom: 15px;
+      &__form-field {
+        &__text-field {
+          width: 40%;
+          line-height: 40px;
+          @include form-style;
+        }
+        &__search-btn {
+          @include search-btn;
+        }
+      }
+    }
+    &__show-keywords {
+      margin: 15px;
+    }
+    &__sort {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+#list_search__sort {
+  height: 30px;
+}
+
+.lists-list_search__list-operator__results__table {
+  height: 72vh;
+}

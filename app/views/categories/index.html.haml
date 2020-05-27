@@ -1,34 +1,34 @@
-= render 'layouts/header'
-%br
-- breadcrumb :categories_index
-= breadcrumbs separator: " &rsaquo; "
+%header
+  = render 'layouts/header'
+  %br
+  - breadcrumb :categories_index
+  = breadcrumbs separator: " &rsaquo; "
 %br
 .category-index
   %h1.category-index__page-title カテゴリ一覧
   %br
   - if @categories.length != 0
     %table
-      %tbody
+      %thead
         %tr
           %th
             カテゴリ名
           %th
             タスク数
-          - @categories.each.with_index(1) do |category, index|
-            %tr
+      %tbody.hover-records
+        - @categories.each.with_index(1) do |category, index|
+          %tr
+            %td
+              = link_to "#{category.category_name}", category_path(category), id: "category-name_#{index}"
+            %td
+              = category.goals.where(user_id: current_user.id).length
+            - if category.user_id == current_user.id
               %td
-                = link_to category_path(category), id: "category-name_#{index}" do
-                  = "#{category.category_name}"
-                  %i.fas.fa-angle-double-right
-              %td
-                = category.goals.where(user_id: current_user.id).length
-              - if category.user_id == current_user.id
-                %td
-                  = link_to edit_category_path(category.id) do
-                    %i.fas.fa-edit
-                %td{data: {index: "#{index}"}}
-                  = link_to category_path(category.id), method: :delete, class: "categories-index__delete-btn" do
-                    %i.fas.fa-trash-alt
+                = link_to edit_category_path(category.id) do
+                  %i.fas.fa-edit
+              %td{data: {index: "#{index}"}}
+                = link_to category_path(category.id), method: :delete, class: "categories-index__delete-btn" do
+                  %i.fas.fa-trash
   - else
     %p -- NO CATEGORY --
 

@@ -1,28 +1,38 @@
-%h2 新規登録
-= form_with model:@user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f|
-  = render "devise/shared/error_messages", resource: @user
-  .field
-    = f.label :name, "お名前"
-    %br
-    = f.text_field :name
-  .field
-    = f.label :email, "Eメール"
-    %br
-    = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "例：hoge@hoge.hoge"
-  .field
-    = f.label :tel_num, "電話番号"
-    %br
-    = f.telephone_field :tel_num, autofocus: true, placeholder: "例：01234567890"
-  .field
-    = f.label :password , "パスワード"
-    - if @minimum_password_length
-      = "（#{@minimum_password_length}文字以上）"
-    %br
-    = f.password_field :password, autocomplete: "new-password"
-  .field
-    = f.label :password_confirmation, "パスワード（確認）"
-    %br
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .actions
-    = f.submit "次へ"
-= render "devise/shared/links"
+.registrations-new
+  %h1.registrations-new__application-name Task 1-3-9
+  %h2 { 新規登録 }
+  %br
+  .registrations-new__form
+    = form_with model:@user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f|
+      = render "devise/shared/error_messages", resource: @user
+      .field
+        = f.label :name, "お名前"
+        %br
+        = f.text_field :name
+      %br
+      .field
+        = f.label :email, "Eメール"
+        %br
+        = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "例：hoge@hoge.hoge"
+      %br
+      .field
+        = f.label :tel_num, "電話番号"
+        %br
+        = f.telephone_field :tel_num, autofocus: true, placeholder: "例：01234567890"
+      %br
+      .field
+        = f.label :password , "パスワード"
+        - if @minimum_password_length
+          = "（#{@minimum_password_length}文字以上）"
+        %br
+        = f.password_field :password, autocomplete: "new-password"
+      %br
+      .field
+        = f.label :password_confirmation, "パスワード（確認）"
+        %br
+        = f.password_field :password_confirmation, autocomplete: "new-password"
+      %br
+      .actions
+        = f.submit "次へ", class: "devise-action-btns"
+  %br
+  = render "devise/shared/links"

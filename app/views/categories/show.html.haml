@@ -1,7 +1,8 @@
-= render 'layouts/header'
-%br
-- breadcrumb :categories_show
-= breadcrumbs separator: " &rsaquo; "
+%header
+  = render 'layouts/header'
+  %br
+  - breadcrumb :categories_show
+  = breadcrumbs separator: " &rsaquo; "
 %br
 .categories-show
   .categories-show__top
@@ -25,7 +26,7 @@
             %td
               = link_to "#{List.find(goal.list_id).list_name}", list_path(goal.list_id)
             %td
-              = "#{goal.date.strftime("%Y年%m月%d日 %H時%M分")}"
+              = "#{goal.date.strftime("%Y/%m/%d %H:%M")}"
   %br
 
   = render partial: "layouts/link-to-category-index"

@@ -1,9 +1,16 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: [:show, :edit, :update, :destroy]
+  before_action :set_list, only: [:show, :edit, :update, :destroy, :search_in_list]
 
   def index
-    @lists = List.all
-    @goals = List.includes(:goals)
+    @lists = List.includes(:user).order("list_name ASC").page(params[:page]).per(7)
+
+    tasks = Goal.order("date DESC").select{|d| d.date >= Time.now}.select{|d|d.date <= Time.now + 1.week}
+    @tasks = tasks.delete_if { |task| task.user_id != current_user.id }
+    @next_seven_days = Date.today + 1.week
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   def new
@@ -22,7 +29,7 @@ class ListsController < ApplicationController
   end
 
   def show
-    @goals = @list.goals
+    @goals = @list.goals.order("id DESC").page(params[:page]).per(6)
   end
 
   def edit
@@ -43,36 +50,38 @@ class ListsController < ApplicationController
 
   def destroy
     if @list.user_id == current_user.id
-      @list.destroy
-      redirect_to root_path, notice: "#{@list.list_name}を削除しました"
+      @list.destroy!
     else
-      redirect_to root_path
+      render root_path
     end
   end
 
   def list_search
-    if params[:keyword] != ""
-      @lists = List.list_search(params[:keyword])
-      @lists = @lists.where(user_id: current_user.id)
+    # ソート機能用
+    if params[:sort].nil?       # 不具合などでparams[:sort]がnilになったときはid降順で表示
+      list_sort = "id DESC"
     else
-      redirect_to root_path
+      list_sort = params[:sort] # params[:sort]が値を持っているときは、その値をorderメソッドに渡す
     end
+
+    # 検索機能用
+    user_id = current_user.id
+    @lists = List.order(list_sort).list_search(params[:keyword], user_id)
+    @keywords = List.split_keyword(params[:keyword])
+
   end
 
   def task_search
-    if params[:keyword] != ""
-      goals = Goal.includes([:user, :list])
-      goals = goals.where(user_id: current_user.id)
-      @tasks = List.task_search(goals, params[:keyword])
-    else
-      redirect_to root_path
+    user_id = current_user.id
+    @tasks = List.task_search(params[:keyword], user_id)
+    respond_to do |format|
+      format.html
+      format.json
     end
   end
 
+
   private
-  def move_to_index
-    redirect_to action: :index unless user_signed_in?
-  end
 
   def list_params
     params.require(:list).permit(:list_name).merge(user_id: current_user.id)
@@ -81,6 +90,5 @@ class ListsController < ApplicationController
   def set_list
     @list = List.find(params[:id])
   end
-
 
 end

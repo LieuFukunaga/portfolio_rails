@@ -1,0 +1,11 @@
+@mixin no-image-icons-style {
+  height: 100px;
+  width: 100px;
+  line-height: 100px;
+  font-size: 25px;
+  text-align: center;
+}
+
+.lists-search__results__icon {
+  @include no-image-icons-style;
+}

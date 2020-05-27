@@ -1,7 +1,8 @@
-= render 'layouts/header'
-%br
-- breadcrumb :categories_edit
-= breadcrumbs separator: " &rsaquo; "
+%header
+  = render 'layouts/header'
+  %br
+  - breadcrumb :categories_edit
+  = breadcrumbs separator: " &rsaquo; "
 %br
 .categories-edit
   %h1.categories-edit__page-title
@@ -16,23 +17,8 @@
       = f.hidden_field :user_id, value: @category.user_id
       = f.submit "更新する"
   %br
-  .categories-edit__table
-    %table
-      %tbody
-        %h2.categories-edit__table-title
-          = "”#{@category.category_name}”のタスク一覧"
-        %tr
-          %th
-            タスク名
-          %th
-            予定日時
-        - @category.goals.each do |goal|
-          %tr
-            %td
-              = link_to list_goal_path(goal.list_id, goal.id) do
-                = "#{goal.title}"
-                %i.fas.fa-angle-double-right
-            %td
-              = goal.date.strftime("%Y年%m月%d日 %H時%M分")
-  %br
+  .link-to-category-index
+    = link_to categories_path do
+      %i.fas.fa-angle-left
+      カテゴリ一覧
   = render partial: "layouts/return-to-root"

@@ -1,0 +1,11 @@
+.registrations-new {
+  margin: 10px;
+  text-align: center;
+  &__application-name {
+    font-size: 50px;
+    font-weight: bold;
+  }
+  &__form {
+    font-size: 20px;
+  }
+}

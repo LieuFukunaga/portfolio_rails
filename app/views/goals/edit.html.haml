@@ -1,38 +1,45 @@
-- breadcrumb :goals_edit
-= breadcrumbs separator: " &rsaquo; "
+%header
+  - breadcrumb :goals_edit
+  = breadcrumbs separator: " &rsaquo; "
 %br
-.goals-edit
-  %h1.goals-edit__page-title ＜タスク編集画面＞
-  %br
+%main.goals-edit
   .goals-edit__form
     = form_with model:@goal, url: list_goal_path(@list, @goal), local: true do |f|
+      .goals-edit__form__image
+        .goals-edit__form__image__previews
+          .goals-edit__form__image__previews__current-image
+            -# 編集対象に画像が紐付いている場合
+            - if @goal.image.attached?
+              .goals-edit__form__image__previews__current-image__image-box
+                = image_tag @goal.image, id: "current_image", class: "thumbnail--middle"
+                = link_to "元の画像を削除", image_destroy_list_goal_path(@list, @goal), method: :delete , class: "goals-edit__form__image__previews__current-image__image-box__delete-btn"
+              .goals-edit__form__image__previews__current-image__right-angle
+                %i.fas.fa-angle-double-right
+          .goals-edit__form__image__previews__new-image
+            -# この下にプレビュー用のimg要素がappendされる
+
+      .goals-edit__form__text-field
+        .goals-edit__form__text-field__input
+          = f.label :title, "ゴールを設定して下さい"
+          %br
+          = f.text_field :title, value: @goal.title, id: "goals-edit__text-field", size: "45px", placeholder: "スペースや読点を含めないで下さい"
+        -# プレビュー用イベント発生元
+        .goals-edit__form__text-field__icons
+          .goals-edit__form__text-field__icons__upload
+            = f.label :image, class: "goals-edit__form__text-field__icons__upload__label" do
+              %i.fa.fa-camera
+              = f.file_field :image, class: "goals-edit__form__text-field__icons__upload__label__file-field"
+          .goals-edit__form__text-field__icons__remove
+            %i.fas.fa-trash#goals-edit__remove-preview-btn
+      %br
       .goals-edit__form__fields
-        = f.label :title, "ゴールを設定して下さい"
-        %br
-        = f.text_field :title, value: @goal.title
-        %br
-        - if @goal.image.attached?
-          現在の画像
-          %br
-          = image_tag @goal.image, size: "100x100"
-          %br
-          = f.label :image do
-            画像を変更する
-            %i.fa.fa-camera
-            = f.file_field :image, class: "goals-edit__file-field"
-        - else
-          = f.label :image do
-            画像を追加する
-            %i.fa.fa-camera
-            = f.file_field :image, class: "goals-edit__file-field"
-        %br
         = f.label :status, "タスクの状態"
         %br
         = f.select :status, Goal.statuses_i18n.invert, {}, {id: 'status_selector'}
         %br
         = f.label :date, "予定日"
         %br
-        = f.datetime_select :date, {use_month_numbers: true, start_year: Date.today.year, datetime_separator: '<h4 class="datetime-selector">予定時刻</h4>'}
+        = f.datetime_select :date, {use_month_numbers: true, default: Time.now + 1.hour, datetime_separator: '<br><label class="datetime-selector">予定時刻<br></label>', minute_step: 5}
         = f.hidden_field :list_id, value: @list.id
         = f.hidden_field :user_id, value: current_user.id, id:"login-user-id"
 
@@ -58,6 +65,6 @@
 
       .goals-edit__form__submit-btn
         = f.submit "登録"
-
-    = render partial: "layouts/return-to-list-show"
-    = render partial: "layouts/return-to-root"
+%footer
+  = render partial: "layouts/return-to-list-show"
+  = render partial: "layouts/return-to-root"
