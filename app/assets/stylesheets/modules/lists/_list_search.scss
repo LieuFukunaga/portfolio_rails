@@ -1,30 +1,15 @@
-@mixin form-style {
-  height: 40px;
-  line-height: 40px;
-  padding: 10px;
-  border-radius: 25px;
-}
-
-
 .lists-list_search {
-  margin: 15px;
   &__list-operator {
     &__form {
       margin-bottom: 15px;
       &__form-field {
-        position: relative;
         &__text-field {
-          height: 40px;
-          line-height: 40px;
-          padding: 10px;
           width: 40%;
+          line-height: 40px;
           @include form-style;
         }
         &__search-btn {
-          position: absolute;
-          border-style: none;
-          left: 36%;
-          top: 1vh;
+          @include search-btn;
         }
       }
     }
@@ -42,5 +27,5 @@
 }
 
 .lists-list_search__list-operator__results__table {
-  height: 60vh;
+  height: 72vh;
 }

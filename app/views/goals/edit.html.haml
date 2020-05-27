@@ -3,9 +3,6 @@
   = breadcrumbs separator: " &rsaquo; "
 %br
 %main.goals-edit
-  .goals-edit__page-info
-    %h1.goals-edit__page-info__page-title ＜タスク編集画面＞
-  %br
   .goals-edit__form
     = form_with model:@goal, url: list_goal_path(@list, @goal), local: true do |f|
       .goals-edit__form__image
@@ -14,7 +11,7 @@
             -# 編集対象に画像が紐付いている場合
             - if @goal.image.attached?
               .goals-edit__form__image__previews__current-image__image-box
-                = image_tag @goal.image.variant(resize: "250x250").processed, id: "current_image"
+                = image_tag @goal.image, id: "current_image", class: "thumbnail--middle"
                 = link_to "元の画像を削除", image_destroy_list_goal_path(@list, @goal), method: :delete , class: "goals-edit__form__image__previews__current-image__image-box__delete-btn"
               .goals-edit__form__image__previews__current-image__right-angle
                 %i.fas.fa-angle-double-right

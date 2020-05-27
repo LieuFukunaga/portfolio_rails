@@ -1,0 +1,12 @@
+@mixin form-style {
+  height: 40px;
+  line-height: 40px;
+  padding: 10px;
+}
+
+@mixin search-btn {
+  height: 40px;
+  width: 80px;
+  display: inline-block;
+  background-color: $green;
+}

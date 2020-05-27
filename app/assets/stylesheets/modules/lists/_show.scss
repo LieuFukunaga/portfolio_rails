@@ -1,5 +1,23 @@
-@import "modules/colors";
-
 .lists-show__page-title {
   font-size: 20px;
+}
+
+#list-in-search {
+  @include form-style;
+  width: 40%;
+}
+
+#lists-show__search-btn {
+  @include search-btn;
+}
+
+.lists-show {
+  height: 78vh;
+  &__operator {
+    &__search-form {
+    }
+    &__create-task-btn {
+      margin: 20px 0;
+    }
+  }
 }

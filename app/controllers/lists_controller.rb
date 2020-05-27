@@ -29,14 +29,7 @@ class ListsController < ApplicationController
   end
 
   def show
-    # ソート機能用
-    # binding.pry
-    # if params[:sort].nil?
-    #   task_sort = "id DESC"
-    # else
-    #   task_sort = params[:sort]
-    # end
-    @goals = @list.goals.order("id DESC").page(params[:page]).per(5)
+    @goals = @list.goals.order("id DESC").page(params[:page]).per(6)
   end
 
   def edit
@@ -87,19 +80,6 @@ class ListsController < ApplicationController
     end
   end
 
-  def search_in_list
-    user_id = current_user.id
-    list_id = List.find(params[:id]).id
-
-    # binding.pry
-    if params[:sort].nil?
-      task_sort = "id DESC"
-    else
-      task_sort = params[:sort]
-    end
-
-    @tasks = List.order(task_sort).search_in_list(params[:keyword], user_id, list_id)
-  end
 
   private
 

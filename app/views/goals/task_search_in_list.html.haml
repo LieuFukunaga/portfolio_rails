@@ -1,0 +1,89 @@
+%header
+  = render 'layouts/header'
+  .breadcrumbs-field
+    - breadcrumb :goals_task_search_in_list
+    = breadcrumbs separator: " &rsaquo; "
+
+%main.goals-task_search_in_list
+  %h2.goals-task_search_in_list__page-title
+    = "{ ”#{@list_name}” 内のタスク検索 }"
+  .goals-task_search_in_list__operator
+    .goals-task_search_in_list__operator__form
+      = form_with url: task_search_in_list_list_goals_path(@list_id), method: :get, class: "goals-task_search_in_list__operator__form__form-field" do |f|
+        = f.text_field :keyword, placeholder: "Tips：除外したい単語の前にマイナス記号(-)をつけて下さい", required: true, class: "goals-task_search_in_list__operator__form__form-field__text-field"
+        = button_tag type: "submit", class:"goals-task_search_in_list__operator__form__form-field__search-btn" do
+          %i.fas.fa-search
+    .goals-task_search_in_list__operator__show-keywords
+      検索ワード:
+      - @keywords.each do |keyword|
+        = "”#{keyword}”"
+    -# ソート用プルダウンメニュー
+    .goals-task_search_in_list__operator__sort
+      - if @tasks.length != 0
+        %select{name: :sort_order, id: 'task_search-in-list__sort', action: "task_search_in_list", class: "pulldown-menu"}
+          %option{value: "location.pathname", name: "location.pathname"}
+            並び替え
+          %option{value: "title_asc"}
+            タスク名（昇順）
+          %option{value: "title_desc"}
+            タスク名（降順）
+          %option{value: "date_asc"}
+            予定日時（昇順）
+          %option{value: "date_desc"}
+            予定日時（降順）
+          %option{value: "status_asc"}
+            「実行中」を前に
+          %option{value: "status_desc"}
+            「達成！」を前に
+          %option{value: "updated_at_asc"}
+            更新日時（昇順）
+          %option{value: "updated_at_desc"}
+            更新日時（降順）
+
+  .goals-task_search_in_list__task-table
+    - if @tasks.length != 0
+      -# 検索結果表示
+      %table.goals-task_search_in_list__task-table__results
+        %thead.goals-task_search_in_list__task-table__results__header
+          %tr
+            %th
+              サムネイル
+            %th
+              タスク名
+            %th
+              予定日時
+            %th
+              タスクの状態
+            %th
+              更新日時
+            %th
+            %th
+        %tbody.goals-task_search_in_list__task-table__results__body.hover-records
+          - @tasks.each do |task|
+            %tr{data: {searched_task_id: task.id}}
+              - if task.image.attached?
+                %td.thumbnail.td-image
+                  = image_tag task.image, class: "thumbnail--small"
+              - else
+                %td
+                  %i.fas.fa-tasks.no-image
+              %td
+                = link_to "#{task.title}", list_goal_path(@list_id, task), id: "searched_task_#{task.id}"
+              %td
+                = "#{task.date.strftime("%Y/%m/%d %H:%M")}"
+              %td.js-change-status{data: {id: task.id}}
+                = button_to "#{task.status_i18n}", change_status_list_goal_path(task.list_id, task), method: :post, name: "status", class: "change-status-btn goal_#{task.id}", value: task.status
+              %td
+                = "#{task.updated_at.strftime("%Y/%m/%d %H:%M")}"
+              %td
+                = link_to edit_list_goal_path(task.list_id, task.id) do
+                  %i.fas.fa-edit
+              %td
+                = link_to list_goal_path(task.list_id, task.id), method: :delete, class: "goals-task_search_in_list__delete-task-btn", data: {trash_task_id: "#{task.id}"} do
+                  %i.fas.fa-trash
+    - else
+      該当するタスクはありません
+%footer
+  = link_to list_path(@list_id) do
+    %i.fas.fa-angle-left
+    = "#{@list_name}のタスク一覧へ戻る"

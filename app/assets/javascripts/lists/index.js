@@ -1,4 +1,15 @@
 $(function(){
+  // リスト削除の確認アラート表示のため
+  $(".lists-index__delete-btn").click(function(){
+    let listId = $(this).data('trash-list-id');
+    let listName = $(`#list_${listId}`).text();
+    if (!confirm(`「${listName}」を削除してよろしいですか？`)){
+      return false;
+    } else {
+        $(`tr[data-list-id=${listId}]`).fadeOut(200);
+    };
+  });
+
   // ＜次の７日間のタスク＞に表示されているタスクを削除する際のアラート表示のため
   $(".delete-task-btn").on("click", function(){
     var taskId = $(this).data("trash-task-id");
@@ -9,16 +20,4 @@ $(function(){
       $(`tr[data-search-result-id=${taskId}]`).fadeOut(200);
     };
   })
-
-  // lists#showにおけるタスク削除のため
-  $(".lists-show__delete-task-btn").click(function(){
-    let goalId = $(this).data("task-id");
-    let goalTitle = $(`#goal_${goalId}`).text();
-    if (!confirm(`「 ${goalTitle} 」 を削除してよろしいですか？`)){
-      return false;
-    } else {
-      $(`tr[data-lists-show-task-id=${goalId}]`).fadeOut(200);
-    };
-  });
-
 });

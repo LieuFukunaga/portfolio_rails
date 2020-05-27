@@ -13,7 +13,7 @@
       .field
         = f.label :prefecture, "住所"
         %br
-        = f.select :prefecture, Address.prefectures_i18n.invert, {}, {id: 'prefecture_selector'}
+        = f.select :prefecture, Address.prefectures_i18n.invert, {}, {id: 'prefecture_selector', class: "pulldown-menu"}
       %br
       .field
         = f.label :city, "市区町村"
@@ -26,6 +26,6 @@
         = f.text_field :building, placeholder: "例：xxマンションyyy号室", size: "40px"
       %br
       .actions
-        = f.submit "登録"
+        = f.submit "登録", class: "devise-action-btns"
   %br
   = render "devise/shared/links"

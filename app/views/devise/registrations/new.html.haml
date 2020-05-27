@@ -33,6 +33,6 @@
         = f.password_field :password_confirmation, autocomplete: "new-password"
       %br
       .actions
-        = f.submit "次へ"
+        = f.submit "次へ", class: "devise-action-btns"
   %br
   = render "devise/shared/links"

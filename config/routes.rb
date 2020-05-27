@@ -17,9 +17,6 @@ Rails.application.routes.draw do
       get "list_search"
       get "task_search"
     end
-    member do
-      get "search_in_list"
-    end
 
     resources :goals do
       member do
@@ -29,7 +26,7 @@ Rails.application.routes.draw do
         post "change_status_at_root", defaults: {format: 'json'}
       end
       collection do
-        # post "change_status", defaults: {format: 'json'}
+        get "task_search_in_list"
       end
     end
 

@@ -4,7 +4,11 @@
   .common-header--right
     - if user_signed_in?
       .login-user-name
-        = "ようこそ、#{current_user.name}さん"
+        ようこそ
+        %b
+          -# = link_to "#{current_user.name}", edit_user_registration_path
+          = "#{current_user.name}"
+        さん
       .logout-btn
         = link_to destroy_user_session_path, method: :delete do
           %i.fas.fa-sign-out-alt

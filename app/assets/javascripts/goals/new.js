@@ -1,7 +1,7 @@
 $(function(){
   // 画像アップロード時のプレビュー表示のため
   function buildImg (blobUrl){
-    let html = `<img src="${blobUrl}" id="goals-new__image-preview">`
+    let html = `<img src="${blobUrl}" id="goals-new__image-preview" class="thumbnail--middle">`
     return html;
   }
 

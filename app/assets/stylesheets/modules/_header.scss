@@ -4,12 +4,16 @@
   display: flex;
   justify-content: space-between;
   &--left {
-    .application-name {
+    h1.application-name {
       font-weight: bold;
-      font-size: 40px;
+      font-size: 50px;
     }
   }
   &--right {
+    margin-top: 10px;
+    .login-user-name {
+      margin-bottom: 10px;
+    }
     .logout-btn {
       display: flex;
       justify-content: flex-end;

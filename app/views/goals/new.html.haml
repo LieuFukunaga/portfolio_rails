@@ -3,9 +3,6 @@
   = breadcrumbs separator: " &rsaquo; "
 %br
 %main.goals-new
-  .goals-new__page-info
-    %h1.goals-new__page-info__page-title ＜タスク作成画面＞
-  %br
   .goals-new__form
     = form_with model:@goal, url: list_goals_path(:id), local: true do |f|
       .goals-new__form__image

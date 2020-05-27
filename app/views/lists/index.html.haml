@@ -1,5 +1,6 @@
 %header
   = render 'layouts/header'
+
 %main.lists-index
   .left-content
     .upper-content
@@ -40,11 +41,12 @@
                       %i.fas.fa-edit
                   %td{data: {list_id: "#{list.id}"}}
                     = link_to list_path(list.id), method: :delete, class: "lists-index__delete-btn", data:{trash_list_id: "#{list.id}"} do
-                      %i.fas.fa-trash-alt
+                      %i.fas.fa-trash
             - else
               %tr
                 %td -- NO LIST --
         = paginate @lists
+
     .lower-content
       %h2 { 次の7日間のタスク }
       %table#next-seven-days-tasks
@@ -68,7 +70,7 @@
               %tr{data: {search_result_id: "#{task.id}"}}
                 -if task.image.attached?
                   %td.thumbnail.td-image
-                    = image_tag task.image.variant(resize: "100x100").processed
+                    = image_tag task.image, class: "thumbnail--small"
                 - else
                   %td.no-image-icons
                     %i.fas.fa-tasks.no-image
@@ -86,7 +88,7 @@
                 %td
                   = link_to list_goal_path(task.list_id, task.id), method: :delete, class: "delete-task-btn", data:{trash_task_id: "#{task.id}"} do
                     -# = button_tag type: "button", class: "delete-task-btn", data:{trash_task_id: "#{task.id}", href: "/lists/#{task.list_id}/gaols/#{task.id}/root_destroy"} do
-                    %i.fas.fa-trash-alt
+                    %i.fas.fa-trash
         - else
           %h3
             = "#{@next_seven_days.strftime("%m/%d  (#{%w(日 月 火 水 木 金 土)[@next_seven_days.wday]}）")}までタスクはありません"

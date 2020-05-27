@@ -10,7 +10,7 @@ $(function(){
 
   // 画像アップロード時のプレビュー表示のため
   function buildImg (blobUrl){
-    let html = `<img src="${blobUrl}" class="goals-edit__new-image-preview">`
+    let html = `<img src="${blobUrl}" class="goals-edit__new-image-preview thumbnail--middle">`
     return html
   }
 

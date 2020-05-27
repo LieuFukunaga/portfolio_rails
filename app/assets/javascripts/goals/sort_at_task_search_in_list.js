@@ -1,8 +1,8 @@
 $(function(){
   // プルダウンメニューが変更されたらイベント発火
-  $('select[name=sort]').change(function(){
+  $('select[name=sort_order]').change(function(){
     let currentOption = $(this).val();
-
+    // console.log(currentOption);
     // 選択肢に応じたURLパラメータを変数化
     if (currentOption == "title_asc") {
       var html = "&sort=title+asc"
@@ -24,9 +24,11 @@ $(function(){
       var html = ""
     };
 
+    console.log(html);
+
     // 現在のページのURLを取得
     var currentHref = window.location.href;
-    // console.log(`${currentHref}`);
+    // console.log(currentHref);
 
     // ソート機能の重複防止
     if(location.href.match(/&sort=.+/) != null) {
@@ -35,6 +37,7 @@ $(function(){
 
     // ページ遷移
     window.location.href = currentHref + html
+    // console.log(window.location.href);
   });
 
   // ページ遷移後の挙動
@@ -42,7 +45,7 @@ $(function(){
     if (location.href.match(/&sort=.+/) != null) {
       // （念のため）選択解除
       if ($("select option:selected")) {
-        $("select option:selected").prop("selected", false);
+        $("select option:first").prop("selected", false);
       }
       let selectedOption = location.href.match(/&sort=.+/)[0].replace('&sort=', '')
 
@@ -64,9 +67,8 @@ $(function(){
         var sort = 8
       }
 
-      let add_selected = $('select[name=sort]').children()[sort]
+      let add_selected = $('select[name=sort_order]').children()[sort]
       $(add_selected).attr('selected', true)
-      $("option[value=location.pathname]").text(add_selected.text());
     }
   });
 });

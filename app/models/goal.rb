@@ -12,7 +12,7 @@ class Goal < ApplicationRecord
   accepts_nested_attributes_for :categories, allow_destroy: true
   accepts_nested_attributes_for :goal_categories, allow_destroy: true
 
-  has_one_attached :image
+  # has_one_attached :image
 
   enum status: {
     doing: 0,
@@ -76,7 +76,7 @@ class Goal < ApplicationRecord
       old_category = all_categories_name - added_categories
       new_category = added_categories - all_categories_name
     end
-    binding.pry
+
     # 関連データもろともDestroy
     old_category.each do |old_name|
       Category.find_by(category_name: old_name).destroy
@@ -139,7 +139,7 @@ class Goal < ApplicationRecord
       tasks = tasks.group_by{ |e| e }.select{ |key, value| value.size >= 1 }.map(&:first)   # キーワードすべてに部分一致している検索結果を配列化
       tasks.delete_if { |task| task.user_id != user_id } # 検索結果から、ログインユーザに紐づくリストを抽出
       tasks.delete_if { |task| task.list_id != list_id} # 検索を実行したリスト内のタスクのみを抽出
-      tasks.sort!{|a,b| a.title <=> b.title}
+      # tasks.sort!{|a,b| a.title <=> b.title}
 
       if minus_keyword.length != 0
         minus_tasks = []

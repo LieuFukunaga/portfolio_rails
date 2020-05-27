@@ -1,14 +1,15 @@
 %header
   = render 'layouts/header'
-  - breadcrumb :lists_search
-  = breadcrumbs separator: " &rsaquo; "
-%br
+  .breadcrumbs-field
+    - breadcrumb :lists_search
+    = breadcrumbs separator: " &rsaquo; "
+
 %main.lists-list_search
   -# 検索フォーム
   .lists-list_search__list-operator
     .lists-list_search__list-operator__form
       = form_with url: list_search_lists_path, method: :get, class: "lists-list_search__list-operator__form__form-field" do |f|
-        = f.text_field :keyword, placeholder: "検索のヒント：除外したい単語の前にマイナス記号(-)をつけて下さい", required: true, class: "lists-list_search__list-operator__form__form-field__text-field"
+        = f.text_field :keyword, placeholder: "Tips：除外したい単語の前にマイナス記号(-)をつけて下さい", required: true, class: "lists-list_search__list-operator__form__form-field__text-field"
         = button_tag type: "submit", class:"lists-list_search__list-operator__form__form-field__search-btn" do
           %i.fas.fa-search
     .lists-list_search__list-operator__show-keywords
@@ -17,11 +18,11 @@
         = "”#{keyword}”"
 
   - if @lists.length != 0
-    -# ソートボタン
+    -# リスト検索画面、ソート機能
     .lists-list_search__list-operator__sort
       .lists-list_search__list-operator__sort__select-wrap
         -# params[:sort]という名前でoptionのvalue属性をlists#list_searchに送る
-        %select{name: "sort", id: 'list_search__sort'}
+        %select{name: :sort, id: 'list_search__sort', action: "list_search", class: "pulldown-menu"}
           %option{value: "location.pathname", name: "location.pathname"}
             並び替え
           %option{value: "list_name_asc"}
@@ -32,6 +33,7 @@
             更新日時（昇順）
           %option{value: "updated_at_desc"}
             更新日時（降順）
+
     -# 検索結果
     .lists-list_search__list-operator__results
       %table.lists-list_search__list-operator__results__table
@@ -55,7 +57,7 @@
                   - if goal.updated_at >= Time.now - 1.week
                     %td.td-image{class: "lists-list_search__list-operator__results__table__body__record__image-#{i} thumbnail"}
                       - if goal.image.attached?
-                        = image_tag goal.image.variant(resize: "100x100").processed
+                        = image_tag goal.image, class: "thumbnail--small"
                       - else
                         %i.fas.fa-tasks.lists-search__results__icon
                     %td{class: "lists-list_search__list-operator__results__table__body__record__title-#{i}"}
@@ -63,7 +65,4 @@
   - else
     %br
     該当するリストはありません
-%br
-%footer
-  = render partial: "layouts/return-to-root"
 

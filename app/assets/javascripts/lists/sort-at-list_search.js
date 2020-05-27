@@ -34,7 +34,7 @@ $(function(){
     if (location.href.match(/&sort=.+/) != null) {
       // （念のため）選択解除
       if ($("select option:selected")) {
-        $("select option:selected").prop("selected", false);
+        $("select option:first").prop("selected", false);
       }
       let selectedOption = location.href.match(/&sort=.+/)[0].replace('&sort=', '')
 
@@ -50,7 +50,6 @@ $(function(){
 
       let add_selected = $('select[name=sort]').children()[sort]
       $(add_selected).attr('selected', true)
-      $("option[value=location.pathname]").text(add_selected.text());
     }
   });
 });

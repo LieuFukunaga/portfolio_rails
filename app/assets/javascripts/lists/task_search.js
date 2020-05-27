@@ -40,7 +40,7 @@ $(function() {
         // 画像あり・実行中
         var html =`<tr data-search-result-id="${task.id}">
                     <td class="thumbnail td-image">
-                      <img src="${task.image}" class="lists-index__task_search__images">
+                      <img src="${task.image}" class="lists-index__task_search__images thumbnail--small">
                     </td>
                     <td>
                       <a id="task_search__result-${task.id}" href="/lists/${task.list_id}/goals/${task.id}">
@@ -65,7 +65,7 @@ $(function() {
                     </td>
                     <td>
                       <a class="appended-delete-task-btn" rel="nofollow" data-method="delete" data-trash-task-id="${task.id}" href="/lists/${task.list_id}/goals/${task.id}">
-                        <i class="fas fa-trash-alt"></i>
+                        <i class="fas fa-trash"></i>
                       </a>
                     </td>
                   </tr>`
@@ -74,7 +74,7 @@ $(function() {
         // 画像あり・達成！
         var html =`<tr data-search-result-id="${task.id}">
                     <td class="thumbnail td-image">
-                      <img src="${task.image}" class="lists-index__task_search__images">
+                      <img src="${task.image}" class="lists-index__task_search__images thumbnail--small">
                     </td>
                     <td>
                       <a id="task_search__result-${task.id}" href="/lists/${task.list_id}/goals/${task.id}">
@@ -99,7 +99,7 @@ $(function() {
                     </td>
                     <td>
                       <a class="appended-delete-task-btn" rel="nofollow" data-method="delete" data-trash-task-id="${task.id}" href="/lists/${task.list_id}/goals/${task.id}">
-                        <i class="fas fa-trash-alt"></i>
+                        <i class="fas fa-trash"></i>
                       </a>
                     </td>
                   </tr>`
@@ -135,7 +135,7 @@ $(function() {
                     </td>
                     <td>
                       <a class="appended-delete-task-btn" rel="nofollow" data-method="delete" data-trash-task-id="${task.id}" href="/lists/${task.list_id}/goals/${task.id}">
-                        <i class="fas fa-trash-alt"></i>
+                        <i class="fas fa-trash"></i>
                       </a>
                     </td>
                   </tr>`
@@ -169,7 +169,7 @@ $(function() {
                     </td>
                     <td>
                       <a class="appended-delete-task-btn" rel="nofollow" data-method="delete" data-trash-task-id="${task.id}" href="/lists/${task.list_id}/goals/${task.id}">
-                        <i class="fas fa-trash-alt"></i>
+                        <i class="fas fa-trash"></i>
                       </a>
                     </td>
                   </tr>`

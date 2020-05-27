@@ -38,10 +38,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     sign_in(:user, @user)
   end
 
-  # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+  end
+
+  def update
+  end
 
   # PUT /resource
   # def update

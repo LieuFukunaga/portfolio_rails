@@ -24,7 +24,7 @@
 .goals-edit__form {
   &__image {
     &__previews {
-      height: 300px;
+      height: 350px;
       text-align: center;
       display: flex;
       // 変更前画像がある場合の表示に対するスタイル
@@ -46,8 +46,6 @@
         // appendされた変更後画像プレビュー
         .goals-edit__new-image-preview {
           align-items: center;
-          max-width: 250px;
-          max-height: 250px;
         }
       }
     }

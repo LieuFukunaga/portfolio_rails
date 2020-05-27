@@ -3,23 +3,6 @@ class GoalsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update]
   before_action :set_goal, only: [:show, :edit, :update, :destroy, :root_destroy, :image_destroy, :change_status, :change_status_at_root]
 
-  def index
-    user_id = current_user.id
-    list_id = List.find(params[:list_id]).id
-    binding.pry
-
-    if params[:sort].nil?
-      task_sort = "id DESC"
-    else
-      task_sort = params[:sort]
-    end
-
-    @tasks = Goal.order(task_sort).search_in_list(params[:keyword], user_id, list_id)
-    @keywords = Goal.split_keyword(params[:keyword])
-    @list_id = list_id
-    @list_name = List.find(params[:list_id]).list_name
-  end
-
   def new
     @goal = Goal.new
     @goal.categories.new                 # 新規カテゴリ作成用
@@ -52,7 +35,6 @@ class GoalsController < ApplicationController
         render action: :new
       end
     end
-
   end
 
   def show
@@ -79,7 +61,7 @@ class GoalsController < ApplicationController
         redirect_to list_goal_path(@goal.list_id, @goal.id)
       else
         flash.now[:alert] = @goal.errors.full_messages
-        render action: :edit
+        render action: :show
       end
       # 新規カテゴリの入力がない場合
     else
@@ -100,6 +82,7 @@ class GoalsController < ApplicationController
   end
 
 
+
   # 画像削除のためのアクション
   def image_destroy
     if @goal.user_id == current_user.id && @goal.image.attached?
@@ -109,7 +92,7 @@ class GoalsController < ApplicationController
     end
   end
 
-  # リスト詳細ページ用
+  # リスト詳細・タスク詳細ページ用
   def change_status
     if @goal.user_id == current_user.id
       status = params[:status]
@@ -140,6 +123,25 @@ class GoalsController < ApplicationController
     end
   end
 
+
+  # リスト内タスク検索のため
+  def task_search_in_list
+    if params[:sort].nil?
+      task_sort = "id DESC"
+    else
+      task_sort = params[:sort]
+    end
+
+    user_id = current_user.id
+    list_id = List.find(params[:list_id]).id
+
+    @tasks = Goal.order(task_sort).search_in_list(params[:keyword], user_id, list_id)
+    @keywords = Goal.split_keyword(params[:keyword])
+
+    @list_id = list_id
+    @list_name = List.find(params[:list_id]).list_name
+    @sort = task_sort
+  end
 
 
   private
