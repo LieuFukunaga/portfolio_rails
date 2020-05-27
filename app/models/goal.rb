@@ -12,7 +12,7 @@ class Goal < ApplicationRecord
   accepts_nested_attributes_for :categories, allow_destroy: true
   accepts_nested_attributes_for :goal_categories, allow_destroy: true
 
-  # has_one_attached :image
+  has_one_attached :image
 
   enum status: {
     doing: 0,

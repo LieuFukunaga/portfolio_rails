@@ -24,8 +24,11 @@
 .goals-new__form {
   &__image {
     &__preview {
-      width: 350px;
-      height: 350px;
+
+      // リサイズ（仮）
+      width: 20%;
+      height: 30vh;
+
       text-align: center;
       display: flex;
       #goals-new__image-preview {

@@ -63,7 +63,7 @@
             %tr{data: {searched_task_id: task.id}}
               - if task.image.attached?
                 %td.thumbnail.td-image
-                  = image_tag task.image, class: "thumbnail--small"
+                  = image_tag task.image.variant(resize: "100x100").processed
               - else
                 %td
                   %i.fas.fa-tasks.no-image

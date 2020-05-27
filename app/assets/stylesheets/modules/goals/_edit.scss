@@ -30,6 +30,7 @@
       // 変更前画像がある場合の表示に対するスタイル
       &__current-image {
         display: flex;
+        align-items: center;
         &__image-box {
           &__delete-btn {
             display: block;

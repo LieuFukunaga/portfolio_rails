@@ -11,7 +11,7 @@
             -# 編集対象に画像が紐付いている場合
             - if @goal.image.attached?
               .goals-edit__form__image__previews__current-image__image-box
-                = image_tag @goal.image, id: "current_image", class: "thumbnail--middle"
+                = image_tag @goal.image.variant(resize:"100x100").processed, id: "current_image"
                 = link_to "元の画像を削除", image_destroy_list_goal_path(@list, @goal), method: :delete , class: "goals-edit__form__image__previews__current-image__image-box__delete-btn"
               .goals-edit__form__image__previews__current-image__right-angle
                 %i.fas.fa-angle-double-right

@@ -12,7 +12,7 @@
     .goals-show__task-info
       .goals-show__task-info__image
         - if @goal.image.attached?
-          = image_tag @goal.image, data: {id: @goal.id}, class: "goals-show__task-info__image__thumbnail thumbnail--large"
+          = image_tag @goal.image.variant(resize:"300x300").processed, data: {id: @goal.id}, class: "goals-show__task-info__image__thumbnail"
     .goals-show__task-info--middle
       .goals-show__task-info--middle__change-status{data: {id: @goal.id}}
         = link_to "#{@goal.status_i18n}", change_status_at_root_list_goal_path(@goal.list_id, @goal, status: @goal.status), method: :post, class: "goals-show__task-info--middle__change-status__link", id: "change_status_task_#{@goal.id}"
