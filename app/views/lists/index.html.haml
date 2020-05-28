@@ -15,8 +15,8 @@
         %h2 { リスト一覧 }
         .lists-index__list-operator__create-list-btn
           = link_to "リストを追加", new_list_path, class: "new-list-btn"
-        %table.users-list
-          - if current_user.lists.length != 0
+        - if current_user.lists.length != 0
+          %table.users-list
             %thead
               %tr
                 %th
@@ -42,10 +42,9 @@
                   %td{data: {list_id: "#{list.id}"}}
                     = link_to list_path(list.id), method: :delete, class: "lists-index__delete-btn", data:{trash_list_id: "#{list.id}"} do
                       %i.fas.fa-trash
-          - else
-            = "-- NO LIST --"
-        - if current_user.lists.length >= 8
-          = paginate @lists
+        - else
+          = "-- NO LIST --"
+        = paginate @lists
 
     .lower-content
       %h2 { 次の7日間のタスク }
