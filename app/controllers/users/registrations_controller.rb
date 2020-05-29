@@ -42,7 +42,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def update
-    binding.pry
     # 現在のパスワードが正しいか判定
     if @user.valid_password?(params[:user][:current_password])
       # 「新しいパスワード」と「パスワード（確認）」とが等しいか判定

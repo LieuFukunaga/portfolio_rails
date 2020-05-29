@@ -14,7 +14,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    # binding.pry
     if @user.valid_password?(params[:user][:current_password])
       if @user.id == current_user.id
         if @user.update(user_params_except_password)
