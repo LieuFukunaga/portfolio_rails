@@ -2,10 +2,6 @@
   display: none;
 }
 
-.users-edit__form {
-  text-align: center;
-}
-
 .users-edit__default-icon {
   font-size: 200px;
   color: $green;
@@ -24,16 +20,11 @@
 
 .users-edit {
   &__form {
-    width: 30%;
-    margin: 15vh auto 0 auto;
-    padding: 50px;
-    background-color: whitesmoke;
+    text-align: center;
+    @include mypage-form-box;
     .field__avatar {
-      // height: 35vh;
-      // background-color: red;
       &__image-box {
         height: 20vh;
-        // background-color: pink;
         .users-edit__avatar {
           text-align: center;
           // background-color: blue;
@@ -49,7 +40,6 @@
         justify-content: center;
         // background-color: gray;
         .users-edit__operator__upload {
-          margin-right: 15px;
           &__label {
             // background-color: pink;
             text-align: center;
@@ -57,6 +47,7 @@
           }
         }
         .users-edit__operator__remove {
+          margin-left: 15px;
           text-align: center;
           // background-color: purple;
         }

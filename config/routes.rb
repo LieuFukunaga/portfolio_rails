@@ -16,8 +16,11 @@ Rails.application.routes.draw do
   resources :users, except: [:index] do
     member do
       delete "avatar_destroy"
+      get "confirm_destroy"
     end
+    resources :addresses, only: [:edit, :update]
   end
+
 
   resources :categories, except: :new
   resources :lists do

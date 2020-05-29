@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :avatar_destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :avatar_destroy, :confirm_destroy]
 
   def show
     @lists = @user.lists
+    @address = @user.address
 
     @tasks = @user.goals
     @done = @tasks.where(status: 0)
@@ -17,23 +18,39 @@ class UsersController < ApplicationController
     if @user.valid_password?(params[:user][:current_password])
       if @user.id == current_user.id
         if @user.update(user_params_except_password)
-          flash[:success] = "登録情報を更新しました"
+          flash[:success] = "登録情報を変更しました"
           redirect_to user_path(@user)
         else
           flash.now[:alert] = @goal.errors.full_messages
           render action: :edit
         end
       else
-        flash[:alert] = "ログインし直して下さい"
+        flash.now[:alert] = "ログインし直して下さい"
         render new_user_session_path
       end
     else
-      flash[:alert] = "パスワードが違います"
+      flash.now[:alert] = "パスワードが違います"
       render action: :edit
     end
   end
 
   def destroy
+    if @user.valid_password?(params[:user][:password])
+      if @user.id == current_user.id
+        @user.destroy
+        flash[:success] = "アカウントを削除しました"
+        redirect_to new_user_session_path
+      else
+        flash.now[:alert] = "アカウントを削除できませんでした"
+        render action: :show
+      end
+    else
+      flash.now[:alert] = "パスワードが正しくありません"
+      render action: :confirm_destroy
+    end
+  end
+
+  def confirm_destroy
   end
 
   def avatar_destroy

@@ -42,20 +42,27 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def update
-    # binding.pry
+    binding.pry
+    # 現在のパスワードが正しいか判定
     if @user.valid_password?(params[:user][:current_password])
-      if @user.update(user_params_only_password)
-        # パスワード変更後、ログイン状態を維持するため
-        sign_in(current_user, bypass: true)
-        flash[:success] = "パスワードを変更しました"
-        redirect_to user_path(@user)
+      # 「新しいパスワード」と「パスワード（確認）」とが等しいか判定
+      if params[:user][:password] == params[:user][:password_confirmation]
+        if @user.update(user_params_only_password)
+          # パスワード変更後、ログイン状態を維持するため
+          sign_in(current_user, bypass: true)
+          flash[:success] = "パスワードを変更しました"
+          redirect_to user_path(@user)
+        else
+          flash.now[:alert] = "パスワードを変更できませんでした"
+          render action: :edit
+        end
       else
-        flash.now[:alert] = ""
+        flash.now[:alert] = "新しいパスワード と パスワード（確認）が一致しません"
         render action: :edit
       end
     else
+      flash.now[:alert] = "現在のパスワード が正しくありません"
       render action: :edit
-      flash.now[:alert] = @user.errors.full_messages
     end
   end
 
@@ -82,6 +89,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def address_params
     params.require(:address).permit(:postcode, :prefecture, :city, :building)
   end
+
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params

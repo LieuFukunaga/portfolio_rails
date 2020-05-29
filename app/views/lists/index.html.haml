@@ -44,7 +44,8 @@
                       %i.fas.fa-trash
           - else
             = "-- NO LIST --"
-        = paginate @lists
+        - if current_user.lists.length >= 8
+          = paginate @lists
 
     .lower-content
       %h2 { 次の7日間のタスク }

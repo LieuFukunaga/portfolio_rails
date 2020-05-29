@@ -26,11 +26,14 @@
 @import "modules/categories/show";
 @import "modules/categories/edit";
 // for users
-@import "modules/users/sessions_new";
-@import "modules/users/registrations_new";
-@import "modules/users/registrations_new_address";
+@import "modules/users/sessions/new";
+@import "modules/users/registrations/new";
+@import "modules/users/registrations/edit";
+@import "modules/users/registrations/new_address";
 @import "modules/users/show";
 @import "modules/users/edit";
+// for addresses
+@import "modules/addresses/edit";
 
 
 * {
@@ -105,6 +108,9 @@ td {
 
 // クラス・共通
 
+.breadcrumbs-field {
+  margin: 5px 20px;
+}
 .fas:not(.fa-tasks):not(.fa-user-circle) {
   font-size: 20px;
 }

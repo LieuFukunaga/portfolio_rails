@@ -1,42 +1,50 @@
-%header.users-show
-  %h1.users-show__application-name Task 1-3-9
-  .breadcrumbs-field
-    - breadcrumb :users_show
-    = breadcrumbs separator: " &rsaquo; "
+- if user_signed_in?
+  %header.users-show
+    %h1.users-show__application-name Task 1-3-9
+    .breadcrumbs-field
+      - breadcrumb :users_show
+      = breadcrumbs separator: " &rsaquo; "
 
-%main.users-show
-  .users-show__outcome
-    .users-show__outcome__user-info
-      %h2.users-show__outcome__user-info__title
-        = "{ #{current_user.name} さんの成果 }"
-      .users-show__outcome__user-info__list-info
-        -if @lists.nil?
-          リストがありません
-        - else
-          = "リスト数：#{@lists.length}"
-      %br
-      .users-show__outcome__user-info__task-info
-        - if @tasks.nil?
-          タスクがありません
-        - else
-          %p
-            = "タスク数：#{@tasks.length}"
-          %p
-            = "達成した数：#{@done.length}"
-          %p
-            = "実行中の数：#{@doing.length}"
-          %br
+  %main.users-show
+    .users-show__outcome
+      .users-show__outcome__user-info
+        %h2.users-show__outcome__user-info__title
+          = "{ #{current_user.name} さんの成果 }"
+        .users-show__outcome__user-info__list-info
+          -if @lists.nil?
+            リストがありません
+          - else
+            = "リスト数：#{@lists.length}"
+        %br
+        .users-show__outcome__user-info__task-info
+          - if @tasks.nil?
+            タスクがありません
+          - else
+            %p
+              = "タスク数：#{@tasks.length}"
+            %p
+              = "達成した数：#{@done.length}"
+            %p
+              = "実行中の数：#{@doing.length}"
+            %br
 
-  .users-show__link-to-edit
-    %h2 { 登録情報を編集 }
-    .users-show__link-to-edit__email
-      = link_to "プロフィール写真/ユーザー名/メールアドレス/電話番号", edit_user_path(current_user)
-    .users-show__link-to-edit__password
-      = link_to "パスワード", edit_user_registration_path
+    .users-show__link-to-edit
+      %h2 { 登録情報を編集 }
+      .users-show__link-to-edit__except-password
+        = link_to "プロフィール写真/ユーザー名/メールアドレス/電話番号", edit_user_path(current_user)
+      .users-show__link-to-edit__address
+        = link_to "住所/郵便番号", edit_user_address_path(@user, @address)
+      .users-show__link-to-edit__password
+        = link_to "パスワード", edit_user_registration_path
+    %br
 
-%footer
-  - if user_signed_in?
+  %footer
     .logout-btn
       = link_to destroy_user_session_path, method: :delete do
         %i.fas.fa-sign-out-alt
         ログアウト
+    %br
+    .users-show__delete-user
+      = link_to confirm_destroy_user_path(current_user) do
+        %i.fas.fa-user-slash
+        アカウントを削除する

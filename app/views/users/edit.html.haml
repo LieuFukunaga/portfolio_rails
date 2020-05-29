@@ -18,9 +18,10 @@
           = f.label :avatar, class: "users-edit__operator__upload__label" do
             %i.fa.fa-camera
             = f.file_field :avatar, id: "users-edit__file-field"
-        .users-edit__operator__remove
-          = link_to avatar_destroy_user_path(@user.id), method: :delete do
-            %i.fas.fa-trash#remove-avatar-btn
+        - if @user.avatar.attached?
+          .users-edit__operator__remove
+            = link_to avatar_destroy_user_path(@user.id), method: :delete do
+              %i.fas.fa-trash#remove-avatar-btn
 
     .field
       = f.label :name, "お名前"
@@ -41,7 +42,10 @@
     %br
 
     .field
-      = f.label :current_password, "変更を確定するためにパスワードを入力して下さい", class: "users-edit__required"
+      = f.label :current_password, class: "users-edit__required" do
+        ※変更を確定するために
+        %br
+        パスワードを入力して下さい
       %br
       = f.password_field :current_password, autocomplete: "current-password", required: true
 

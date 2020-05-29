@@ -1,0 +1,13 @@
+.addresses-edit__footer {
+  text-align: center;
+}
+
+.addresses-edit {
+  &__form {
+    text-align: center;
+    @include mypage-form-box;
+    input:not(.devise-action-btns) {
+      width: 60%;
+    }
+  }
+}
