@@ -9,16 +9,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-    # Userモデルクラスのインスタンスを作成
-    # 1ページ目から送られてきたパラメータを@userに代入
+    # Userモデルクラスのインスタンスを作成。1ページ目から送られてきたパラメータを@userに代入
     @user = User.new(sign_up_params)
     # バリデーションチェック
     unless @user.valid?
       flash.now[:alert] = @user.errors.full_messages
       # フォームに入力した情報をリセットせずに再表示
-      # DoubleRenderErrorを回避
       render :new and return
     end
+
     session["devise.regist_data"] = {user: @user.attributes}
     session["devise.regist_data"][:user]["password"] = params[:user][:password]
     @address = @user.build_address
@@ -39,15 +38,26 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def edit
+    @user = current_user
   end
 
   def update
+    # binding.pry
+    if @user.valid_password?(params[:user][:current_password])
+      if @user.update(user_params_only_password)
+        # パスワード変更後、ログイン状態を維持するため
+        sign_in(current_user, bypass: true)
+        flash[:success] = "パスワードを変更しました"
+        redirect_to user_path(@user)
+      else
+        flash.now[:alert] = ""
+        render action: :edit
+      end
+    else
+      render action: :edit
+      flash.now[:alert] = @user.errors.full_messages
+    end
   end
-
-  # PUT /resource
-  # def update
-  #   super
-  # end
 
   # DELETE /resource
   # def destroy
@@ -64,6 +74,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   protected
+
+  def user_params_only_password
+    params.require(:user).permit(:id, :password)
+  end
 
   def address_params
     params.require(:address).permit(:postcode, :prefecture, :city, :building)

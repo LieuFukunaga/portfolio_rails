@@ -1,0 +1,57 @@
+.users-edit
+  = form_with model: @user, url: user_path(@user.id), class: "users-edit__form", local: true do |f|
+    .field__avatar
+
+      .field__avatar__image-box
+        .users-edit__avatar
+          -# プレビューappend位置
+          -# プロフィール画像あり
+          - if @user.avatar.attached?
+            .users-edit__avatar__preview
+              = image_tag @user.avatar.variant(combine_options:{resize:"200x200^",crop:"200x200+0+0",gravity: :center}).processed, id: "current-avatar"
+          - else
+            -# デフォルトのアイコン
+            %i.fas.fa-user-circle.users-edit__default-icon
+
+      .field__avatar__operator
+        .users-edit__operator__upload
+          = f.label :avatar, class: "users-edit__operator__upload__label" do
+            %i.fa.fa-camera
+            = f.file_field :avatar, id: "users-edit__file-field"
+        .users-edit__operator__remove
+          = link_to avatar_destroy_user_path(@user.id), method: :delete do
+            %i.fas.fa-trash#remove-avatar-btn
+
+    .field
+      = f.label :name, "お名前"
+      %br
+      = f.text_field :name
+    %br
+
+    .field
+      = f.label :email, "Eメール"
+      %br
+      = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "例：hoge@hoge.hoge"
+    %br
+
+    .field
+      = f.label :tel_num, "電話番号"
+      %br
+      = f.telephone_field :tel_num, autofocus: true, placeholder: "例：01234567890"
+    %br
+
+    .field
+      = f.label :current_password, "変更を確定するためにパスワードを入力して下さい", class: "users-edit__required"
+      %br
+      = f.password_field :current_password, autocomplete: "current-password", required: true
+
+    .hidden-field
+      = f.hidden_field :id
+
+    %br
+    .users-edit__submit
+      = f.submit "変更"
+%br
+
+%footer.users-edit__footer
+  = link_to "マイページへ戻る", user_path(@user)

@@ -1,23 +1,49 @@
 @import "modules/colors";
 
 .common-header {
+  padding: 0 15px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   &--left {
+    display: flex;
+    align-items: center;
     h1.application-name {
       font-weight: bold;
       font-size: 50px;
     }
   }
+
   &--right {
-    margin-top: 10px;
-    .login-user-name {
-      margin-bottom: 10px;
-    }
-    .logout-btn {
-      display: flex;
-      justify-content: flex-end;
+    .common-header__user-info {
+      text-align: center;
+      .login-user-avatar {
+        margin: 0 auto;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        .fa-user-circle {
+          line-height: 100px;
+          font-size: 60px;
+          color: $green;
+        }
+        .fas.fa-user-circle:hover {
+          opacity: 0.7;
+        }
+      }
+      // .login-user-name {
+      //   margin: 0 auto;
+      // }
     }
 
   }
+}
+
+#login-user-avatar {
+  border-radius: 50%;
+}
+
+#login-user-avatar:hover {
+  opacity: 0.7;
 }
