@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :lists, dependent: :destroy
   has_many :goals, dependent: :destroy
 
-  has_one_attached :image
+  has_one_attached :avatar
 
   validates :name, presence: true
   validates :name, length: { minimum: 1, maximum: 255 }

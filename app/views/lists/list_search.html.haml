@@ -57,7 +57,7 @@
                   - if goal.updated_at >= Time.now - 1.week
                     %td.td-image{class: "lists-list_search__list-operator__results__table__body__record__image-#{i} thumbnail"}
                       - if goal.image.attached?
-                        = image_tag goal.image.variant(resize: "100x100").processed
+                        = image_tag goal.image.variant(combine_options:{resize:"100x100^",crop:"100x100+0+0",gravity: :center}).processed
                       - else
                         %i.fas.fa-tasks.lists-search__results__icon
                     %td{class: "lists-list_search__list-operator__results__table__body__record__title-#{i}"}

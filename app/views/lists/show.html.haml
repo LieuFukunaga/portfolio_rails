@@ -39,7 +39,7 @@
             %tr{data: {lists_show_task_id: goal.id}}
               - if goal.image.attached?
                 %td.thumbnail.td-image
-                  = image_tag goal.image.variant(resize: "100x100").processed
+                  = image_tag goal.image.variant(combine_options:{resize:"100x100^",crop:"100x100+0+0",gravity: :center}).processed
               - else
                 %td
                   %i.fas.fa-tasks.no-image

@@ -16,17 +16,17 @@
         .lists-index__list-operator__create-list-btn
           = link_to "リストを追加", new_list_path, class: "new-list-btn"
         %table.users-list
-          %thead
-            %tr
-              %th
-                リスト名
-              %th
-                タスク数
-              %th
-              %th
-              %th
-          %tbody.hover-records
-            - if current_user.lists.length != 0
+          - if current_user.lists.length != 0
+            %thead
+              %tr
+                %th
+                  リスト名
+                %th
+                  タスク数
+                %th
+                %th
+                %th
+            %tbody.hover-records
               - @lists.where(user_id: current_user).each.with_index(1) do |list|
                 %tr{data: {list_id: "#{list.id}"}}
                   %td
@@ -42,10 +42,10 @@
                   %td{data: {list_id: "#{list.id}"}}
                     = link_to list_path(list.id), method: :delete, class: "lists-index__delete-btn", data:{trash_list_id: "#{list.id}"} do
                       %i.fas.fa-trash
-            - else
-              %tr
-                %td -- NO LIST --
-        = paginate @lists
+          - else
+            = "-- NO LIST --"
+        - if current_user.lists.length >= 8
+          = paginate @lists
 
     .lower-content
       %h2 { 次の7日間のタスク }
@@ -70,7 +70,7 @@
               %tr{data: {search_result_id: "#{task.id}"}}
                 -if task.image.attached?
                   %td.thumbnail.td-image
-                    = image_tag task.image, class: "thumbnail--small"
+                    = image_tag task.image.variant(combine_options:{resize:"100x100^",crop:"100x100+0+0",gravity: :center}).processed
                 - else
                   %td.no-image-icons
                     %i.fas.fa-tasks.no-image

@@ -26,7 +26,6 @@ $(function(){
     $('.goals-edit__form__image__previews__new-image').append(buildImg(blobUrl));
   })
 
-  // このブロックはおｋ
   $("#goals-edit__remove-preview-btn").click(function(){
     $(".goals-edit__form__image__previews__new-image").empty();
     $(".goals-edit__form__text-field__icons__upload__label__file-field").remove();

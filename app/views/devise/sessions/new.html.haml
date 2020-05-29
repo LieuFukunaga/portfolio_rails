@@ -1,9 +1,10 @@
 .sessions-new
-  %h1.sessions-new__application-name Task 1-3-9
-  %h2 { ログイン画面 }
+  .sessions-new__page-info
+    %h1.sessions-new__page-info__application-name Task 1-3-9
+    %h2 { ログイン画面 }
   %br
   .sessions-new__form
-    = form_with model: @user, scope: :user, url: user_session_path, id: 'user_session', class: 'user_session', local: true do |f|
+    = form_with model: @user, scope: :user, url: user_session_path, id: 'user_session', class: 'sessions-new__form__form-field', local: true do |f|
       .field
         = f.label :email, "Eメール"
         %br

@@ -1,0 +1,37 @@
+.addresses-edit
+  .addresses-edit__form
+    = form_with model: @address, url: user_address_path(current_user, @address), class: "addressess-edit__form", local: true do |f|
+      .field
+        = f.label :postcode, "郵便番号"
+        %br
+        = f.text_field :postcode, placeholder: "例：123-4567"
+      %br
+      .field
+        = f.label :prefecture, "住所"
+        %br
+        = f.select :prefecture, Address.prefectures_i18n.invert, {}, {id: 'prefecture_selector', class: "pulldown-menu"}
+      %br
+      .field
+        = f.label :city, "市区町村"
+        %br
+        = f.text_field :city, placeholder: "例：渋谷区xx町"
+      %br
+      .field
+        = f.label :building, "建物名・番地"
+        %br
+        = f.text_field :building, placeholder: "例：xxマンションyyy号室"
+      %br
+      .field
+        = f.label :current_password, class: "users-edit__required" do
+          ※変更を確定するために
+          %br
+          パスワードを入力して下さい
+        %br
+        = f.password_field :current_password, autocomplete: "current-password", required: true
+      %br
+      .hidden-field
+        = f.hidden_field :user_id
+      .actions
+        = f.submit "登録", class: "devise-action-btns"
+%footer.addresses-edit__footer
+  = link_to "マイページへ戻る", user_path(current_user)

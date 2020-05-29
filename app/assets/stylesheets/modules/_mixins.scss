@@ -10,3 +10,10 @@
   display: inline-block;
   background-color: $green;
 }
+
+@mixin mypage-form-box{
+  width: 30%;
+  margin: 15vh auto 0 auto;
+  padding: 50px;
+  background-color: whitesmoke;
+}

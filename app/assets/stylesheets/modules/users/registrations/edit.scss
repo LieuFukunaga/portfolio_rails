@@ -1,0 +1,17 @@
+.registrations-edit {
+  text-align: center;
+  &__form {
+    // background-color: red;
+    @include mypage-form-box;
+    height: 40vh;
+    text-align: center;
+    .field {
+      margin: 10px 0;
+      label {
+      }
+      input {
+        @include form-style;
+      }
+    }
+  }
+}

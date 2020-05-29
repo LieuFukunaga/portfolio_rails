@@ -1,0 +1,10 @@
+.users-confirm_destroy
+  = form_with model: @user, url: user_path, method: :delete, local: true do |f|
+    = f.label :password, "パスワードを入力して下さい"
+    %br
+    = f.password_field :password, required: true
+    = f.hidden_field :id
+    %br
+    = f.submit "削除", id: "destroy-user-btn"
+  .users-confirm_destroy
+    = link_to "マイページへ戻る", user_path(@user)

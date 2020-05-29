@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
 
+  # devise/registrationsからusers/registrationsに変更するため
   devise_for :users, controllers: {
     registrations: 'users/registrations',
   }
+
   # users/registrationsコントローラのnew_addressアクション、create_addressアクションとして振る舞うということ？
   devise_scope :user do
     get 'addresses', to: 'users/registrations#new_address'
@@ -11,13 +13,21 @@ Rails.application.routes.draw do
 
   root to: "lists#index"
 
+  resources :users, except: [:index] do
+    member do
+      delete "avatar_destroy"
+      get "confirm_destroy"
+    end
+    resources :addresses, only: [:edit, :update]
+  end
+
+
   resources :categories, except: :new
   resources :lists do
     collection do
       get "list_search"
       get "task_search"
     end
-
     resources :goals do
       member do
         delete "image_destroy"
@@ -29,7 +39,6 @@ Rails.application.routes.draw do
         get "task_search_in_list"
       end
     end
-
   end
 
 end

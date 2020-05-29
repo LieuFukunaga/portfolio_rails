@@ -2,6 +2,14 @@ crumb :root do
   link "ホーム", root_path
 end
 
+crumb :users_show do
+  link "マイページ", user_path(current_user)
+end
+
+crumb :users_edit do
+  link "ユーザー情報編集", user_path(current_user)
+end
+
 crumb :lists_new do
   link "リスト作成", new_list_path
 end
