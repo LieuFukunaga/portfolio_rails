@@ -1,12 +1,25 @@
 .sessions-new {
   margin: 10px;
   text-align: center;
-  &__application-name {
-    font-size: 50px;
-    font-weight: bold;
+  &__page-info {
+    &__application-name {
+      font-size: 50px;
+      font-weight: bold;
+    }
   }
   &__form {
+    width: 30%;
+    margin: 0 auto;
+    padding: 50px;
     font-size: 20px;
+    &__form-field {
+      .field {
+        input {
+          font-size: 20px;
+          padding: 10px;
+        }
+      }
+    }
   }
 }
 
