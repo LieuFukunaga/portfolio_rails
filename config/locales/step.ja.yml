@@ -1,6 +1,6 @@
 ja:
   enums:
-    goal:
+    step:
       status:
         doing:  "実行中"
         done:   "達成！"
@@ -12,12 +12,13 @@ ja:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
     models:
-      goal: ゴール
+      step: ステップ
     attributes:
-      goal:
-        title:      タスク名
+      step:
+        title:      ステップ名
         status:     ステータス
         user_id:    ユーザーID
         list_id:    リストID
+        goal_id:    タスクID
         created_at: 作成日時
         updated_at: 更新日時
