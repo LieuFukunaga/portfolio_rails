@@ -4,11 +4,11 @@ class Action < ApplicationRecord
   belongs_to :goal
   belongs_to :step
 
+  has_one_attached :image
+
   validates :title, format: {with:/\A[^[:blank:]\s、,]+\z/}
   validates :title, length: { minimum: 0, maximum: 45 }
   validates :title, null: false, presence: true
-
-  has_one_attached :image
 
   enum status: {
     doing: 0,

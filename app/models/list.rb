@@ -1,6 +1,9 @@
 class List < ApplicationRecord
   belongs_to :user
+
   has_many :goals, dependent: :destroy
+  has_many :steps, dependent: :destroy
+  has_many :actions, dependent: :destroy
 
   validates :user_id, null: false
   validates :list_name, null: false, presence: true
