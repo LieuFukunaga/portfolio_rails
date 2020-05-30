@@ -8,7 +8,7 @@
       .field
         = f.label :postcode, "郵便番号"
         %br
-        = f.text_field :postcode, placeholder: "例：123-4567"
+        = f.text_field :postcode, placeholder: "例：123-4567", class: "postcode-field"
       %br
       .field
         = f.label :prefecture, "住所"
@@ -18,12 +18,12 @@
       .field
         = f.label :city, "市区町村"
         %br
-        = f.text_field :city, placeholder: "例：渋谷区xx町", size: "40px"
+        = f.text_field :city, placeholder: "例：渋谷区xx町"
       %br
       .field
         = f.label :building, "建物名・番地"
         %br
-        = f.text_field :building, placeholder: "例：xxマンションyyy号室", size: "40px"
+        = f.text_field :building, placeholder: "例：xxマンションyyy号室"
       %br
       .actions
         = f.submit "登録", class: "devise-action-btns"

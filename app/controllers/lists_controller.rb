@@ -2,7 +2,7 @@ class ListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :destroy, :search_in_list]
 
   def index
-    @lists = List.includes(:user).where(user_id: current_user.id).order("list_name ASC").page(params[:page]).per(7)
+    @lists = List.includes(:user).where(user_id: current_user.id).order("list_name ASC").page(params[:page]).per(5)
 
     tasks = Goal.order("date DESC").select{|d| d.date >= Time.now}.select{|d|d.date <= Time.now + 1.week}
     @tasks = tasks.delete_if { |task| task.user_id != current_user.id }
