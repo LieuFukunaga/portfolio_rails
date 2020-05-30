@@ -3,22 +3,23 @@
     -# このページのフォームはすべてこのform要素に内包されなければならない
     = form_with model:@goal, url: list_goals_path(:id), id: "new-task-form", local: true do |f|
       .new-task-form
+        -# セクション：goal
         .new-task-form__goal
           .new-task-form__goal__image
             .new-task-form__goal__image__preview
               -# 以下に画像プレビューをappend
           %br
-          .new-task-form__goal__text-field
-            .new-task-form__goal__text-field__input
+          .new-task-form__goal__fields
+            .new-task-form__goal__fields__text
               = f.label :title, "ゴールを設定して下さい"
               %br
               = f.text_field :title, id: "new-task__goal__text-field", placeholder: "スペースや読点を含めないで下さい"
-            .new-task-form__goal__text-field__icons
-              .new-task-form__goal__text-field__icons__upload
-                = f.label :image, class: "new-task-form__goal__upload-label" do
+            .new-task-form__goal__fields__image
+              .new-task-form__goal__fields__image__upload
+                = f.label :image, id: "new-task-form__goal__upload-label" do
                   %i.fa.fa-camera
                   = f.file_field :image, id: "new-task__goal__file-field"
-              .new-task-form__goal__text-field__icons__remove
+              .new-task-form__goal__fields__image__remove
                 %i.fas.fa-trash#new-task__goal__remove-preview-btn
           = f.label :date, "予定日"
           %br
@@ -48,26 +49,27 @@
               = f.fields_for :categories do |c|
                 = c.text_field :category_name, placeholder: "複数の場合はspaceまたはカンマで区切って下さい", id:"create-category-form"
                 = c.hidden_field :user_id, value: current_user.id, class: "hidden-field__category__user-id"
+        -# セクション：step
         .new-task-form__steps
-          .new-task-form__steps__create-steps-form
-            = f.label "新規ステップ作成"
-            %br
-            = f.fields_for :steps do |s|
-              = s.text_field :title, placeholder: "これはステップです", class:"create-step-form"
-              %br
-              = s.file_field :step_image
-              = s.hidden_field :user_id, value: current_user.id, class: "hidden-field__steps__user-id"
-              = s.hidden_field :list_id, value: @list.id, class: "hidden-field__steps__list-id"
+          .new-task-form__steps__form-fields
+            - 3.times.with_index(1) do |t, index|
+              = f.fields_for :steps do |s|
+                = s.text_field :title, placeholder: "スペースや読点を含めないで下さい", class:"create-step-form", id: "task-new__step-#{index}"
+                %br
+                = s.file_field :step_image, class: "new-task-form__steps__file-field"
+                = s.hidden_field :user_id, value: current_user.id, class: "hidden-field__steps__user-id"
+                = s.hidden_field :list_id, value: @list.id, class: "hidden-field__steps__list-id"
+            -# = render partial: 'steps', locals: {f: f}
+        -# セクション：action
         .new-task-form__actions
-          .new-task-form__actions__create-actions-form
-            = f.label "新規アクション作成"
-            %br
-            = f.fields_for :actions do |a|
-              = a.text_field :title, placeholder: "これはアクションです", class:"create-action-form"
-              %br
-              = a.file_field :action_image
-              = a.hidden_field :user_id, value: current_user.id, class: "hidden-field__actions__user-id"
-              = a.hidden_field :list_id, value: @list.id, class: "hidden-field__actions__list-id"
+          .new-task-form__actions__form-fields
+            - 9.times.with_index(1) do |t, index|
+              = f.fields_for :actions do |a|
+                = a.text_field :title, placeholder: "スペースや読点を含めないで下さい", class:"create-action-form", id: "task-new__step-#{index}"
+                %br
+                = a.file_field :action_image, class: "new-task-form__actions__file-field"
+                = a.hidden_field :user_id, value: current_user.id, class: "hidden-field__actions__user-id"
+                = a.hidden_field :list_id, value: @list.id, class: "hidden-field__actions__list-id"
 
       .new-task-form__submit-btn
         = f.submit "登録"

@@ -10,7 +10,7 @@ $(function(){
   let fileField = `<input id="new-task__goal__file-field" type="file" name="goal[image]">`
 
 
-  $(".new-task-form__goal__text-field__icons__upload").on("change", "#new-task__goal__file-field", function(e){
+  $(".new-task-form__goal__fields__image").on("change", "#new-task__goal__file-field", function(e){
     $(".new-task-form__goal__image__preview").empty();
     let file = e.target.files[0];
     let blobUrl = window.URL.createObjectURL(file);
@@ -20,7 +20,7 @@ $(function(){
   $("#new-task__goal__remove-preview-btn").click(function(){
     $(".new-task-form__goal__image__preview").empty();
     $("#new-task__goal__file-field").remove();
-    $(".new-task-form__goal__upload-label").append(fileField);
+    $("#new-task-form__goal__upload-label").append(fileField);
   })
 
 

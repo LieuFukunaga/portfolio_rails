@@ -23,17 +23,17 @@
               text-align: center;
             }
           }
-          &__text-field {
+          &__fields {
             display: flex;
             position: relative;
-            &__input {
+            &__text {
 
             }
-            &__icons {
+            &__image {
               position: absolute;
               display: flex;
               &__upload {
-                .new-task-form__goal__upload-label {
+                #new-task-form__goal__upload-label {
                   #new-task__goal__file-field {
                     display: none;
                   }
