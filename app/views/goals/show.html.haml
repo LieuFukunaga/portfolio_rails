@@ -1,11 +1,10 @@
-%header
-  .goals-show__header
-    .goals-show__header__left-content
-      #goals-show__task-title
-        = "#{@goal.title}"
-    .goals-show__header__right-content
-      .goals-show__header__right-content__date-time
-        = "#{@goal.updated_at.strftime("%Y/%m/%d")}"
+%header.goals-show__header
+  .goals-show__header__left-content
+    #goals-show__task-title
+      = "#{@goal.title}"
+  .goals-show__header__right-content
+    .goals-show__header__right-content__date-time
+      = "#{@goal.updated_at.strftime("%Y/%m/%d")}"
 
 %main.goals-show
   .goals-show__goal
