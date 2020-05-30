@@ -1,16 +1,3 @@
-@import "modules/colors";
-
-@mixin task-form-style {
-  height: 40px;
-  line-height: 40px;
-  padding: 5px;
-  border-radius: 5px;
-}
-
-
-.goals-new__page-info__page-title {
-  font-size: 20px;
-}
 .goals-new__form__category__check-boxes__options-box {
   max-height: 300px;
   max-width: 300px;
@@ -21,46 +8,72 @@
   -webkit-overflow-scrolling: touch;
 }
 
-.goals-new__form {
-  &__image {
-    &__preview {
+.goals-new {
+  padding: 10px;
+  &__form {
+    #new-task-form {
+      .new-task-form {
+        display: flex;
+        // セクション：ゴール
+        &__goal {
+          width: 34%;
+          background-color: red;
+          &__image {
+            &__preview {
+              text-align: center;
+            }
+          }
+          &__text-field {
+            display: flex;
+            position: relative;
+            &__input {
 
-      // リサイズ（仮）
-      width: 20%;
-      height: 30vh;
+            }
+            &__icons {
+              position: absolute;
+              display: flex;
+              &__upload {
+                .new-task-form__goal__upload-label {
+                  #new-task__goal__file-field {
+                    display: none;
+                  }
+                }
+              }
+              &__remove {
+                #new-task__goal__remove-preview-btn {
+                  padding-left: 5px;
+                }
+              }
+            }
+          }
+          .new-task-form__category {
+            &__check-boxes {
+              #modal-fadein-btn {
 
-      text-align: center;
-      display: flex;
-      #goals-new__image-preview {
-        align-items: center;
-      }
-    }
-  }
-  &__text-field {
-    display: flex;
-    position: relative;
-    &__input {
-      #goals-new__text-field {
-        @include task-form-style;
-      }
-    }
-    &__icons {
-      display: flex;
-      position: absolute;
-      top: 32px;
-      left: 350px;
-      &__upload {
-        #goals-new__file-field {
-          display: none;
+              }
+              &__options-box {
+                display: none;
+                max-height: 300px;
+                max-width: 300px;
+                border: solid 1px;
+                overflow: scroll;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+              }
+            }
+          }
+        }
+        // セクション：ステップ
+        &__steps {
+          width: 33%;
+          background-color: blue;
+        }
+        // セクション：アクション
+        &__actions {
+          width: 33%;
+          background-color: green;
         }
       }
-      &__remove {
-        padding-left: 5px;
-      }
     }
   }
-}
-
-#create-category-form {
-  @include task-form-style;
 }

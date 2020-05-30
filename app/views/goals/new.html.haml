@@ -1,57 +1,75 @@
-%header
-  - breadcrumb :goals_new
-  = breadcrumbs separator: " &rsaquo; "
-%br
-%main.goals-new
+.goals-new
   .goals-new__form
-    = form_with model:@goal, url: list_goals_path(:id), local: true do |f|
-      .goals-new__form__image
-        .goals-new__form__image__preview
-          -# 以下に画像プレビューをappend
-      %br
-      .goals-new__form__text-field
-        .goals-new__form__text-field__input
-          = f.label :title, "ゴールを設定して下さい"
+    -# このページのフォームはすべてこのform要素に内包されなければならない
+    = form_with model:@goal, url: list_goals_path(:id), id: "new-task-form", local: true do |f|
+      .new-task-form
+        .new-task-form__goal
+          .new-task-form__goal__image
+            .new-task-form__goal__image__preview
+              -# 以下に画像プレビューをappend
           %br
-          = f.text_field :title, id: "goals-new__text-field", size: "45px", placeholder: "スペースや読点を含めないで下さい"
-        .goals-new__form__text-field__icons
-          .goals-new__form__text-field__icons__upload
-            = f.label :image, class: "goals-new__form__text-field__icons__upload__label" do
-              %i.fa.fa-camera
-              = f.file_field :image, id: "goals-new__file-field"
-          .goals-new__form__text-field__icons__remove
-            %i.fas.fa-trash#goals-new__remove-preview-btn
-      = f.label :date, "予定日"
-      %br
-      = f.datetime_select :date, {use_month_numbers: true, default: Time.now + 1.hour, datetime_separator: '<br><label class="datetime-selector">予定時刻<br></label>', minute_step: 5}
-      = f.hidden_field :list_id, value: @list.id
-      = f.hidden_field :user_id, value: current_user.id
-
-      .goals-new__form__category
-        - if Category.where(user_id: current_user.id).length != 0
-          .goals-new__form__category__check-boxes
-            = button_tag "カテゴリを選択", type: "button", id: "modal-fadein-btn"
-            .goals-new__form__category__check-boxes__options-box
-              .options
-                = f.collection_check_boxes(:category_ids, Category.where(user_id: current_user.id), :id, :category_name, include_hidden: false) do |c|
-                  %br
-                  = c.label {c.check_box}
-                  %span
-                  = c.label {c.text}
-                  %br
+          .new-task-form__goal__text-field
+            .new-task-form__goal__text-field__input
+              = f.label :title, "ゴールを設定して下さい"
               %br
-              .close-btn
-                = button_tag "閉じる", type: "button", id: "modal-fadeout-btn"
-              %br
-        .goals-new__form__category__create-category-form
-          = f.label "新規カテゴリを作成"
+              = f.text_field :title, id: "new-task__goal__text-field", placeholder: "スペースや読点を含めないで下さい"
+            .new-task-form__goal__text-field__icons
+              .new-task-form__goal__text-field__icons__upload
+                = f.label :image, class: "new-task-form__goal__upload-label" do
+                  %i.fa.fa-camera
+                  = f.file_field :image, id: "new-task__goal__file-field"
+              .new-task-form__goal__text-field__icons__remove
+                %i.fas.fa-trash#new-task__goal__remove-preview-btn
+          = f.label :date, "予定日"
           %br
-          = f.fields_for :categories do |c|
-            = c.text_field :category_name, placeholder: "複数の場合はspaceまたはカンマで区切って下さい", size: "45px", id:"create-category-form"
-            = c.hidden_field :user_id, value: current_user.id, class: "hidden-field__user-id"
+          = f.datetime_select :date, {use_month_numbers: true, default: Time.now + 1.hour, datetime_separator: '<br><label class="datetime-selector">予定時刻<br></label>', minute_step: 5}
+          = f.hidden_field :list_id, value: @list.id
+          = f.hidden_field :user_id, value: current_user.id
 
+          .new-task-form__category
+            - if Category.where(user_id: current_user.id).length != 0
+              .new-task-form__category__check-boxes
+                = button_tag "カテゴリを選択", type: "button", id: "modal-fadein-btn"
+                .new-task-form__category__check-boxes__options-box
+                  .options
+                    = f.collection_check_boxes(:category_ids, Category.where(user_id: current_user.id), :id, :category_name, include_hidden: false) do |c|
+                      %br
+                      = c.label {c.check_box}
+                      %span
+                      = c.label {c.text}
+                      %br
+                  %br
+                  .close-btn
+                    = button_tag "閉じる", type: "button", id: "modal-fadeout-btn"
+                  %br
+            .new-task-form__category__create-category-form
+              = f.label "新規カテゴリを作成"
+              %br
+              = f.fields_for :categories do |c|
+                = c.text_field :category_name, placeholder: "複数の場合はspaceまたはカンマで区切って下さい", id:"create-category-form"
+                = c.hidden_field :user_id, value: current_user.id, class: "hidden-field__category__user-id"
+        .new-task-form__steps
+          .new-task-form__steps__create-steps-form
+            = f.label "新規ステップ作成"
+            %br
+            = f.fields_for :steps do |s|
+              = s.text_field :title, placeholder: "これはステップです", class:"create-step-form"
+              %br
+              = s.file_field :step_image
+              = s.hidden_field :user_id, value: current_user.id, class: "hidden-field__steps__user-id"
+              = s.hidden_field :list_id, value: @list.id, class: "hidden-field__steps__list-id"
+        .new-task-form__actions
+          .new-task-form__actions__create-actions-form
+            = f.label "新規アクション作成"
+            %br
+            = f.fields_for :actions do |a|
+              = a.text_field :title, placeholder: "これはアクションです", class:"create-action-form"
+              %br
+              = a.file_field :action_image
+              = a.hidden_field :user_id, value: current_user.id, class: "hidden-field__actions__user-id"
+              = a.hidden_field :list_id, value: @list.id, class: "hidden-field__actions__list-id"
 
-      .goals-new__form__submit-btn
+      .new-task-form__submit-btn
         = f.submit "登録"
 %footer
   = render partial: "layouts/return-to-list-show"

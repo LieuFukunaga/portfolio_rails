@@ -2,7 +2,7 @@ $(function(){
 
   let userId = $("#login-user-id").val();
   let addedCategory = `<li class="added-categories">
-                          <input placeholder="複数の場合はspaceまたはカンマで区切って下さい" size="45px" class="added-form" type="text" name="no_category" id="goal_categories_attributes_0_category_name">
+                          <input placeholder="複数の場合はspaceまたはカンマで区切って下さい" class="added-form" type="text" name="no_category" id="goal_categories_attributes_0_category_name">
                           <input value="${userId}" class="added-form-hidden" type="hidden" name="no_user" id="goal_categories_attributes_0_user_id">
                       </li>`
 

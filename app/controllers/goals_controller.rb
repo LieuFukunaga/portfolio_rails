@@ -5,11 +5,16 @@ class GoalsController < ApplicationController
 
   def new
     @goal = Goal.new
+
     @goal.categories.new                 # 新規カテゴリ作成用
+    @goal.steps.new                 # 新規ステップ作成用
+    @goal.actions.new                 # 新規アクション作成用
+
     @list = List.find(params[:list_id])  # 画面遷移用
   end
 
   def create
+    binding.pry
     @goal = Goal.new(goal_params)
     @list = List.find(@goal.list_id)           # 画面遷移用
     checked_ids = params[:goal][:category_ids] # チェックボックスのカテゴリのidを取得
@@ -146,7 +151,7 @@ class GoalsController < ApplicationController
 
   private
   def goal_params
-    params.require(:goal).permit(:title, :image, :status, :list_id, :user_id, :date, category_ids: [], categories_attributes: [:category_name, :user_id])
+    params.require(:goal).permit(:title, :image, :status, :list_id, :user_id, :date, category_ids: [], categories_attributes: [:category_name, :user_id], steps_attributes: [:title, :step_image, :status, :user_id, :list_id, :goal_id], actions_attributes: [:title, :action_image, :status, :user_id, :list_id, :goal_id, :step_id])
   end
 
   def set_list

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_30_041435) do
+ActiveRecord::Schema.define(version: 2020_05_30_064932) do
 
   create_table "actions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -20,10 +20,8 @@ ActiveRecord::Schema.define(version: 2020_05_30_041435) do
     t.bigint "goal_id"
     t.bigint "list_id"
     t.bigint "user_id"
-    t.bigint "step_id"
     t.index ["goal_id"], name: "index_actions_on_goal_id"
     t.index ["list_id"], name: "index_actions_on_list_id"
-    t.index ["step_id"], name: "index_actions_on_step_id"
     t.index ["user_id"], name: "index_actions_on_user_id"
   end
 
@@ -128,7 +126,6 @@ ActiveRecord::Schema.define(version: 2020_05_30_041435) do
 
   add_foreign_key "actions", "goals"
   add_foreign_key "actions", "lists"
-  add_foreign_key "actions", "steps"
   add_foreign_key "actions", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "users"
