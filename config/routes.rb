@@ -38,6 +38,10 @@ Rails.application.routes.draw do
       collection do
         get "task_search_in_list"
       end
+      resources :steps do
+        resources :actions do
+        end
+      end
     end
   end
 
