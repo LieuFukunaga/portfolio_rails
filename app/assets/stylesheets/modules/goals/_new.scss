@@ -1,77 +1,147 @@
-.goals-new__form__category__check-boxes__options-box {
-  max-height: 300px;
-  max-width: 300px;
-  display: none;
-  border: solid 1px;
-  overflow: scroll;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
+.categories {
+  margin-bottom: 5px;
 }
 
 .goals-new {
-  padding: 10px;
+  padding: 1vh;
   &__form {
     #new-task-form {
       .new-task-form {
         display: flex;
+        height: 98vh;
         // セクション：ゴール
         &__goal {
+          white-space: nowrap;
+          -webkit-overflow-scrolling: touch;
           width: 34%;
-          background-color: red;
           &__image {
+            margin-top: 3vh;
+            height: 30vh;
             &__preview {
-              text-align: center;
+              height: 250px;
+              width: 250px;
+              margin: 0 auto;
             }
           }
           &__fields {
-            display: flex;
-            position: relative;
-            &__text {
-
-            }
-            &__image {
-              position: absolute;
+            &__image{
+              text-align: center;
               display: flex;
+              justify-content: center;
+              margin-bottom: 5px;
               &__upload {
-                #new-task-form__goal__upload-label {
-                  #new-task__goal__file-field {
+                .new-task-form__goal__upload-label {
+                  .new-task-form__goal__file-field {
                     display: none;
                   }
                 }
               }
               &__remove {
-                #new-task__goal__remove-preview-btn {
+                .new-task__goal__remove-preview-btn {
                   padding-left: 5px;
                 }
               }
             }
+            &__text {
+              text-align: center;
+            }
+            &__datetime {
+              text-align: center;
+              padding-top: 5px;
+              select {
+                height: 30px;
+              }
+            }
           }
           .new-task-form__category {
-            &__check-boxes {
-              #modal-fadein-btn {
+            height: 30vh;
+            padding-top: 2vh;
+            text-align: center;
 
+            overflow: scroll;
+            white-space: nowrap;
+            &__check-boxes {
+
+              #modal-fadein-btn {
+                margin-bottom: 5px;
               }
               &__options-box {
-                display: none;
-                max-height: 300px;
-                max-width: 300px;
+                height: 15vh;
+                width: 60%;
+                padding: 10px;
+                margin: 0 auto;
                 border: solid 1px;
+                border-radius: 5px;
+                display: none;
                 overflow: scroll;
                 white-space: nowrap;
                 -webkit-overflow-scrolling: touch;
               }
             }
+            &__create-category-form {
+              margin-top: 1vh;
+            }
+          }
+          .new-task-form__submit-btn {
+            display: flex;
+            justify-content: flex-end;
+            padding: 0 5%;
+          }
+          .new-task-form__links {
+            margin-top: 1vh;
           }
         }
         // セクション：ステップ
         &__steps {
           width: 33%;
+          overflow: scroll;
+          white-space: nowrap;
+          -webkit-overflow-scrolling: touch;
           background-color: blue;
+          &__fields {
+            height: 33%;
+            &--flex {
+              display: flex;
+              .new-task-form__steps__fields__image {
+                display: flex;
+                &__upload {
+                  .new-task-form__steps__upload-label {
+                    .new-task-form__steps__file-field {
+                      display: none;
+                    }
+                  }
+                }
+                &__remove {
+                }
+              }
+            }
+          }
         }
         // セクション：アクション
         &__actions {
           width: 33%;
+          overflow: scroll;
+          white-space: nowrap;
+          -webkit-overflow-scrolling: touch;
           background-color: green;
+          &__fields {
+            height: 11%;
+            &--flex {
+              display: flex;
+              .new-task-form__actions__fields__image {
+                display: flex;
+                &__upload {
+                  .new-task-form__actions__upload-label {
+                    .new-task-form__actions__file-field {
+                      display: none;
+                    }
+                  }
+                }
+                &__remove {
+                }
+              }
+            }
+          }
         }
       }
     }

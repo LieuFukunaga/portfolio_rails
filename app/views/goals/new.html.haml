@@ -10,23 +10,22 @@
               -# 以下に画像プレビューをappend
           %br
           .new-task-form__goal__fields
-            .new-task-form__goal__fields__text
-              = f.label :title, "ゴールを設定して下さい"
-              %br
-              = f.text_field :title, id: "new-task__goal__text-field", placeholder: "スペースや読点を含めないで下さい"
             .new-task-form__goal__fields__image
               .new-task-form__goal__fields__image__upload
-                = f.label :image, id: "new-task-form__goal__upload-label" do
+                = f.label :image, class: "new-task-form__goal__upload-label" do
                   %i.fa.fa-camera
-                  = f.file_field :image, id: "new-task__goal__file-field"
+                  = f.file_field :image, class: "new-task-form__goal__file-field"
               .new-task-form__goal__fields__image__remove
-                %i.fas.fa-trash#new-task__goal__remove-preview-btn
-          = f.label :date, "予定日"
-          %br
-          = f.datetime_select :date, {use_month_numbers: true, default: Time.now + 1.hour, datetime_separator: '<br><label class="datetime-selector">予定時刻<br></label>', minute_step: 5}
-          = f.hidden_field :list_id, value: @list.id
-          = f.hidden_field :user_id, value: current_user.id
-
+                %i.fas.fa-trash.new-task__goal__remove-preview-btn
+            .new-task-form__goal__fields__text
+              = f.text_field :title, id: "new-task-form__goal__text-field", value: "goal"
+            .new-task-form__goal__fields__datetime
+              = f.label :date, "予定日"
+              %br
+              = f.datetime_select :date, {use_month_numbers: true, default: Time.now + 1.hour, datetime_separator: '<br><label class="datetime-selector">予定時刻<br></label>', minute_step: 5}
+            = f.hidden_field :list_id, value: @list.id
+            = f.hidden_field :user_id, value: current_user.id
+          -# セクション：goal(カテゴリ)
           .new-task-form__category
             - if Category.where(user_id: current_user.id).length != 0
               .new-task-form__category__check-boxes
@@ -34,45 +33,58 @@
                 .new-task-form__category__check-boxes__options-box
                   .options
                     = f.collection_check_boxes(:category_ids, Category.where(user_id: current_user.id), :id, :category_name, include_hidden: false) do |c|
-                      %br
-                      = c.label {c.check_box}
-                      %span
-                      = c.label {c.text}
-                      %br
-                  %br
+                      .categories
+                        = c.label {c.check_box}
+                        = c.label {c.text}
                   .close-btn
                     = button_tag "閉じる", type: "button", id: "modal-fadeout-btn"
-                  %br
             .new-task-form__category__create-category-form
               = f.label "新規カテゴリを作成"
               %br
               = f.fields_for :categories do |c|
                 = c.text_field :category_name, placeholder: "複数の場合はspaceまたはカンマで区切って下さい", id:"create-category-form"
                 = c.hidden_field :user_id, value: current_user.id, class: "hidden-field__category__user-id"
+          .new-task-form__submit-btn
+            = f.submit "保存"
+          .new-task-form__links
+            = render partial: "layouts/return-to-list-show"
+            = render partial: "layouts/return-to-root"
+
         -# セクション：step
         .new-task-form__steps
-          .new-task-form__steps__form-fields
-            - 3.times.with_index(1) do |t, index|
+          - 3.times.with_index(1) do |t, index|
+            .new-task-form__steps__fields{data: {step_index: index}}
               = f.fields_for :steps do |s|
-                = s.text_field :title, placeholder: "スペースや読点を含めないで下さい", class:"create-step-form", id: "task-new__step-#{index}"
-                %br
-                = s.file_field :step_image, class: "new-task-form__steps__file-field"
-                = s.hidden_field :user_id, value: current_user.id, class: "hidden-field__steps__user-id"
-                = s.hidden_field :list_id, value: @list.id, class: "hidden-field__steps__list-id"
-            -# = render partial: 'steps', locals: {f: f}
+                .new-task-form__steps__fields--flex
+                  = s.text_field :title, class:"new-task-form__steps__text-field", id: "new-task-form__step-#{index}", value: "steps"
+                  %br
+                  .new-task-form__steps__fields__image
+                    .new-task-form__steps__fields__image__upload
+                      = f.label :image, class: "new-task-form__steps__upload-label" do
+                        %i.fa.fa-camera
+                        = f.file_field :image, class: "new-task-form__steps__file-field"
+                    .new-task-form__steps__fields__image__remove
+                      %i.fas.fa-trash.new-task__steps__remove-preview-btn
+                = s.hidden_field :user_id, value: current_user.id, class: "new-task-form__steps__hidden-field__user-id"
+                = s.hidden_field :list_id, value: @list.id, class: "new-task-form__steps__hidden-field__list-id"
+
         -# セクション：action
         .new-task-form__actions
-          .new-task-form__actions__form-fields
-            - 9.times.with_index(1) do |t, index|
+          - 9.times.with_index(1) do |t, index|
+            .new-task-form__actions__fields{data: {action_index: index}}
               = f.fields_for :actions do |a|
-                = a.text_field :title, placeholder: "スペースや読点を含めないで下さい", class:"create-action-form", id: "task-new__step-#{index}"
-                %br
-                = a.file_field :action_image, class: "new-task-form__actions__file-field"
-                = a.hidden_field :user_id, value: current_user.id, class: "hidden-field__actions__user-id"
-                = a.hidden_field :list_id, value: @list.id, class: "hidden-field__actions__list-id"
+                .new-task-form__actions__fields--flex
+                  = a.text_field :title, class:"new-task-form__actions__text-field", id: "new-task-form__action-#{index}", value: "actions"
+                  %br
+                  .new-task-form__actions__fields__image
+                    .new-task-form__actions__fields__image__upload
+                      = f.label :image, class: "new-task-form__actions__upload-label" do
+                        %i.fa.fa-camera
+                        = f.file_field :image, class: "new-task-form__actions__file-field"
+                    .new-task-form__actions__fields__image__remove
+                      %i.fas.fa-trash.new-task__actions__remove-preview-btn
+                = a.hidden_field :user_id, value: current_user.id, class: "new-task-form__actions__hidden-field__user-id"
+                = a.hidden_field :list_id, value: @list.id, class: "new-task-form__actions__hidden-field__list-id"
 
-      .new-task-form__submit-btn
-        = f.submit "登録"
-%footer
-  = render partial: "layouts/return-to-list-show"
-  = render partial: "layouts/return-to-root"
+
+

@@ -29,7 +29,7 @@ class ListsController < ApplicationController
   end
 
   def show
-    @goals = @list.goals.order("id DESC").page(params[:page]).per(6)
+    @goals = @list.goals.order("id DESC").page(params[:page]).per(5)
   end
 
   def edit

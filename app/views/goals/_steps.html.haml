@@ -1,8 +1,0 @@
-= f.label "ステップ"
-%br
-= f.fields_for :steps do |s|
-  = s.text_field :title, placeholder: "ステップ", class:"create-step-form"
-  %br
-  = s.file_field :step_image
-  = s.hidden_field :user_id, value: current_user.id, class: "hidden-field__steps__user-id"
-  = s.hidden_field :list_id, value: @list.id, class: "hidden-field__steps__list-id"
