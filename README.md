@@ -117,6 +117,7 @@ Task 1-3-9
 - belongs_to :user
 - belongs_to :list
 - belongs_to :goal
+- has_many :actions
 
 ### Actionsテーブル
 |Column  |Type       |Options              |
@@ -126,9 +127,11 @@ Task 1-3-9
 |user_id |references |foreign_key: true    |
 |list_id |references |foreign_key: true    |
 |goal_id |references |foreign_key: true    |
+|step_id |references |foreign_key: true    |
 
 #### Association
 - belongs_to :user
+- belongs_to :list
 - belongs_to :goal
 - belongs_to :step
 

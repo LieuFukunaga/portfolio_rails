@@ -14,7 +14,6 @@ class GoalsController < ApplicationController
   end
 
   def create
-    binding.pry
     @goal = Goal.new(goal_params)
     @list = List.find(@goal.list_id)           # 画面遷移用
     checked_ids = params[:goal][:category_ids] # チェックボックスのカテゴリのidを取得
@@ -23,6 +22,19 @@ class GoalsController < ApplicationController
     if params[:goal][:categories_attributes] != nil
       inputs = params[:goal][:categories_attributes][:"0"][:"category_name"].split(/[, 、　]/) # 区切り文字で分割、配列化
       if @goal.save
+        steps = @goal.steps
+        actions = @goal.actions
+
+        actions[0..2].each do |action|
+          action.update(step_id: steps[0].id)
+        end
+        actions[3..5].each do |action|
+          action.update(step_id: steps[1].id)
+        end
+        actions[6..8].each do |action|
+          action.update(step_id: steps[2].id)
+        end
+
         @goal.save_category(inputs, checked_ids)
         flash[:success] = "タスクを作成しました"
         redirect_to list_path(@list)
@@ -33,6 +45,19 @@ class GoalsController < ApplicationController
       # 新規カテゴリの入力がない場合
     else
       if @goal.save
+        steps = @goal.steps
+        actions = @goal.actions
+
+        actions[0..2].each do |action|
+          action.update(step_id: steps[0].id)
+        end
+        actions[3..5].each do |action|
+          action.update(step_id: steps[1].id)
+        end
+        actions[6..8].each do |action|
+          action.update(step_id: steps[2].id)
+        end
+
         flash[:success] = "タスクを作成しました"
         redirect_to list_path(@list)
       else
