@@ -2,15 +2,27 @@
   margin-bottom: 5px;
 }
 
+.new-task-form__steps__fields--bottom {
+  height: calc(100vh - 66%);
+  border-top: 1px solid;
+  margin-top: -1px;
+}
+
+.new-task-form__step-previews {
+  height: 150px;
+  width: 150px;
+}
+
 .goals-new {
-  padding: 1vh;
   &__form {
     #new-task-form {
       .new-task-form {
         display: flex;
-        height: 98vh;
+        height: 100vh;
         // セクション：ゴール
         &__goal {
+          border-right: 1px solid;
+          padding: 1vh;
           white-space: nowrap;
           -webkit-overflow-scrolling: touch;
           width: 34%;
@@ -97,14 +109,22 @@
           overflow: scroll;
           white-space: nowrap;
           -webkit-overflow-scrolling: touch;
-          background-color: blue;
           &__fields {
+            border-bottom: 1px solid;
+            margin-top: -1px;
             height: 33%;
-            &--flex {
-              display: flex;
-              .new-task-form__steps__fields__image {
+            &__image {
+              height: 20vh;
+              &__preview {
+                height: 17vh;
+                width: 100%;
+              }
+              &__icons {
+                padding-bottom: 5px;
                 display: flex;
+                justify-content: center;
                 &__upload {
+                  margin-right: 5px;
                   .new-task-form__steps__upload-label {
                     .new-task-form__steps__file-field {
                       display: none;
@@ -114,6 +134,10 @@
                 &__remove {
                 }
               }
+            }
+            &__text {
+              display: flex;
+              justify-content: center;
             }
           }
         }
