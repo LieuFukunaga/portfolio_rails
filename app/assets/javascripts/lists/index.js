@@ -3,7 +3,7 @@ $(function(){
   $(".lists-index__delete-btn").click(function(){
     let listId = $(this).data('trash-list-id');
     let listName = $(`#list_${listId}`).text();
-    if (!confirm(`「${listName}」を削除してよろしいですか？`)){
+    if (!confirm(`「${listName}」を削除してよろしいですか？\n\n※リストを削除するとリスト内のタスクも削除されます。この操作は取り消せません。`)){
       return false;
     } else {
         $(`tr[data-list-id=${listId}]`).fadeOut(200);

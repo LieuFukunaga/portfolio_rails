@@ -3,9 +3,9 @@
     margin-bottom: 10px;
     &__form {
       margin-bottom: 20px;
-      @include form-style;
       &__form-field {
         &__text-field {
+          @include form-style;
           width: 40%;
         }
         &__search-btn {

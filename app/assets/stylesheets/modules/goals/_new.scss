@@ -15,6 +15,18 @@
   margin-top : 1vh;
 }
 
+#new-task-form__goal__text-field, #create-category-form {
+  @include form-style;
+}
+
+.new-task-form__steps__text-field, .new-task-form__anchor-step__text-field {
+  @include form-style;
+}
+
+.new-task-form__actions__text-field, .new-task-form__anchor-actions__text-field {
+  @include form-style;
+}
+
 
 .goals-new {
   &__form {
