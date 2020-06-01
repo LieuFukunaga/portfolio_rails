@@ -2,16 +2,12 @@
   margin-bottom: 5px;
 }
 
-.new-task-form__steps__fields--bottom {
-  height: calc(100vh - 66%);
-  border-top: 1px solid;
-  margin-top: -1px;
+// appendされる画像プレビュー
+.new-task-form__step-previews {
+  height: 130px;
+  width: 130px;
 }
 
-.new-task-form__step-previews {
-  height: 150px;
-  width: 150px;
-}
 
 .goals-new {
   &__form {
@@ -21,7 +17,7 @@
         height: 100vh;
         // セクション：ゴール
         &__goal {
-          border-right: 1px solid;
+          // border-right: 1px solid;
           padding: 1vh;
           white-space: nowrap;
           -webkit-overflow-scrolling: touch;
@@ -110,14 +106,16 @@
           white-space: nowrap;
           -webkit-overflow-scrolling: touch;
           &__fields {
-            border-bottom: 1px solid;
-            margin-top: -1px;
             height: 33%;
             &__image {
               height: 20vh;
               &__preview {
                 height: 17vh;
                 width: 100%;
+                text-align: center;
+                .new-task-form__step-previews {
+                  margin-top: 10px;
+                }
               }
               &__icons {
                 padding-bottom: 5px;
@@ -140,28 +138,125 @@
               justify-content: center;
             }
           }
-        }
-        // セクション：アクション
-        &__actions {
-          width: 33%;
-          overflow: scroll;
-          white-space: nowrap;
-          -webkit-overflow-scrolling: touch;
-          background-color: green;
-          &__fields {
-            height: 11%;
-            &--flex {
-              display: flex;
-              .new-task-form__actions__fields__image {
+          .new-task-form__anchor-step__fields {
+            height: calc(100vh - 66%);
+            &__image {
+              height: 20vh;
+              &__preview {
+                height: 17vh;
+                width: 100%;
+                text-align: center;
+                .new-task-form__step-previews {
+                  margin-top: 10px;
+                }
+              }
+              &__icons {
+                padding-bottom: 5px;
                 display: flex;
+                justify-content: center;
                 &__upload {
-                  .new-task-form__actions__upload-label {
-                    .new-task-form__actions__file-field {
+                  margin-right: 5px;
+                  .new-task-form__anchor-step__upload-label {
+                    .new-task-form__anchor-step__file-field {
                       display: none;
                     }
                   }
                 }
                 &__remove {
+                }
+              }
+            }
+            &__text {
+              display: flex;
+              justify-content: center;
+            }
+          }
+        }
+        // セクション：アクション
+        &__actions {
+          width: 33%;
+          &__fields {
+            height: 11%;
+            display: flex;
+            margin: 1px;
+            &--left {
+              height: 100%;
+              width: 30%;
+              // background-color: gray;
+              .new-task-form__actions__fields__image {
+                display: flex;
+                height: 100%;
+                width: 100%;
+                &__preview {
+                  height: 100%;
+                  width: 100%;
+                  // background-color: green;
+                  // 画像プレビューappend場所
+                }
+              }
+            }
+            &--right {
+              // background-color: purple;
+              .right-form-box {
+                margin-top: 10%;
+                .new-task-form__actions__fields__text-field {
+                }
+                .new-task-form__actions__fields__icons {
+                  display: flex;
+                  justify-content: flex-end;
+                  margin-top: 5px;
+                  &__upload {
+                    margin-right: 5px;
+                    .new-task-form__actions__upload-label {
+                      .new-task-form__acitons__file-field {
+                        display: none;
+                      }
+                    }
+                  }
+                  &__remove {
+                  }
+                }
+              }
+            }
+          }
+          &__anchor-fields {
+            height: 11%;
+            display: flex;
+            border-bottom: 1px solid;
+            border-color: $lightgreen;
+            .new-task-form__actions__anchor-fields--left {
+              height: 100%;
+              width: 30%;
+              .new-task-form__actions__anchor-fields__image {
+                display: flex;
+                height: 100%;
+                width: 100%;
+                &__preview {
+                  height: 100%;
+                  width: 100%;
+                  // 画像プレビューappend場所
+                }
+              }
+            }
+            .new-task-form__actions__anchor-fields--right {
+              .right-form-box {
+                margin-top: 10%;
+                .new-task-form__actions__text-field {
+                }
+                .new-task-form__actions__anchor-fields__icons {
+                  margin-top: 5px;
+                  display: flex;
+                  justify-content: flex-end;
+                  &__upload {
+                    margin-right: 5px;
+                    .new-task-form__actions__upload-label {
+                      .new-task-form__acitons__file-field {
+                        display: none;
+                      }
+                    }
+                  }
+                  &__remove {
+                  }
                 }
               }
             }
