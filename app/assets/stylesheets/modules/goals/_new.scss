@@ -8,6 +8,13 @@
   width: 150px;
 }
 
+// appendされる画像プレビュー
+.new-task-form__action-previews {
+  height: 80px;
+  width: 80px;
+  margin-top : 1vh;
+}
+
 
 .goals-new {
   &__form {
@@ -182,80 +189,76 @@
             &--left {
               height: 100%;
               width: 30%;
-              // background-color: gray;
               .new-task-form__actions__fields__image {
                 display: flex;
                 height: 100%;
                 width: 100%;
                 &__preview {
+                  // 画像プレビューappend場所
                   height: 100%;
                   width: 100%;
-                  // background-color: green;
-                  // 画像プレビューappend場所
+                  text-align: center;
                 }
               }
             }
             &--right {
-              // background-color: purple;
               .right-form-box {
                 margin-top: 10%;
                 .new-task-form__actions__fields__text-field {
                 }
-                .new-task-form__actions__fields__icons {
+                .new-task-form__actions__icons {
                   display: flex;
                   justify-content: flex-end;
                   margin-top: 5px;
                   &__upload {
                     margin-right: 5px;
                     .new-task-form__actions__upload-label {
-                      .new-task-form__acitons__file-field {
+                      .new-task-form__actions__file-field {
                         display: none;
                       }
                     }
-                  }
-                  &__remove {
                   }
                 }
               }
             }
           }
-          &__anchor-fields {
+          .new-task-form__anchor-actions__fields {
             height: 11%;
             display: flex;
             border-bottom: 1px solid;
             border-color: $lightgreen;
-            .new-task-form__actions__anchor-fields--left {
+            margin: 1px;
+            &--left {
               height: 100%;
               width: 30%;
-              .new-task-form__actions__anchor-fields__image {
+              .new-task-form__anchor-actions__fields__image {
                 display: flex;
                 height: 100%;
                 width: 100%;
                 &__preview {
+                  // 画像プレビューappend場所
                   height: 100%;
                   width: 100%;
-                  // 画像プレビューappend場所
+                  text-align: center;
                 }
               }
             }
-            .new-task-form__actions__anchor-fields--right {
+            &--right {
               .right-form-box {
                 margin-top: 10%;
-                .new-task-form__actions__text-field {
+                .new-task-form__anchor-actions____text-field {
                 }
-                .new-task-form__actions__anchor-fields__icons {
-                  margin-top: 5px;
+                .new-task-form__anchor-actions__icons {
                   display: flex;
                   justify-content: flex-end;
+                  margin-top: 5px;
                   &__upload {
                     margin-right: 5px;
-                    .new-task-form__actions__upload-label {
-                      .new-task-form__acitons__file-field {
+                    .new-task-form__anchor-actions__upload-label {
+                      .new-task-form__anchor-actions__file-field {
                         display: none;
                       }
                     }
-                  }
-                  &__remove {
                   }
                 }
               }
