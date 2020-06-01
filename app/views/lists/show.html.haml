@@ -33,7 +33,10 @@
             %th
               タスクの状態
             %th
+              実行中のステップ
             %th
+              実行中のアクション
+
         %tbody.lists-show__task-table__results__body
           - @goals.each do |goal|
             %tr{data: {lists_show_task_id: goal.id}}
@@ -49,6 +52,10 @@
                 = "#{goal.date.strftime("%Y/%m/%d %H:%M")}"
               %td.js-change-status{data: {id: goal.id}}
                 = button_to "#{goal.status_i18n}", change_status_list_goal_path(goal.list_id, goal), method: :post, name: "status", class: "change-status-btn goal_#{goal.id}", value: goal.status
+              %td
+                = "#{goal.steps.where(status: 0).length}"
+              %td
+                = "#{goal.actions.where(status: 0).length}"
               %td
                 = link_to edit_list_goal_path(goal.list_id, goal.id) do
                   %i.fas.fa-edit

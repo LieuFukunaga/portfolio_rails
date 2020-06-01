@@ -57,7 +57,9 @@
             %th
               更新日時
             %th
+              実行中のステップ
             %th
+              実行中のアクション
         %tbody.goals-task_search_in_list__task-table__results__body.hover-records
           - @tasks.each do |task|
             %tr{data: {searched_task_id: task.id}}
@@ -75,6 +77,10 @@
                 = button_to "#{task.status_i18n}", change_status_list_goal_path(task.list_id, task), method: :post, name: "status", class: "change-status-btn goal_#{task.id}", value: task.status
               %td
                 = "#{task.updated_at.strftime("%Y/%m/%d %H:%M")}"
+              %td
+                = "#{task.steps.where(status: 0).length}"
+              %td
+                = "#{task.actions.where(status: 0).length}"
               %td
                 = link_to edit_list_goal_path(task.list_id, task.id) do
                   %i.fas.fa-edit

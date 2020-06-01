@@ -5,7 +5,6 @@
 
 #lists-show__search-btn {
   @include search-btn;
-  
 }
 
 .lists-show {
@@ -17,12 +16,12 @@
     &__search-form {
     }
     &__create-task-btn {
-      margin: 20px 0;
+      margin: 1vh;
     }
   }
 }
 
 .lists-show__task-table__results {
-  background-color: blue;
+  // background-color: blue;
   height: 60vh;
 }

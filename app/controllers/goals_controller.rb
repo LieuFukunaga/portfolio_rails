@@ -68,7 +68,10 @@ class GoalsController < ApplicationController
   end
 
   def show
-    @goal_categories = @goal.categories.order("category_name ASC")
+    @categories = @goal.categories.order("category_name ASC")
+    @steps = @goal.steps
+    @actions = @goal.actions
+
   end
 
   def edit

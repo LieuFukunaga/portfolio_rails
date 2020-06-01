@@ -1,57 +1,113 @@
 .goals-show
+  -# セクション：goal
   .goals-show__goal
-    .goals-show__task-info
-      .goals-show__task-info__image
-        - if @goal.image.attached?
-          = image_tag @goal.image.variant(combine_options:{resize:"250x250^",crop:"250x250+0+0",gravity: :center}).processed, data: {id: @goal.id}, class: "goals-show__task-info__image__thumbnail"
-    .goals-show__task-info--middle
-      .goals-show__task-info--middle__change-status{data: {id: @goal.id}}
-        = link_to "#{@goal.status_i18n}", change_status_at_root_list_goal_path(@goal.list_id, @goal, status: @goal.status), method: :post, class: "goals-show__task-info--middle__change-status__link", id: "change_status_task_#{@goal.id}"
-      .goals-show__task-info--middle__link-to-edit
-        = link_to edit_list_goal_path(@goal.list_id, @goal) do
-          %i.fas.fa-edit
-    %br
-    %table
-      %thead
-        %tr
-          %th
-            カテゴリー：
-      %tbody
-        - @goal_categories.each do |c|
-          %tr
-            %td
-              = link_to category_path(c) do
-                = "#{c.category_name}"
-    .goals-show__links
+    .goals-show__goal__box
+      .goals-show__goal__box__image
+        .goal-image-box
+          - if @goal.image.attached?
+            = image_tag @goal.image.variant(combine_options:{resize:"300x300^",crop:"300x300+0+0",gravity: :center}).processed
+          - else
+            %i.fas.fa-flag-checkered.no-image
+      .goals-show__goal__box__title
+        = link_to "#{@goal.title}", edit_list_goal_path(@goal.list_id, @goal)
+      .goals-show__goal__box__status
+        -# = button_to "#{@goal.status_i18n}", change_status_list_goal_path(@goal.list_id, @goal), method: :post, name: "status", class: "change-status-btn", value: @goal.status
+        = link_to change_status_list_goal_path(@goal.list_id, @goal, status: @goal.status), method: :post, class: "change-status-btn", id: "goal-status" do
+          - if @goal.status == "doing"
+            %i.far.fa-circle
+          - else
+            %i.fas.fa-check-circle
+      .goals-show__goal__box__date
+        = "予定日時：#{@goal.date.strftime("%Y/%m/%d %H:%M")}"
+      .goals-show__goal__box__category
+        - if @categories.length != 0
+          カテゴリ一覧：
+          - @categories.each do |category|
+            .goals-show__goal-categories
+              = link_to "#{category.category_name}", category_path(category)
+        - else
+          カテゴリは設定されていません
+    .goals-show-links
       = render partial: "layouts/return-to-list-show"
       = render partial: "layouts/return-to-root"
 
+  -# セクション：steps
   .goals-show__steps
-    .task__steps__upper
-      step1
-    .task__steps__middle
-      step2
-    .task__steps__lower
-      step3
+    - @steps.each.with_index do |step, index|
+      - if index % 3 != 2
+        .goals-show__steps__box
+          .goals-show__steps__box__image
+            .step-image-boxes
+              - if step.step_image.attached?
+                = image_tag step.step_image.variant(combine_options:{resize:"150x150^",crop:"150x150+0+0",gravity: :center}).processed
+              - else
+                %i.fas.fa-shoe-prints.no-image
+          .goals-show__steps__box__title
+            = link_to "#{step.title}", edit_list_goal_path(@goal.list_id, @goal)
+          .goals-show__steps__box__status
+            -# = button_to "#{step.status_i18n}", change_status_list_goal_path(@goal.list_id, @goal), method: :post, name: "status", class: "change-status-btn step_#{index}", value: step.status
+            = link_to change_status_list_goal_path(@goal.list_id, @goal, status: step.status), method: :post, class: "change-status-btn step_#{index}" do
+              - if step.status == "doing"
+                %i.far.fa-circle
+              - else
+                %i.fas.fa-check-circle
+      - else
+        .goals-show__steps__anchor-box
+          .goals-show__steps__anchor-box__image
+            .step-image-boxes
+              - if step.step_image.attached?
+                = image_tag step.step_image.variant(combine_options:{resize:"150x150^",crop:"150x150+0+0",gravity: :center}).processed
+              - else
+                %i.fas.fa-shoe-prints.no-image
+          .goals-show__steps__anchor-box__title
+            = link_to "#{step.title}", edit_list_goal_path(@goal.list_id, @goal)
+          .goals-show__steps__anchor-box__status
+            -# = button_to "#{step.status_i18n}", change_status_list_goal_path(@goal.list_id, @goal), method: :post, name: "status", class: "change-status-btn step_#{index}", value: step.status
+            = link_to change_status_list_goal_path(@goal.list_id, @goal, status: step.status), method: :post, class: "change-status-btn step_#{index}" do
+              - if step.status == "doing"
+                %i.far.fa-circle
+              - else
+                %i.fas.fa-check-circle
 
+  -# セクション：actions
   .goals-show__actions
-    .task__actions--1
-      action1
-    .task__actions--2
-      action2
-    .task__actions--3
-      action3
-    .task__actions--4
-      action4
-    .task__actions--5
-      action5
-    .task__actions--6
-      action6
-    .task__actions--7
-      action7
-    .task__actions--8
-      action8
-    .task__actions--9
-      action9
+    - @actions.each.with_index do |action, index|
+      - if index != 2 && index != 5
+        .goals-show__actions__box
+          .box--left
+            .goals-show__actions__box__image
+              - if action.action_image.attached?
+                = image_tag action.action_image.variant(combine_options:{resize:"80x80^",crop:"80x80+0+0",gravity: :center}).processed
+              - else
+                %i.fas.fa-location-arrow.no-image
+          .box--right
+            .goals-show__actions__box__title
+              = link_to "#{action.title}", edit_list_goal_path(@goal.list_id, @goal)
+            .goals-show__actions__box__status
+              -# = button_to "#{action.status_i18n}", change_status_list_goal_path(@goal.list_id, @goal), method: :post, name: "status", class: "change-status-btn action_#{index}", value: action.status
+              = link_to change_status_list_goal_path(@goal.list_id, @goal, status: action.status), method: :post, class: "change-status-btn action_#{index}" do
+                - if action.status == "doing"
+                  %i.far.fa-circle
+                - else
+                  %i.fas.fa-check-circle
+      - else
+        .goals-show__actions__anchor-box
+          .box--left
+            .goals-show__actions__anchor-box__image
+              - if action.action_image.attached?
+                = image_tag action.action_image.variant(combine_options:{resize:"80x80^",crop:"80x80+0+0",gravity: :center}).processed
+              - else
+                %i.fas.fa-location-arrow.no-image
+          .box--right
+            .goals-show__actions__anchor-box__title
+              = link_to "#{action.title}", edit_list_goal_path(@goal.list_id, @goal)
+            .goals-show__actions__anchor-box__status
+              -# = button_to "#{action.status_i18n}", change_status_list_goal_path(@goal.list_id, @goal), method: :post, name: "status", class: "change-status-btn action_#{index}", value: action.status
+              = link_to change_status_list_goal_path(@goal.list_id, @goal, status: action.status), method: :post, class: "change-status-btn action_#{index}" do
+                - if action.status == "doing"
+                  %i.far.fa-circle
+                - else
+                  %i.fas.fa-check-circle
+
 
 

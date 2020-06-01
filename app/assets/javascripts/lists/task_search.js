@@ -15,8 +15,6 @@ $(function() {
                           <th>所属リスト</th>
                           <th>予定日時</th>
                           <th>タスクの状態</th>
-                          <th></th>
-                          <th></th>
                         </tr>
                       </thead>
                       <tbody id="task-table__body" class="hover-records"></tbody>`

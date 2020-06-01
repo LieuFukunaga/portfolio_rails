@@ -1,70 +1,158 @@
+.goals-show .fa-circle {
+  color: $orange;
+}
+
+.goals-show .fa-check-circle {
+  color: $green;
+}
+
 .goals-show {
+  height: 100vh;
   display: flex;
-  .goals-show__goal{
+  &__goal {
+    height: 100%;
     width: 34%;
-    .goals-show__task-info {
-      height: 500px;
-      display: flex;
-      align-items: center;
+    &__box {
+      height: 90%;
       &__image {
+        height: 50%;
+        margin: 0 auto;
         display: flex;
+        padding-top: 10vh;
+        .goal-image-box {
+          text-align: center;
+          width: 100%;
+          .fa-flag-checkered {
+            margin-top: 15vh;
+          }
+        }
+      }
+      &__title {
+        padding: 10px;
+        font-size: 20px;
         text-align: center;
-        &__thumbnail {
-          align-items: center;
-        }
       }
-      &--middle {
+      &__status {
+        font-size: 30px;
+        line-height: 30px;
+        margin: 0 50px 2vh 0px;
         display: flex;
-        &__change-status {
-          margin-right: 20px;
+        justify-content: flex-end;
+      }
+      &__date {
+        padding: 1vh 20px;
+      }
+      &__category {
+        padding: 1vh 20px;
+        .goals-show__goal-categories {
         }
       }
     }
-  }
-  .goals-show__steps {
-    width: 33%;
-    &__upper {
-      height: 33%;
-    }
-    &__middle {
-      height: 33%;
-    }
-    &__lower {
-      height: 33%;
+    .goals-show-links {
+      margin: 0 20px;
     }
   }
-  .goals-show__actions {
+  &__steps {
+    height: 100%;
     width: 33%;
-    &--1 {
-      height: 11%;
+    &__box {
+      height: 33%;
+      margin: 1px;
+      &__image {
+        height: 20vh;
+        .step-image-boxes {
+          padding-top: 2vh;
+          text-align: center;
+          .fa-shoe-prints {
+            margin-top: 5vh;
+          }
+        }
+      }
+      &__title {
+        text-align: center;
+      }
+      &__status {
+        font-size: 25px;
+        margin: 20px;
+        display: flex;
+        justify-content: flex-end;
+      }
     }
-    &--2 {
-      height: 11%;
+    &__anchor-box {
+      height: 34%;
+      &__image {
+        height: 20vh;
+        .step-image-boxes {
+          padding-top: 2vh;
+          text-align: center;
+          .fa-shoe-prints {
+            margin-top: 5vh;
+          }
+        }
+      }
+      &__title {
+        text-align: center;
+      }
+      &__status {
+        font-size: 25px;
+        margin: 20px;
+        display: flex;
+        justify-content: flex-end;
+      }
     }
-    &--3 {
+  }
+  &__actions {
+    height: 100%;
+    width: 33%;
+    &__box {
       height: 11%;
+      display: flex;
+      .box--left {
+        width: 40%;
+        .goals-show__actions__box__image {
+          text-align: center;
+          margin-top: 1vh;
+        }
+      }
+      .box--right {
+        width: 60%;
+        display: flex;
+        .goals-show__actions__box__title {
+          width: 70%;
+          margin-top: 3vh;
+          text-align: center;
+        }
+        .goals-show__actions__box__status {
+          font-size: 25px;
+          margin: 5vh 10px 0 10px;
+        }
+      }
     }
-    &--4 {
+    &__anchor-box {
       height: 11%;
-    }
-    &--5 {
-      height: 11%;
-    }
-    &--6 {
-      height: 11%;
-    }
-    &--7 {
-      height: 11%;
-    }
-    &--8 {
-      height: 11%;
-    }
-    &--9 {
-      height: 11%;
+      border-bottom: 1px solid;
+      border-color: $lightgreen;
+      display: flex;
+      .box--left {
+        width: 40%;
+        .goals-show__actions__anchor-box__image {
+          text-align: center;
+          margin-top: 1vh;
+        }
+      }
+      .box--right {
+        width: 60%;
+        display: flex;
+        .goals-show__actions__anchor-box__title {
+          text-align: center;
+          width: 70%;
+          margin-top: 3vh;
+        }
+        .goals-show__actions__anchor-box__status {
+          font-size: 25px;
+          margin: 5vh 10px 0 10px;
+        }
+      }
     }
   }
 }
-
-
-
-

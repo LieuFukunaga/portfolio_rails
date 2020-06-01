@@ -66,5 +66,9 @@
       .goals-edit__form__submit-btn
         = f.submit "登録"
 %footer
+  = link_to list_goal_path(@goal.list_id, @goal) do
+    %i.fas.fa-angle-left
+    %span
+      タスク詳細ページへ戻る
   = render partial: "layouts/return-to-list-show"
   = render partial: "layouts/return-to-root"

@@ -73,7 +73,7 @@ input {
   padding: 5px;
 }
 
-i:not(.fa-tasks):not(.fa-user-circle):not(.fa-search) {
+i:not(.fa-tasks):not(.fa-user-circle):not(.fa-search):not(.fa-circle):not(.fa-check-circle) {
   color: $slategreen;
 }
 
@@ -95,12 +95,14 @@ table {
 
 th {
   font-weight: bold;
-  padding: 0 5px;
+  padding: 0 10px;
   background-color: $lightgray;
+  text-align: center;
 }
 
 td {
-  padding: 5px 10px;
+  padding: 1vh 10px;
+  text-align: center;
 }
 
 
@@ -110,7 +112,7 @@ td {
 .breadcrumbs-field {
   margin: 5px 20px;
 }
-.fas:not(.fa-tasks):not(.fa-user-circle) {
+.fas:not(.fa-tasks):not(.fa-user-circle):not(.fa-check-circle) {
   font-size: 20px;
 }
 
@@ -119,11 +121,13 @@ td {
 }
 
 .no-image {
-  height: 100px;
-  width: 100px;
-  line-height: 100px;
+  height: 80px;
+  width: 80px;
+  line-height: 80px;
   font-size: 25px;
   text-align: center;
+  border-radius: 10%;
+  background-color: $whitesmoke;
 }
 
 .tasks-thumbnail {
@@ -146,8 +150,8 @@ td {
 }
 
 .thumbnail--small {
-  height: 100px;
-  width: 100px;
+  height: 80px;
+  width: 80px;
 }
 
 .breadcrumbs-field {
@@ -161,6 +165,12 @@ td {
 .grayout {
   opacity: 0.3;
 }
+
+// .change-status-btn {
+//   border-radius: 5px;
+//   border-color: darkgray;
+//   border-style: solid;
+// }
 
 // タグ、クラス・共通
 
