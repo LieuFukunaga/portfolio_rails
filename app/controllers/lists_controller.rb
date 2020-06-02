@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: [:show, :edit, :update, :destroy, :search_in_list]
+  before_action :set_list, only: [:show, :edit, :update, :destroy, :search_in_list, :change_favorite]
 
   def index
     @lists = List.includes(:user).where(user_id: current_user.id).order("list_name ASC").page(params[:page]).per(4)
@@ -79,6 +79,22 @@ class ListsController < ApplicationController
       format.json
     end
   end
+
+  def change_favorite
+    if @list.user_id == current_user.id
+      favorite = params[:favorite]
+      if favorite == "ordinary"
+        @list.update(favorite: "favorite")
+      else
+        @list.update(favorite: "ordinary")
+      end
+      respond_to do |format|
+        format.html {redirect_to root_path}
+        format.json {render json: @list}
+      end
+    end
+  end
+
 
 
   private

@@ -55,6 +55,7 @@ Task 1-3-9
 |Column       |Type       |Options                        |
 |-------------|-----------|-------------------------------|
 |list_name    |string     |null: false, index: true       |
+|favorite     |integer    |limit: 1, default: 0           |
 |user_id      |references |foreign_key: true, index: true |
 
 #### Association

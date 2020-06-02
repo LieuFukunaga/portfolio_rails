@@ -29,6 +29,10 @@
             リスト名（昇順）
           %option{value: "list_name_desc"}
             リスト名（降順）
+          %option{value: "favorite_desc"}
+            「お気に入り」を前に
+          %option{value: "favorite_asc"}
+            「お気に入り」以外を前に
           %option{value: "updated_at_asc"}
             更新日時（昇順）
           %option{value: "updated_at_desc"}
@@ -40,14 +44,23 @@
         %thead.lists-list_search__list-operator__results__table__head
           %tr
             %th
+              お気に入り
+            %th
               リスト名
             %th
               タスク数
             %th
-              最近更新したタスク
+              最近のタスク
         %tbody.lists-list_search__list-operator__results__table__body
           - @lists.each do |list|
             %tr.lists-list_search__list-operator__results__table__body__record
+              %td.js-change-favorite
+                - if list.favorite == "ordinary"
+                  = link_to change_favorite_list_path(list, favorite: list.favorite), method: :post, class: "change-favorite-icons", id: "change-favorite__list_#{list.id}", data: { list_id: list.id} do
+                    %i.far.fa-heart{id: "list_#{list.id}__favorite-icon"}
+                - else
+                  = link_to change_favorite_list_path(list, favorite: list.favorite), method: :post, class: "change-favorite-icons", id: "change-favorite__list_#{list.id}", data: { list_id: list.id} do
+                    %i.fas.fa-heart{id: "list_#{list.id}__favorite-icon"}
               %td
                 = link_to "#{list.list_name}", list_path(list)
               %td
@@ -55,13 +68,17 @@
               - list.goals.each.with_index(1) do |goal, i|
                 - if goal != 0
                   - if goal.updated_at >= Time.now - 1.week
-                    %td.td-image{class: "lists-list_search__list-operator__results__table__body__record__image-#{i} thumbnail"}
-                      - if goal.image.attached?
-                        = image_tag goal.image.variant(combine_options:{resize:"100x100^",crop:"100x100+0+0",gravity: :center}).processed
-                      - else
-                        %i.fas.fa-tasks.lists-search__results__icon
-                    %td{class: "lists-list_search__list-operator__results__table__body__record__title-#{i}"}
-                      = link_to "#{goal.title}",list_goal_path(goal.list_id, goal.id)
+                    -# %td.td-image{class: "lists-list_search__list-operator__results__table__body__record__image-#{i} thumbnail"}
+                      -# - if goal.image.attached?
+                      -#   = image_tag goal.image.variant(combine_options:{resize:"100x100^",crop:"100x100+0+0",gravity: :center}).processed
+                      -# - else
+                      -#   %i.fas.fa-tasks.lists-search__results__icon
+                    %td
+                      = link_to list_goal_path(goal.list_id, goal.id) do
+                        - if goal.image.attached?
+                          = image_tag goal.image.variant(combine_options:{resize:"100x100^",crop:"100x100+0+0",gravity: :center}).processed
+                        - else
+                          %i.fas.fa-tasks.list-search-thumbnails
   - else
     %br
     該当するリストはありません

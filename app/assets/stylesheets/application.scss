@@ -73,7 +73,7 @@ input {
   padding: 5px;
 }
 
-i:not(.fa-tasks):not(.fa-user-circle):not(.fa-search):not(.fa-circle):not(.fa-check-circle) {
+i:not(.fa-tasks):not(.fa-user-circle):not(.fa-search):not(.fa-circle):not(.fa-check-circle):not(.fa-heart) {
   color: $slategreen;
 }
 
@@ -113,6 +113,10 @@ td {
   margin: 5px 20px;
 }
 .fas:not(.fa-tasks):not(.fa-user-circle):not(.fa-check-circle) {
+  font-size: 20px;
+}
+
+.far {
   font-size: 20px;
 }
 
@@ -164,6 +168,10 @@ td {
 
 .grayout {
   opacity: 0.3;
+}
+
+.fas.fa-heart {
+  color: $red;
 }
 
 // .change-status-btn {

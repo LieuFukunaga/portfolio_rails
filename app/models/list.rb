@@ -9,6 +9,12 @@ class List < ApplicationRecord
   validates :list_name, null: false, presence: true
 
 
+  enum favorite: {
+    ordinary: 0,
+    favorite: 1,
+  }
+
+
   # 検索ワード表示のため
   def self.split_keyword(search)
     split_keyword = search.split(/[[:blank:]]+/)

@@ -6,10 +6,9 @@ $(function(){
   })
 
   $(".change-status-link").on("click", function(){
-    // レコードのリンク先情報に持たせておいた"status"を抽出
+    // href属性からgoalのstatusカラムのデータを抽出
     let href = $(this).attr("href");
     let status = href.split("=")[1];
-    // console.log(`${status}`);
 
     // 直属のtd要素のカスタムデータ属性からタスクのidを取得
     let taskId = $(this).parents(".js-change-status").data("id");

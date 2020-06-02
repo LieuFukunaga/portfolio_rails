@@ -39,8 +39,8 @@ class GoalsController < ApplicationController
         flash[:success] = "タスクを作成しました"
         redirect_to list_path(@list)
       else
-        flash.now[:alert] = @goal.errors.full_messages
-        render action: :new
+        flash[:alert] = @goal.errors.full_messages
+        redirect_to list_path(@goal.list_id)
       end
       # 新規カテゴリの入力がない場合
     else
@@ -57,12 +57,11 @@ class GoalsController < ApplicationController
         actions[6..8].each do |action|
           action.update(step_id: steps[2].id)
         end
-
         flash[:success] = "タスクを作成しました"
         redirect_to list_path(@list)
       else
-        flash.now[:alert] = @goal.errors.full_messages
-        render action: :new
+        flash[:alert] = @goal.errors.full_messages
+        redirect_to list_path(@goal.list_id)
       end
     end
   end

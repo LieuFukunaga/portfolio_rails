@@ -20,15 +20,21 @@
             %thead
               %tr
                 %th
+                  お気に入り
+                %th
                   リスト名
                 %th
                   タスク数
-                %th
-                %th
-                %th
             %tbody.hover-records
               - @lists.where(user_id: current_user).each.with_index(1) do |list|
                 %tr{data: {list_id: "#{list.id}"}}
+                  %td.js-change-favorite
+                    - if list.favorite == "ordinary"
+                      = link_to change_favorite_list_path(list, favorite: list.favorite), method: :post, class: "change-favorite-icons", id: "change-favorite__list_#{list.id}", data: { list_id: list.id} do
+                        %i.far.fa-heart{id: "list_#{list.id}__favorite-icon"}
+                    - else
+                      = link_to change_favorite_list_path(list, favorite: list.favorite), method: :post, class: "change-favorite-icons", id: "change-favorite__list_#{list.id}", data: { list_id: list.id} do
+                        %i.fas.fa-heart{id: "list_#{list.id}__favorite-icon"}
                   %td
                     = link_to "#{list.list_name}", list_path(list), id: "list_#{list.id}"
                   %td
@@ -62,8 +68,6 @@
                 予定日時
               %th
                 タスクの状態
-              %th
-              %th
           %tbody.hover-records.n7dt-tbody
             - @tasks.each do |task|
               %tr{data: {search_result_id: "#{task.id}"}}

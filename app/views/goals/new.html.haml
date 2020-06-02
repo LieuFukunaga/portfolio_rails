@@ -52,50 +52,50 @@
 
         -# セクション：step
         .new-task-form__steps
-          - 3.times.with_index do |t, index|
-            - if index % 3 != 2
-              .new-task-form__steps__fields
-                = f.fields_for :steps do |s|
+          = f.fields_for :steps do |s|
+            - 3.times.with_index do |t, index|
+              - if index % 3 != 2
+                .new-task-form__steps__fields
                   .new-task-form__steps__fields__image
                     .new-task-form__steps__fields__image__preview{class: "step-previews_#{index}"}
                       -# 以下に画像プレビューをappend
                     .new-task-form__steps__fields__image__icons
                       .new-task-form__steps__fields__image__icons__upload
-                        = s.label :step_image, class: "new-task-form__steps__upload-label steps-upload-label_#{index}" do
+                        = s.label :step_image, class: "new-task-form__steps__upload-label", id: "steps-upload-label_#{index}", for: "goal_steps_attributes_#{index}_step_image" do
                           %i.fa.fa-camera
-                          = s.file_field :step_image, class: "new-task-form__steps__file-field steps-file-field_#{index}", data:{step_index: index}
+                          = s.file_field :step_image, class: "new-task-form__steps__file-field steps-file-field_#{index}", data:{step_index: index}, name: "goal[steps_attributes][#{index}][step_image]", id: "goal_steps_attributes_#{index}_step_image"
                       .new-task-form__steps__fields__image__icons__remove
                         %i.fas.fa-trash.new-task-form__steps__remove-preview-btn{data:{step_index: index}}
                   .new-task-form__steps__fields__text
-                    = s.text_field :title, class:"new-task-form__steps__text-field", id: "new-task-form__step-#{index}", value: "steps"
+                    = s.text_field :title, class:"new-task-form__steps__text-field", id: "new-task-form__step-#{index}", value: "steps", name: "goal[steps_attributes][#{index}][title]"
                   .new-task-form__steps__hidden-fields
-                    = s.hidden_field :user_id, value: current_user.id, class: "new-task-form__steps__hidden-field__user-id"
-                    = s.hidden_field :list_id, value: @list.id, class: "new-task-form__steps__hidden-field__list-id"
-            - else
-              .new-task-form__anchor-step__fields
-                = f.fields_for :steps do |s|
+                    = s.hidden_field :user_id, value: current_user.id, class: "new-task-form__steps__hidden-field__user-id", id: "goal_steps_attributes_#{index}_user_id", name: "goal[steps_attributes][#{index}][user_id]"
+                    = s.hidden_field :list_id, value: @list.id, class: "new-task-form__steps__hidden-field__list-id", id: "goal_steps_attributes_#{index}_list_id", name: "goal[steps_attributes][#{index}][list_id]"
+              - else
+                .new-task-form__anchor-step__fields
                   .new-task-form__anchor-step__fields__image
                     .new-task-form__anchor-step__fields__image__preview{class: "step-previews_#{index}"}
                       -# 以下に画像プレビューをappend
                     .new-task-form__anchor-step__fields__image__icons
                       .new-task-form__anchor-step__fields__image__icons__upload
-                        = s.label :step_image, class: "new-task-form__anchor-step__upload-label steps-upload-label_#{index}" do
+                        = s.label :step_image, class: "new-task-form__anchor-step__upload-label", id: "steps-upload-label_#{index}", for: "goal_steps_attributes_#{index}_step_image" do
                           %i.fa.fa-camera
-                          = s.file_field :step_image, class: "new-task-form__anchor-step__file-field steps-file-field_#{index}", data:{step_index: index}
+                          = s.file_field :step_image, class: "new-task-form__anchor-step__file-field steps-file-field_#{index}", data:{step_index: index}, name: "goal[steps_attributes][#{index}][step_image]", id: "goal_steps_attributes_#{index}_step_image"
                       .new-task-form__anchor-step__fields__image__icons__remove
                         %i.fas.fa-trash.new-task-form__anchor-step__remove-preview-btn{data:{step_index: index}}
                   .new-task-form__anchor-step__fields__text
-                    = s.text_field :title, class:"new-task-form__anchor-step__text-field", id: "new-task-form__step-#{index}", value: "steps"
+                    = s.text_field :title, class:"new-task-form__anchor-step__text-field", id: "new-task-form__step-#{index}", value: "steps", name: "goal[steps_attributes][#{index}][title]"
                   .new-task-form__anchor-step__hidden-fields
-                    = s.hidden_field :user_id, value: current_user.id, class: "new-task-form__anchor-step__hidden-field__user-id"
-                    = s.hidden_field :list_id, value: @list.id, class: "new-task-form__anchor-step__hidden-field__list-id"
+                    = s.hidden_field :user_id, value: current_user.id, class: "new-task-form__anchor-step__hidden-field__user-id", id: "goal_steps_attributes_#{index}_user_id", name: "goal[steps_attributes][#{index}][user_id]"
+                    = s.hidden_field :list_id, value: @list.id, class: "new-task-form__anchor-step__hidden-field__list-id", id: "goal_steps_attributes_#{index}_list_id", name: "goal[steps_attributes][#{index}][list_id]"
+
 
         -# セクション：action
         .new-task-form__actions
-          - 9.times.with_index do |t, index|
-            - if index != 2 && index != 5
-              .new-task-form__actions__fields
-                = f.fields_for :actions do |a|
+          = f.fields_for :actions do |a|
+            - 9.times.with_index do |t, index|
+              - if index != 2 && index != 5
+                .new-task-form__actions__fields
                   .new-task-form__actions__fields--left
                     .new-task-form__actions__fields__image
                       .new-task-form__actions__fields__image__preview{class: "action-previews_#{index}"}
@@ -104,20 +104,19 @@
                   .new-task-form__actions__fields--right
                     .right-form-box
                       .new-task-form__actions____text-field
-                        = a.text_field :title, class:"new-task-form__actions__text-field", id: "new-task-form__action-#{index}", value: "actions"
+                        = a.text_field :title, class:"new-task-form__actions__text-field", id: "new-task-form__action-#{index}", value: "actions", name: "goal[actions_attributes][#{index}][title]"
                       .new-task-form__actions__icons
                         .new-task-form__actions__icons__upload
-                          = a.label :action_image, class: "new-task-form__actions__upload-label actions-upload-label_#{index}" do
+                          = a.label :action_image, class: "new-task-form__actions__upload-label", id: "actions-upload-label_#{index}", for: "goal_actions_attributes_#{index}_action_image" do
                             %i.fa.fa-camera
-                            = a.file_field :action_image, class: "new-task-form__actions__file-field actions-file-field_#{index}", data:{action_index: index}
+                            = a.file_field :action_image, class: "new-task-form__actions__file-field actions-file-field_#{index}", data:{action_index: index}, name: "goal[actions_attributes][#{index}][action_image]", id: "goal_actions_attributes_#{index}_action_image"
                         .new-task-form__actions__icons__remove
                           %i.fas.fa-trash.new-task-form__actions__remove-preview-btn{data:{action_index: index}}
                   .new-task-form__actions__hidden-fields
-                    = a.hidden_field :user_id, value: current_user.id, class: "new-task-form__actions__hidden-field__user-id"
-                    = a.hidden_field :list_id, value: @list.id, class: "new-task-form__actions__hidden-field__list-id"
-            - else
-              .new-task-form__anchor-actions__fields
-                = f.fields_for :actions do |a|
+                    = a.hidden_field :user_id, value: current_user.id, class: "new-task-form__actions__hidden-field__user-id", id: "goal_actions_attributes_#{index}_user_id", name: "goal[actions_attributes][#{index}][user_id]"
+                    = a.hidden_field :list_id, value: @list.id, class: "new-task-form__actions__hidden-field__list-id", id: "goal_actions_attributes_#{index}_list_id", name: "goal[actions_attributes][#{index}][list_id]"
+              - else
+                .new-task-form__anchor-actions__fields
                   .new-task-form__anchor-actions__fields--left
                     .new-task-form__anchor-actions__fields__image
                       .new-task-form__anchor-actions__fields__image__preview{class: "action-previews_#{index}"}
@@ -126,14 +125,14 @@
                   .new-task-form__anchor-actions__fields--right
                     .right-form-box
                       .new-task-form__anchor-actions____text-field
-                        = a.text_field :title, class:"new-task-form__anchor-actions__text-field", id: "new-task-form__action-#{index}", value: "actions"
+                        = a.text_field :title, class:"new-task-form__anchor-actions__text-field", id: "new-task-form__action-#{index}", value: "actions", name: "goal[actions_attributes][#{index}][title]"
                       .new-task-form__anchor-actions__icons
                         .new-task-form__anchor-actions__icons__upload
-                          = a.label :action_image, class: "new-task-form__anchor-actions__upload-label actions-upload-label_#{index}" do
+                          = a.label :action_image, class: "new-task-form__anchor-actions__upload-label", id: "actions-upload-label_#{index}", for: "goal_actions_attributes_#{index}_action_image" do
                             %i.fa.fa-camera
-                            = a.file_field :action_image, class: "new-task-form__anchor-actions__file-field actions-file-field_#{index}", data:{action_index: index}
+                            = a.file_field :action_image, class: "new-task-form__anchor-actions__file-field actions-file-field_#{index}", data:{action_index: index}, name: "goal[actions_attributes][#{index}][action_image]", id: "goal_actions_attributes_#{index}_action_image"
                         .new-task-form__anchor-actions__icons__remove
                           %i.fas.fa-trash.new-task-form__anchor-actions__remove-preview-btn{data:{action_index: index}}
                   .new-task-form__anchor-actions__hidden-fields
-                    = a.hidden_field :user_id, value: current_user.id, class: "new-task-form__anchor-actions__hidden-field__user-id"
-                    = a.hidden_field :list_id, value: @list.id, class: "new-task-form__anchor-actions__hidden-field__list-id"
+                    = a.hidden_field :user_id, value: current_user.id, class: "new-task-form__anchor-actions__hidden-field__user-id", id: "goal_actions_attributes_#{index}_user_id", name: "goal[actions_attributes][#{index}][user_id]"
+                    = a.hidden_field :list_id, value: @list.id, class: "new-task-form__anchor-actions__hidden-field__list-id", id: "goal_actions_attributes_#{index}_list_id", name: "goal[actions_attributes][#{index}][list_id]"

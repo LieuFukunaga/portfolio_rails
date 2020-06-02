@@ -13,6 +13,7 @@ $(function(){
 
   $(".new-task-form__steps__fields__image__icons__upload").on("change", ".new-task-form__steps__file-field", function (e){
     var stepIndex = $(this).data("step-index");
+    // console.log(stepIndex);
     $(`.step-previews_${stepIndex}`).empty();
     var file = e.target.files[0];
     var blobUrl = window.URL.createObjectURL(file);
@@ -23,7 +24,7 @@ $(function(){
     var stepIndex = $(this).data("step-index");
     $(`.steps-img_${stepIndex}`).remove();
     $(`.steps-file-field_${stepIndex}`).remove();
-    $(`.steps-upload-label_${stepIndex}`).append(buildStepsFileField(stepIndex));
+    $(`#steps-upload-label_${stepIndex}`).append(buildStepsFileField(stepIndex));
   })
 
 
@@ -42,6 +43,7 @@ $(function(){
 
   $(".new-task-form__anchor-step__fields__image__icons__upload").on("change", ".new-task-form__anchor-step__file-field", function (e){
     var stepIndex = $(this).data("step-index");
+    console.log(stepIndex);
     $(`.step-previews_${stepIndex}`).empty();
     var file = e.target.files[0];
     var blobUrl = window.URL.createObjectURL(file);
@@ -52,6 +54,6 @@ $(function(){
     var stepIndex = $(this).data("step-index");
     $(`.steps-img_${stepIndex}`).remove();
     $(`.steps-file-field_${stepIndex}`).remove();
-    $(`.steps-upload-label_${stepIndex}`).append(buildAnchorStepFileField(stepIndex));
+    $(`#steps-upload-label_${stepIndex}`).append(buildAnchorStepFileField(stepIndex));
   })
 });

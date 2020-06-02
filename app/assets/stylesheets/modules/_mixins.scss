@@ -15,6 +15,14 @@
   background-color: $green;
 }
 
+@mixin no-image-icons-style {
+  height: 100px;
+  width: 100px;
+  line-height: 100px;
+  font-size: 25px;
+  text-align: center;
+}
+
 @mixin mypage-form-box{
   width: 30%;
   margin: 15vh auto 0 auto;

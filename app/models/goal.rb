@@ -16,7 +16,7 @@ class Goal < ApplicationRecord
   has_one_attached :image
 
   # validates :title, format: {with:/\A[^[:blank:]\s、,]+\z/}
-  validates :title, length: { minimum: 0, maximum: 20 }
+  validates :title, length: { minimum: 0, maximum: 45 }
   validates :title, null: false, presence: true
 
   enum status: {

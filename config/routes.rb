@@ -28,6 +28,9 @@ Rails.application.routes.draw do
       get "list_search"
       get "task_search"
     end
+    member do
+      post "change_favorite"
+    end
     resources :goals do
       member do
         delete "image_destroy"
