@@ -14,7 +14,7 @@ ja:
     models:
       step: ステップ
     attributes:
-      step:
+      steps:
         title:      ステップ名
         status:     ステータス
         user_id:    ユーザーID

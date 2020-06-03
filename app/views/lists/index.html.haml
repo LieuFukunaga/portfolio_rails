@@ -84,7 +84,10 @@
                 %td
                   = "#{task.date.strftime("%m/%d %H:%M (#{%w(日 月 火 水 木 金 土)[task.date.wday]}）")}"
                 %td.js-change-status{data: {id: task.id}}
-                  = link_to "#{task.status_i18n}", change_status_at_root_list_goal_path(task.list_id, task, status: task.status), method: :post, class: "change-status-link", id: "change_status_task_#{task.id}"
+                  - if task.status == "doing"
+                    = link_to "#{task.status_i18n}", change_status_at_root_list_goal_path(task.list_id, task, status: task.status), method: :post, class: "change-status-link lists-index__goal--doing", id: "change_status_task_#{task.id}"
+                  - else
+                    = link_to "#{task.status_i18n}", change_status_at_root_list_goal_path(task.list_id, task, status: task.status), method: :post, class: "change-status-link lists-index__goal--done", id: "change_status_task_#{task.id}"
                 %td
                   = link_to edit_list_goal_path(task.list_id, task.id) do
                     %i.fas.fa-edit

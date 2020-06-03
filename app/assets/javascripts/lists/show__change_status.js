@@ -20,8 +20,12 @@ $(function(){
     .done(function(task){
       if (task.status == "doing") {
         $(`.goal_${taskId}`).val("実行中");
+        $(`.goal_${taskId}`).removeClass("goal--done");
+        $(`.goal_${taskId}`).addClass("goal--doing");
       } else {
         $(`.goal_${taskId}`).val("達成！");
+        $(`.goal_${taskId}`).removeClass("goal--doing");
+        $(`.goal_${taskId}`).addClass("goal--done");
       };
     })
     .fail(function(){

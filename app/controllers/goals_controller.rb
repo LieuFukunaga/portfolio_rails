@@ -70,7 +70,6 @@ class GoalsController < ApplicationController
     @categories = @goal.categories.order("category_name ASC")
     @steps = @goal.steps
     @actions = @goal.actions
-
   end
 
   def edit
@@ -124,7 +123,7 @@ class GoalsController < ApplicationController
     end
   end
 
-  # リスト詳細・タスク詳細ページ用
+  # リスト詳細ページ用
   def change_status
     if @goal.user_id == current_user.id
       status = params[:status]
@@ -140,7 +139,7 @@ class GoalsController < ApplicationController
     end
   end
 
-  # トップページのタスク検索機能におけるステータス更新のため
+  # トップページタスク検索フォーム、タスク詳細ページ用
   def change_status_at_root
     if @goal.user_id == current_user.id
       status = params[:status]

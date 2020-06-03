@@ -14,7 +14,7 @@ ja:
     models:
       action: アクション
     attributes:
-      action:
+      actions:
         title:      アクション名
         status:     ステータス
         user_id:    ユーザーID

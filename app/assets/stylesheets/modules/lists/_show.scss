@@ -7,6 +7,14 @@
   @include search-btn;
 }
 
+.goal--doing {
+  background-color: $lightorange;
+}
+
+.goal--done {
+  background-color: $lightgreen;
+}
+
 .lists-show {
   height: 75vh;
   overflow: scroll;

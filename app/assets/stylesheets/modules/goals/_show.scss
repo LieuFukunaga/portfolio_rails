@@ -1,5 +1,5 @@
 .goals-show .fa-circle {
-  color: $orange;
+  color: $darkorange;
 }
 
 .goals-show .fa-check-circle {
@@ -33,8 +33,8 @@
         text-align: center;
       }
       &__status {
-        font-size: 30px;
-        line-height: 30px;
+        font-size: 35px;
+        line-height: 35px;
         margin: 0 50px 2vh 0px;
         display: flex;
         justify-content: flex-end;
@@ -43,8 +43,13 @@
         padding: 1vh 20px;
       }
       &__category {
+        height: 25vh;
         padding: 1vh 20px;
+        overflow: scroll;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
         .goals-show__goal-categories {
+          padding: 5px;
         }
       }
     }
@@ -72,8 +77,8 @@
         text-align: center;
       }
       &__status {
-        font-size: 25px;
-        margin: 20px;
+        width: 80%;
+        font-size: 30px;
         display: flex;
         justify-content: flex-end;
       }
@@ -94,8 +99,8 @@
         text-align: center;
       }
       &__status {
-        font-size: 25px;
-        margin: 20px;
+        width: 80%;
+        font-size: 30px;
         display: flex;
         justify-content: flex-end;
       }

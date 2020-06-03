@@ -27,12 +27,15 @@ $(function(){
         var beforeHref = $(`#change_status_task_${taskId}`).attr("href");
         afterHref = beforeHref.replace("?status=done", "?status=doing");
         $(`#change_status_task_${taskId}`).text("実行中").attr("href", afterHref);
-
+        $(`#change_status_task_${taskId}`).removeClass("lists-index__goal--done");
+        $(`#change_status_task_${taskId}`).addClass("lists-index__goal--doing");
         // 更新後の状態が「達成！」の場合
       } else {
         var beforeHref = $(`#change_status_task_${taskId}`).attr("href");
         afterHref = beforeHref.replace("?status=doing", "?status=done");
         $(`#change_status_task_${taskId}`).text("達成！").attr("href", afterHref);
+        $(`#change_status_task_${taskId}`).removeClass("lists-index__goal--doing");
+        $(`#change_status_task_${taskId}`).addClass("lists-index__goal--done");
       };
     })
     .fail(function(){

@@ -107,6 +107,8 @@ td {
 
 
 
+
+
 // クラス・共通
 
 .breadcrumbs-field {
@@ -116,7 +118,7 @@ td {
   font-size: 20px;
 }
 
-.far {
+.far:not(.fa-circle) {
   font-size: 20px;
 }
 
@@ -172,6 +174,11 @@ td {
 
 .fas.fa-heart {
   color: $red;
+}
+
+.change-status-btn {
+  border-radius: 5px;
+
 }
 
 // .change-status-btn {

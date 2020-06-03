@@ -42,7 +42,13 @@ Rails.application.routes.draw do
         get "task_search_in_list"
       end
       resources :steps do
+        member do
+          post "change_status", defaults: {format: 'json'}
+        end
         resources :actions do
+          member do
+            post "change_status", defaults: {format: 'json'}
+          end
         end
       end
     end

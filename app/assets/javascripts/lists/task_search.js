@@ -54,7 +54,7 @@ $(function() {
                       ${year}/${month}/${day} ${hour}:${minute} (${youbi})
                     </td>
                     <td class="js-change-status" data-id="${task.id}">
-                      <a class="change-status-links" id="task_${task.id}_${task.status}" rel="nofollow" data-method="post" href="javascript:void(0)" data-href="/lists/${task.list_id}/goals/${task.id}/change_status_at_root">実行中</a>
+                      <a class="change-status-links lists-index__goal--doing" id="task_${task.id}_${task.status}" rel="nofollow" data-method="post" href="javascript:void(0)" data-href="/lists/${task.list_id}/goals/${task.id}/change_status_at_root">実行中</a>
                     </td>
                     <td>
                     <a href="/lists/${task.list_id}/goals/${task.id}/edit">
@@ -88,7 +88,7 @@ $(function() {
                       ${year}/${month}/${day} ${hour}:${minute} (${youbi})
                     </td>
                     <td class="js-change-status" data-id="${task.id}">
-                      <a class="change-status-links" id="task_${task.id}_${task.status}" rel="nofollow" data-method="post" href="javascript:void(0)" data-href="/lists/${task.list_id}/goals/${task.id}/change_status_at_root">達成！</a>
+                      <a class="change-status-links lists-index__goal--done" id="task_${task.id}_${task.status}" rel="nofollow" data-method="post" href="javascript:void(0)" data-href="/lists/${task.list_id}/goals/${task.id}/change_status_at_root">達成！</a>
                     </td>
                     <td>
                     <a href="/lists/${task.list_id}/goals/${task.id}/edit">
@@ -124,7 +124,7 @@ $(function() {
                       ${year}/${month}/${day} ${hour}:${minute} (${youbi})
                     </td>
                     <td class="js-change-status" data-id="${task.id}">
-                      <a class="change-status-links" id="task_${task.id}_${task.status}" rel="nofollow" data-method="post" href="javascript:void(0)" data-href="/lists/${task.list_id}/goals/${task.id}/change_status_at_root">実行中</a>
+                      <a class="change-status-links  lists-index__goal--doing" id="task_${task.id}_${task.status}" rel="nofollow" data-method="post" href="javascript:void(0)" data-href="/lists/${task.list_id}/goals/${task.id}/change_status_at_root">実行中</a>
                     </td>
                     <td>
                     <a href="/lists/${task.list_id}/goals/${task.id}/edit">
@@ -158,7 +158,7 @@ $(function() {
                       ${year}/${month}/${day} ${hour}:${minute} (${youbi})
                     </td>
                     <td class="js-change-status" data-id="${task.id}">
-                      <a class="change-status-links" id="task_${task.id}_${task.status}" rel="nofollow" data-method="post" href="javascript:void(0)" data-href="/lists/${task.list_id}/goals/${task.id}/change_status_at_root">達成！</a>
+                      <a class="change-status-links lists-index__goal--done" id="task_${task.id}_${task.status}" rel="nofollow" data-method="post" href="javascript:void(0)" data-href="/lists/${task.list_id}/goals/${task.id}/change_status_at_root">達成！</a>
                     </td>
                     <td>
                     <a href="/lists/${task.list_id}/goals/${task.id}/edit">

@@ -51,7 +51,10 @@
               %td
                 = "#{goal.date.strftime("%Y/%m/%d %H:%M")}"
               %td.js-change-status{data: {id: goal.id}}
-                = button_to "#{goal.status_i18n}", change_status_list_goal_path(goal.list_id, goal), method: :post, name: "status", class: "change-status-btn goal_#{goal.id}", value: goal.status
+                - if goal.status == "doing"
+                  = button_to "#{goal.status_i18n}", change_status_list_goal_path(goal.list_id, goal), method: :post, name: "status", class: "change-status-btn goal_#{goal.id} goal--doing", value: goal.status
+                - else
+                  = button_to "#{goal.status_i18n}", change_status_list_goal_path(goal.list_id, goal), method: :post, name: "status", class: "change-status-btn goal_#{goal.id} goal--done", value: goal.status
               %td
                 = "#{goal.steps.where(status: 0).length}"
               %td
