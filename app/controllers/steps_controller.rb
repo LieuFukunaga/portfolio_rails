@@ -4,6 +4,7 @@ class StepsController < ApplicationController
   def edit
     @list = @step.list
     @goal = @step.goal
+    @categories = @goal.categories
     @steps = Step.where(goal_id: @goal.id)
   end
 

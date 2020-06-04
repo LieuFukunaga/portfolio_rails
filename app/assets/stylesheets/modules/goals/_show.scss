@@ -6,12 +6,18 @@
   color: $green;
 }
 
+
+
 .goals-show {
   height: 100vh;
+  width: 100vw;
   display: flex;
   &__goal {
     height: 100%;
     width: 34%;
+    overflow-x: scroll;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
     &__box {
       height: 90%;
       &__image {
@@ -60,11 +66,14 @@
   &__steps {
     height: 100%;
     width: 33%;
+    overflow-x: scroll;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
     &__box {
       height: 33%;
       margin: 1px;
       &__image {
-        height: 20vh;
+        height: 25vh;
         .step-image-boxes {
           padding-top: 2vh;
           text-align: center;
@@ -86,7 +95,7 @@
     &__anchor-box {
       height: 34%;
       &__image {
-        height: 20vh;
+        height: 25vh;
         .step-image-boxes {
           padding-top: 2vh;
           text-align: center;
@@ -109,6 +118,9 @@
   &__actions {
     height: 100%;
     width: 33%;
+    overflow-x: scroll;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
     &__box {
       height: 11%;
       display: flex;

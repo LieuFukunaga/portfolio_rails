@@ -1,22 +1,46 @@
-= @goal
-
-= @step.title
-%br/
-
-= form_with model: @step, url: list_goal_step_path(@list, @goal, @step), local: true do |f|
-  - @steps.each.with_index do |step, index|
-    - if @step.id > step.id
-      - if index != 2
-        = "step_#{index}"
+.steps-edit
+  .steps-edit__goal
+    .steps-edit__goal__image
+      .goal-image-box
+        - if @goal.image.attached?
+          = image_tag @goal.image.variant(combine_options:{resize:"300x300^",crop:"300x300+0+0",gravity: :center}).processed
+        - else
+          %i.fas.fa-flag-checkered.no-image
+    .steps-edit__goal__title
+      = link_to "#{@goal.title}", edit_list_goal_path(@goal.list_id, @goal)
+    .steps-edit__goal__status
+      = @goal.status_i18n
+    .steps-edit__goal__box__date
+      = "予定日時：#{@goal.date.strftime("%Y/%m/%d %H:%M")}"
+    .steps-edit__goal__box__category
+      - if @categories.length != 0
+        カテゴリ一覧：
+        - @categories.each do |category|
+          .steps-edit__goal-categories
+            = link_to "#{category.category_name}", category_path(category)
       - else
-        = "anchor-step"
-      %br
-    - elsif @step.id == step.id
-      = f.text_field :title
-      %br
-    - else
-      - if index != 2
-        = "step_#{index}"
-      - else
-        = "anchor-step"
-      %br
+        カテゴリは設定されていません
+    .steps-edit-links
+      = render partial: "layouts/return-to-goals-show"
+      = render partial: "layouts/return-to-lists-show"
+      = render partial: "layouts/return-to-root"
+
+  .steps-edit__steps
+    = form_with model: @step, url: list_goal_step_path(@list, @goal, @step), local: true do |f|
+      - @steps.each.with_index do |step, index|
+        - if @step.id > step.id
+          - if index != 2
+            = "step_#{index}"
+          - else
+            = "anchor-step"
+          %br
+        - elsif @step.id == step.id
+          = f.text_field :title
+          %br
+        - else
+          - if index != 2
+            = "step_#{index}"
+          - else
+            = "anchor-step"
+          %br
+  .steps-edit__actions

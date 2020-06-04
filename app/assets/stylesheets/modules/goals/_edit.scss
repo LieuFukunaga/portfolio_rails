@@ -4,13 +4,15 @@
 }
 
 .goals-edit__new-image-preview {
-  height: 250px;
-  width: 250px;
+  height: 100%;
+  width: 100%;
+  padding: 10px;
 }
 
 .goals-edit {
   display: flex;
   height: 100vh;
+  width: 100vw;
   &__goal-section {
     width: 40%;
     .goals-edit__form {
@@ -30,6 +32,10 @@
             padding: 10px;
             display: flex;
             justify-content: center;
+            align-items: center;
+            overflow: scroll;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
             &__image-box {
               text-align: center;
             }
@@ -42,8 +48,9 @@
           &__new-image {
             height: 100%;
             width: 50%;
-            margin: 1vh auto;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
         }
       }
@@ -133,40 +140,108 @@
   }
   &__steps-section {
     width: 30%;
-    opacity: 0.7;
-    // background-color: gray;
+    opacity: 0.6;
     .goals-edit__steps {
       height: 33%;
-      width: 100%
+      width: 100%;
+      display: flex;
+      .goals-edit__steps--left {
+        height: 100%;
+        width: 50%;
+        .steps__image {
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+      .goals-edit__steps--right {
+        height: 100%;
+        width: 50%;
+        text-align: center;
+        .right-box {
+          margin-top: 15vh;
+          .steps__title {
+          }
+          .steps__status {
+          }
+        }
+      }
     }
     .goals-edit__anchor-step {
       height: 34%;
-      width: 100%
+      width: 100%;
+      display: flex;
+      .goals-edit__anchor-step--left {
+        height: 100%;
+        width: 50%;
+        .anchor-step__image {
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+      .goals-edit__anchor-step--right {
+        height: 100%;
+        width: 50%;
+        text-align: center;
+        .right-box {
+          margin-top: 15vh;
+          .anchor-step__title {
+          }
+          .anchor-step__status {
+          }
+        }
+      }
     }
   }
   &__actions-section {
     height: 100%;
     width: 30%;
     opacity: 0.7;
-    // background-color: whitesmoke;
     .goals-edit__actions {
       height: 11%;
       display: flex;
       .actions__left-box {
-        width: 40%;
+        width: 50%;
+        .actions__image {
+          height: 100%;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
       }
       .actions__right-box {
-        width: 60%;
+        height: 100%;
+        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
     .goals-edit__anchor-actions {
       height: 11%;
       display: flex;
+      border-bottom: 1px solid;
+      border-color: $lightgreen;
       .anchor-actions__left-box {
-        width: 40%;
+        width: 50%;
+        .anchor-actions__image {
+          height: 100%;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
       }
       .anchor-actions__right-box {
-        width: 60%;
+        height: 100%;
+        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
   }

@@ -18,6 +18,14 @@
   text-align: center;
 }
 
+.users-edit__form-style {
+  @include form-style;
+}
+
+.users-edit .field {
+  margin: 5px;
+}
+
 .users-edit {
   &__form {
     text-align: center;
@@ -48,9 +56,6 @@
           text-align: center;
         }
       }
-    }
-    input {
-      @include form-style;
     }
   }
 }

@@ -27,7 +27,7 @@
         - else
           カテゴリは設定されていません
     .goals-show-links
-      = render partial: "layouts/return-to-list-show"
+      = render partial: "layouts/return-to-lists-show"
       = render partial: "layouts/return-to-root"
 
   -# セクション：steps
@@ -38,7 +38,7 @@
           .goals-show__steps__box__image
             .step-image-boxes
               - if step.step_image.attached?
-                = image_tag step.step_image.variant(combine_options:{resize:"150x150^",crop:"150x150+0+0",gravity: :center}).processed
+                = image_tag step.step_image.variant(combine_options:{resize:"200x200^",crop:"200x200+0+0",gravity: :center}).processed
               - else
                 %i.fas.fa-shoe-prints.no-image
           .goals-show__steps__box__title
@@ -54,7 +54,7 @@
           .goals-show__steps__anchor-box__image
             .step-image-boxes
               - if step.step_image.attached?
-                = image_tag step.step_image.variant(combine_options:{resize:"150x150^",crop:"150x150+0+0",gravity: :center}).processed
+                = image_tag step.step_image.variant(combine_options:{resize:"200x200^",crop:"200x200+0+0",gravity: :center}).processed
               - else
                 %i.fas.fa-shoe-prints.no-image
           .goals-show__steps__anchor-box__title

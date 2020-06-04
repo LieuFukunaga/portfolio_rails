@@ -6,7 +6,9 @@
 
 %main.goals-task_search_in_list
   %h2.goals-task_search_in_list__page-title
-    = "{ ”#{@list_name}” 内のタスク検索 }"
+    { "
+    = link_to "#{@list_name}", list_path(@list_id)
+    " }内のタスク検索
   .goals-task_search_in_list__operator
     .goals-task_search_in_list__operator__form
       = form_with url: task_search_in_list_list_goals_path(@list_id), method: :get, class: "goals-task_search_in_list__operator__form__form-field" do |f|

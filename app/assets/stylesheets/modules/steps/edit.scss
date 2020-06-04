@@ -1,0 +1,19 @@
+.steps-edit {
+  height: 100vh;
+  display: flex;
+  &__goal {
+    background-color: red;
+    height: 100%;
+    width: 30%;
+  }
+  &__steps {
+    background-color: blue;
+    height: 100%;
+    width: 40%;
+  }
+  &__actions {
+    background-color: green;
+    height: 100%;
+    width: 30%;
+  }
+}

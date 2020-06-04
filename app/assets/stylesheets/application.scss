@@ -9,6 +9,15 @@
 @import "modules/mixins";
 @import "modules/flash";
 
+// for users
+@import "modules/users/sessions/new";
+@import "modules/users/registrations/new";
+@import "modules/users/registrations/edit";
+@import "modules/users/registrations/new_address";
+@import "modules/users/show";
+@import "modules/users/edit";
+// for addresses
+@import "modules/addresses/edit";
 // for lists
 @import "modules/lists/index";
 @import "modules/lists/new";
@@ -21,26 +30,19 @@
 @import "modules/goals/show";
 @import "modules/goals/edit";
 @import "modules/goals/task_search_in_list";
+// for steps
+@import "modules/steps/edit";
+
 // for categories
 @import "modules/categories/index";
 @import "modules/categories/show";
 @import "modules/categories/edit";
-// for users
-@import "modules/users/sessions/new";
-@import "modules/users/registrations/new";
-@import "modules/users/registrations/edit";
-@import "modules/users/registrations/new_address";
-@import "modules/users/show";
-@import "modules/users/edit";
-// for addresses
-@import "modules/addresses/edit";
 
 
 * {
   box-sizing: border-box;
   color: $cs-navy;
 }
-
 
 // タグ・共通
 header {
@@ -69,7 +71,7 @@ a:hover {
   text-decoration: underline;
 }
 
-input {
+input:not(.users-edit__submit) {
   padding: 5px;
 }
 
