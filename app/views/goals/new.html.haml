@@ -18,7 +18,7 @@
               .new-task-form__goal__fields__image__remove
                 %i.fas.fa-trash.new-task__goal__remove-preview-btn
             .new-task-form__goal__fields__text
-              = f.text_field :title, id: "new-task-form__goal__text-field", value: "goal"
+              = f.text_field :title, id: "new-task-form__goal__text-field", value: "goal", placeholder: "20文字以内"
             .new-task-form__goal__fields__datetime
               = f.label :date, "予定日"
               %br
@@ -29,15 +29,13 @@
           .new-task-form__category
             - if Category.where(user_id: current_user.id).length != 0
               .new-task-form__category__check-boxes
-                = button_tag "カテゴリを選択", type: "button", id: "modal-fadein-btn"
+                = button_tag "カテゴリを選択", type: "button", id: "goals-new__modal-fadein-btn"
                 .new-task-form__category__check-boxes__options-box
                   .options
                     = f.collection_check_boxes(:category_ids, Category.where(user_id: current_user.id), :id, :category_name, include_hidden: false) do |c|
                       .categories
                         = c.label {c.check_box}
                         = c.label {c.text}
-                  .close-btn
-                    = button_tag "閉じる", type: "button", id: "modal-fadeout-btn"
             .new-task-form__category__create-category-form
               = f.label "新規カテゴリを作成"
               %br
@@ -67,7 +65,7 @@
                       .new-task-form__steps__fields__image__icons__remove
                         %i.fas.fa-trash.new-task-form__steps__remove-preview-btn{data:{step_index: index}}
                   .new-task-form__steps__fields__text
-                    = s.text_field :title, class:"new-task-form__steps__text-field", id: "new-task-form__step-#{index}", value: "steps", name: "goal[steps_attributes][#{index}][title]"
+                    = s.text_field :title, class:"new-task-form__steps__text-field", id: "new-task-form__step-#{index}", value: "steps", name: "goal[steps_attributes][#{index}][title]", placeholder: "20文字以内"
                   .new-task-form__steps__hidden-fields
                     = s.hidden_field :user_id, value: current_user.id, class: "new-task-form__steps__hidden-field__user-id", id: "goal_steps_attributes_#{index}_user_id", name: "goal[steps_attributes][#{index}][user_id]"
                     = s.hidden_field :list_id, value: @list.id, class: "new-task-form__steps__hidden-field__list-id", id: "goal_steps_attributes_#{index}_list_id", name: "goal[steps_attributes][#{index}][list_id]"
@@ -84,7 +82,7 @@
                       .new-task-form__anchor-step__fields__image__icons__remove
                         %i.fas.fa-trash.new-task-form__anchor-step__remove-preview-btn{data:{step_index: index}}
                   .new-task-form__anchor-step__fields__text
-                    = s.text_field :title, class:"new-task-form__anchor-step__text-field", id: "new-task-form__step-#{index}", value: "steps", name: "goal[steps_attributes][#{index}][title]"
+                    = s.text_field :title, class:"new-task-form__anchor-step__text-field", id: "new-task-form__step-#{index}", value: "steps", name: "goal[steps_attributes][#{index}][title]", placeholder: "20文字以内"
                   .new-task-form__anchor-step__hidden-fields
                     = s.hidden_field :user_id, value: current_user.id, class: "new-task-form__anchor-step__hidden-field__user-id", id: "goal_steps_attributes_#{index}_user_id", name: "goal[steps_attributes][#{index}][user_id]"
                     = s.hidden_field :list_id, value: @list.id, class: "new-task-form__anchor-step__hidden-field__list-id", id: "goal_steps_attributes_#{index}_list_id", name: "goal[steps_attributes][#{index}][list_id]"
@@ -104,7 +102,7 @@
                   .new-task-form__actions__fields--right
                     .right-form-box
                       .new-task-form__actions____text-field
-                        = a.text_field :title, class:"new-task-form__actions__text-field", id: "new-task-form__action-#{index}", value: "actions", name: "goal[actions_attributes][#{index}][title]"
+                        = a.text_field :title, class:"new-task-form__actions__text-field", id: "new-task-form__action-#{index}", value: "actions", name: "goal[actions_attributes][#{index}][title]", placeholder: "20文字以内"
                       .new-task-form__actions__icons
                         .new-task-form__actions__icons__upload
                           = a.label :action_image, class: "new-task-form__actions__upload-label", id: "actions-upload-label_#{index}", for: "goal_actions_attributes_#{index}_action_image" do
@@ -125,7 +123,7 @@
                   .new-task-form__anchor-actions__fields--right
                     .right-form-box
                       .new-task-form__anchor-actions____text-field
-                        = a.text_field :title, class:"new-task-form__anchor-actions__text-field", id: "new-task-form__action-#{index}", value: "actions", name: "goal[actions_attributes][#{index}][title]"
+                        = a.text_field :title, class:"new-task-form__anchor-actions__text-field", id: "new-task-form__action-#{index}", value: "actions", name: "goal[actions_attributes][#{index}][title]", placeholder: "20文字以内"
                       .new-task-form__anchor-actions__icons
                         .new-task-form__anchor-actions__icons__upload
                           = a.label :action_image, class: "new-task-form__anchor-actions__upload-label", id: "actions-upload-label_#{index}", for: "goal_actions_attributes_#{index}_action_image" do

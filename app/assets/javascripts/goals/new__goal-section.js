@@ -26,11 +26,15 @@ $(function(){
 
 
   // collection_check_boxes表示切り替えのため
-  $("#modal-fadein-btn").click(function(){
-    $(".new-task-form__category__check-boxes__options-box").fadeIn(100);
-  });
-  $("#modal-fadeout-btn").click(function(){
-    $(".new-task-form__category__check-boxes__options-box").fadeOut(100);
+  $("#goals-new__modal-fadein-btn").click(function(){
+    var modalBtnText = $(this).text();
+    if (modalBtnText == "カテゴリを選択") {
+      $(".new-task-form__category__check-boxes__options-box").fadeIn();
+      $(this).text("閉じる")
+    } else {
+      $(".new-task-form__category__check-boxes__options-box").fadeOut(50);
+      $(this).text("カテゴリを選択");
+    };
   });
 
 
@@ -47,9 +51,5 @@ $(function(){
       $(".hidden-field__category__user-id").attr("name", 'no_user')
     };
   });
-
-
-
-  // ========= セクション: Action ==========
 
 });

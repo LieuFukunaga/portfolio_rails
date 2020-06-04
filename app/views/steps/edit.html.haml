@@ -1,0 +1,22 @@
+= @goal
+
+= @step.title
+%br/
+
+= form_with model: @step, url: list_goal_step_path(@list, @goal, @step), local: true do |f|
+  - @steps.each.with_index do |step, index|
+    - if @step.id > step.id
+      - if index != 2
+        = "step_#{index}"
+      - else
+        = "anchor-step"
+      %br
+    - elsif @step.id == step.id
+      = f.text_field :title
+      %br
+    - else
+      - if index != 2
+        = "step_#{index}"
+      - else
+        = "anchor-step"
+      %br

@@ -5,7 +5,7 @@ $(function(){
   });
 
   $(".change-status-btn").on("click", function(){
-    // button要素の表示文字を取得
+    // "実行中"または"達成！"を取得
     let status = $(this).val();
     // 直属のtd要素のカスタムデータ属性からタスクのidを取得
     let taskId = $(this).parents(".js-change-status").data("id");

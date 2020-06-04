@@ -42,7 +42,7 @@
               - else
                 %i.fas.fa-shoe-prints.no-image
           .goals-show__steps__box__title
-            = link_to "#{step.title}", edit_list_goal_path(@goal.list_id, @goal)
+            = link_to "#{step.title}", edit_list_goal_step_path(@goal.list_id, @goal, step)
           .goals-show__steps__box__status.goals-show__js-change-status
             = link_to change_status_list_goal_step_path(@goal.list_id, @goal, step.id, status: step.status), method: :post, class: "goals-show__change-step-status-btn", id: "change-status__step-#{index}", data: {step_index: index} do
               - if step.status == "doing"
@@ -58,7 +58,7 @@
               - else
                 %i.fas.fa-shoe-prints.no-image
           .goals-show__steps__anchor-box__title
-            = link_to "#{step.title}", edit_list_goal_path(@goal.list_id, @goal)
+            = link_to "#{step.title}", edit_list_goal_step_path(@goal.list_id, @goal, step)
           .goals-show__steps__anchor-box__status.goals-show__js-change-status
             = link_to change_status_list_goal_step_path(@goal.list_id, @goal, step.id, status: step.status), method: :post, class: "goals-show__change-step-status-btn", id: "change-status__step-#{index}", data: {step_index: index} do
               - if step.status == "doing"
@@ -79,7 +79,7 @@
                 %i.fas.fa-location-arrow.no-image
           .box--right
             .goals-show__actions__box__title
-              = link_to "#{action.title}", edit_list_goal_path(@goal.list_id, @goal)
+              = link_to "#{action.title}", edit_list_goal_step_action_path(@goal.list_id, @goal, action.step_id, action)
             .goals-show__actions__box__status.goals-show__js-change-status
               = link_to change_status_list_goal_step_action_path(@goal.list_id, @goal, action.step_id, action, status: action.status), method: :post, class: "goals-show__change-action-status-btn", id: "change-status__action-#{index}", data: {action_index: index} do
                 - if action.status == "doing"
@@ -96,7 +96,7 @@
                 %i.fas.fa-location-arrow.no-image
           .box--right
             .goals-show__actions__anchor-box__title
-              = link_to "#{action.title}", edit_list_goal_path(@goal.list_id, @goal)
+              = link_to "#{action.title}", edit_list_goal_step_action_path(@goal.list_id, @goal, action.step_id, action)
             .goals-show__actions__anchor-box__status.goals-show__js-change-status
               = link_to change_status_list_goal_step_action_path(@goal.list_id, @goal, action.step_id, action, status: action.status), method: :post, class: "goals-show__change-action-status-btn action_#{index}", id: "change-status__action-#{index}", data: {action_index: index} do
                 - if action.status == "doing"

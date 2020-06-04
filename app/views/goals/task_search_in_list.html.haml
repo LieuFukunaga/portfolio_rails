@@ -53,7 +53,7 @@
             %th
               予定日時
             %th
-              タスクの状態
+              状態
             %th
               更新日時
             %th
@@ -74,16 +74,16 @@
               %td
                 = "#{task.date.strftime("%Y/%m/%d %H:%M")}"
               %td.js-change-status{data: {id: task.id}}
-                = button_to "#{task.status_i18n}", change_status_list_goal_path(task.list_id, task), method: :post, name: "status", class: "change-status-btn goal_#{task.id}", value: task.status
+                - if task.status == "doing"
+                  = button_to "#{task.status_i18n}", change_status_list_goal_path(task.list_id, task), method: :post, name: "status", class: "change-status-btn goal_#{task.id} goal--doing", value: task.status
+                - else
+                  = button_to "#{task.status_i18n}", change_status_list_goal_path(task.list_id, task), method: :post, name: "status", class: "change-status-btn goal_#{task.id} goal--done", value: task.status
               %td
                 = "#{task.updated_at.strftime("%Y/%m/%d %H:%M")}"
               %td
                 = "#{task.steps.where(status: 0).length}"
               %td
                 = "#{task.actions.where(status: 0).length}"
-              %td
-                = link_to edit_list_goal_path(task.list_id, task.id) do
-                  %i.fas.fa-edit
               %td
                 = link_to list_goal_path(task.list_id, task.id), method: :delete, class: "goals-task_search_in_list__delete-task-btn", data: {trash_task_id: "#{task.id}"} do
                   %i.fas.fa-trash

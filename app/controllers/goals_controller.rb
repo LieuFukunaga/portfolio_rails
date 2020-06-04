@@ -74,7 +74,9 @@ class GoalsController < ApplicationController
 
   def edit
     if @goal.user_id == current_user.id
-      @categories = Category.includes(:goals) # セレクトボックス用
+      @steps = @goal.steps
+      @actions = @goal.actions
+      @categories = Category.where(user_id: current_user.id) # セレクトボックス用
     else
       redirect_to root_path
     end
@@ -89,7 +91,7 @@ class GoalsController < ApplicationController
       if @goal.update(goal_params)
         @goal.update_category(added_categories, update_ids)
         flash[:success] = "#{@goal.title}を更新しました"
-        redirect_to list_goal_path(@goal.list_id, @goal.id)
+        redirect_to list_goal_path(@list, @goal)
       else
         flash.now[:alert] = @goal.errors.full_messages
         render action: :show
@@ -98,7 +100,7 @@ class GoalsController < ApplicationController
     else
       if @goal.update(goal_params)
         flash[:success] = "#{@goal.title}を更新しました"
-        redirect_to list_path(@list)
+        redirect_to action: :show
       else
         flash.now[:alert] = @goal.errors.full_messages
         render action: :edit

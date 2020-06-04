@@ -27,11 +27,11 @@
             %th
               サムネイル
             %th
-              タスク名
+              タイトル
             %th
               予定日時
             %th
-              タスクの状態
+              状態
             %th
               実行中のステップ
             %th
@@ -59,9 +59,6 @@
                 = "#{goal.steps.where(status: 0).length}"
               %td
                 = "#{goal.actions.where(status: 0).length}"
-              %td
-                = link_to edit_list_goal_path(goal.list_id, goal.id) do
-                  %i.fas.fa-edit
               %td
                 = link_to list_goal_path(goal.list_id, goal.id), method: :delete, class: "lists-show__delete-task-btn", data: {task_id: "#{goal.id}"} do
                   %i.fas.fa-trash

@@ -1,83 +1,173 @@
-@import "modules/colors";
-
-@mixin task-form-style {
-  height: 40px;
-  line-height: 40px;
-  padding: 5px;
-  border-radius: 5px;
+.goals-edit .added-form {
+  width: 60%;
+  @include form-style;
 }
 
-.goals-edit__page-info__page-title {
-  font-size: 20px;
+.goals-edit__new-image-preview {
+  height: 250px;
+  width: 250px;
 }
 
-.goals-edit__form__category__check-boxes__options-box {
-  max-height: 300px;
-  max-width: 300px;
-  display: none;
-  border: solid 1px;
-  overflow: scroll;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
-}
-
-.goals-edit__form {
-  &__image {
-    &__previews {
-      height: 350px;
-      text-align: center;
-      display: flex;
-      // 変更前画像がある場合の表示に対するスタイル
-      &__current-image {
+.goals-edit {
+  display: flex;
+  height: 100vh;
+  &__goal-section {
+    width: 40%;
+    .goals-edit__form {
+      &__image {
+        height: 34vh;
         display: flex;
         align-items: center;
-        &__image-box {
-          &__delete-btn {
-            display: block;
-            margin: 5px 10px;
+        &__previews {
+          // 新旧画像プレビューを横並びに
+          height: 100%;
+          width: 100%;
+          display: flex;
+          padding: 10px;
+          &__current-image {
+            height: 32vh;
+            width: 50%;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            &__image-box {
+              text-align: center;
+            }
+            &__icon {
+              margin: auto 5px;
+              display: flex;
+              align-items: center;
+            }
           }
-        }
-        &__right-angle {
-          margin: 10px;
-          line-height: 250px;
-        }
-      }
-      // 変更後画像がある場合の表示に対するスタイル
-      &__new-image {
-        // appendされた変更後画像プレビュー
-        .goals-edit__new-image-preview {
-          align-items: center;
-        }
-      }
-    }
-  }
-  &__text-field {
-    display: flex;
-    position: relative;
-    &__input {
-      #goals-edit__text-field {
-        @include task-form-style;
-      }
-    }
-    &__icons {
-      display: flex;
-      position: absolute;
-      top: 32px;
-      left: 350px;
-      &__upload {
-        &__label {
-          &__file-field {
-            display: none;
+          &__new-image {
+            height: 100%;
+            width: 50%;
+            margin: 1vh auto;
+            text-align: center;
           }
         }
       }
-      &__remove {
-        padding-left: 5px;
-      }
-    }
-  }
-}
+      &__fields {
+        text-align: center;
+        margin-bottom: 5px;
+        &--file {
+          display: flex;
+          justify-content: center;
+          &__upload {
+            .goals-edit__form__upload-label {
 
-.added-form {
-  @include task-form-style;
+            }
+            .goals-edit__form__file-field {
+              display: none;
+            }
+
+          }
+          &__remove {
+            margin-left: 10px;
+
+          }
+        }
+        &--text {
+          #goals-edit__text-field {
+            @include form-style;
+          }
+        }
+      }
+      &__status {
+        margin: 0 10px;
+        text-align: center;
+        .goals-edit__select-goal-status {
+          height: 30px;
+        }
+      }
+      &__date {
+        text-align: center;
+        select {
+          height: 30px;
+        }
+      }
+      &__category {
+        height: 28vh;
+        text-align: center;
+        &__check-boxes {
+          text-align: center;
+          margin-top: 5px;
+          #goals-edit__modal-fadein-btn {
+            width: 25%;
+          }
+          &__options-box {
+            height: 15vh;
+            width: 60%;
+            border: 1px solid;
+            padding: 10px;
+            margin: 5px auto;
+            border-radius: 5px;
+            display: none;
+            overflow: scroll;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            .options {
+              .categories {
+                margin-bottom: 5px;
+              }
+            }
+          }
+        }
+        ul {
+          margin-top: 5px;
+          #create-category-btn {
+            width: 25%;
+            margin-bottom: 5px;
+          }
+        }
+      }
+      &__submit-btn {
+        width: 80%;
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+    .goals-edit__links {
+      padding: 5px 10px;
+    }
+  }
+  &__steps-section {
+    width: 30%;
+    opacity: 0.7;
+    // background-color: gray;
+    .goals-edit__steps {
+      height: 33%;
+      width: 100%
+    }
+    .goals-edit__anchor-step {
+      height: 34%;
+      width: 100%
+    }
+  }
+  &__actions-section {
+    height: 100%;
+    width: 30%;
+    opacity: 0.7;
+    // background-color: whitesmoke;
+    .goals-edit__actions {
+      height: 11%;
+      display: flex;
+      .actions__left-box {
+        width: 40%;
+      }
+      .actions__right-box {
+        width: 60%;
+      }
+    }
+    .goals-edit__anchor-actions {
+      height: 11%;
+      display: flex;
+      .anchor-actions__left-box {
+        width: 40%;
+      }
+      .anchor-actions__right-box {
+        width: 60%;
+      }
+    }
+  }
 }

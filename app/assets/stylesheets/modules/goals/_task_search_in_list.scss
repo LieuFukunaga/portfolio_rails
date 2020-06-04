@@ -1,3 +1,12 @@
+.search-in-list--doing {
+  background-color: $kurenai;
+}
+
+.search-in-list--done {
+  background-color: $green;
+}
+
+
 .goals-task_search_in_list {
   &__operator {
     margin-bottom: 10px;

@@ -61,13 +61,13 @@
               %th
                 サムネイル
               %th
-                タスク名
+                タイトル
               %th
                 所属リスト
               %th
                 予定日時
               %th
-                タスクの状態
+                状態
           %tbody.hover-records.n7dt-tbody
             - @tasks.each do |task|
               %tr{data: {search_result_id: "#{task.id}"}}
@@ -88,9 +88,6 @@
                     = link_to "#{task.status_i18n}", change_status_at_root_list_goal_path(task.list_id, task, status: task.status), method: :post, class: "change-status-link lists-index__goal--doing", id: "change_status_task_#{task.id}"
                   - else
                     = link_to "#{task.status_i18n}", change_status_at_root_list_goal_path(task.list_id, task, status: task.status), method: :post, class: "change-status-link lists-index__goal--done", id: "change_status_task_#{task.id}"
-                %td
-                  = link_to edit_list_goal_path(task.list_id, task.id) do
-                    %i.fas.fa-edit
                 %td
                   = link_to list_goal_path(task.list_id, task.id), method: :delete, class: "delete-task-btn", data:{trash_task_id: "#{task.id}"} do
                     -# = button_tag type: "button", class: "delete-task-btn", data:{trash_task_id: "#{task.id}", href: "/lists/#{task.list_id}/gaols/#{task.id}/root_destroy"} do

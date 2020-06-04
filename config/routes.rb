@@ -41,11 +41,11 @@ Rails.application.routes.draw do
       collection do
         get "task_search_in_list"
       end
-      resources :steps do
+      resources :steps, only: [:edit, :update, :destroy] do
         member do
           post "change_status", defaults: {format: 'json'}
         end
-        resources :actions do
+        resources :actions, only: [:edit, :update, :destroy] do
           member do
             post "change_status", defaults: {format: 'json'}
           end

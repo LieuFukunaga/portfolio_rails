@@ -1,8 +1,21 @@
 class ActionsController < ApplicationController
+  before_action :set_action, only: [:edit, :update, :change_status]
+
+  def edit
+    @list = @action.list
+    @goal = @action.goal
+    @step = @action.step
+    @actions = Action.where(goal_id: @goal.id)
+  end
+
+  def update
+  end
+
+  def destroy
+  end
 
   # タスク詳細ページ・actions用
   def change_status
-    @action = Action.find(params[:id])
     if @action.user_id == current_user.id
       status = params[:status]
       if status == "doing"
@@ -14,6 +27,12 @@ class ActionsController < ApplicationController
         format.json {render json: @action}
       end
     end
+  end
+
+  private
+
+  def set_action
+    @action = Action.find(params[:id])
   end
 
 end

@@ -1,0 +1,28 @@
+.actions-edit
+  .actions-edit__form
+    = form_with model: @action, url: list_goal_step_action_path(@list, @goal, @step), local: true do |f|
+      - @actions.each.with_index do |action, index|
+        - if @action.id > action.id
+          - if index != 2 && index != 5
+            .actions-edit__fields
+              = "action_#{index}"
+          - else
+            .actions-edit__anchor-fields
+              = "anchor-action_#{index}"
+          %br
+        - elsif @action.id == action.id
+          - if index != 2 && index != 5
+            .actions-edit__fields
+              = f.text_field :title
+          - else
+            .actions-edit__anchor-fields
+              = f.text_field :title
+          %br
+        - else
+          - if index != 2 && index != 5
+            .actions-edit__fields
+              = "action_#{index}"
+          - else
+            .actions-edit__anchor-fields
+              = "anchor-action_#{index}"
+          %br
