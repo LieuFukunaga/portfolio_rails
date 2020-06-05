@@ -1,3 +1,7 @@
+.steps-edit__new-image-preview {
+  height: 150px;
+  width: 150px;
+}
 .steps-edit {
   display: flex;
   @include scroll-config;
@@ -101,14 +105,25 @@
                 @include flex-center;
                 .current-image {
                   height: 100%;
-                  width: 50%;
+                  width: 40%;
                   @include flex-center;
                   .image--flex {
+                    text-align: center;
+                    .steps-edit__delete-current-image-btn {
+                      font-size: 14px;
+                    }
                   }
                 }
                 .new-image {
                   height: 100%;
-                  width: 50%;
+                  width: 60%;
+                  .new-image--flex {
+                    height: 100%;
+                    @include flex-center;
+                    .steps-edit__change-image-icon {
+                      padding-right: 20px;
+                    }
+                  }
                 }
               }
             }
@@ -192,14 +207,25 @@
                 @include flex-center;
                 .current-image {
                   height: 100%;
-                  width: 50%;
+                  width: 40%;
                   @include flex-center;
                   .image--flex {
+                    text-align: center;
+                    .steps-edit__delete-current-image-btn {
+                      font-size: 14px;
+                    }
                   }
                 }
                 .new-image {
                   height: 100%;
-                  width: 50%;
+                  width: 60%;
+                  .new-image--flex {
+                    height: 100%;
+                    @include flex-center;
+                    .steps-edit__change-image-icon {
+                      padding-right: 20px;
+                    }
+                  }
                 }
               }
             }
