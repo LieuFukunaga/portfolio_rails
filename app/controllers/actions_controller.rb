@@ -1,5 +1,5 @@
 class ActionsController < ApplicationController
-  before_action :set_action, only: [:edit, :update, :change_status]
+  before_action :set_action, only: [:edit, :update, :change_status, :destroy_image]
 
   def edit
     @list = @action.list
@@ -26,6 +26,14 @@ class ActionsController < ApplicationController
       respond_to do |format|
         format.json {render json: @action}
       end
+    end
+  end
+
+  def destroy_image
+    if @action.user_id == current_user.id && @action.action_image.attached?
+      @action.action_image.purge
+    else
+      render action: :edit
     end
   end
 

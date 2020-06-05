@@ -90,9 +90,7 @@ img:not(#login-user-avatar):not(.users-edit__new-avatar-preview):not(#current-av
 
 table {
   display: block;
-  overflow: scroll;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
+  @include scroll-config;
 }
 
 th {
@@ -172,6 +170,10 @@ td {
 
 .grayout {
   opacity: 0.3;
+}
+
+.half_opacity {
+  opacity: 0.5;
 }
 
 .fas.fa-heart {

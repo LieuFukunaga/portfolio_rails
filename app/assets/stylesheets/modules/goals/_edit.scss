@@ -4,9 +4,13 @@
 }
 
 .goals-edit__new-image-preview {
-  height: 100%;
-  width: 100%;
+  height: 250px;
+  width: 250px;
   padding: 10px;
+}
+
+.goals-edit__delete-current-image-btn {
+  font-size: 14px;
 }
 
 .goals-edit {
@@ -18,39 +22,40 @@
     .goals-edit__form {
       &__image {
         height: 34vh;
-        display: flex;
-        align-items: center;
+        @include flex-center;
         &__previews {
           // 新旧画像プレビューを横並びに
           height: 100%;
           width: 100%;
-          display: flex;
+          @include flex-center;
           padding: 10px;
           &__current-image {
             height: 32vh;
-            width: 50%;
+            width: 45%;
             padding: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: scroll;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
+            @include flex-center;
+            @include scroll-config;
             &__image-box {
               text-align: center;
             }
             &__icon {
-              margin: auto 5px;
+              margin: auto 0 auto 20px;
               display: flex;
               align-items: center;
             }
           }
           &__new-image {
             height: 100%;
-            width: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            width: 55%;
+            @include flex-center;
+            @include scroll-config;
+            .goals-edit__new-image-box {
+              display: flex;
+              text-align: center;
+              .goals-edit__change-image-icon {
+                @include flex-center;
+              }
+            }
           }
         }
       }
@@ -110,9 +115,7 @@
             margin: 5px auto;
             border-radius: 5px;
             display: none;
-            overflow: scroll;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
+            @include scroll-config;
             .options {
               .categories {
                 margin-bottom: 5px;
@@ -140,7 +143,6 @@
   }
   &__steps-section {
     width: 30%;
-    opacity: 0.6;
     .goals-edit__steps {
       height: 33%;
       width: 100%;
@@ -150,9 +152,8 @@
         width: 50%;
         .steps__image {
           height: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          @include scroll-config;
+          @include flex-center;
         }
       }
       .goals-edit__steps--right {
@@ -177,9 +178,8 @@
         width: 50%;
         .anchor-step__image {
           height: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          @include scroll-config;
+          @include flex-center;
         }
       }
       .goals-edit__anchor-step--right {
@@ -199,7 +199,6 @@
   &__actions-section {
     height: 100%;
     width: 30%;
-    opacity: 0.7;
     .goals-edit__actions {
       height: 11%;
       display: flex;
@@ -208,17 +207,14 @@
         .actions__image {
           height: 100%;
           width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          @include scroll-config;
+          @include flex-center;
         }
       }
       .actions__right-box {
         height: 100%;
         width: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        @include flex-center;
       }
     }
     .goals-edit__anchor-actions {
@@ -231,17 +227,14 @@
         .anchor-actions__image {
           height: 100%;
           width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          @include scroll-config;
+          @include flex-center;
         }
       }
       .anchor-actions__right-box {
         height: 100%;
         width: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        @include flex-center;
       }
     }
   }

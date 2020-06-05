@@ -7,12 +7,11 @@
             - if @goal.image.attached?
               .goals-edit__form__image__previews__current-image
                 .goals-edit__form__image__previews__current-image__image-box
-                  = image_tag @goal.image.variant(combine_options:{resize:"220x220^",crop:"220x220+0+0",gravity: :center}).processed
+                  = image_tag @goal.image.variant(combine_options:{resize:"200x200^",crop:"200x200+0+0",gravity: :center}).processed
                   %br
                   = link_to "元の画像を削除", image_destroy_list_goal_path(@list, @goal), method: :delete , class: "goals-edit__delete-current-image-btn"
-                .goals-edit__form__image__previews__current-image__icon
-                  %i.fas.fa-angle-double-right
             .goals-edit__form__image__previews__new-image
+              .goals-edit__new-image-box
               -# この下にプレビュー用のimg要素がappendされる
         .goals-edit__form__fields
           -# プレビュー用イベント発生元
@@ -49,7 +48,7 @@
           = f.hidden_field :list_id, value: @list.id
           = f.hidden_field :user_id, value: current_user.id, id:"login-user-id"
         .goals-edit__form__submit-btn
-          = f.submit "登録"
+          = f.submit "保存"
     .goals-edit__links
       = render partial: "layouts/return-to-goals-show"
       = render partial: "layouts/return-to-lists-show"

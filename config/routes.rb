@@ -44,10 +44,12 @@ Rails.application.routes.draw do
       resources :steps, only: [:edit, :update, :destroy] do
         member do
           post "change_status", defaults: {format: 'json'}
+          delete "destroy_image"
         end
         resources :actions, only: [:edit, :update, :destroy] do
           member do
             post "change_status", defaults: {format: 'json'}
+            delete "destroy_image"
           end
         end
       end

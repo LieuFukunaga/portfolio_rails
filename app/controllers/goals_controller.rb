@@ -2,6 +2,8 @@ class GoalsController < ApplicationController
 
   before_action :set_list, only: [:show, :edit, :update]
   before_action :set_goal, only: [:show, :edit, :update, :destroy, :root_destroy, :image_destroy, :change_status, :change_status_at_root]
+  before_action :set_steps, only: [:show, :edit, :update]
+  before_action :set_actions, only: [:show, :edit, :update]
 
   def new
     @goal = Goal.new
@@ -68,14 +70,10 @@ class GoalsController < ApplicationController
 
   def show
     @categories = @goal.categories.order("category_name ASC")
-    @steps = @goal.steps
-    @actions = @goal.actions
   end
 
   def edit
     if @goal.user_id == current_user.id
-      @steps = @goal.steps
-      @actions = @goal.actions
       @categories = Category.where(user_id: current_user.id) # セレクトボックス用
     else
       redirect_to root_path
@@ -91,10 +89,10 @@ class GoalsController < ApplicationController
       if @goal.update(goal_params)
         @goal.update_category(added_categories, update_ids)
         flash[:success] = "#{@goal.title}を更新しました"
-        redirect_to list_goal_path(@list, @goal)
+        redirect_to action: :show
       else
         flash.now[:alert] = @goal.errors.full_messages
-        render action: :show
+        render action: :edit
       end
       # 新規カテゴリの入力がない場合
     else
@@ -179,17 +177,23 @@ class GoalsController < ApplicationController
 
   private
   def goal_params
-    params.require(:goal).permit(:title, :image, :status, :list_id, :user_id, :date, category_ids: [], categories_attributes: [:category_name, :user_id], steps_attributes: [:title, :step_image, :status, :user_id, :list_id, :goal_id], actions_attributes: [:title, :action_image, :status, :user_id, :list_id, :goal_id, :step_id])
+    params.require(:goal).permit(:title, :image, :status, :user_id, :list_id, :date, category_ids: [], categories_attributes: [:category_name, :user_id], steps_attributes: [:title, :step_image, :status, :user_id, :list_id, :goal_id], actions_attributes: [:title, :action_image, :status, :user_id, :list_id, :goal_id, :step_id])
   end
 
   def set_list
-    @goal = Goal.find(params[:id])
-    @list = List.find(@goal.list_id)
-    # @list = List.find(params[:id])だとゴールのidを取得してしまう
+    @list = Goal.find(params[:id]).list
   end
 
   def set_goal
     @goal = Goal.find(params[:id])
+  end
+
+  def set_steps
+    @steps = Goal.find(params[:id]).steps
+  end
+
+  def set_actions
+    @actions = Goal.find(params[:id]).actions
   end
 
 end

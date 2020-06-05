@@ -29,13 +29,15 @@
           .new-task-form__category
             - if Category.where(user_id: current_user.id).length != 0
               .new-task-form__category__check-boxes
-                = button_tag "カテゴリを選択", type: "button", id: "goals-new__modal-fadein-btn"
+                = button_tag "カテゴリを選択", type: "button", id: "modal-fadein-btn"
                 .new-task-form__category__check-boxes__options-box
                   .options
                     = f.collection_check_boxes(:category_ids, Category.where(user_id: current_user.id), :id, :category_name, include_hidden: false) do |c|
                       .categories
                         = c.label {c.check_box}
                         = c.label {c.text}
+                  .close-btn
+                    = button_tag "閉じる", type: "button", id: "modal-fadeout-btn"
             .new-task-form__category__create-category-form
               = f.label "新規カテゴリを作成"
               %br

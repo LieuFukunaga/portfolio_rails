@@ -11,7 +11,12 @@ $(function(){
 
   // 画像アップロード時のプレビュー表示のため
   function buildImg (blobUrl){
-    let html = `<img src="${blobUrl}" class="goals-edit__new-image-preview">`
+    let html = `<div class="goals-edit__change-image-icon">
+                  <i class="fas fa-angle-double-right"></i>
+                </div>
+                <div class="goals-edit__new-image">
+                  <img src="${blobUrl}" class="goals-edit__new-image-preview">
+                </div>`
     return html
   }
 
@@ -21,14 +26,14 @@ $(function(){
   }
 
   $(".goals-edit__form__fields--file__upload").on("change", ".goals-edit__form__file-field", function(e){
-    $(".goals-edit__form__image__previews__new-image").empty();
+    $(".goals-edit__new-image-box").empty();
     let file = e.target.files[0];
     let blobUrl = window.URL.createObjectURL(file);
-    $('.goals-edit__form__image__previews__new-image').append(buildImg(blobUrl));
+    $(".goals-edit__new-image-box").append(buildImg(blobUrl));
   })
 
   $("#goals-edit__remove-preview-btn").click(function(){
-    $(".goals-edit__form__image__previews__new-image").empty();
+    $(".goals-edit__new-image-box").empty();
     $(".goals-edit__form__file-field").remove();
     $(".goals-edit__form__upload-label").append(buildFileField);
   })
