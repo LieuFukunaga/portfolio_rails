@@ -1,28 +1,55 @@
 .actions-edit
+  .actions-edit__goal
+    .actions-edit__goal__image
+      .goal-image-box
+        - if @goal.image.attached?
+          = image_tag @goal.image.variant(combine_options:{resize:"300x300^",crop:"300x300+0+0",gravity: :center}).processed
+        - else
+          %i.fas.fa-flag-checkered.no-image
+    .actions-edit__goal__contents
+      .contents-box
+        .contents
+          .actions-edit__goal__contents__title
+            = @goal.title
+          .actions-edit__goal__contents__status
+            = @goal.status_i18n
+    .actions-edit__goal__date
+      = "予定日時：#{@goal.date.strftime("%Y/%m/%d %H:%M")}"
+    .actions-edit__goal__category
+      - if @categories.length != 0
+        カテゴリ一覧：
+        .category-box
+          - @categories.each do |category|
+            .actions-edit__goal-categories
+              = link_to "#{category.category_name}", category_path(category)
+      - else
+        カテゴリは設定されていません
+    .actions-edit-links
+      = render partial: "layouts/return-to-goals-show"
+      = render partial: "layouts/return-to-lists-show"
+      = render partial: "layouts/return-to-root"
+
   .actions-edit__form
     = form_with model: @action, url: list_goal_step_action_path(@list, @goal, @step), local: true do |f|
       - @actions.each.with_index do |action, index|
         - if @action.id > action.id
           - if index != 2 && index != 5
-            .actions-edit__fields
-              = "action_#{index}"
+            .actions.half_opacity
+              = render partial: "actions", locals: {action: action}
           - else
-            .actions-edit__anchor-fields
-              = "anchor-action_#{index}"
-          %br
+            .anchor-actions.half_opacity
+              = render partial: "actions", locals: {action: action}
         - elsif @action.id == action.id
           - if index != 2 && index != 5
-            .actions-edit__fields
-              = f.text_field :title
+            .actions{class: "action_#{index}"}
+              = render partial: "form", locals: {action: @action, f: f, index: index}
           - else
-            .actions-edit__anchor-fields
-              = f.text_field :title
-          %br
+            .anchor-actions
+              = render partial: "form", locals: {action: @action, f: f, index: index}
         - else
           - if index != 2 && index != 5
-            .actions-edit__fields
-              = "action_#{index}"
+            .actions.half_opacity
+              = render partial: "actions", locals: {action: action}
           - else
-            .actions-edit__anchor-fields
-              = "anchor-action_#{index}"
-          %br
+            .anchor-actions.half_opacity
+              = render partial: "actions", locals: {action: action}

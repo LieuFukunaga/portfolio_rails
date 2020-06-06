@@ -79,7 +79,12 @@ class StepsController < ApplicationController
   end
 
   def set_actions
-    @actions = Step.find(params[:id]).actions
+    @actions = []
+    Step.where(goal_id: Step.find(params[:id]).goal.id).each do |step|
+      step.actions.each do |action|
+        @actions << action
+      end
+    end
   end
 
 end

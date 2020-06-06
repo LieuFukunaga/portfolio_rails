@@ -6,6 +6,7 @@ class ActionsController < ApplicationController
 
   def edit
     @actions = Action.where(goal_id: @goal.id)
+    @categories = @goal.categories
   end
 
   def update
