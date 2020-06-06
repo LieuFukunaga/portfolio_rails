@@ -43,12 +43,12 @@
           -# step＝編集対象の場合
           - if index != 2
             -# step_1または2を編集する場合
-            .steps
-              = render partial: "form", locals: {step: @step, f: f}
+            .steps{class: "step_#{index}"}
+              = render partial: "form", locals: {step: @step, f: f, index: index}
           - else
             -# step_3を編集する場合
-            .anchor-step
-              = render partial: "form", locals: {step: @step, f: f}
+            .anchor-step{class: "step_#{index}"}
+              = render partial: "form", locals: {step: @step, f: f, index: index}
 
         - else
           -# 編集対象がstep_1のときstep_1,2 / step_2のときstep_3

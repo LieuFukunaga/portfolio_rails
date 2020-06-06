@@ -37,6 +37,7 @@ Rails.application.routes.draw do
         # 既存リソースの更新なのでpatchを使用
         post "change_status"
         post "change_status_at_root", defaults: {format: 'json'}
+        post "reset"
       end
       collection do
         get "task_search_in_list"
@@ -45,11 +46,13 @@ Rails.application.routes.draw do
         member do
           post "change_status", defaults: {format: 'json'}
           delete "destroy_image"
+          post "reset"
         end
         resources :actions, only: [:edit, :update, :destroy] do
           member do
             post "change_status", defaults: {format: 'json'}
             delete "destroy_image"
+            post "reset"
           end
         end
       end

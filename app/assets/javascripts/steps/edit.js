@@ -15,6 +15,7 @@ $(function(){
     return fileField
   }
 
+  // プレビュー表示のため
   $(".steps-edit__icons__upload-image").on("change", ".steps-edit__file-field", function(e){
     $(".new-image--flex").empty();
     let file = e.target.files[0];
@@ -22,12 +23,14 @@ $(function(){
     $(".new-image--flex").append(buildImg(blobUrl));
   })
 
+  // プレビュー削除のため
   $("#steps-edit__remove-preview-btn").click(function(){
     $(".new-image--flex").empty();
     $(".steps-edit__file-field").remove();
     $(".steps-edit__upload-label").append(buildFileField);
   })
 
+  // 現在の画像を削除するため
   $(".steps-edit__delete-current-image-btn").click(function(){
     if (!confirm("この操作は取り消せません")){
       return false;

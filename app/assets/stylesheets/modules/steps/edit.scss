@@ -145,19 +145,23 @@
         .form--right {
           height: 100%;
           width: 40%;
-          padding-top: 15vh;
+          padding-top: 10vh;
           display: flex;
           justify-content: center;
           .steps-edit__fields {
             .fields--flex {
               .status-field {
-                margin: 10px;
+                margin: 10px 0;
                 display: flex;
                 justify-content: flex-end;
               }
             }
             .steps-edit__submit-btn {
-              margin: 3vh 10px;
+              margin: 3vh 0 1vh 0;
+              display: flex;
+              justify-content: flex-end;
+            }
+            .steps-edit__reset-btn {
               display: flex;
               justify-content: flex-end;
             }

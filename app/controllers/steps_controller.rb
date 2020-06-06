@@ -1,7 +1,7 @@
 class StepsController < ApplicationController
-  before_action :set_list, only: [:edit, :update]
-  before_action :set_goal, only: [:edit, :update]
-  before_action :set_step, only: [:edit, :update, :change_status, :destroy_image]
+  before_action :set_list, only: [:edit, :update, :reset]
+  before_action :set_goal, only: [:edit, :update, :reset]
+  before_action :set_step, only: [:edit, :update, :change_status, :destroy_image, :reset]
   before_action :set_actions, only: [:edit]
 
   def edit
@@ -44,6 +44,19 @@ class StepsController < ApplicationController
       @step.step_image.purge
     else
       render action: :edit
+    end
+  end
+
+  def reset
+    if @step.user_id == current_user.id
+      if @step.step_image.attached?
+        @step.step_image.purge
+        @step.update(title: "steps", status: "doing")
+        redirect_to list_goal_path(@list, @goal)
+      else
+        @step.update(title: "steps", status: "doing")
+        redirect_to list_goal_path(@list, @goal)
+      end
     end
   end
 

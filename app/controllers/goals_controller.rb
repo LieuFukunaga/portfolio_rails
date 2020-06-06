@@ -1,7 +1,7 @@
 class GoalsController < ApplicationController
 
-  before_action :set_list, only: [:show, :edit, :update]
-  before_action :set_goal, only: [:show, :edit, :update, :destroy, :root_destroy, :image_destroy, :change_status, :change_status_at_root]
+  before_action :set_list, only: [:show, :edit, :update, :reset]
+  before_action :set_goal, only: [:show, :edit, :update, :destroy, :root_destroy, :image_destroy, :change_status, :change_status_at_root, :reset]
   before_action :set_steps, only: [:show, :edit, :update]
   before_action :set_actions, only: [:show, :edit, :update]
 
@@ -173,6 +173,23 @@ class GoalsController < ApplicationController
     @list_name = List.find(params[:list_id]).list_name
     @sort = task_sort
   end
+
+  def reset
+    if @goal.user_id == current_user.id
+      if @goal.image.attached?
+        @goal.image.purge
+        @goal.update(title: "goal", status: "doing", date: Time.now + 1.hour, )
+        redirect_to list_goal_path(@list, @goal)
+      else
+        @goal.update(title: "goal", status: "doing")
+        redirect_to list_goal_path(@list, @goal)
+      end
+      if @goal.categories.length != 0
+        @goal.update(category_ids: "")
+      end
+    end
+  end
+
 
 
   private

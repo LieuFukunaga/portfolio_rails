@@ -6,8 +6,6 @@
   color: $green;
 }
 
-
-
 .goals-show {
   height: 100vh;
   width: 100vw;
@@ -39,9 +37,15 @@
         text-align: center;
       }
       &__status {
+        width: 85%;
         font-size: 35px;
         line-height: 35px;
-        margin: 0 50px 2vh 0px;
+        margin-bottom: 2vh;
+        display: flex;
+        justify-content: flex-end;
+      }
+      &__reset {
+        width: 95%;
         display: flex;
         justify-content: flex-end;
       }
@@ -71,7 +75,7 @@
       margin: 1px;
       @include scroll-config;
       &__image {
-        height: 25vh;
+        height: 20vh;
         .step-image-boxes {
           padding-top: 2vh;
           text-align: center;
@@ -89,12 +93,17 @@
         display: flex;
         justify-content: flex-end;
       }
+      .goals-show__reset-steps {
+        width: 95%;
+        display: flex;
+        justify-content: flex-end;
+      }
     }
     &__anchor-box {
       height: 34%;
       @include scroll-config;
       &__image {
-        height: 25vh;
+        height: 20vh;
         .step-image-boxes {
           padding-top: 2vh;
           text-align: center;
@@ -109,6 +118,11 @@
       &__status {
         width: 80%;
         font-size: 30px;
+        display: flex;
+        justify-content: flex-end;
+      }
+      .goals-show__reset-steps {
+        width: 95%;
         display: flex;
         justify-content: flex-end;
       }
@@ -136,13 +150,17 @@
         display: flex;
         @include scroll-config;
         .goals-show__actions__box__title {
+          @include flex-center;
           width: 70%;
-          margin-top: 3vh;
           text-align: center;
         }
         .goals-show__actions__box__status {
-          font-size: 25px;
+          font-size: 20px;
           margin: 5vh 10px 0 10px;
+        }
+        .goals-show__actions__box__reset {
+          display: flex;
+          align-items: flex-end;
         }
       }
     }
@@ -169,8 +187,12 @@
           margin-top: 3vh;
         }
         .goals-show__actions__anchor-box__status {
-          font-size: 25px;
+          font-size: 20px;
           margin: 5vh 10px 0 10px;
+        }
+        .goals-show__actions__anchor-box__reset {
+          display: flex;
+          align-items: flex-end;
         }
       }
     }

@@ -56,7 +56,7 @@
 
 
 
-  .goals-edit__steps-section
+  .goals-edit__steps-section.half_opacity
     - @steps.each.with_index do |step, index|
       - if index % 3 != 2
         .goals-edit__steps
@@ -91,7 +91,7 @@
 
 
 
-  .goals-edit__actions-section
+  .goals-edit__actions-section.half_opacity
     - @actions.each.with_index do |action, index|
       - if index != 2 && index != 5
         .goals-edit__actions
