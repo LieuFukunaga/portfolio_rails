@@ -18,7 +18,7 @@
             %i.fas.fa-check-circle.goals-show__change-status-icons
       .goals-show__goal__box__reset
         = link_to reset_list_goal_path(@goal.list_id, @goal), method: :post, class: "goals-show__reset-goal-btn", data: {goal_id: @goal.id} do
-          %i.fas.fa-sync-alt
+          %i.fas.fa-eraser
       .goals-show__goal__box__date
         = "予定日時：#{@goal.date.strftime("%Y/%m/%d %H:%M")}"
       .goals-show__goal__box__category
@@ -54,7 +54,7 @@
                 %i.fas.fa-check-circle{id: "step-status-icon_#{index}"}
           .goals-show__reset-steps
             = link_to reset_list_goal_step_path(step.list_id, step.goal_id, step), method: :post, class: "goals-show__reset-step-btn", data: {step_id: step.id} do
-              %i.fas.fa-sync-alt
+              %i.fas.fa-eraser
       - else
         .goals-show__steps__anchor-box
           .goals-show__steps__anchor-box__image
@@ -73,7 +73,7 @@
                 %i.fas.fa-check-circle{id: "step-status-icon_#{index}"}
           .goals-show__reset-steps
             = link_to reset_list_goal_step_path(step.list_id, step.goal_id, step), method: :post, class: "goals-show__reset-step-btn", data: {step_id: step.id} do
-              %i.fas.fa-sync-alt
+              %i.fas.fa-eraser
 
   -# セクション：actions
   .goals-show__actions
@@ -97,7 +97,7 @@
                   %i.fas.fa-check-circle{id: "action-status-icon_#{index}"}
             .goals-show__actions__box__reset
               = link_to reset_list_goal_step_action_path(action.list_id, action.goal_id, action.step_id, action), method: :post, class: "goals-show__reset-actions-btn", data: {action_id: action.id} do
-                %i.fas.fa-sync-alt
+                %i.fas.fa-eraser
       - else
         .goals-show__actions__anchor-box
           .box--left
@@ -117,7 +117,7 @@
                   %i.fas.fa-check-circle{id: "action-status-icon_#{index}"}
             .goals-show__actions__anchor-box__reset
               = link_to reset_list_goal_step_action_path(action.list_id, action.goal_id, action.step_id, action), method: :post, class: "goals-show__reset-actions-btn", data: {action_id: action.id} do
-                %i.fas.fa-sync-alt
+                %i.fas.fa-eraser
 
 
 

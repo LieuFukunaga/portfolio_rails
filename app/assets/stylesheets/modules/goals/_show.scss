@@ -138,15 +138,17 @@
       height: 11%;
       display: flex;
       .box--left {
+        width: 30%;
+        display: flex;
+        justify-content: flex-end;
         @include scroll-config;
-        width: 40%;
         .goals-show__actions__box__image {
           text-align: center;
           margin-top: 1vh;
         }
       }
       .box--right {
-        width: 60%;
+        width: 70%;
         display: flex;
         @include scroll-config;
         .goals-show__actions__box__title {
@@ -155,7 +157,7 @@
           text-align: center;
         }
         .goals-show__actions__box__status {
-          font-size: 20px;
+          font-size: 25px;
           margin: 5vh 10px 0 10px;
         }
         .goals-show__actions__box__reset {
@@ -170,7 +172,9 @@
       border-color: $lightgreen;
       display: flex;
       .box--left {
-        width: 40%;
+        width: 30%;
+        display: flex;
+        justify-content: flex-end;
         @include scroll-config;
         .goals-show__actions__anchor-box__image {
           text-align: center;
@@ -178,7 +182,7 @@
         }
       }
       .box--right {
-        width: 60%;
+        width: 70%;
         display: flex;
         @include scroll-config;
         .goals-show__actions__anchor-box__title {
@@ -187,7 +191,7 @@
           margin-top: 3vh;
         }
         .goals-show__actions__anchor-box__status {
-          font-size: 20px;
+          font-size: 25px;
           margin: 5vh 10px 0 10px;
         }
         .goals-show__actions__anchor-box__reset {
