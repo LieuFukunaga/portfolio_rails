@@ -24,6 +24,6 @@
       .title-field
         = f.text_field :title
       .status-field
-        = f.select :status, Goal.statuses_i18n.invert, {}, {class: 'steps-edit__select-step-status'}
+        = f.select :status, Step.statuses_i18n.invert, {}, {class: 'steps-edit__select-step-status'}
     .steps-edit__submit-btn
       = f.submit "保存"

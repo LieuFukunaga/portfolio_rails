@@ -1,0 +1,186 @@
+.actions-edit {
+  display: flex;
+  @include scroll-config;
+  &__goal {
+    height: 100vh;
+    width: 30%;
+    @include scroll-config;
+    .actions-edit__goal__image {
+      height: 45vh;
+      @include half-opacity;
+      .goal-image-box {
+        height: 100%;
+        width: 100%;
+        @include flex-center;
+      }
+    }
+    &__contents {
+      margin: 10px;
+      @include half-opacity;
+      .contents-box {
+        height: 100%;
+        width: 100%;
+        .contents {
+          text-align: center;
+          .actions-edit__goal__contents__title {
+            font-size: 20px;
+            margin-bottom: 1vh;
+          }
+          .actions-edit__goal__contents__status {
+            width: 90%;
+            display: flex;
+            justify-content: flex-end;
+          }
+        }
+      }
+    }
+    &__date {
+      margin-bottom: 1vh;
+      margin-left: 20px;
+      @include half-opacity;
+    }
+    &__category {
+      height: 30vh;
+      margin-left: 20px;
+      @include half-opacity;
+      .category-box {
+        height: 25vh;
+        @include scroll-config;
+        padding: 10px;
+      }
+    }
+    .actions-edit-links {
+      margin: 10px;
+    }
+  }
+  &__steps {
+    height: 100vh;
+    width: 30%;
+    .steps {
+      height: 33%;
+      width: 100%;
+      display: flex;
+      @include scroll-config;
+      .left-box {
+        height: 100%;
+        width: 60%;
+        @include flex-center;
+        @include scroll-config;
+      }
+      .right-box {
+        width: 40%;
+        .flex-box {
+          height: 100%;
+          width: 100%;
+          @include flex-center;
+          .flex--center {
+            .steps__title {
+              margin: 10px;
+            }
+            .steps__status {
+              margin: 10px;
+            }
+          }
+        }
+      }
+    }
+    .anchor-step {
+      height: 34%;
+      width: 100%;
+      display: flex;
+      @include scroll-config;
+      .left-box {
+        height: 100%;
+        width: 60%;
+        @include flex-center;
+        @include scroll-config;
+      }
+      .right-box {
+        width: 40%;
+        .flex-box {
+          height: 100%;
+          width: 100%;
+          @include flex-center;
+          .flex--center {
+            .steps__title {
+              margin: 10px;
+            }
+            .steps__status {
+              margin: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+  &__actions {
+    height: 100vh;
+    width: 40%;
+    form {
+      height: 100%;
+      width: 100%;
+      .actions {
+        height: 11%;
+        display: flex;
+        background-color: blue;
+        &--left {
+          height: 100%;
+          width: 50%;
+          @include flex-center;
+        }
+        &--right {
+          height: 100%;
+          width: 50%;
+          @include flex-center;
+          .actions--right__box {
+            text-align: center;
+            width: 100%;
+            .box--flex {
+              @include flex-center;
+            }
+            .actions--right__box__status {
+              width: 90%;
+              display: flex;
+              justify-content: flex-end;
+              margin-top: 1vh;
+            }
+          }
+        }
+      }
+      .anchor-actions {
+        height: 11%;
+        display: flex;
+        border-bottom: 1px solid;
+        border-color: $lightgreen;
+        background-color: green;
+        &--left {
+          height: 100%;
+          width: 50%;
+          @include flex-center;
+        }
+        &--right {
+          height: 100%;
+          width: 50%;
+          @include flex-center;
+          .anchor-actions--right__box {
+            text-align: center;
+            width: 100%;
+            .box--flex {
+              @include flex-center;
+            }
+            .anchor-actions--right__box__status {
+              width: 90%;
+              display: flex;
+              justify-content: flex-end;
+              margin-top: 1vh;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.actions-edit__form {
+  display: flex;
+}

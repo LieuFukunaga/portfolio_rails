@@ -1,14 +1,14 @@
-.actions--left
-  .actions--left__image
+.anchor-actions--left
+  .anchor-actions--left__image
     - if action.action_image.attached?
       = image_tag action.action_image.variant(combine_options:{resize:"80x80^",crop:"80x80+0+0",gravity: :center}).processed
     - else
       %i.fas.fa-location-arrow.no-image
-.actions--right
-  .actions--right__box
+.anchor-actions--right
+  .anchor-actions--right__box
     .box--flex
       .title
         .actions__title
           = action.title
-    .actions--right__box__status
+    .anchor-actions--right__box__status
       = action.status_i18n

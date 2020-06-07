@@ -1,7 +1,8 @@
 class ActionsController < ApplicationController
-  before_action :set_list, only: [:edit, :reset]
-  before_action :set_goal, only: [:edit, :reset]
+  before_action :set_list, only: [:edit, :update, :reset]
+  before_action :set_goal, only: [:edit, :update, :reset]
   before_action :set_step, only: [:edit]
+  before_action :set_steps, only: [:edit]
   before_action :set_action, only: [:edit, :update, :change_status, :destroy_image, :reset]
 
   def edit
@@ -10,6 +11,14 @@ class ActionsController < ApplicationController
   end
 
   def update
+    binding.pry
+    if @action.update(action_params)
+      flash[:success] = "#{@action.title}を更新しました"
+      redirect_to list_goal_path(@list, @goal)
+    else
+      flash.now[:alert] = @action.errors.full_messages
+      render action: :edit
+    end
   end
 
   def destroy
@@ -53,6 +62,10 @@ class ActionsController < ApplicationController
 
   private
 
+  def action_params
+    params.require(:action).permit(:title)
+  end
+
   def set_list
     @list = Action.find(params[:id]).list
   end
@@ -62,7 +75,11 @@ class ActionsController < ApplicationController
   end
 
   def set_step
-    @step = Action.find(params[:id]).step
+    @step = Step.find(Action.find(params[:id]).step.id)
+  end
+
+  def set_steps
+    @steps = Step.where(goal_id: Action.find(params[:id]).goal.id)
   end
 
   def set_action

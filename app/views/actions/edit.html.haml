@@ -29,27 +29,42 @@
       = render partial: "layouts/return-to-lists-show"
       = render partial: "layouts/return-to-root"
 
-  .actions-edit__form
-    = form_with model: @action, url: list_goal_step_action_path(@list, @goal, @step), local: true do |f|
-      - @actions.each.with_index do |action, index|
-        - if @action.id > action.id
-          - if index != 2 && index != 5
-            .actions.half_opacity
-              = render partial: "actions", locals: {action: action}
-          - else
-            .anchor-actions.half_opacity
-              = render partial: "actions", locals: {action: action}
-        - elsif @action.id == action.id
-          - if index != 2 && index != 5
-            .actions{class: "action_#{index}"}
-              = render partial: "form", locals: {action: @action, f: f, index: index}
-          - else
-            .anchor-actions
-              = render partial: "form", locals: {action: @action, f: f, index: index}
-        - else
-          - if index != 2 && index != 5
-            .actions.half_opacity
-              = render partial: "actions", locals: {action: action}
-          - else
-            .anchor-actions.half_opacity
-              = render partial: "actions", locals: {action: action}
+  .actions-edit__steps
+    - @steps.each.with_index do |step, index|
+      - if index % 3 != 2
+        .steps.half_opacity
+          = render partial: "steps", locals: {step: step}
+      - else
+        .anchor-step.half_opacity
+          = render partial: "steps", locals: {step: step}
+
+  .actions-edit__actions
+    = form_with model: @action, url: list_goal_step_action_path(@action.list_id, @action.goal_id, @action.step_id, @action), local: true do |f|
+      = f.text_field :title
+      = f.submit
+    -# - @actions.each.with_index do |action, index|
+    -#   - if @action.id > action.id
+    -#     - if index != 2 && index != 5
+    -#       .actions
+    -#         = "#{index}:#{action.title}"
+    -#     - else
+    -#       .anchor-actions
+    -#         = "アンカー#{index}:#{action.title}"
+    -#   - elsif @action.id == action.id
+    -#     - if index != 2 && index != 5
+    -#       .actions
+    -#         = form_with model: @action, url: list_goal_step_action_path(@list, @goal, @step, @action), local: true do |f|
+    -#           = f.text_field :title
+    -#           = f.submit
+    -#     - else
+    -#       .anchor-actions
+    -#         = form_with model: @action, url: list_goal_step_action_path(@list, @goal, @step, @action), local: true do |f|
+    -#           = f.text_field :title
+    -#           = f.submit
+    -#   - else
+    -#     - if index != 2 && index != 5
+    -#       .actions
+    -#         = "#{index}:#{action.title}"
+    -#     - else
+    -#       .anchor-actions
+    -#         = "アンカー#{index}:#{action.title}"

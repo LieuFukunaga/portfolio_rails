@@ -67,14 +67,15 @@
         height: 33%;
         width: 100%;
         display: flex;
-        @include scroll-config;
         .left-box {
           height: 100%;
           width: 60%;
           @include flex-center;
+          @include scroll-config;
         }
         .right-box {
           width: 40%;
+          @include scroll-config;
           .flex-box {
             height: 100%;
             width: 100%;
@@ -92,6 +93,7 @@
         .form--left {
           height: 100%;
           width: 60%;
+          @include scroll-config;
           @include flex-center;
           .flex--center {
             height: 100%;
@@ -148,6 +150,7 @@
           padding-top: 10vh;
           display: flex;
           justify-content: center;
+          @include scroll-config;
           .steps-edit__fields {
             .fields--flex {
               .status-field {
@@ -178,9 +181,11 @@
           height: 100%;
           width: 60%;
           @include flex-center;
+          @include scroll-config;
         }
         .right-box {
           width: 40%;
+          @include scroll-config;
           .flex-box {
             height: 100%;
             width: 100%;
@@ -199,6 +204,7 @@
           height: 100%;
           width: 60%;
           @include flex-center;
+          @include scroll-config;
           .flex--center {
             height: 100%;
             width: 100%;
@@ -254,6 +260,7 @@
           padding-top: 15vh;
           display: flex;
           justify-content: center;
+          @include scroll-config;
           .steps-edit__fields {
             .fields--flex {
               .status-field {
