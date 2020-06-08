@@ -2,22 +2,24 @@ class PracticesController < ApplicationController
   before_action :set_list, only: [:edit, :update, :reset]
   before_action :set_goal, only: [:edit, :update, :reset]
   before_action :set_step, only: [:edit]
-  before_action :set_steps, only: [:edit]
+  before_action :set_steps, only: [:edit, :update]
   before_action :set_practice, only: [:edit, :update, :change_status, :destroy_image, :reset]
+  before_action :set_practices, only: [:edit, :update]
+  before_action :set_categories, only: [:edit, :update]
 
   def edit
     @practices = Practice.where(goal_id: @goal.id)
-    @categories = @goal.categories
   end
 
   def update
-    binding.pry
-    if @practice.update(practice_params)
-      flash[:success] = "#{@practice.title}を更新しました"
-      redirect_to list_goal_path(@list, @goal)
-    else
-      flash.now[:alert] = @practice.errors.full_messages
-      render action: :edit
+    if @practice.user_id == current_user.id
+      if @practice.update(practice_params)
+        flash[:success] = "#{@practice.title}を更新しました"
+        redirect_to list_goal_path(@list, @goal)
+      else
+        flash.now[:alert] = @practice.errors.full_messages
+        render action: :edit
+      end
     end
   end
 
@@ -63,7 +65,7 @@ class PracticesController < ApplicationController
   private
 
   def practice_params
-    params.require(:practice).permit(:title)
+    params.require(:practice).permit(:title, :status, :practice_image)
   end
 
   def set_list
@@ -84,6 +86,16 @@ class PracticesController < ApplicationController
 
   def set_practice
     @practice = Practice.find(params[:id])
+  end
+
+  def set_categories
+    @categories = Practice.find(params[:id]).goal.categories
+  end
+
+  def set_practices
+    practice = Practice.find(params[:id])
+    goal = Goal.find(practice.goal_id)
+    @practices = Practice.where(goal_id: goal.id)
   end
 
 end

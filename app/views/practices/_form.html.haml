@@ -1,15 +1,25 @@
--# .form--left
--#   .practices-edit__image-box
--#     .practices-edit__current-image
--#       - if practice.practice_image.attached?
--#         = image_tag practice.practice_image.variant(combine_options:{resize:"80x80^",crop:"80x80+0+0",gravity: :center}).processed
--#         = f.file_field :practice_image
--#     .practices-edit__new-image
--# .form--right
--#   .practices-edit__fields
--#     .practices-edit__fields__title
--#       = f.text_field :title, class: "practices-edit__fields__title"
--#     .practices-edit__fields__status
--#       = f.select :status, Practice.statuses_i18n.invert, {}, {class: 'practices-edit__select-practice-status'}
--#   .practices-edit__submit
--#     = f.submit "保存"
+.form--left
+  .practices-edit__image-box
+    .practices-edit__current-image
+      - if practice.practice_image.attached?
+        = link_to destroy_image_list_goal_step_practice_path(practice.list_id, practice.goal_id, practice.step_id, practice), method: :delete, class: "practices-edit__delete-current-image-btn" do
+          = image_tag practice.practice_image.variant(combine_options:{resize:"80x80^",crop:"80x80+0+0",gravity: :center}).processed
+    .practices-edit__new-image
+      .practices-edit__new-image--flex
+    .practices-edit__icons
+      .icons--upload
+        = f.label :practice_image, class: "practices-edit__upload-label" do
+          %i.fas.fa-camera
+          = f.file_field :practice_image, class: "practices-edit__file-field"
+      .icons--remove
+        %i.fas.fa-trash#practices-edit__remove-preview-btn
+
+.form--right
+  .practices-edit__fields
+    .practices-edit__fields__title
+      = f.text_field :title, class: "practices-edit__title-field"
+    .form--right--flex
+      .practices-edit__fields__status
+        = f.select :status, Practice.statuses_i18n.invert, {}, {class: 'practices-edit__select-practice-status'}
+      .practices-edit__submit
+        = f.submit "保存"

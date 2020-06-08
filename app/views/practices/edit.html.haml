@@ -40,31 +40,25 @@
 
   .practices-edit__practices
     = form_with model: @practice, url: list_goal_step_practice_path(@practice.list_id, @practice.goal_id, @practice.step_id, @practice), local: true do |f|
-      = f.text_field :title
-      = f.submit
-    -# - @practices.each.with_index do |practice, index|
-    -#   - if @practice.id > practice.id
-    -#     - if index != 2 && index != 5
-    -#       .practices
-    -#         = "#{index}:#{practice.title}"
-    -#     - else
-    -#       .anchor-practices
-    -#         = "アンカー#{index}:#{practice.title}"
-    -#   - elsif @practice.id == practice.id
-    -#     - if index != 2 && index != 5
-    -#       .practices
-    -#         = form_with model: @practice, url: list_goal_step_practice_path(@list, @goal, @step, @practice), local: true do |f|
-    -#           = f.text_field :title
-    -#           = f.submit
-    -#     - else
-    -#       .anchor-practices
-    -#         = form_with model: @practice, url: list_goal_step_practice_path(@list, @goal, @step, @practice), local: true do |f|
-    -#           = f.text_field :title
-    -#           = f.submit
-    -#   - else
-    -#     - if index != 2 && index != 5
-    -#       .practices
-    -#         = "#{index}:#{practice.title}"
-    -#     - else
-    -#       .anchor-practices
-    -#         = "アンカー#{index}:#{practice.title}"
+      - @practices.each.with_index do |practice, index|
+        - if @practice.id > practice.id
+          - if index != 2 && index != 5
+            .practices.half_opacity
+              = render partial: "practices", locals: { practice: practice}
+          - else
+            .anchor-practices.half_opacity
+              = render partial: "practices", locals: { practice: practice}
+        - elsif @practice.id == practice.id
+          - if index != 2 && index != 5
+            .practices
+              = render partial: "form", locals: { practice: @practice, f: f, index: index}
+          - else
+            .anchor-practices
+              = render partial: "form", locals: { practice: @practice, f: f, index: index}
+        - else
+          - if index != 2 && index != 5
+            .practices.half_opacity
+              = render partial: "practices", locals: { practice: practice}
+          - else
+            .anchor-practices.half_opacity
+              = render partial: "practices", locals: { practice: practice}

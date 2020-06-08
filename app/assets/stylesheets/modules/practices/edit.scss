@@ -1,3 +1,28 @@
+.practices-edit__title-field {
+  height: 40px;
+  width: 95%;
+  line-height: 40px;
+  padding: 10px;
+  border-radius: 5px;
+  border-color: $slategreen;
+  border-style: solid;
+}
+
+.practices-edit__select-practice-status {
+  height: 3vh;
+}
+
+.practices-edit__new-image-preview {
+  height: 80px;
+  width: 80px;
+}
+
+.practices-edit__change-image-icon {
+  margin-right: 10px;
+}
+
+
+
 .practices-edit {
   display: flex;
   @include scroll-config;
@@ -122,7 +147,6 @@
       .practices {
         height: 11%;
         display: flex;
-        background-color: blue;
         &--left {
           height: 100%;
           width: 50%;
@@ -146,13 +170,74 @@
             }
           }
         }
+        .form--left {
+          height: 100%;
+          width: 50%;
+          .practices-edit__image-box {
+            height: 100%;
+            width: 100%;
+            @include flex-center;
+            .practices-edit__current-image {
+              height: 100%;
+              width: 35%;
+              @include flex-center;
+            }
+            .practices-edit__new-image {
+              height: 100%;
+              width: 45%;
+              display: flex;
+              align-items: center;
+              .practices-edit__new-image--flex {
+                height: 100%;
+                width: 100%;
+                display: flex;
+                align-items: center;
+              }
+            }
+            .practices-edit__icons {
+              height: 100%;
+              width: 20%;
+              display: flex;
+              justify-content: center;
+              align-items: flex-end;
+              .icons--upload {
+                margin-right: 5px;
+                .practices-edit__upload-label {
+                  .practices-edit__file-field {
+                    display: none;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .form--right {
+          height: 100%;
+          width: 50%;
+          .practices-edit__fields {
+            height: 100%;
+            &__title {
+              height: 50%;
+              @include flex-center;
+            }
+            .form--right--flex {
+              height: 50%;
+              margin-right: 5px;
+              display: flex;
+              align-items: center;
+              justify-content: flex-end;
+              .practices-edit__fields__status {
+                margin-right: 10px;
+              }
+            }
+          }
+        }
       }
       .anchor-practices {
         height: 11%;
         display: flex;
         border-bottom: 1px solid;
         border-color: $lightgreen;
-        background-color: green;
         &--left {
           height: 100%;
           width: 50%;
@@ -173,6 +258,68 @@
               display: flex;
               justify-content: flex-end;
               margin-top: 1vh;
+            }
+          }
+        }
+        .form--left {
+          height: 100%;
+          width: 50%;
+          .practices-edit__image-box {
+            height: 100%;
+            width: 100%;
+            @include flex-center;
+            .practices-edit__current-image {
+              height: 100%;
+              width: 35%;
+              @include flex-center;
+            }
+            .practices-edit__new-image {
+              height: 100%;
+              width: 45%;
+              display: flex;
+              align-items: center;
+              .practices-edit__new-image--flex {
+                height: 100%;
+                width: 100%;
+                display: flex;
+                align-items: center;
+              }
+            }
+            .practices-edit__icons {
+              height: 100%;
+              width: 20%;
+              display: flex;
+              justify-content: center;
+              align-items: flex-end;
+              .icons--upload {
+                margin-right: 5px;
+                .practices-edit__upload-label {
+                  .practices-edit__file-field {
+                    display: none;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .form--right {
+          height: 100%;
+          width: 50%;
+          .practices-edit__fields {
+            height: 100%;
+            &__title {
+              height: 50%;
+              @include flex-center;
+            }
+            .form--right--flex {
+              height: 50%;
+              margin-right: 5px;
+              display: flex;
+              align-items: center;
+              justify-content: flex-end;
+              .practices-edit__fields__status {
+                margin-right: 10px;
+              }
             }
           }
         }
