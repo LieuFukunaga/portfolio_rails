@@ -1,12 +1,12 @@
 %header
   = render 'layouts/header'
-  %br
-  - breadcrumb :categories_index
-  = breadcrumbs separator: " &rsaquo; "
-%br
-.category-index
-  %h1.category-index__page-title カテゴリ一覧
-  %br
+  .breadcrumbs-field
+    - breadcrumb :categories_index
+    = breadcrumbs separator: " &rsaquo; "
+
+.categories-index
+  %h2.categories-index__page-title
+    = "{ #{current_user.name}さんのカテゴリ一覧 }"
   - if @categories.length != 0
     %table
       %thead
@@ -29,8 +29,6 @@
               %td{data: {index: "#{index}"}}
                 = link_to category_path(category.id), method: :delete, class: "categories-index__delete-btn" do
                   %i.fas.fa-trash
+    = paginate @categories
   - else
     %p -- NO CATEGORY --
-
-%br
-= render partial: "layouts/return-to-root"

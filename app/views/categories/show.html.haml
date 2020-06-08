@@ -1,13 +1,13 @@
 %header
   = render 'layouts/header'
-  %br
-  - breadcrumb :categories_show
-  = breadcrumbs separator: " &rsaquo; "
-%br
+  .breadcrumbs-field
+    - breadcrumb :categories_show
+    = breadcrumbs separator: " &rsaquo; "
+
 .categories-show
-  .categories-show__top
+  %h2.categories-show__top
     %span.categories-show__top__page-title
-      = "”#{@category.category_name}”のタスク一覧"
+      = "{ #{@category.category_name}”のタスク一覧 }"
   %br
   .categories-show__table
     %table
@@ -19,7 +19,9 @@
             所属リスト
           %th
             予定日時
-        - @category.goals.where(user_id: current_user.id).each do |goal|
+          %th
+            状態
+        - @goals.each do |goal|
           %tr
             %td
               = link_to "#{goal.title}", list_goal_path(goal.list_id, goal.id)
@@ -27,8 +29,10 @@
               = link_to "#{List.find(goal.list_id).list_name}", list_path(goal.list_id)
             %td
               = "#{goal.date.strftime("%Y/%m/%d %H:%M")}"
+            %td
+              = goal.status_i18n
   %br
-
+%footer
   = render partial: "layouts/link-to-category-index"
   = render partial: "layouts/return-to-root"
 

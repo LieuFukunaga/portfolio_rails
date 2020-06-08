@@ -1,8 +1,9 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_goals, only: [:show, :edit, :update, :destroy]
 
   def index
-    @categories = current_user.categories.order("category_name ASC")
+    @categories = current_user.categories.order("category_name ASC").page(params[:page]).per(15)
   end
 
   def show
@@ -41,6 +42,10 @@ class CategoriesController < ApplicationController
 
   def set_category
     @category = Category.find(params[:id])
+  end
+
+  def set_goals
+    @goals = Category.find(params[:id]).goals.where(user_id: current_user.id)
   end
 
 end
