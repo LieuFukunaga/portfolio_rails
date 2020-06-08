@@ -34,7 +34,7 @@
             width: 45%;
             padding: 10px;
             @include flex-center;
-            @include scroll-config;
+            // @include scroll-config;
             &__image-box {
               text-align: center;
             }
@@ -48,7 +48,7 @@
             height: 100%;
             width: 55%;
             @include flex-center;
-            @include scroll-config;
+            // @include scroll-config;
             .goals-edit__new-image-box {
               display: flex;
               text-align: center;
@@ -152,7 +152,7 @@
         width: 50%;
         .steps__image {
           height: 100%;
-          @include scroll-config;
+          // @include scroll-config;
           @include flex-center;
         }
       }
@@ -178,7 +178,7 @@
         width: 50%;
         .anchor-step__image {
           height: 100%;
-          @include scroll-config;
+          // @include scroll-config;
           @include flex-center;
         }
       }
@@ -207,7 +207,7 @@
         .practices__image {
           height: 100%;
           width: 100%;
-          @include scroll-config;
+          // @include scroll-config;
           @include flex-center;
         }
       }
@@ -227,7 +227,7 @@
         .anchor-practices__image {
           height: 100%;
           width: 100%;
-          @include scroll-config;
+          // @include scroll-config;
           @include flex-center;
         }
       }
