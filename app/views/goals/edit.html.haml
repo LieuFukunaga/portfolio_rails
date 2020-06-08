@@ -1,70 +1,123 @@
-%header
-  - breadcrumb :goals_edit
-  = breadcrumbs separator: " &rsaquo; "
-%br
-%main.goals-edit
-  .goals-edit__form
-    = form_with model:@goal, url: list_goal_path(@list, @goal), local: true do |f|
-      .goals-edit__form__image
-        .goals-edit__form__image__previews
-          .goals-edit__form__image__previews__current-image
-            -# 編集対象に画像が紐付いている場合
+.goals-edit
+  .goals-edit__goal-section
+    .goals-edit__form
+      = form_with model:@goal, url: list_goal_path(@list, @goal), local: true do |f|
+        .goals-edit__form__image
+          .goals-edit__form__image__previews
             - if @goal.image.attached?
-              .goals-edit__form__image__previews__current-image__image-box
-                = image_tag @goal.image.variant(resize:"100x100").processed, id: "current_image"
-                = link_to "元の画像を削除", image_destroy_list_goal_path(@list, @goal), method: :delete , class: "goals-edit__form__image__previews__current-image__image-box__delete-btn"
-              .goals-edit__form__image__previews__current-image__right-angle
-                %i.fas.fa-angle-double-right
-          .goals-edit__form__image__previews__new-image
-            -# この下にプレビュー用のimg要素がappendされる
-
-      .goals-edit__form__text-field
-        .goals-edit__form__text-field__input
-          = f.label :title, "ゴールを設定して下さい"
+              .goals-edit__form__image__previews__current-image
+                .goals-edit__form__image__previews__current-image__image-box
+                  = image_tag @goal.image.variant(combine_options:{resize:"200x200^",crop:"200x200+0+0",gravity: :center}).processed
+                  %br
+                  = link_to "元の画像を削除", image_destroy_list_goal_path(@list, @goal), method: :delete , class: "goals-edit__delete-current-image-btn"
+            .goals-edit__form__image__previews__new-image
+              .goals-edit__new-image-box
+              -# この下にプレビュー用のimg要素がappendされる
+        .goals-edit__form__fields
+          -# プレビュー用イベント発生元
+          .goals-edit__form__fields--file
+            .goals-edit__form__fields--file__upload
+              = f.label :image, class: "goals-edit__form__upload-label" do
+                %i.fa.fa-camera
+                = f.file_field :image, class: "goals-edit__form__file-field"
+            .goals-edit__form__fields--file__remove
+              %i.fas.fa-trash#goals-edit__remove-preview-btn
+          .goals-edit__form__fields--text
+            = f.text_field :title, value: @goal.title, id: "goals-edit__text-field", placeholder: "20文字以内"
+        .goals-edit__form__status
+          = f.select :status, Goal.statuses_i18n.invert, {}, {class: 'goals-edit__select-goal-status'}
+        .goals-edit__form__date
+          = f.label :date, "予定日"
           %br
-          = f.text_field :title, value: @goal.title, id: "goals-edit__text-field", size: "45px", placeholder: "スペースや読点を含めないで下さい"
-        -# プレビュー用イベント発生元
-        .goals-edit__form__text-field__icons
-          .goals-edit__form__text-field__icons__upload
-            = f.label :image, class: "goals-edit__form__text-field__icons__upload__label" do
-              %i.fa.fa-camera
-              = f.file_field :image, class: "goals-edit__form__text-field__icons__upload__label__file-field"
-          .goals-edit__form__text-field__icons__remove
-            %i.fas.fa-trash#goals-edit__remove-preview-btn
-      %br
-      .goals-edit__form__fields
-        = f.label :status, "タスクの状態"
-        %br
-        = f.select :status, Goal.statuses_i18n.invert, {}, {id: 'status_selector'}
-        %br
-        = f.label :date, "予定日"
-        %br
-        = f.datetime_select :date, {use_month_numbers: true, default: Time.now + 1.hour, datetime_separator: '<br><label class="datetime-selector">予定時刻<br></label>', minute_step: 5}
-        = f.hidden_field :list_id, value: @list.id
-        = f.hidden_field :user_id, value: current_user.id, id:"login-user-id"
+          = f.datetime_select :date, {use_month_numbers: true, default: Time.now + 1.hour, datetime_separator: '<br><label class="datetime-selector">予定時刻<br></label>', minute_step: 5}
+        .goals-edit__form__category
+          - if Category.where(user_id: current_user.id).length != 0
+            .goals-edit__form__category__check-boxes
+              = button_tag "カテゴリを選択", type: "button", id: "goals-edit__modal-fadein-btn"
+              .goals-edit__form__category__check-boxes__options-box
+                .options
+                  = f.collection_check_boxes(:category_ids, Category.where(user_id: current_user.id), :id, :category_name, include_hidden: false) do |c|
+                    .categories
+                      = c.label {c.check_box}
+                      %span
+                      = c.label {c.text}
+                      %br
+          %ul.goals-edit__form__category__create-category-btn
+            = button_tag "カテゴリを作成", type: "button", id: "create-category-btn"
+        .goal-edit__form__hidden-field
+          = f.hidden_field :list_id, value: @list.id
+          = f.hidden_field :user_id, value: current_user.id, id:"login-user-id"
+        .goals-edit__form__submit-btn
+          = f.submit "保存"
+    .goals-edit__links
+      = render partial: "layouts/return-to-goals-show"
+      = render partial: "layouts/return-to-lists-show"
+      = render partial: "layouts/return-to-root"
 
-      .goals-edit__form__category
-        - if Category.where(user_id: current_user.id).length != 0
-          .goals-edit__form__category__check-boxes
-            = button_tag "カテゴリを選択", type: "button", id: "modal-fadein-btn"
-            .goals-edit__form__category__check-boxes__options-box
-              .options
-                = f.collection_check_boxes(:category_ids, Category.where(user_id: current_user.id), :id, :category_name, include_hidden: false) do |c|
-                  %br
-                  = c.label {c.check_box}
-                  %span
-                  = c.label {c.text}
-                  %br
-                %br
-                .close-btn
-                  = button_tag "閉じる", type: "button", id: "modal-fadeout-btn"
-                %br
-        %ul.goals-edit__form__category__create-category-btn
-          ＜新規カテゴリ＞
-          = button_tag "追加", type: "button", id: "create-category-btn"
 
-      .goals-edit__form__submit-btn
-        = f.submit "登録"
-%footer
-  = render partial: "layouts/return-to-list-show"
-  = render partial: "layouts/return-to-root"
+
+  .goals-edit__steps-section.half_opacity
+    - @steps.each.with_index do |step, index|
+      - if index % 3 != 2
+        .goals-edit__steps
+          .goals-edit__steps--left
+            .steps__image
+              - if step.step_image.attached?
+                = image_tag step.step_image.variant(combine_options:{resize:"170x170^",crop:"170x170+0+0",gravity: :center}).processed
+              - else
+                %i.fas.fa-shoe-prints.no-image
+          .goals-edit__steps--right
+            .right-box
+              .steps__title
+                = step.title
+              %br
+              .steps__status
+                = step.status_i18n
+      - else
+        .goals-edit__anchor-step
+          .goals-edit__anchor-step--left
+            .anchor-step__image
+              - if step.step_image.attached?
+                = image_tag step.step_image.variant(combine_options:{resize:"170x170^",crop:"170x170+0+0",gravity: :center}).processed
+              - else
+                %i.fas.fa-shoe-prints.no-image
+          .goals-edit__anchor-step--right
+            .right-box
+              .anchor-step__title
+                = step.title
+              %br
+              .anchor-step__status
+                = step.status_i18n
+
+
+
+  .goals-edit__practices-section.half_opacity
+    - @practices.each.with_index do |practice, index|
+      - if index != 2 && index != 5
+        .goals-edit__practices
+          .practices__left-box
+            .practices__image
+              - if practice.practice_image.attached?
+                = image_tag practice.practice_image.variant(combine_options:{resize:"80x80^",crop:"80x80+0+0",gravity: :center}).processed
+              - else
+                %i.fas.fa-location-arrow
+          .practices__right-box
+            .contents--right
+              .practices__title
+                = practice.title
+              .practices__status
+                = practice.status_i18n
+      - else
+        .goals-edit__anchor-practices
+          .anchor-practices__left-box
+            .anchor-practices__image
+              - if practice.practice_image.attached?
+                = image_tag practice.practice_image.variant(combine_options:{resize:"80x80^",crop:"80x80+0+0",gravity: :center}).processed
+              - else
+                %i.fas.fa-location-arrow
+          .anchor-practices__right-box
+            .anchor-contents--right
+              .anchor-practices__title
+                = practice.title
+              .anchor-practices__status
+                = practice.status_i18n

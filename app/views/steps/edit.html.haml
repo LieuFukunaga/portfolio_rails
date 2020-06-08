@@ -1,0 +1,105 @@
+.steps-edit
+  .steps-edit__goal
+    .steps-edit__goal__image
+      .goal-image-box
+        - if @goal.image.attached?
+          = image_tag @goal.image.variant(combine_options:{resize:"300x300^",crop:"300x300+0+0",gravity: :center}).processed
+        - else
+          %i.fas.fa-flag-checkered.no-image
+    .steps-edit__goal__contents
+      .contents-box
+        .contents
+          .steps-edit__goal__contents__title
+            = @goal.title
+          .steps-edit__goal__contents__status
+            = @goal.status_i18n
+    .steps-edit__goal__date
+      = "予定日時：#{@goal.date.strftime("%Y/%m/%d %H:%M")}"
+    .steps-edit__goal__category
+      - if @categories.length != 0
+        カテゴリ一覧：
+        .category-box
+          - @categories.each do |category|
+            .steps-edit__goal-categories
+              = link_to "#{category.category_name}", category_path(category)
+      - else
+        カテゴリは設定されていません
+    .steps-edit-links
+      = render partial: "layouts/return-to-goals-show"
+      = render partial: "layouts/return-to-lists-show"
+      = render partial: "layouts/return-to-root"
+
+  .steps-edit__steps
+    = form_with model: @step, url: list_goal_step_path(@list, @goal, @step), local: true do |f|
+      - @steps.each.with_index do |step, index|
+        -# 編集対象がstep_2のときstep_1, step_3のときstep_1,2
+        - if @step.id > step.id
+          -# step_3以外の場合
+          - if index != 2
+            .steps.half_opacity
+              = render partial: "steps", locals: {step: step}
+
+        - elsif @step.id == step.id
+          -# step＝編集対象の場合
+          - if index != 2
+            -# step_1または2を編集する場合
+            .steps{class: "step_#{index}"}
+              = render partial: "form", locals: {step: @step, f: f, index: index}
+          - else
+            -# step_3を編集する場合
+            .anchor-step{class: "step_#{index}"}
+              = render partial: "form", locals: {step: @step, f: f, index: index}
+
+        - else
+          -# 編集対象がstep_1のときstep_1,2 / step_2のときstep_3
+          - if index != 2
+            -# step_3以外の場合
+            .steps.half_opacity
+              = render partial: "steps", locals: {step: step}
+          - else
+            -# step_3の場合
+            .anchor-step.half_opacity
+              .left-box
+                .anchor-step__image
+                  - if step.step_image.attached?
+                    = image_tag step.step_image.variant(combine_options:{resize:"220x220^",crop:"220x220+0+0",gravity: :center}).processed
+                  - else
+                    %i.fas.fa-shoe-prints.no-image
+              .right-box
+                .flex-box
+                  .flex--center
+                    .steps__title
+                      = step.title
+                    .steps__status
+                      = step.status_i18n
+
+  .steps-edit__practices.half_opacity
+    - @practices.each.with_index do |practice, index|
+      - if index != 2 && index != 5
+        .practices
+          .practices__left-box
+            .practices__image
+              - if practice.practice_image.attached?
+                = image_tag practice.practice_image.variant(combine_options:{resize:"80x80^",crop:"80x80+0+0",gravity: :center}).processed
+              - else
+                %i.fas.fa-location-arrow.no-image
+          .practices__right-box
+            .contents--right
+              .practices__title
+                = practice.title
+              .practices__status
+                = practice.status_i18n
+      - else
+        .anchor-practices
+          .anchor-practices__left-box
+            .anchor-practices__image
+              - if practice.practice_image.attached?
+                = image_tag practice.practice_image.variant(combine_options:{resize:"80x80^",crop:"80x80+0+0",gravity: :center}).processed
+              - else
+                %i.fas.fa-location-arrow.no-image
+          .anchor-practices__right-box
+            .anchor-contents--right
+              .anchor-practices__title
+                = practice.title
+              .anchor-practices__status
+                = practice.status_i18n

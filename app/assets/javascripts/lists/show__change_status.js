@@ -5,7 +5,7 @@ $(function(){
   });
 
   $(".change-status-btn").on("click", function(){
-    // button要素の表示文字を取得
+    // "実行中"または"達成！"を取得
     let status = $(this).val();
     // 直属のtd要素のカスタムデータ属性からタスクのidを取得
     let taskId = $(this).parents(".js-change-status").data("id");
@@ -20,8 +20,12 @@ $(function(){
     .done(function(task){
       if (task.status == "doing") {
         $(`.goal_${taskId}`).val("実行中");
+        $(`.goal_${taskId}`).removeClass("goal--done");
+        $(`.goal_${taskId}`).addClass("goal--doing");
       } else {
         $(`.goal_${taskId}`).val("達成！");
+        $(`.goal_${taskId}`).removeClass("goal--doing");
+        $(`.goal_${taskId}`).addClass("goal--done");
       };
     })
     .fail(function(){

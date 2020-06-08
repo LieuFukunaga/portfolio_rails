@@ -4,7 +4,7 @@
       .field
         = f.label :postcode, "郵便番号"
         %br
-        = f.text_field :postcode, placeholder: "例：123-4567"
+        = f.text_field :postcode, placeholder: "例：123-4567", class: "addresses-edit__form-style"
       %br
       .field
         = f.label :prefecture, "住所"
@@ -14,12 +14,12 @@
       .field
         = f.label :city, "市区町村"
         %br
-        = f.text_field :city, placeholder: "例：渋谷区xx町"
+        = f.text_field :city, placeholder: "例：渋谷区xx町", class: "addresses-edit__form-style"
       %br
       .field
         = f.label :building, "建物名・番地"
         %br
-        = f.text_field :building, placeholder: "例：xxマンションyyy号室"
+        = f.text_field :building, placeholder: "例：xxマンションyyy号室", class: "addresses-edit__form-style"
       %br
       .field
         = f.label :current_password, class: "users-edit__required" do
@@ -27,7 +27,7 @@
           %br
           パスワードを入力して下さい
         %br
-        = f.password_field :current_password, autocomplete: "current-password", required: true
+        = f.password_field :current_password, autocomplete: "current-password", required: true, class: "addresses-edit__form-style"
       %br
       .hidden-field
         = f.hidden_field :user_id

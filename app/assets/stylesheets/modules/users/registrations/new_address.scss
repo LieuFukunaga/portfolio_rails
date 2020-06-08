@@ -7,5 +7,11 @@
   }
   &__form {
     font-size: 20px;
+    input:not(.postcode-field):not(.devise-action-btns) {
+      width: 20%;
+    }
+  }
+  &__submit {
+    margin: 10px;
   }
 }

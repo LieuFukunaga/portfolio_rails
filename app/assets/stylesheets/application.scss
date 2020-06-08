@@ -9,22 +9,6 @@
 @import "modules/mixins";
 @import "modules/flash";
 
-// for lists
-@import "modules/lists/index";
-@import "modules/lists/new";
-@import "modules/lists/show";
-@import "modules/lists/list_search_at_root";
-@import "modules/lists/task_search_at_root";
-@import "modules/lists/list_search";
-// for goals
-@import "modules/goals/new";
-@import "modules/goals/show";
-@import "modules/goals/edit";
-@import "modules/goals/task_search_in_list";
-// for categories
-@import "modules/categories/index";
-@import "modules/categories/show";
-@import "modules/categories/edit";
 // for users
 @import "modules/users/sessions/new";
 @import "modules/users/registrations/new";
@@ -34,6 +18,26 @@
 @import "modules/users/edit";
 // for addresses
 @import "modules/addresses/edit";
+// for lists
+@import "modules/lists/index";
+@import "modules/lists/new";
+@import "modules/lists/show";
+@import "modules/lists/task_search_at_root";
+@import "modules/lists/list_search";
+// for goals
+@import "modules/goals/new";
+@import "modules/goals/show";
+@import "modules/goals/edit";
+@import "modules/goals/task_search_in_list";
+// for steps
+@import "modules/steps/edit";
+// for practices
+@import "modules/practices/edit";
+
+// for categories
+@import "modules/categories/index";
+@import "modules/categories/show";
+@import "modules/categories/edit";
 
 
 * {
@@ -41,10 +45,8 @@
   color: $cs-navy;
 }
 
-
 // タグ・共通
 header {
-  margin-bottom: 10px;
   border-bottom: 1px solid;
   border-color: $gray;
 }
@@ -70,11 +72,11 @@ a:hover {
   text-decoration: underline;
 }
 
-input {
+input:not(.users-edit__submit) {
   padding: 5px;
 }
 
-i:not(.fa-tasks):not(.fa-user-circle):not(.fa-search) {
+i:not(.fa-tasks):not(.fa-user-circle):not(.fa-search):not(.fa-circle):not(.fa-check-circle):not(.fa-heart) {
   color: $slategreen;
 }
 
@@ -89,20 +91,22 @@ img:not(#login-user-avatar):not(.users-edit__new-avatar-preview):not(#current-av
 
 table {
   display: block;
-  overflow: scroll;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
+  @include scroll-config;
 }
 
 th {
   font-weight: bold;
-  padding: 0 5px;
+  padding: 0 10px;
   background-color: $lightgray;
+  text-align: center;
 }
 
 td {
-  padding: 5px 10px;
+  padding: 1vh 10px;
+  text-align: center;
 }
+
+
 
 
 
@@ -111,7 +115,11 @@ td {
 .breadcrumbs-field {
   margin: 5px 20px;
 }
-.fas:not(.fa-tasks):not(.fa-user-circle) {
+.fas:not(.fa-tasks):not(.fa-user-circle):not(.fa-check-circle) {
+  font-size: 20px;
+}
+
+.far:not(.fa-circle) {
   font-size: 20px;
 }
 
@@ -120,11 +128,13 @@ td {
 }
 
 .no-image {
-  height: 100px;
-  width: 100px;
-  line-height: 100px;
+  height: 80px;
+  width: 80px;
+  line-height: 80px;
   font-size: 25px;
   text-align: center;
+  border-radius: 10%;
+  background-color: $whitesmoke;
 }
 
 .tasks-thumbnail {
@@ -147,8 +157,8 @@ td {
 }
 
 .thumbnail--small {
-  height: 100px;
-  width: 100px;
+  height: 80px;
+  width: 80px;
 }
 
 .breadcrumbs-field {
@@ -162,6 +172,25 @@ td {
 .grayout {
   opacity: 0.3;
 }
+
+.half_opacity {
+  opacity: 0.5;
+}
+
+.fas.fa-heart {
+  color: $red;
+}
+
+.change-status-btn {
+  border-radius: 5px;
+
+}
+
+// .change-status-btn {
+//   border-radius: 5px;
+//   border-color: darkgray;
+//   border-style: solid;
+// }
 
 // タグ、クラス・共通
 

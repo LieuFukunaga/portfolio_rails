@@ -1,0 +1,29 @@
+.form--left
+  .flex--center
+    .steps-edit__image
+      .image-box
+        - if step.step_image.attached?
+          .current-image
+            .image--flex
+              = image_tag step.step_image.variant(combine_options:{resize:"120x120^",crop:"120x120+0+0",gravity: :center}).processed
+              %br
+              = link_to "元の画像を削除", destroy_image_list_goal_step_path(@list, @goal, step), method: :delete , class: "steps-edit__delete-current-image-btn"
+        .new-image
+          .new-image--flex
+          -# 画像プレビューappend位置
+    .steps-edit__icons
+      .steps-edit__icons__upload-image
+        = f.label :step_image, class: "steps-edit__upload-label" do
+          %i.fa.fa-camera
+          = f.file_field :step_image, class: "steps-edit__file-field"
+      .steps-edit__icons__remove-image
+        %i.fas.fa-trash#steps-edit__remove-preview-btn
+.form--right
+  .steps-edit__fields
+    .fields--flex
+      .title-field
+        = f.text_field :title
+      .status-field
+        = f.select :status, Step.statuses_i18n.invert, {}, {class: 'steps-edit__select-step-status'}
+    .steps-edit__submit-btn
+      = f.submit "保存"

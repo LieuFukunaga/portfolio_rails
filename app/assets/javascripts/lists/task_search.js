@@ -11,12 +11,10 @@ $(function() {
     let tableHeader = `<thead id="task-table__header">
                         <tr>
                           <th>サムネイル</th>
-                          <th>タスク名</th>
+                          <th>タイトル</th>
                           <th>所属リスト</th>
                           <th>予定日時</th>
-                          <th>タスクの状態</th>
-                          <th></th>
-                          <th></th>
+                          <th>状態</th>
                         </tr>
                       </thead>
                       <tbody id="task-table__body" class="hover-records"></tbody>`
@@ -56,12 +54,7 @@ $(function() {
                       ${year}/${month}/${day} ${hour}:${minute} (${youbi})
                     </td>
                     <td class="js-change-status" data-id="${task.id}">
-                      <a class="change-status-links" id="task_${task.id}_${task.status}" rel="nofollow" data-method="post" href="javascript:void(0)" data-href="/lists/${task.list_id}/goals/${task.id}/change_status_at_root">実行中</a>
-                    </td>
-                    <td>
-                    <a href="/lists/${task.list_id}/goals/${task.id}/edit">
-                      <i class="fas fa-edit"></i>
-                    </a>
+                      <a class="change-status-links lists-index__goal--doing" id="task_${task.id}_${task.status}" rel="nofollow" data-method="post" href="javascript:void(0)" data-href="/lists/${task.list_id}/goals/${task.id}/change_status_at_root">実行中</a>
                     </td>
                     <td>
                       <a class="appended-delete-task-btn" rel="nofollow" data-method="delete" data-trash-task-id="${task.id}" href="/lists/${task.list_id}/goals/${task.id}">
@@ -90,12 +83,7 @@ $(function() {
                       ${year}/${month}/${day} ${hour}:${minute} (${youbi})
                     </td>
                     <td class="js-change-status" data-id="${task.id}">
-                      <a class="change-status-links" id="task_${task.id}_${task.status}" rel="nofollow" data-method="post" href="javascript:void(0)" data-href="/lists/${task.list_id}/goals/${task.id}/change_status_at_root">達成！</a>
-                    </td>
-                    <td>
-                    <a href="/lists/${task.list_id}/goals/${task.id}/edit">
-                      <i class="fas fa-edit"></i>
-                    </a>
+                      <a class="change-status-links lists-index__goal--done" id="task_${task.id}_${task.status}" rel="nofollow" data-method="post" href="javascript:void(0)" data-href="/lists/${task.list_id}/goals/${task.id}/change_status_at_root">達成！</a>
                     </td>
                     <td>
                       <a class="appended-delete-task-btn" rel="nofollow" data-method="delete" data-trash-task-id="${task.id}" href="/lists/${task.list_id}/goals/${task.id}">
@@ -126,12 +114,7 @@ $(function() {
                       ${year}/${month}/${day} ${hour}:${minute} (${youbi})
                     </td>
                     <td class="js-change-status" data-id="${task.id}">
-                      <a class="change-status-links" id="task_${task.id}_${task.status}" rel="nofollow" data-method="post" href="javascript:void(0)" data-href="/lists/${task.list_id}/goals/${task.id}/change_status_at_root">実行中</a>
-                    </td>
-                    <td>
-                    <a href="/lists/${task.list_id}/goals/${task.id}/edit">
-                      <i class="fas fa-edit"></i>
-                    </a>
+                      <a class="change-status-links  lists-index__goal--doing" id="task_${task.id}_${task.status}" rel="nofollow" data-method="post" href="javascript:void(0)" data-href="/lists/${task.list_id}/goals/${task.id}/change_status_at_root">実行中</a>
                     </td>
                     <td>
                       <a class="appended-delete-task-btn" rel="nofollow" data-method="delete" data-trash-task-id="${task.id}" href="/lists/${task.list_id}/goals/${task.id}">
@@ -160,12 +143,7 @@ $(function() {
                       ${year}/${month}/${day} ${hour}:${minute} (${youbi})
                     </td>
                     <td class="js-change-status" data-id="${task.id}">
-                      <a class="change-status-links" id="task_${task.id}_${task.status}" rel="nofollow" data-method="post" href="javascript:void(0)" data-href="/lists/${task.list_id}/goals/${task.id}/change_status_at_root">達成！</a>
-                    </td>
-                    <td>
-                    <a href="/lists/${task.list_id}/goals/${task.id}/edit">
-                      <i class="fas fa-edit"></i>
-                    </a>
+                      <a class="change-status-links lists-index__goal--done" id="task_${task.id}_${task.status}" rel="nofollow" data-method="post" href="javascript:void(0)" data-href="/lists/${task.list_id}/goals/${task.id}/change_status_at_root">達成！</a>
                     </td>
                     <td>
                       <a class="appended-delete-task-btn" rel="nofollow" data-method="delete" data-trash-task-id="${task.id}" href="/lists/${task.list_id}/goals/${task.id}">

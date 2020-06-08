@@ -12,7 +12,7 @@
           - else
             -# デフォルトのアイコン
             %i.fas.fa-user-circle.users-edit__default-icon
-
+      %br
       .field__avatar__operator
         .users-edit__operator__upload
           = f.label :avatar, class: "users-edit__operator__upload__label" do
@@ -26,20 +26,17 @@
     .field
       = f.label :name, "お名前"
       %br
-      = f.text_field :name
-    %br
+      = f.text_field :name, class: "users-edit__form-style"
 
     .field
       = f.label :email, "Eメール"
       %br
-      = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "例：hoge@hoge.hoge"
-    %br
+      = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "例：hoge@hoge.hoge", class: "users-edit__form-style"
 
     .field
       = f.label :tel_num, "電話番号"
       %br
-      = f.telephone_field :tel_num, autofocus: true, placeholder: "例：01234567890"
-    %br
+      = f.telephone_field :tel_num, autofocus: true, placeholder: "例：01234567890", class: "users-edit__form-style"
 
     .field
       = f.label :current_password, class: "users-edit__required" do
@@ -47,7 +44,7 @@
         %br
         パスワードを入力して下さい
       %br
-      = f.password_field :current_password, autocomplete: "current-password", required: true
+      = f.password_field :current_password, autocomplete: "current-password", required: true, class: "users-edit__form-style"
 
     .hidden-field
       = f.hidden_field :id

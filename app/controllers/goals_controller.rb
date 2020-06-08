@@ -1,11 +1,17 @@
 class GoalsController < ApplicationController
 
-  before_action :set_list, only: [:show, :edit, :update]
-  before_action :set_goal, only: [:show, :edit, :update, :destroy, :root_destroy, :image_destroy, :change_status, :change_status_at_root]
+  before_action :set_list, only: [:show, :edit, :update, :reset]
+  before_action :set_goal, only: [:show, :edit, :update, :destroy, :root_destroy, :image_destroy, :change_status, :change_status_at_root, :reset]
+  before_action :set_steps, only: [:show, :edit, :update]
+  before_action :set_practices, only: [:show, :edit, :update]
 
   def new
     @goal = Goal.new
+
     @goal.categories.new                 # 新規カテゴリ作成用
+    @goal.steps.new                 # 新規ステップ作成用
+    @goal.practices.new                 # 新規アクション作成用
+
     @list = List.find(params[:list_id])  # 画面遷移用
   end
 
@@ -18,32 +24,57 @@ class GoalsController < ApplicationController
     if params[:goal][:categories_attributes] != nil
       inputs = params[:goal][:categories_attributes][:"0"][:"category_name"].split(/[, 、　]/) # 区切り文字で分割、配列化
       if @goal.save
+        steps = @goal.steps
+        practices = @goal.practices
+
+        practices[0..2].each do |practice|
+          practice.update(step_id: steps[0].id)
+        end
+        practices[3..5].each do |practice|
+          practice.update(step_id: steps[1].id)
+        end
+        practices[6..8].each do |practice|
+          practice.update(step_id: steps[2].id)
+        end
+
         @goal.save_category(inputs, checked_ids)
         flash[:success] = "タスクを作成しました"
         redirect_to list_path(@list)
       else
-        flash.now[:alert] = @goal.errors.full_messages
-        render action: :new
+        flash[:alert] = @goal.errors.full_messages
+        redirect_to list_path(@goal.list_id)
       end
       # 新規カテゴリの入力がない場合
     else
       if @goal.save
+        steps = @goal.steps
+        practices = @goal.practices
+
+        practices[0..2].each do |practice|
+          practice.update(step_id: steps[0].id)
+        end
+        practices[3..5].each do |practice|
+          practice.update(step_id: steps[1].id)
+        end
+        practices[6..8].each do |practice|
+          practice.update(step_id: steps[2].id)
+        end
         flash[:success] = "タスクを作成しました"
         redirect_to list_path(@list)
       else
-        flash.now[:alert] = @goal.errors.full_messages
-        render action: :new
+        flash[:alert] = @goal.errors.full_messages
+        redirect_to list_path(@goal.list_id)
       end
     end
   end
 
   def show
-    @goal_categories = @goal.categories.order("category_name ASC")
+    @categories = @goal.categories.order("category_name ASC")
   end
 
   def edit
     if @goal.user_id == current_user.id
-      @categories = Category.includes(:goals) # セレクトボックス用
+      @categories = Category.where(user_id: current_user.id) # セレクトボックス用
     else
       redirect_to root_path
     end
@@ -58,16 +89,16 @@ class GoalsController < ApplicationController
       if @goal.update(goal_params)
         @goal.update_category(added_categories, update_ids)
         flash[:success] = "#{@goal.title}を更新しました"
-        redirect_to list_goal_path(@goal.list_id, @goal.id)
+        redirect_to action: :show
       else
         flash.now[:alert] = @goal.errors.full_messages
-        render action: :show
+        render action: :edit
       end
       # 新規カテゴリの入力がない場合
     else
       if @goal.update(goal_params)
         flash[:success] = "#{@goal.title}を更新しました"
-        redirect_to list_path(@list)
+        redirect_to action: :show
       else
         flash.now[:alert] = @goal.errors.full_messages
         render action: :edit
@@ -92,7 +123,7 @@ class GoalsController < ApplicationController
     end
   end
 
-  # リスト詳細・タスク詳細ページ用
+  # リスト詳細ページ用
   def change_status
     if @goal.user_id == current_user.id
       status = params[:status]
@@ -108,7 +139,7 @@ class GoalsController < ApplicationController
     end
   end
 
-  # トップページのタスク検索機能におけるステータス更新のため
+  # トップページタスク検索フォーム、タスク詳細ページ用
   def change_status_at_root
     if @goal.user_id == current_user.id
       status = params[:status]
@@ -143,20 +174,43 @@ class GoalsController < ApplicationController
     @sort = task_sort
   end
 
+  def reset
+    if @goal.user_id == current_user.id
+      if @goal.image.attached?
+        @goal.image.purge
+        @goal.update(title: "goal", status: "doing", date: Time.now + 1.hour, )
+        redirect_to list_goal_path(@list, @goal)
+      else
+        @goal.update(title: "goal", status: "doing")
+        redirect_to list_goal_path(@list, @goal)
+      end
+      if @goal.categories.length != 0
+        @goal.update(category_ids: "")
+      end
+    end
+  end
+
+
 
   private
   def goal_params
-    params.require(:goal).permit(:title, :image, :status, :list_id, :user_id, :date, category_ids: [], categories_attributes: [:category_name, :user_id])
+    params.require(:goal).permit(:title, :image, :status, :user_id, :list_id, :date, category_ids: [], categories_attributes: [:category_name, :user_id], steps_attributes: [:title, :step_image, :status, :user_id, :list_id, :goal_id], practices_attributes: [:title, :practice_image, :status, :user_id, :list_id, :goal_id, :step_id])
   end
 
   def set_list
-    @goal = Goal.find(params[:id])
-    @list = List.find(@goal.list_id)
-    # @list = List.find(params[:id])だとゴールのidを取得してしまう
+    @list = Goal.find(params[:id]).list
   end
 
   def set_goal
     @goal = Goal.find(params[:id])
+  end
+
+  def set_steps
+    @steps = Goal.find(params[:id]).steps
+  end
+
+  def set_practices
+    @practices = Goal.find(params[:id]).practices
   end
 
 end

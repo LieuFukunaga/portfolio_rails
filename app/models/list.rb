@@ -1,9 +1,18 @@
 class List < ApplicationRecord
   belongs_to :user
+
   has_many :goals, dependent: :destroy
+  has_many :steps, dependent: :destroy
+  has_many :practices, dependent: :destroy
 
   validates :user_id, null: false
   validates :list_name, null: false, presence: true
+
+
+  enum favorite: {
+    ordinary: 0,
+    favorite: 1,
+  }
 
 
   # 検索ワード表示のため

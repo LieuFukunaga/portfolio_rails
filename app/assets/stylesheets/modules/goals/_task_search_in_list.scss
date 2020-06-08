@@ -1,11 +1,20 @@
+.search-in-list--doing {
+  background-color: $kurenai;
+}
+
+.search-in-list--done {
+  background-color: $green;
+}
+
+
 .goals-task_search_in_list {
   &__operator {
     margin-bottom: 10px;
     &__form {
       margin-bottom: 20px;
-      @include form-style;
       &__form-field {
         &__text-field {
+          @include form-style;
           width: 40%;
         }
         &__search-btn {

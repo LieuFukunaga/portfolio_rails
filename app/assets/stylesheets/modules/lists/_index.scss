@@ -7,13 +7,28 @@ i.fas.fa-search {
   color: whitesmoke;
 }
 
+.lists-index__goal--doing {
+  color: $darkorange;
+}
+
+.lists-index__goal--done {
+  color: $green;
+}
+
+
 
 .lists-index {
   display: flex;
+  height: 90vh;
   .left-content {
-    max-height: 50vh;
+    height: 100%;
     width: 50%;
+    margin-right: 10px;
     .upper-content {
+      height: calc(50% - 10px);
+      margin-bottom: 10px;
+      overflow: scroll;
+      white-space: nowrap;
       .lists-index__list-operator {
         &__search-form {
           &__form-field {
@@ -31,18 +46,20 @@ i.fas.fa-search {
         }
       }
       .lists-index__list-table {
-        margin-top: 30px;
+        margin-top: 15px;
       }
     }
     .lower-content {
-      margin-top: 5vh;
+      height: 50%;
+      overflow: scroll;
+      white-space: nowrap;
       #next-seven-days-tasks {
-        max-height: 35vh;
+        max-height: 40vh;
       }
     }
   }
   .right-content {
-    max-height: 50vh;
+    height: 100%;
     width: 50%;
     .lists-index__task-operator {
       &__search-form {

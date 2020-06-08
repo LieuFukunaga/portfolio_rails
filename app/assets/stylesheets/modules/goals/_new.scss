@@ -1,66 +1,282 @@
-@import "modules/colors";
+.goals-new .categories {
+  margin-bottom: 5px;
+}
 
-@mixin task-form-style {
-  height: 40px;
-  line-height: 40px;
-  padding: 5px;
-  border-radius: 5px;
+// appendされる画像プレビュー
+.new-task-form__step-previews {
+  height: 150px;
+  width: 150px;
+}
+
+// appendされる画像プレビュー
+.new-task-form__practice-previews {
+  height: 80px;
+  width: 80px;
+  margin-top : 1vh;
+}
+
+#new-task-form__goal__text-field, #create-category-form {
+  @include form-style;
+}
+
+.new-task-form__steps__text-field, .new-task-form__anchor-step__text-field {
+  @include form-style;
+}
+
+.new-task-form__practices__text-field, .new-task-form__anchor-practices__text-field {
+  @include form-style;
 }
 
 
-.goals-new__page-info__page-title {
-  font-size: 20px;
-}
-.goals-new__form__category__check-boxes__options-box {
-  max-height: 300px;
-  max-width: 300px;
-  display: none;
-  border: solid 1px;
-  overflow: scroll;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
-}
+.goals-new {
+  &__form {
+    #new-task-form {
+      .new-task-form {
+        display: flex;
+        height: 100vh;
+        // セクション：ゴール
+        &__goal {
+          // border-right: 1px solid;
+          padding: 1vh;
+          white-space: nowrap;
+          -webkit-overflow-scrolling: touch;
+          width: 34%;
+          &__image {
+            margin-top: 3vh;
+            height: 30vh;
+            &__preview {
+              height: 250px;
+              width: 250px;
+              margin: 0 auto;
+            }
+          }
+          &__fields {
+            &__image{
+              text-align: center;
+              display: flex;
+              justify-content: center;
+              margin-bottom: 5px;
+              &__upload {
+                .new-task-form__goal__upload-label {
+                  .new-task-form__goal__file-field {
+                    display: none;
+                  }
+                }
+              }
+              &__remove {
+                .new-task__goal__remove-preview-btn {
+                  padding-left: 5px;
+                }
+              }
+            }
+            &__text {
+              text-align: center;
+            }
+            &__datetime {
+              text-align: center;
+              padding-top: 5px;
+              select {
+                height: 30px;
+              }
+            }
+          }
+          .new-task-form__category {
+            height: 30vh;
+            padding-top: 2vh;
+            text-align: center;
+            overflow: scroll;
+            white-space: nowrap;
+            &__check-boxes {
 
-.goals-new__form {
-  &__image {
-    &__preview {
-
-      // リサイズ（仮）
-      width: 20%;
-      height: 30vh;
-
-      text-align: center;
-      display: flex;
-      #goals-new__image-preview {
-        align-items: center;
-      }
-    }
-  }
-  &__text-field {
-    display: flex;
-    position: relative;
-    &__input {
-      #goals-new__text-field {
-        @include task-form-style;
-      }
-    }
-    &__icons {
-      display: flex;
-      position: absolute;
-      top: 32px;
-      left: 350px;
-      &__upload {
-        #goals-new__file-field {
-          display: none;
+              #modal-fadein-btn {
+                margin-bottom: 5px;
+              }
+              &__options-box {
+                height: 15vh;
+                width: 60%;
+                padding: 10px;
+                margin: 0 auto;
+                border: solid 1px;
+                border-radius: 5px;
+                display: none;
+                overflow: scroll;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+              }
+            }
+            &__create-category-form {
+              margin-top: 1vh;
+            }
+          }
+          .new-task-form__submit-btn {
+            display: flex;
+            justify-content: flex-end;
+            padding: 0 5%;
+          }
+          .new-task-form__links {
+            margin-top: 1vh;
+          }
+        }
+        // セクション：ステップ
+        &__steps {
+          width: 33%;
+          overflow: scroll;
+          white-space: nowrap;
+          -webkit-overflow-scrolling: touch;
+          &__fields {
+            height: 33%;
+            &__image {
+              height: 25vh;
+              &__preview {
+                height: 22vh;
+                width: 100%;
+                text-align: center;
+                .new-task-form__step-previews {
+                  margin-top: 3vh;
+                }
+              }
+              &__icons {
+                padding-bottom: 5px;
+                display: flex;
+                justify-content: center;
+                &__upload {
+                  margin-right: 5px;
+                  .new-task-form__steps__upload-label {
+                    .new-task-form__steps__file-field {
+                      display: none;
+                    }
+                  }
+                }
+                &__remove {
+                }
+              }
+            }
+            &__text {
+              display: flex;
+              justify-content: center;
+            }
+          }
+          .new-task-form__anchor-step__fields {
+            height: calc(100vh - 66%);
+            &__image {
+              height: 25vh;
+              &__preview {
+                height: 22vh;
+                width: 100%;
+                text-align: center;
+                .new-task-form__step-previews {
+                  margin-top: 3vh;
+                }
+              }
+              &__icons {
+                padding-bottom: 5px;
+                display: flex;
+                justify-content: center;
+                &__upload {
+                  margin-right: 5px;
+                  .new-task-form__anchor-step__upload-label {
+                    .new-task-form__anchor-step__file-field {
+                      display: none;
+                    }
+                  }
+                }
+                &__remove {
+                }
+              }
+            }
+            &__text {
+              display: flex;
+              justify-content: center;
+            }
+          }
+        }
+        // セクション：practice
+        &__practices {
+          width: 33%;
+          &__fields {
+            height: 11%;
+            display: flex;
+            margin: 1px;
+            &--left {
+              height: 100%;
+              width: 30%;
+              .new-task-form__practices__fields__image {
+                display: flex;
+                height: 100%;
+                width: 100%;
+                &__preview {
+                  // 画像プレビューappend場所
+                  height: 100%;
+                  width: 100%;
+                  text-align: center;
+                }
+              }
+            }
+            &--right {
+              .right-form-box {
+                margin-top: 10%;
+                .new-task-form__practices__fields__text-field {
+                }
+                .new-task-form__practices__icons {
+                  display: flex;
+                  justify-content: flex-end;
+                  margin-top: 5px;
+                  &__upload {
+                    margin-right: 5px;
+                    .new-task-form__practices__upload-label {
+                      .new-task-form__practices__file-field {
+                        display: none;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          .new-task-form__anchor-practices__fields {
+            height: 11%;
+            display: flex;
+            border-bottom: 1px solid;
+            border-color: $lightgreen;
+            margin: 1px;
+            &--left {
+              height: 100%;
+              width: 30%;
+              .new-task-form__anchor-practices__fields__image {
+                display: flex;
+                height: 100%;
+                width: 100%;
+                &__preview {
+                  // 画像プレビューappend場所
+                  height: 100%;
+                  width: 100%;
+                  text-align: center;
+                }
+              }
+            }
+            &--right {
+              .right-form-box {
+                margin-top: 10%;
+                .new-task-form__anchor-practices____text-field {
+                }
+                .new-task-form__anchor-practices__icons {
+                  display: flex;
+                  justify-content: flex-end;
+                  margin-top: 5px;
+                  &__upload {
+                    margin-right: 5px;
+                    .new-task-form__anchor-practices__upload-label {
+                      .new-task-form__anchor-practices__file-field {
+                        display: none;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
-      &__remove {
-        padding-left: 5px;
-      }
     }
   }
-}
-
-#create-category-form {
-  @include task-form-style;
 }

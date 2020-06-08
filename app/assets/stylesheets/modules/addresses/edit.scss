@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+.addresses-edit__form-style {
+  @include form-style;
+}
+
 .addresses-edit {
   &__form {
     text-align: center;

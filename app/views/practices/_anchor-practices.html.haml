@@ -1,0 +1,14 @@
+.anchor-practices--left
+  .anchor-practices--left__image
+    - if practice.practice_image.attached?
+      = image_tag practice.practice_image.variant(combine_options:{resize:"80x80^",crop:"80x80+0+0",gravity: :center}).processed
+    - else
+      %i.fas.fa-location-arrow.no-image
+.anchor-practices--right
+  .anchor-practices--right__box
+    .box--flex
+      .title
+        .practices__title
+          = practice.title
+    .anchor-practices--right__box__status
+      = practice.status_i18n

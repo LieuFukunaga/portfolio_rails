@@ -27,19 +27,22 @@
             %th
               サムネイル
             %th
-              タスク名
+              タイトル
             %th
               予定日時
             %th
-              タスクの状態
+              状態
             %th
+              実行中のステップ
             %th
+              実行中のアクション
+
         %tbody.lists-show__task-table__results__body
           - @goals.each do |goal|
             %tr{data: {lists_show_task_id: goal.id}}
               - if goal.image.attached?
                 %td.thumbnail.td-image
-                  = image_tag goal.image.variant(combine_options:{resize:"100x100^",crop:"100x100+0+0",gravity: :center}).processed
+                  = image_tag goal.image.variant(combine_options:{resize:"80x80^",crop:"80x80+0+0",gravity: :center}).processed
               - else
                 %td
                   %i.fas.fa-tasks.no-image
@@ -48,10 +51,14 @@
               %td
                 = "#{goal.date.strftime("%Y/%m/%d %H:%M")}"
               %td.js-change-status{data: {id: goal.id}}
-                = button_to "#{goal.status_i18n}", change_status_list_goal_path(goal.list_id, goal), method: :post, name: "status", class: "change-status-btn goal_#{goal.id}", value: goal.status
+                - if goal.status == "doing"
+                  = button_to "#{goal.status_i18n}", change_status_list_goal_path(goal.list_id, goal), method: :post, name: "status", class: "change-status-btn goal_#{goal.id} goal--doing", value: goal.status
+                - else
+                  = button_to "#{goal.status_i18n}", change_status_list_goal_path(goal.list_id, goal), method: :post, name: "status", class: "change-status-btn goal_#{goal.id} goal--done", value: goal.status
               %td
-                = link_to edit_list_goal_path(goal.list_id, goal.id) do
-                  %i.fas.fa-edit
+                = "#{goal.steps.where(status: 0).length}"
+              %td
+                = "#{goal.practices.where(status: 0).length}"
               %td
                 = link_to list_goal_path(goal.list_id, goal.id), method: :delete, class: "lists-show__delete-task-btn", data: {task_id: "#{goal.id}"} do
                   %i.fas.fa-trash
@@ -59,5 +66,5 @@
     - else
       %p -- NO TASK --
 
-%footer
+%footer.lists-show__footer
   = render partial: "layouts/link-to-category-index"

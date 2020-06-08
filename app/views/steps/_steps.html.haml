@@ -1,0 +1,13 @@
+.left-box
+  .steps__image
+    - if step.step_image.attached?
+      = image_tag step.step_image.variant(combine_options:{resize:"220x220^",crop:"220x220+0+0",gravity: :center}).processed
+    - else
+      %i.fas.fa-shoe-prints.no-image
+.right-box
+  .flex-box
+    .flex--center
+      .steps__title
+        = step.title
+      .steps__status
+        = step.status_i18n

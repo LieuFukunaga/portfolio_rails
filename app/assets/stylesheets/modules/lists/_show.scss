@@ -1,7 +1,3 @@
-.lists-show__page-title {
-  font-size: 20px;
-}
-
 #list-in-search {
   @include form-style;
   width: 40%;
@@ -11,13 +7,29 @@
   @include search-btn;
 }
 
+.goal--doing {
+  background-color: $kurenai;
+}
+
+.goal--done {
+  background-color: $lightgreen;
+}
+
 .lists-show {
-  height: 78vh;
+  height: 75vh;
+  overflow: scroll;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
   &__operator {
     &__search-form {
     }
     &__create-task-btn {
-      margin: 20px 0;
+      margin: 1vh;
     }
   }
+}
+
+.lists-show__task-table__results {
+  // background-color: blue;
+  height: 60vh;
 }

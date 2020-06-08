@@ -8,6 +8,10 @@ $(function(){
       var html = "&sort=list_name+asc"
     } else if (currentOptionVal == "list_name_desc") {
       var html = "&sort=list_name+desc"
+    } else if (currentOptionVal == "favorite_desc") {
+      var html = "&sort=favorite+desc"
+    } else if (currentOptionVal == "favorite_asc") {
+      var html = "&sort=favorite+asc"
     } else if (currentOptionVal == "updated_at_asc") {
       var html = "&sort=updated_at+asc"
     } else if (currentOptionVal == "updated_at_desc") {
@@ -42,10 +46,14 @@ $(function(){
         var sort = 1
       } else if (selectedOption == "list_name+desc") {
         var sort = 2
-      } else if (selectedOption == "updated_at+asc") {
+      } else if (selectedOption == "favorite+desc") {
         var sort = 3
-      } else if (selectedOption == "updated_at+desc") {
+      } else if (selectedOption == "favorite+asc") {
         var sort = 4
+      } else if (selectedOption == "updated_at+asc") {
+        var sort = 5
+      } else if (selectedOption == "updated_at+desc") {
+        var sort = 6
       }
 
       let add_selected = $('select[name=sort]').children()[sort]

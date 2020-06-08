@@ -49,9 +49,11 @@ class UsersController < ApplicationController
     end
   end
 
+  # アカウント削除を確定するためにパスワード入力を求めるページ
   def confirm_destroy
   end
 
+  # プロフィール写真を削除するため
   def avatar_destroy
     if @user.id == current_user.id && @user.avatar.attached?
       @user.avatar.purge

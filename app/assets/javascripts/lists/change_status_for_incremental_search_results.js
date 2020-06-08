@@ -24,8 +24,12 @@ $(function(){
 
       if (task.status == "doing") {
         $(`#task_${task.id}_${task.status}`).text("実行中");
+        $(`#task_${task.id}_${task.status}`).removeClass("lists-index__goal--done");
+        $(`#task_${task.id}_${task.status}`).addClass("lists-index__goal--doing");
       } else {
         $(`#task_${task.id}_${task.status}`).text("達成！");
+        $(`#task_${task.id}_${task.status}`).removeClass("lists-index__goal--doing");
+        $(`#task_${task.id}_${task.status}`).addClass("lists-index__goal--done");
       };
     })
     .fail(function(){

@@ -11,9 +11,6 @@
               = image_tag current_user.avatar.variant(combine_options:{resize:"100x100^",crop:"100x100+0+0",gravity: :center}).processed.processed, id: "login-user-avatar"
             - else
               %i.fas.fa-user-circle
-        -# .login-user-name
-        -#   %b
-        -#     = link_to "#{current_user.name}", user_path(current_user)
 
     - else
       %h2 ログインしていません
