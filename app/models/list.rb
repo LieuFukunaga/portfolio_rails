@@ -3,7 +3,7 @@ class List < ApplicationRecord
 
   has_many :goals, dependent: :destroy
   has_many :steps, dependent: :destroy
-  has_many :actions, dependent: :destroy
+  has_many :practices, dependent: :destroy
 
   validates :user_id, null: false
   validates :list_name, null: false, presence: true

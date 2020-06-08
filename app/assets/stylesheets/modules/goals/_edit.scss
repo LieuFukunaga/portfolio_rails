@@ -196,42 +196,42 @@
       }
     }
   }
-  &__actions-section {
+  &__practices-section {
     height: 100%;
     width: 30%;
-    .goals-edit__actions {
+    .goals-edit__practices {
       height: 11%;
       display: flex;
-      .actions__left-box {
+      .practices__left-box {
         width: 50%;
-        .actions__image {
+        .practices__image {
           height: 100%;
           width: 100%;
           @include scroll-config;
           @include flex-center;
         }
       }
-      .actions__right-box {
+      .practices__right-box {
         height: 100%;
         width: 50%;
         @include flex-center;
       }
     }
-    .goals-edit__anchor-actions {
+    .goals-edit__anchor-practices {
       height: 11%;
       display: flex;
       border-bottom: 1px solid;
       border-color: $lightgreen;
-      .anchor-actions__left-box {
+      .anchor-practices__left-box {
         width: 50%;
-        .anchor-actions__image {
+        .anchor-practices__image {
           height: 100%;
           width: 100%;
           @include scroll-config;
           @include flex-center;
         }
       }
-      .anchor-actions__right-box {
+      .anchor-practices__right-box {
         height: 100%;
         width: 50%;
         @include flex-center;

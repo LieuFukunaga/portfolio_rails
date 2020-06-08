@@ -9,7 +9,7 @@
 }
 
 // appendされる画像プレビュー
-.new-task-form__action-previews {
+.new-task-form__practice-previews {
   height: 80px;
   width: 80px;
   margin-top : 1vh;
@@ -23,7 +23,7 @@
   @include form-style;
 }
 
-.new-task-form__actions__text-field, .new-task-form__anchor-actions__text-field {
+.new-task-form__practices__text-field, .new-task-form__anchor-practices__text-field {
   @include form-style;
 }
 
@@ -190,8 +190,8 @@
             }
           }
         }
-        // セクション：アクション
-        &__actions {
+        // セクション：practice
+        &__practices {
           width: 33%;
           &__fields {
             height: 11%;
@@ -200,7 +200,7 @@
             &--left {
               height: 100%;
               width: 30%;
-              .new-task-form__actions__fields__image {
+              .new-task-form__practices__fields__image {
                 display: flex;
                 height: 100%;
                 width: 100%;
@@ -215,16 +215,16 @@
             &--right {
               .right-form-box {
                 margin-top: 10%;
-                .new-task-form__actions__fields__text-field {
+                .new-task-form__practices__fields__text-field {
                 }
-                .new-task-form__actions__icons {
+                .new-task-form__practices__icons {
                   display: flex;
                   justify-content: flex-end;
                   margin-top: 5px;
                   &__upload {
                     margin-right: 5px;
-                    .new-task-form__actions__upload-label {
-                      .new-task-form__actions__file-field {
+                    .new-task-form__practices__upload-label {
+                      .new-task-form__practices__file-field {
                         display: none;
                       }
                     }
@@ -233,7 +233,7 @@
               }
             }
           }
-          .new-task-form__anchor-actions__fields {
+          .new-task-form__anchor-practices__fields {
             height: 11%;
             display: flex;
             border-bottom: 1px solid;
@@ -242,7 +242,7 @@
             &--left {
               height: 100%;
               width: 30%;
-              .new-task-form__anchor-actions__fields__image {
+              .new-task-form__anchor-practices__fields__image {
                 display: flex;
                 height: 100%;
                 width: 100%;
@@ -257,16 +257,16 @@
             &--right {
               .right-form-box {
                 margin-top: 10%;
-                .new-task-form__anchor-actions____text-field {
+                .new-task-form__anchor-practices____text-field {
                 }
-                .new-task-form__anchor-actions__icons {
+                .new-task-form__anchor-practices__icons {
                   display: flex;
                   justify-content: flex-end;
                   margin-top: 5px;
                   &__upload {
                     margin-right: 5px;
-                    .new-task-form__anchor-actions__upload-label {
-                      .new-task-form__anchor-actions__file-field {
+                    .new-task-form__anchor-practices__upload-label {
+                      .new-task-form__anchor-practices__file-field {
                         display: none;
                       }
                     }

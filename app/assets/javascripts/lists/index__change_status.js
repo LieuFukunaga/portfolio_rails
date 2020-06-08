@@ -12,7 +12,6 @@ $(function(){
 
     // 直属のtd要素のカスタムデータ属性からタスクのidを取得
     let taskId = $(this).parents(".js-change-status").data("id");
-    // 直属のform要素のaction属性を取得
 
     $.ajax({
       type: 'POST',

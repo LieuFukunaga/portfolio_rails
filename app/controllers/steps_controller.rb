@@ -2,7 +2,7 @@ class StepsController < ApplicationController
   before_action :set_list, only: [:edit, :update, :reset]
   before_action :set_goal, only: [:edit, :update, :reset]
   before_action :set_step, only: [:edit, :update, :change_status, :destroy_image, :reset]
-  before_action :set_actions, only: [:edit]
+  before_action :set_practices, only: [:edit]
 
   def edit
     @categories = @goal.categories
@@ -78,11 +78,11 @@ class StepsController < ApplicationController
     @step = Step.find(params[:id])
   end
 
-  def set_actions
-    @actions = []
+  def set_practices
+    @practices = []
     Step.where(goal_id: Step.find(params[:id]).goal.id).each do |step|
-      step.actions.each do |action|
-        @actions << action
+      step.practices.each do |practice|
+        @practices << practice
       end
     end
   end

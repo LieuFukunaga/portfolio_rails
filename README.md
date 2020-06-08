@@ -33,7 +33,7 @@ Task 1-3-9
 - has_many :lists, dependent: :destroy
 - has_many :goals, dependent: :destroy
 - has_many :steps, dependent: :destroy
-- has_many :actions, dependent: :destroy
+- has_many :practices, dependent: :destroy
 - has_many :addresses, dependent: :destroy
 - has_namy :categories, dependent: :destroy
 
@@ -62,7 +62,7 @@ Task 1-3-9
 - belongs_to :user
 - has_many :goals, dependent: :destroy
 - has_many :steps, dependent: :destroy
-- has_many :actions, dependent: :destroy
+- has_many :practices, dependent: :destroy
 
 
 ### Categoriesテーブル
@@ -102,7 +102,7 @@ Task 1-3-9
 - has_many :categories, through: :goal_categories
 - has_many :goal_categories, dependent: :destroy
 - has_many :steps, dependent: :destroy
-- has_many :actions, dependent: :destroy
+- has_many :practices, dependent: :destroy
 
 
 ### Stepsテーブル
@@ -118,9 +118,9 @@ Task 1-3-9
 - belongs_to :user
 - belongs_to :list
 - belongs_to :goal
-- has_many :actions
+- has_many :practices
 
-### Actionsテーブル
+### Practicesテーブル
 |Column  |Type       |Options              |
 |--------|-----------|---------------------|
 |title   |string     |null: false          |
@@ -143,7 +143,7 @@ Task 1-3-9
 - has_one_attached: image
 #### Stepモデル
 - has_one_attached: step_image
-#### Actionモデル
-- has_one_attached: action_image
+#### Practiceモデル
+- has_one_attached: practice_image
 
 ### Active_Storage_blobsテーブル

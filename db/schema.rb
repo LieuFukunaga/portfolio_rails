@@ -10,22 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_01_234052) do
-
-  create_table "actions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "title", null: false
-    t.integer "status", limit: 1, default: 0
-    t.bigint "goal_id"
-    t.bigint "list_id"
-    t.bigint "user_id"
-    t.bigint "step_id"
-    t.index ["goal_id"], name: "index_actions_on_goal_id"
-    t.index ["list_id"], name: "index_actions_on_list_id"
-    t.index ["step_id"], name: "index_actions_on_step_id"
-    t.index ["user_id"], name: "index_actions_on_user_id"
-  end
+ActiveRecord::Schema.define(version: 2020_06_07_233901) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -100,6 +85,21 @@ ActiveRecord::Schema.define(version: 2020_06_01_234052) do
     t.index ["user_id"], name: "index_lists_on_user_id"
   end
 
+  create_table "practices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title", null: false
+    t.integer "status", limit: 1, default: 0
+    t.bigint "goal_id"
+    t.bigint "list_id"
+    t.bigint "user_id"
+    t.bigint "step_id"
+    t.index ["goal_id"], name: "index_practices_on_goal_id"
+    t.index ["list_id"], name: "index_practices_on_list_id"
+    t.index ["step_id"], name: "index_practices_on_step_id"
+    t.index ["user_id"], name: "index_practices_on_user_id"
+  end
+
   create_table "steps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -127,10 +127,6 @@ ActiveRecord::Schema.define(version: 2020_06_01_234052) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "actions", "goals"
-  add_foreign_key "actions", "lists"
-  add_foreign_key "actions", "steps"
-  add_foreign_key "actions", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "users"
   add_foreign_key "categories", "users"
@@ -139,6 +135,10 @@ ActiveRecord::Schema.define(version: 2020_06_01_234052) do
   add_foreign_key "goals", "lists"
   add_foreign_key "goals", "users"
   add_foreign_key "lists", "users"
+  add_foreign_key "practices", "goals"
+  add_foreign_key "practices", "lists"
+  add_foreign_key "practices", "steps"
+  add_foreign_key "practices", "users"
   add_foreign_key "steps", "goals"
   add_foreign_key "steps", "lists"
   add_foreign_key "steps", "users"

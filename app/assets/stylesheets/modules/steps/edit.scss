@@ -280,10 +280,10 @@
       }
     }
   }
-  &__actions {
+  &__practices {
     height: 100vh;
     width: 30%;
-    .actions {
+    .practices {
       height: 11%;
       display: flex;
       &__left-box {
@@ -297,13 +297,13 @@
         @include flex-center;
         .contents--right {
           text-align: center;
-          .actions__status {
+          .practices__status {
             margin-top: 1vh;
           }
         }
       }
     }
-    .anchor-actions {
+    .anchor-practices {
       height: 11%;
       display: flex;
       &__left-box {
@@ -317,7 +317,7 @@
         @include flex-center;
         .anchor-contents--right {
           text-align: center;
-          .anchor-actions__status {
+          .anchor-practices__status {
             margin-top: 1vh;
           }
         }

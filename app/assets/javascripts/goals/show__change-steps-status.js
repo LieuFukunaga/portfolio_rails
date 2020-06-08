@@ -1,6 +1,6 @@
 $(function(){
 
-  // goal, steps, actions共通 ページ遷移をキャンセル
+  // goal, steps, practices共通 ページ遷移をキャンセル
   $(".goals-show__js-change-status").click(function(e){
     return false;
   })
@@ -10,7 +10,7 @@ $(function(){
     var href = $(this).attr("href");
     var status = href.split("=")[1];
 
-    // statusを更新するレコード（goal, steps, actionsのいずれか）のidを取得
+    // statusを更新するレコード（goal, steps, practicesのいずれか）のidを取得
     var stepIndex = $(this).data("step-index");
 
     $.ajax({

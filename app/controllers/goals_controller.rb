@@ -3,14 +3,14 @@ class GoalsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :reset]
   before_action :set_goal, only: [:show, :edit, :update, :destroy, :root_destroy, :image_destroy, :change_status, :change_status_at_root, :reset]
   before_action :set_steps, only: [:show, :edit, :update]
-  before_action :set_actions, only: [:show, :edit, :update]
+  before_action :set_practices, only: [:show, :edit, :update]
 
   def new
     @goal = Goal.new
 
     @goal.categories.new                 # 新規カテゴリ作成用
     @goal.steps.new                 # 新規ステップ作成用
-    @goal.actions.new                 # 新規アクション作成用
+    @goal.practices.new                 # 新規アクション作成用
 
     @list = List.find(params[:list_id])  # 画面遷移用
   end
@@ -25,16 +25,16 @@ class GoalsController < ApplicationController
       inputs = params[:goal][:categories_attributes][:"0"][:"category_name"].split(/[, 、　]/) # 区切り文字で分割、配列化
       if @goal.save
         steps = @goal.steps
-        actions = @goal.actions
+        practices = @goal.practices
 
-        actions[0..2].each do |action|
-          action.update(step_id: steps[0].id)
+        practices[0..2].each do |practice|
+          practice.update(step_id: steps[0].id)
         end
-        actions[3..5].each do |action|
-          action.update(step_id: steps[1].id)
+        practices[3..5].each do |practice|
+          practice.update(step_id: steps[1].id)
         end
-        actions[6..8].each do |action|
-          action.update(step_id: steps[2].id)
+        practices[6..8].each do |practice|
+          practice.update(step_id: steps[2].id)
         end
 
         @goal.save_category(inputs, checked_ids)
@@ -48,16 +48,16 @@ class GoalsController < ApplicationController
     else
       if @goal.save
         steps = @goal.steps
-        actions = @goal.actions
+        practices = @goal.practices
 
-        actions[0..2].each do |action|
-          action.update(step_id: steps[0].id)
+        practices[0..2].each do |practice|
+          practice.update(step_id: steps[0].id)
         end
-        actions[3..5].each do |action|
-          action.update(step_id: steps[1].id)
+        practices[3..5].each do |practice|
+          practice.update(step_id: steps[1].id)
         end
-        actions[6..8].each do |action|
-          action.update(step_id: steps[2].id)
+        practices[6..8].each do |practice|
+          practice.update(step_id: steps[2].id)
         end
         flash[:success] = "タスクを作成しました"
         redirect_to list_path(@list)
@@ -194,7 +194,7 @@ class GoalsController < ApplicationController
 
   private
   def goal_params
-    params.require(:goal).permit(:title, :image, :status, :user_id, :list_id, :date, category_ids: [], categories_attributes: [:category_name, :user_id], steps_attributes: [:title, :step_image, :status, :user_id, :list_id, :goal_id], actions_attributes: [:title, :action_image, :status, :user_id, :list_id, :goal_id, :step_id])
+    params.require(:goal).permit(:title, :image, :status, :user_id, :list_id, :date, category_ids: [], categories_attributes: [:category_name, :user_id], steps_attributes: [:title, :step_image, :status, :user_id, :list_id, :goal_id], practices_attributes: [:title, :practice_image, :status, :user_id, :list_id, :goal_id, :step_id])
   end
 
   def set_list
@@ -209,8 +209,8 @@ class GoalsController < ApplicationController
     @steps = Goal.find(params[:id]).steps
   end
 
-  def set_actions
-    @actions = Goal.find(params[:id]).actions
+  def set_practices
+    @practices = Goal.find(params[:id]).practices
   end
 
 end

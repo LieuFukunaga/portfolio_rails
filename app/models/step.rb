@@ -3,7 +3,7 @@ class Step < ApplicationRecord
   belongs_to :list
   belongs_to :goal
 
-  has_many :actions, dependent: :destroy
+  has_many :practices, dependent: :destroy
 
   has_one_attached :step_image
 

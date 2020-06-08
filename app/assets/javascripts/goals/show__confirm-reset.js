@@ -18,11 +18,11 @@ $(function(){
     };
   })
 
-  // リセット確認：actions
-  $(".goals-show__reset-actions-btn").click(function(){
-    var actionId = $(this).data("action-id");
-    var actionTitle = $(`#action-id_${actionId}`).text();
-    if (!confirm(`「${actionTitle}」をリセットしてよろしいですか？\n\n※この操作は取り消せません`)){
+  // リセット確認：practices
+  $(".goals-show__reset-practices-btn").click(function(){
+    var practiceId = $(this).data("practice-id");
+    var practiceTitle = $(`#practice-id_${practiceId}`).text();
+    if (!confirm(`「${practiceTitle}」をリセットしてよろしいですか？\n\n※この操作は取り消せません`)){
       return false;
     };
   })

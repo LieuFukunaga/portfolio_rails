@@ -58,7 +58,7 @@
               %td
                 = "#{goal.steps.where(status: 0).length}"
               %td
-                = "#{goal.actions.where(status: 0).length}"
+                = "#{goal.practices.where(status: 0).length}"
               %td
                 = link_to list_goal_path(goal.list_id, goal.id), method: :delete, class: "lists-show__delete-task-btn", data: {task_id: "#{goal.id}"} do
                   %i.fas.fa-trash

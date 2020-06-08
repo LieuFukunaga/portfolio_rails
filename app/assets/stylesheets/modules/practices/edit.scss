@@ -1,11 +1,11 @@
-.actions-edit {
+.practices-edit {
   display: flex;
   @include scroll-config;
   &__goal {
     height: 100vh;
     width: 30%;
     @include scroll-config;
-    .actions-edit__goal__image {
+    .practices-edit__goal__image {
       height: 45vh;
       @include half-opacity;
       .goal-image-box {
@@ -22,11 +22,11 @@
         width: 100%;
         .contents {
           text-align: center;
-          .actions-edit__goal__contents__title {
+          .practices-edit__goal__contents__title {
             font-size: 20px;
             margin-bottom: 1vh;
           }
-          .actions-edit__goal__contents__status {
+          .practices-edit__goal__contents__status {
             width: 90%;
             display: flex;
             justify-content: flex-end;
@@ -49,7 +49,7 @@
         padding: 10px;
       }
     }
-    .actions-edit-links {
+    .practices-edit-links {
       margin: 10px;
     }
   }
@@ -113,13 +113,13 @@
       }
     }
   }
-  &__actions {
+  &__practices {
     height: 100vh;
     width: 40%;
     form {
       height: 100%;
       width: 100%;
-      .actions {
+      .practices {
         height: 11%;
         display: flex;
         background-color: blue;
@@ -132,13 +132,13 @@
           height: 100%;
           width: 50%;
           @include flex-center;
-          .actions--right__box {
+          .practices--right__box {
             text-align: center;
             width: 100%;
             .box--flex {
               @include flex-center;
             }
-            .actions--right__box__status {
+            .practices--right__box__status {
               width: 90%;
               display: flex;
               justify-content: flex-end;
@@ -147,7 +147,7 @@
           }
         }
       }
-      .anchor-actions {
+      .anchor-practices {
         height: 11%;
         display: flex;
         border-bottom: 1px solid;
@@ -162,13 +162,13 @@
           height: 100%;
           width: 50%;
           @include flex-center;
-          .anchor-actions--right__box {
+          .anchor-practices--right__box {
             text-align: center;
             width: 100%;
             .box--flex {
               @include flex-center;
             }
-            .anchor-actions--right__box__status {
+            .anchor-practices--right__box__status {
               width: 90%;
               display: flex;
               justify-content: flex-end;
@@ -181,6 +181,6 @@
   }
 }
 
-.actions-edit__form {
+.practices-edit__form {
   display: flex;
 }

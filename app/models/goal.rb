@@ -3,13 +3,13 @@ class Goal < ApplicationRecord
   belongs_to :user
 
   has_many :steps, dependent: :destroy
-  has_many :actions, dependent: :destroy
+  has_many :practices, dependent: :destroy
 
   has_many :goal_categories, dependent: :destroy
   has_many :categories, through: :goal_categories
 
   accepts_nested_attributes_for :steps, allow_destroy: true
-  accepts_nested_attributes_for :actions, allow_destroy: true
+  accepts_nested_attributes_for :practices, allow_destroy: true
   accepts_nested_attributes_for :categories, allow_destroy: true
   accepts_nested_attributes_for :goal_categories, allow_destroy: true
 

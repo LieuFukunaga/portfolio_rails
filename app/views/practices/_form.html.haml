@@ -1,0 +1,15 @@
+-# .form--left
+-#   .practices-edit__image-box
+-#     .practices-edit__current-image
+-#       - if practice.practice_image.attached?
+-#         = image_tag practice.practice_image.variant(combine_options:{resize:"80x80^",crop:"80x80+0+0",gravity: :center}).processed
+-#         = f.file_field :practice_image
+-#     .practices-edit__new-image
+-# .form--right
+-#   .practices-edit__fields
+-#     .practices-edit__fields__title
+-#       = f.text_field :title, class: "practices-edit__fields__title"
+-#     .practices-edit__fields__status
+-#       = f.select :status, Practice.statuses_i18n.invert, {}, {class: 'practices-edit__select-practice-status'}
+-#   .practices-edit__submit
+-#     = f.submit "保存"

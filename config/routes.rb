@@ -48,7 +48,7 @@ Rails.application.routes.draw do
           delete "destroy_image"
           post "reset"
         end
-        resources :actions, only: [:edit, :update, :destroy] do
+        resources :practices, only: [:edit, :update, :destroy] do
           member do
             post "change_status", defaults: {format: 'json'}
             delete "destroy_image"

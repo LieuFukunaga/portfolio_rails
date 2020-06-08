@@ -128,7 +128,7 @@
       }
     }
   }
-  &__actions {
+  &__practices {
     height: 100%;
     width: 33%;
     // overflow-x: scroll;
@@ -142,7 +142,7 @@
         display: flex;
         justify-content: flex-end;
         @include scroll-config;
-        .goals-show__actions__box__image {
+        .goals-show__practices__box__image {
           text-align: center;
           margin-top: 1vh;
         }
@@ -151,16 +151,16 @@
         width: 70%;
         display: flex;
         @include scroll-config;
-        .goals-show__actions__box__title {
+        .goals-show__practices__box__title {
           @include flex-center;
           width: 70%;
           text-align: center;
         }
-        .goals-show__actions__box__status {
+        .goals-show__practices__box__status {
           font-size: 25px;
           margin: 5vh 10px 0 10px;
         }
-        .goals-show__actions__box__reset {
+        .goals-show__practices__box__reset {
           display: flex;
           align-items: flex-end;
         }
@@ -176,7 +176,7 @@
         display: flex;
         justify-content: flex-end;
         @include scroll-config;
-        .goals-show__actions__anchor-box__image {
+        .goals-show__practices__anchor-box__image {
           text-align: center;
           margin-top: 1vh;
         }
@@ -185,16 +185,16 @@
         width: 70%;
         display: flex;
         @include scroll-config;
-        .goals-show__actions__anchor-box__title {
+        .goals-show__practices__anchor-box__title {
           text-align: center;
           width: 70%;
           margin-top: 3vh;
         }
-        .goals-show__actions__anchor-box__status {
+        .goals-show__practices__anchor-box__status {
           font-size: 25px;
           margin: 5vh 10px 0 10px;
         }
-        .goals-show__actions__anchor-box__reset {
+        .goals-show__practices__anchor-box__reset {
           display: flex;
           align-items: flex-end;
         }

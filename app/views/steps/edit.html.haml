@@ -73,33 +73,33 @@
                     .steps__status
                       = step.status_i18n
 
-  .steps-edit__actions.half_opacity
-    - @actions.each.with_index do |action, index|
+  .steps-edit__practices.half_opacity
+    - @practices.each.with_index do |practice, index|
       - if index != 2 && index != 5
-        .actions
-          .actions__left-box
-            .actions__image
-              - if action.action_image.attached?
-                = image_tag action.action_image.variant(combine_options:{resize:"80x80^",crop:"80x80+0+0",gravity: :center}).processed
+        .practices
+          .practices__left-box
+            .practices__image
+              - if practice.practice_image.attached?
+                = image_tag practice.practice_image.variant(combine_options:{resize:"80x80^",crop:"80x80+0+0",gravity: :center}).processed
               - else
                 %i.fas.fa-location-arrow.no-image
-          .actions__right-box
+          .practices__right-box
             .contents--right
-              .actions__title
-                = action.title
-              .actions__status
-                = action.status_i18n
+              .practices__title
+                = practice.title
+              .practices__status
+                = practice.status_i18n
       - else
-        .anchor-actions
-          .anchor-actions__left-box
-            .anchor-actions__image
-              - if action.action_image.attached?
-                = image_tag action.action_image.variant(combine_options:{resize:"80x80^",crop:"80x80+0+0",gravity: :center}).processed
+        .anchor-practices
+          .anchor-practices__left-box
+            .anchor-practices__image
+              - if practice.practice_image.attached?
+                = image_tag practice.practice_image.variant(combine_options:{resize:"80x80^",crop:"80x80+0+0",gravity: :center}).processed
               - else
                 %i.fas.fa-location-arrow.no-image
-          .anchor-actions__right-box
+          .anchor-practices__right-box
             .anchor-contents--right
-              .anchor-actions__title
-                = action.title
-              .anchor-actions__status
-                = action.status_i18n
+              .anchor-practices__title
+                = practice.title
+              .anchor-practices__status
+                = practice.status_i18n

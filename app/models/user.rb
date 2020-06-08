@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :lists, dependent: :destroy
   has_many :goals, dependent: :destroy
   has_many :steps, dependent: :destroy
-  has_many :actions, dependent: :destroy
+  has_many :practices, dependent: :destroy
 
   has_many :categories, dependent: :destroy
 
