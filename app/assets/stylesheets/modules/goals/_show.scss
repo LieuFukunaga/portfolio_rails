@@ -13,6 +13,8 @@
   &__goal {
     height: 100%;
     width: 34%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
     overflow-x: scroll;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
@@ -58,6 +60,8 @@
         overflow: scroll;
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
         .goals-show__goal-categories {
           padding: 5px;
         }
@@ -74,6 +78,8 @@
       height: 33%;
       margin: 1px;
       @include scroll-config;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
       &__image {
         height: 20vh;
         .step-image-boxes {
@@ -102,6 +108,8 @@
     &__anchor-box {
       height: 34%;
       @include scroll-config;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
       &__image {
         height: 20vh;
         .step-image-boxes {
@@ -142,6 +150,8 @@
         display: flex;
         justify-content: flex-end;
         @include scroll-config;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
         .goals-show__practices__box__image {
           text-align: center;
           margin-top: 1vh;
@@ -150,6 +160,8 @@
       .box--right {
         width: 70%;
         display: flex;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
         @include scroll-config;
         .goals-show__practices__box__title {
           @include flex-center;
@@ -175,6 +187,8 @@
         width: 30%;
         display: flex;
         justify-content: flex-end;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
         @include scroll-config;
         .goals-show__practices__anchor-box__image {
           text-align: center;
@@ -184,6 +198,8 @@
       .box--right {
         width: 70%;
         display: flex;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
         @include scroll-config;
         .goals-show__practices__anchor-box__title {
           text-align: center;
