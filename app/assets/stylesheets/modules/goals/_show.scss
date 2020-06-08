@@ -13,9 +13,9 @@
   &__goal {
     height: 100%;
     width: 34%;
-    overflow-x: scroll;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
+    // overflow-x: scroll;
+    // white-space: nowrap;
+    // -webkit-overflow-scrolling: touch;
     &__box {
       height: 90%;
       &__image {
@@ -73,7 +73,7 @@
     &__box {
       height: 33%;
       margin: 1px;
-      @include scroll-config;
+      // @include scroll-config;
       &__image {
         height: 20vh;
         .step-image-boxes {
@@ -101,7 +101,7 @@
     }
     &__anchor-box {
       height: 34%;
-      @include scroll-config;
+      // @include scroll-config;
       &__image {
         height: 20vh;
         .step-image-boxes {
@@ -141,7 +141,7 @@
         width: 30%;
         display: flex;
         justify-content: flex-end;
-        @include scroll-config;
+        // @include scroll-config;
         .goals-show__practices__box__image {
           text-align: center;
           margin-top: 1vh;
@@ -150,7 +150,7 @@
       .box--right {
         width: 70%;
         display: flex;
-        @include scroll-config;
+        // @include scroll-config;
         .goals-show__practices__box__title {
           @include flex-center;
           width: 70%;
@@ -175,7 +175,7 @@
         width: 30%;
         display: flex;
         justify-content: flex-end;
-        @include scroll-config;
+        // @include scroll-config;
         .goals-show__practices__anchor-box__image {
           text-align: center;
           margin-top: 1vh;
@@ -184,7 +184,7 @@
       .box--right {
         width: 70%;
         display: flex;
-        @include scroll-config;
+        // @include scroll-config;
         .goals-show__practices__anchor-box__title {
           text-align: center;
           width: 70%;

@@ -38,8 +38,8 @@
         &__goal {
           // border-right: 1px solid;
           padding: 1vh;
-          white-space: nowrap;
-          -webkit-overflow-scrolling: touch;
+          // white-space: nowrap;
+          // -webkit-overflow-scrolling: touch;
           width: 34%;
           &__image {
             margin-top: 3vh;
@@ -120,9 +120,9 @@
         // セクション：ステップ
         &__steps {
           width: 33%;
-          overflow: scroll;
-          white-space: nowrap;
-          -webkit-overflow-scrolling: touch;
+          // overflow: scroll;
+          // white-space: nowrap;
+          // -webkit-overflow-scrolling: touch;
           &__fields {
             height: 33%;
             &__image {
