@@ -27,8 +27,8 @@ i.fas.fa-search {
     .upper-content {
       height: calc(50% - 10px);
       margin-bottom: 10px;
-      overflow: scroll;
-      white-space: nowrap;
+      // overflow: scroll;
+      // white-space: nowrap;
       .lists-index__list-operator {
         &__search-form {
           &__form-field {
@@ -51,8 +51,8 @@ i.fas.fa-search {
     }
     .lower-content {
       height: 50%;
-      overflow: scroll;
-      white-space: nowrap;
+      // overflow: scroll;
+      // white-space: nowrap;
       #next-seven-days-tasks {
         max-height: 40vh;
       }
