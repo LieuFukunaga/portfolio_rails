@@ -17,9 +17,6 @@
 
 .lists-show {
   height: 75vh;
-  overflow: scroll;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
   &__operator {
     &__search-form {
     }
@@ -30,6 +27,5 @@
 }
 
 .lists-show__task-table__results {
-  // background-color: blue;
   height: 60vh;
 }
