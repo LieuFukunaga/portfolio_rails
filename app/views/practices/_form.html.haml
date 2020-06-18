@@ -17,7 +17,7 @@
 .form--right
   .practices-edit__fields
     .practices-edit__fields__title
-      = f.text_field :title, class: "practices-edit__title-field"
+      = f.text_field :title, class: "practices-edit__title-field", placeholder: "20文字以下"
     .form--right--flex
       .practices-edit__fields__status
         = f.select :status, Practice.statuses_i18n.invert, {}, {class: 'practices-edit__select-practice-status'}

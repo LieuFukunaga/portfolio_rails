@@ -22,7 +22,7 @@
   .steps-edit__fields
     .fields--flex
       .title-field
-        = f.text_field :title
+        = f.text_field :title, placeholder: "20文字以下"
       .status-field
         = f.select :status, Step.statuses_i18n.invert, {}, {class: 'steps-edit__select-step-status'}
     .steps-edit__submit-btn

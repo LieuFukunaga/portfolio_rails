@@ -23,7 +23,7 @@
             .goals-edit__form__fields--file__remove
               %i.fas.fa-trash#goals-edit__remove-preview-btn
           .goals-edit__form__fields--text
-            = f.text_field :title, value: @goal.title, id: "goals-edit__text-field", placeholder: "20文字以内"
+            = f.text_field :title, value: @goal.title, id: "goals-edit__text-field", placeholder: "45文字以内"
         .goals-edit__form__status
           = f.select :status, Goal.statuses_i18n.invert, {}, {class: 'goals-edit__select-goal-status'}
         .goals-edit__form__date
