@@ -1,4 +1,4 @@
-$(function(){
+$(function () {
   // hidden-fieldの１つのvalue属性を取得
   let userId = $("#login-user-id").val();
 
@@ -10,7 +10,7 @@ $(function(){
 
 
   // 画像アップロード時のプレビュー表示のため
-  function buildImg (blobUrl){
+  function buildImg(blobUrl) {
     let html = `<div class="goals-edit__change-image-icon">
                   <i class="fas fa-angle-double-right"></i>
                 </div>
@@ -20,26 +20,26 @@ $(function(){
     return html
   }
 
-  function buildFileField () {
+  function buildFileField() {
     let fileField = `<input class="goals-edit__form__file-field" type="file" name="goal[image]">`
     return fileField
   }
 
-  $(".goals-edit__form__fields--file__upload").on("change", ".goals-edit__form__file-field", function(e){
+  $(".goals-edit__form__fields--file__upload").on("change", ".goals-edit__form__file-field", function (e) {
     $(".goals-edit__new-image-box").empty();
     let file = e.target.files[0];
     let blobUrl = window.URL.createObjectURL(file);
     $(".goals-edit__new-image-box").append(buildImg(blobUrl));
   })
 
-  $("#goals-edit__remove-preview-btn").click(function(){
+  $("#goals-edit__remove-preview-btn").click(function () {
     $(".goals-edit__new-image-box").empty();
     $(".goals-edit__form__file-field").remove();
     $(".goals-edit__form__upload-label").append(buildFileField);
   })
 
-  $(".goals-edit__delete-current-image-btn").click(function(){
-    if (!confirm("この操作は取り消せません")){
+  $(".goals-edit__delete-current-image-btn").click(function () {
+    if (!confirm("この操作は取り消せません")) {
       return false;
     };
     $(".goals-edit__form__image__previews__current-image").addClass("grayout");
@@ -48,7 +48,7 @@ $(function(){
 
 
   // collection_check_boxesの選択肢を表示するため
-  $("#goals-edit__modal-fadein-btn").click(function(){
+  $("#goals-edit__modal-fadein-btn").click(function () {
     var modalBtnText = $(this).text();
     if (modalBtnText == "カテゴリを選択") {
       $(".goals-edit__form__category__check-boxes__options-box").fadeIn();
@@ -62,7 +62,7 @@ $(function(){
 
 
   // カテゴリ作成フォーム表示のため
-  $(document).on("click", "#create-category-btn", function(){
+  $(document).on("click", "#create-category-btn", function () {
     let btnText = $("#create-category-btn").text()
     if (btnText == "カテゴリを作成") {
       $("ul").append(addedCategory)
@@ -76,7 +76,7 @@ $(function(){
 
 
   // カテゴリ作成フォームのname属性切り替えのため
-  $(document).on("change", ".added-form", function (){
+  $(document).on("change", ".added-form", function () {
     let input = $(".added-form").val();
     if (input != "") {
       $(".added-form").attr("name", "goal[categories_attributes][0][category_name]");

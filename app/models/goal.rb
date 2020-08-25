@@ -163,3 +163,4 @@ class Goal < ApplicationRecord
   end
 
 end
+
